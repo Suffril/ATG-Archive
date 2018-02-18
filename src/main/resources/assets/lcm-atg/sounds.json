@@ -1,0 +1,20 @@
+{
+	"regeneration": {
+		"category": "ambient",
+		"subtitle": "lcm-atg.subtitles.regeneration",
+		"sounds": [{
+			"name": "lcm-atg:regeneration",
+			"stream": true
+		}]
+	},
+	
+	"timey_wimey": {
+		"category": "players",
+		"subtitle": "lcm-atg.subtitles.timey_wimey",
+		"sounds": [{
+			"name": "lcm-atg:timey_wimey",
+			"stream": true
+		}]
+	}
+	
+}
