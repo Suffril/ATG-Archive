@@ -6,11 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ATGTabs {
-    public static final CreativeTabs MAIN_TAB = new TabBase("maintab", Items.CAKE);
+    public final CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Items.CAKE);
+    public final CreativeTabs TABS_ITEMS_SONICS = new TabBase("sonics", Items.CAKE);
 }
-
-
-
 
 class TabBase extends CreativeTabs {
 
@@ -19,7 +17,6 @@ class TabBase extends CreativeTabs {
     public TabBase(String label, Item item) {
         super(label);
         stack = new ItemStack(item);
-        this.setBackgroundImageName("main.png");
     }
 
     @Override

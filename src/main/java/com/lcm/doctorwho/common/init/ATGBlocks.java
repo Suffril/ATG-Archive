@@ -1,13 +1,16 @@
 package com.lcm.doctorwho.common.init;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.client.ATGTabs;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -20,15 +23,16 @@ public class ATGBlocks {
 
     public static List<Block> BLOCKS = new ArrayList<>();
 
-    public static final Block TEST = null;
+    public static final Block block_test = null;
 
     @SubscribeEvent
     public static final void register(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> reg = event.getRegistry();
 
         reg(reg,
-                new BlockOutline(Material.AIR,"test")
+                new BlockOutline(Material.AIR,"block_test").setCreativeTab(ATGTabs.MAIN_TAB)
         );
+
 
         if(ATGUtils.isClient()){ ATGUtils.blockRenders(); }
     }
@@ -36,6 +40,10 @@ public class ATGBlocks {
 
     private static void reg(IForgeRegistry<Block> reg, Block... blocks){
         for(Block block : blocks){
+            ItemBlock item_block = new ItemBlock(block);
+            item_block.setRegistryName(block.getRegistryName());
+            item_block.setUnlocalizedName(block.getUnlocalizedName());
+            ForgeRegistries.ITEMS.register(item_block);
             BLOCKS.add(block);
         }
         reg.registerAll(blocks);
