@@ -26,8 +26,7 @@ public class ATGSounds {
     }
 
     private static void registerSound(String name, IForgeRegistry<SoundEvent> reg) {
-        ResourceLocation rl = new ResourceLocation(AcrossTheGalaxy.MODID, name);
-        SoundEvent sound = new SoundEvent(rl).setRegistryName(name);
+        SoundEvent sound = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, name)).setRegistryName(name);
         reg.register(sound);
     }
 

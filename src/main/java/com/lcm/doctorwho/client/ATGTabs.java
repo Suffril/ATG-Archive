@@ -6,8 +6,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ATGTabs {
-    public final CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Items.CAKE);
-    public final CreativeTabs TABS_ITEMS_SONICS = new TabBase("sonics", Items.CAKE);
+    public static CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Items.CAKE);
+    public static CreativeTabs TABS_ITEMS_SONICS = new TabBase("sonics", Items.CAKE);
 }
 
 class TabBase extends CreativeTabs {

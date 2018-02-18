@@ -16,7 +16,7 @@ public class ATGEntities {
     private static int regID = 0;
 
     @SubscribeEvent
-    public static void RegisterEntiites(RegistryEvent.Register<EntityEntry> event) {
+    public static void RegisterEntities(RegistryEvent.Register<EntityEntry> event) {
 
         EntityEntry[] entity = {
                 

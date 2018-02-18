@@ -30,7 +30,7 @@ public class ATGBlocks {
         IForgeRegistry<Block> reg = event.getRegistry();
 
         reg(reg,
-                new BlockOutline(Material.AIR,"block_test").setCreativeTab(ATGTabs.MAIN_TAB)
+                new BlockOutline(Material.AIR,"block_test").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS)
         );
 
 
