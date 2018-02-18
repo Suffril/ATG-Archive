@@ -1,0 +1,16 @@
+[
+{
+  "modid": "lcm-atg",
+  "name": "Doctor who - Across the Galaxy",
+  "description": "Mod that brings a Doctor who experience to Minecraft!",
+  "version": "1.0",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Grayson, Sub, HoldYourWaffle"],
+  "credits": "Lucraft, for the core",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
