@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.utils;
 
+import com.lcm.doctorwho.config.ATGConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +34,7 @@ public class ExplosionUtil {
 	public static void explodeKill(Entity exploder, World world, BlockPos pos, int range) {
 		world.getEntitiesWithinAABBExcludingEntity(exploder, getReach(pos, range)).forEach(entity -> {
 			if (!(entity instanceof EntityCreature)) return;
-			((EntityCreature)entity).attackEntityFrom(RegenerativeDamageSource.INSTANCE, Float.MAX_VALUE);
+			entity.attackEntityFrom(RegenerativeDamageSource.INSTANCE, Float.MAX_VALUE);
 		});
 	}
 	

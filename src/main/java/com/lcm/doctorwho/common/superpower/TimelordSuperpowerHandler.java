@@ -1,8 +1,8 @@
 package com.lcm.doctorwho.common.superpower;
 
-import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.common.traits.negative.INegativeTrait;
-import com.lcm.doctorwho.utils.PlayerUtils;
+import com.lcm.doctorwho.config.ATGConfig;
+import com.lcm.doctorwho.utils.ATGUtils;
 import lucraft.mods.lucraftcore.LCConfig;
 import lucraft.mods.lucraftcore.karma.KarmaHandler;
 import lucraft.mods.lucraftcore.karma.KarmaStat;
@@ -50,7 +50,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				PlayerUtils.setWalkSpeed((EntityPlayerMP) player, 0f);
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f);
 				if (regenTicks > 100) { //explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
 					double x = player.posX + player.getRNG().nextGaussian() * 2;
@@ -65,7 +65,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 			} else if (regenTicks >= 200) { //end regeneration
 				player.setHealth(player.getMaxHealth());
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, ATGConfig.postRegenerationDuration, ATGConfig.postRegenerationLevel, false, false)); //180 seconds of 20 ticks of Regeneration 4
-				PlayerUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F);
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F);
 				regenerating = false;
 				regenTicks = 0;
 				if (regenerationsLeft != -1) regenerationsLeft--;
@@ -107,7 +107,6 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		//Reset Karma
 		if (LCConfig.modules.karma) for (KarmaStat karmaStat : KarmaStat.getKarmaStats())
 			KarmaHandler.setKarmaStat(handler.getPlayer(), karmaStat, 0);
-		if (ATGConfig.disableTraits) return;
 		
 		handler.getAbilities().forEach(ability -> ability.setUnlocked(false));
 		
@@ -134,7 +133,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 					s = s + ", " + ability.getDisplayName().substring(7);
 			}
 		}
-		handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-regen.messages.newLife", s)), true);
+		handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
 	}
 	
 	protected static boolean isAbilityUnlocked(SuperpowerPlayerHandler handler, Class<? extends Ability> ability) {

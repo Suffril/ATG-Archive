@@ -1,6 +1,6 @@
 itemGroup.tardis.name=TARDIS Blocks
 itemGroup.sonics.name=Sonics
-superpower.Timelord.name=Timelord
+superpower.timelord.name=Timelord
 lcm-atg.abilities.bouncy.name=Trait: Bouncy
 lcm-atg.abilities.bouncy.desc=Take slightly less damage from falling
 lcm-atg.abilities.lucky.name=Trait: Lucky

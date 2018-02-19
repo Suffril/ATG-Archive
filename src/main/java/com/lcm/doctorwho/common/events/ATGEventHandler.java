@@ -1,9 +1,9 @@
-package com.lcm.doctorwho.common;
+package com.lcm.doctorwho.common.events;
 
 import com.lcm.doctorwho.common.init.ATGObjects;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
-import com.lcm.doctorwho.utils.ATGConfig;
+import com.lcm.doctorwho.config.ATGConfig;
 import com.lcm.doctorwho.utils.ExplosionUtil;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
@@ -20,7 +20,6 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -30,15 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod.EventBusSubscriber
 public class ATGEventHandler
 {
-	
-	@SubscribeEvent
-	public static void onWorldLoaded(WorldEvent.Load e) {
-		if (!e.getWorld().isRemote && ATGConfig.disableTraits) {
-			for (EntityPlayer p : e.getWorld().playerEntities) if (SuperpowerHandler.hasSuperpower(p, TimelordSuperpower.INSTANCE))
-				SuperpowerHandler.getSuperpowerPlayerHandler(p).getAbilities().forEach(ability -> ability.setUnlocked(false));
-		}
-	}
-	
+
 	@SubscribeEvent
 	public static void onAttacked(LivingAttackEvent e) {
 		if (!(e.getEntity() instanceof EntityPlayer) || !SuperpowerHandler.hasSuperpower((EntityPlayer) e.getEntity(), TimelordSuperpower.INSTANCE)) return;
@@ -109,7 +100,7 @@ public class ATGEventHandler
 			else
 				time = time + StringHelper.translateToLocal("lcm-atg.messages.numsuffix.ext");
 			
-			if (handler.regenerationsLeft != -1) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-regen.messages.regenLeftExt", time, (handler.regenerationsLeft - 1))), true);
+			if (handler.regenerationsLeft != -1) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.regenLeftExt", time, (handler.regenerationsLeft - 1))), true);
 			player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.REGENERATION, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			ExplosionUtil.regenerationExplosion(player);
 		}

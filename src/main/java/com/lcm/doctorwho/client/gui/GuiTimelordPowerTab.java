@@ -1,8 +1,6 @@
-package com.lcm.doctorwho.gui;
+package com.lcm.doctorwho.client.gui;
 
-import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
-
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.gui.GuiSuperpowerAbilities;
 import lucraft.mods.lucraftcore.util.helper.StringHelper;
@@ -28,16 +26,10 @@ public class GuiTimelordPowerTab extends GuiSuperpowerAbilities {
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
 		
-		if (ATGConfig.disableTraits) {
-			String txtDisabled = StringHelper.translateToLocal("lcm-regen.messages.traitsDisabled");
-			int xDisabled = this.xSize / 2 - mc.fontRenderer.getStringWidth(txtDisabled) / 2;
-			mc.fontRenderer.drawString(TextFormatting.BOLD.toString() + TextFormatting.RED + txtDisabled, i + xDisabled, j + ySize/2, 0x373737);
-		}
-		
 		TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class);
 		
 		if (handler.regenerationsLeft != -1) {
-			String txtCount = StringHelper.translateToLocal("lcm-regen.messages.regenLeft", handler.regenerationsLeft);
+			String txtCount = StringHelper.translateToLocal("lcm-atg.messages.regenLeft", handler.regenerationsLeft);
 			int xCount = (this.width - i) - mc.fontRenderer.getStringWidth(txtCount) - 20;
 			mc.fontRenderer.drawString(TextFormatting.DARK_GRAY + txtCount, xCount, j + 165 + 5, 0x373737);
 		}

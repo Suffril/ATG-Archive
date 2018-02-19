@@ -2,10 +2,10 @@ package com.lcm.doctorwho.common.superpower;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.init.ATGObjects;
-import com.lcm.doctorwho.gui.GuiRegenCustomizer;
-import com.lcm.doctorwho.gui.GuiTimelordPowerTab;
 import com.lcm.doctorwho.common.traits.negative.*;
 import com.lcm.doctorwho.common.traits.positive.*;
+import com.lcm.doctorwho.client.gui.GuiRegenCustomizer;
+import com.lcm.doctorwho.client.gui.GuiTimelordPowerTab;
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
@@ -13,7 +13,6 @@ import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import lucraft.mods.lucraftcore.superpowers.capabilities.ISuperpowerCapability;
 import lucraft.mods.lucraftcore.superpowers.gui.GuiCustomizer;
 import lucraft.mods.lucraftcore.superpowers.render.SuperpowerRenderer;
-import lucraft.mods.lucraftcore.util.helper.StringHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
@@ -34,8 +33,8 @@ public class TimelordSuperpower extends Superpower {
 	private TimelordRenderHandler timelordRenderhandler;
 	
 	public TimelordSuperpower() {
-		super(StringHelper.translateToLocal("superpower.Timelord.name"));
-		setRegistryName(AcrossTheGalaxy.MODID, "timelord");
+		super("timelord");
+		this.setRegistryName(AcrossTheGalaxy.MODID, "timelord");
 	}
 	
 	@Override

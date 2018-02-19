@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.gui;
+package com.lcm.doctorwho.client.gui;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.gui.GuiCustomizer;
@@ -79,17 +79,17 @@ public class GuiRegenCustomizer extends GuiCustomizer implements GuiSlider.ISlid
 		mc.getTextureManager().bindTexture(GuiCustomizer.DEFAULT_TEX);
 		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 		
-		String name = StringHelper.translateToLocal("lcm-regen.info.textured");
+		String name = StringHelper.translateToLocal("lcm-atg.info.textured");
 		int length = mc.fontRenderer.getStringWidth(name);
 		this.drawString(mc.fontRenderer, name, i + this.xSize/2 - length/2, j + 30, 0xffffff);
 		
 		this.texturedButton.displayString = (textured) ? "Yes" : "No";
 		
-		name = StringHelper.translateToLocal("lcm-regen.info.primary");
+		name = StringHelper.translateToLocal("lcm-atg.info.primary");
 		length = mc.fontRenderer.getStringWidth(name);
 		this.drawString(mc.fontRenderer, name, i + 70 - length / 2, j + 75, 0xffffff);
 		
-		name = StringHelper.translateToLocal("lcm-regen.info.secondary");
+		name = StringHelper.translateToLocal("lcm-atg.info.secondary");
 		length = mc.fontRenderer.getStringWidth(name);
 		this.drawString(mc.fontRenderer, name, i + 185 - length / 2, j + 75, 0xffffff);
 		
