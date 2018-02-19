@@ -20,3 +20,6 @@ build
 # other
 eclipse
 run
+
+# notify @HoldYourWaffle if you need to remove this
+gradle.properties
