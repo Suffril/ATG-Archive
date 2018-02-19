@@ -1,22 +1,29 @@
 package com.lcm.doctorwho.common.init;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.client.models.ModelTest;
+import com.lcm.doctorwho.client.render.RenderItemModelBase;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
+import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.traits.negative.*;
 import com.lcm.doctorwho.common.traits.positive.*;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
+import lucraft.mods.lucraftcore.util.render.IItemRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -24,16 +31,15 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by Nictogen on 2/18/18
- */
+
 @Mod.EventBusSubscriber
 public class ATGObjects
 {
 	public static class Items
 	{
 
-		public static final ItemChameleonArch chameleonArch = new ItemChameleonArch();
+        public static final ItemChameleonArch chameleonArch = new ItemChameleonArch();
+        public static final Item testItem = new ItemOutline("test_item");
 
 	}
 
@@ -143,4 +149,12 @@ public class ATGObjects
 		return new Ability.AbilityEntry(ability, new ResourceLocation(AcrossTheGalaxy.MODID, name));
 	}
 
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public static void onModelBake(ModelBakeEvent e) {
+        for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
+            if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID) && loc.getResourcePath().equalsIgnoreCase("test_item"))
+                e.getModelRegistry().putObject(loc, new RenderItemModelBase(e.getModelRegistry().getObject(loc), new ModelTest(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/test.png")) {});
+        }
+    }
 }
