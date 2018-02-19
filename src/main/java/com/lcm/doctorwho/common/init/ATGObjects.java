@@ -59,6 +59,7 @@ public class ATGObjects
 	public static class EntityEntries
 	{
 //		public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
+//		public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
 	}
 
 	public static class Superpowers

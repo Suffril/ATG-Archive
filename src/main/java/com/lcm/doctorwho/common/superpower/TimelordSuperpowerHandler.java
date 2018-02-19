@@ -103,7 +103,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		SuperpowerHandler.syncToAll(this.getPlayer());
 	}
 	
-	protected static void randomizeTraits(SuperpowerPlayerHandler handler) {
+	private static void randomizeTraits(SuperpowerPlayerHandler handler) {
 		//Reset Karma
 		if (LCConfig.modules.karma) for (KarmaStat karmaStat : KarmaStat.getKarmaStats())
 			KarmaHandler.setKarmaStat(handler.getPlayer(), karmaStat, 0);

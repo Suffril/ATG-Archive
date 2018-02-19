@@ -4,6 +4,7 @@ import com.lcm.doctorwho.common.init.ATGObjects;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.config.ATGConfig;
+import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.ExplosionUtil;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
@@ -24,11 +25,19 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod.EventBusSubscriber
 public class ATGEventHandler
 {
+
+    @SubscribeEvent
+    public static void playerTickEvent(TickEvent.PlayerTickEvent e) {
+        if(!e.player.world.isRemote) {
+        }
+    }
+
 
 	@SubscribeEvent
 	public static void onAttacked(LivingAttackEvent e) {
