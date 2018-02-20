@@ -4,8 +4,8 @@ import com.lcm.doctorwho.common.init.ATGObjects;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.config.ATGConfig;
-import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.ExplosionUtil;
+
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
 import lucraft.mods.lucraftcore.util.helper.StringHelper;

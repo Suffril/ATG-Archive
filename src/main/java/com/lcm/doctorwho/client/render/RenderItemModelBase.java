@@ -1,17 +1,15 @@
 package com.lcm.doctorwho.client.render;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.vecmath.Matrix4f;
 
-import com.lcm.doctorwho.client.models.ItemModelBase;
 import org.apache.commons.lang3.tuple.Pair;
-import org.lwjgl.util.vector.Vector3f;
+
+import com.lcm.doctorwho.client.models.ItemModelBase;
+
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import lucraft.mods.lucraftcore.util.render.IItemRenderer;
-import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,13 +17,11 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
-import net.minecraftforge.common.model.TRSRTransformation;
 
 public class RenderItemModelBase implements IItemRenderer {
 
@@ -38,16 +34,16 @@ public class RenderItemModelBase implements IItemRenderer {
 
 
     public RenderItemModelBase(IBakedModel jsonModel, ItemModelBase javaModel, ResourceLocation textureLoc) {
-        this.jsonModel = jsonModel;
-        this.javaModel = javaModel;
-        this.TEX = textureLoc;
+        RenderItemModelBase.jsonModel = jsonModel;
+        RenderItemModelBase.javaModel = javaModel;
+        RenderItemModelBase.TEX = textureLoc;
     }
 
     public RenderItemModelBase(IBakedModel jsonModel, ItemModelBase javaModel, ResourceLocation textureLoc, float scale) {
-        this.jsonModel = jsonModel;
-        this.javaModel = javaModel;
-        this.TEX = textureLoc;
-        this.scale = scale;
+        RenderItemModelBase.jsonModel = jsonModel;
+        RenderItemModelBase.javaModel = javaModel;
+        RenderItemModelBase.TEX = textureLoc;
+        RenderItemModelBase.scale = scale;
     }
 
     @Override
@@ -74,7 +70,8 @@ public class RenderItemModelBase implements IItemRenderer {
         return IItemRenderer.super.handlePerspective(cameraTransformType);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public ItemCameraTransforms getItemCameraTransforms() {
         return IItemRenderer.super.getItemCameraTransforms();
     }

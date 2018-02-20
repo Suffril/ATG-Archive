@@ -1,8 +1,12 @@
 package com.lcm.doctorwho.common.superpower;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import com.lcm.doctorwho.common.traits.negative.INegativeTrait;
 import com.lcm.doctorwho.config.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
+
 import lucraft.mods.lucraftcore.LCConfig;
 import lucraft.mods.lucraftcore.karma.KarmaHandler;
 import lucraft.mods.lucraftcore.karma.KarmaStat;
@@ -24,9 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /** Created by AFlyingGrayson on 8/7/17 */
 @Mod.EventBusSubscriber

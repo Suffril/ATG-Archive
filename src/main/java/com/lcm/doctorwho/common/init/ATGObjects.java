@@ -1,15 +1,37 @@
 package com.lcm.doctorwho.common.init;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.ModelTest;
 import com.lcm.doctorwho.client.render.RenderItemModelBase;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
-import com.lcm.doctorwho.common.traits.negative.*;
-import com.lcm.doctorwho.common.traits.positive.*;
+import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
+import com.lcm.doctorwho.common.traits.negative.TraitDumb;
+import com.lcm.doctorwho.common.traits.negative.TraitFlimsy;
+import com.lcm.doctorwho.common.traits.negative.TraitFrail;
+import com.lcm.doctorwho.common.traits.negative.TraitObvious;
+import com.lcm.doctorwho.common.traits.negative.TraitRigid;
+import com.lcm.doctorwho.common.traits.negative.TraitSlow;
+import com.lcm.doctorwho.common.traits.negative.TraitUnhealthy;
+import com.lcm.doctorwho.common.traits.negative.TraitUnlucky;
+import com.lcm.doctorwho.common.traits.negative.TraitWeak;
+import com.lcm.doctorwho.common.traits.positive.TraitBouncy;
+import com.lcm.doctorwho.common.traits.positive.TraitLucky;
+import com.lcm.doctorwho.common.traits.positive.TraitQuick;
+import com.lcm.doctorwho.common.traits.positive.TraitSmart;
+import com.lcm.doctorwho.common.traits.positive.TraitSneaky;
+import com.lcm.doctorwho.common.traits.positive.TraitSpry;
+import com.lcm.doctorwho.common.traits.positive.TraitStrong;
+import com.lcm.doctorwho.common.traits.positive.TraitSturdy;
+import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
+import com.lcm.doctorwho.common.traits.positive.TraitTough;
+
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
-import lucraft.mods.lucraftcore.util.render.IItemRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -26,10 +48,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 @Mod.EventBusSubscriber
@@ -91,6 +109,7 @@ public class ATGObjects
 		public static final Ability.AbilityEntry obvious = newAbilityEntry(TraitObvious.class, "obvious");
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
 	public static void registerObjects(RegistryEvent event) throws Exception
 	{
