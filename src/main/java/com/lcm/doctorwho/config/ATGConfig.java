@@ -3,8 +3,7 @@ package com.lcm.doctorwho.config;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class ATGConfig
-{
+public class ATGConfig {
 	public static boolean resetHunger, resetOxygen, dontLoseUponDeath, startAsTimelord, disableArch;
 	public static int regenerativeKillRange, regenerativeKnockbackRange, regenCapacity, regenerationLevel, postRegenerationLevel, postRegenerationDuration;
 	public static float regenerativeKnockback, absorbtionLevel;
@@ -31,7 +30,7 @@ public class ATGConfig
 		regenerativeKillRange = cfg.getInt("immediateKillRange", "regeneration", 4, 0, Integer.MAX_VALUE, "Upon regeneration every mob inside of this radius is immediately killed. Keep in mind that you should round up to accomodate for mobs that aren't standing in the center of a block");
 		regenerativeKnockbackRange = cfg.getInt("knockbackRange", "regeneration", 7, 0, 30000000, "Range wherein every mob is knocked back upon regeneration");
 		regenerativeKnockback = cfg.getFloat("knockback", "regeneration", 2.5F, 0, Float.MAX_VALUE, "The amount of knockback every mob inside of the knock back radius gets");
-
+		
 		cfg.save();
 	}
 }

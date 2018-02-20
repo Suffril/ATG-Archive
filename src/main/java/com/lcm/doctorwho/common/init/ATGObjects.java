@@ -49,44 +49,36 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-
 @Mod.EventBusSubscriber
-public class ATGObjects
-{
-	public static class Items
-	{
-
-        public static final ItemChameleonArch chameleonArch = new ItemChameleonArch();
-        public static final Item testItem = new ItemOutline("test_item");
-
+public class ATGObjects {
+	public static class Items {
+		
+		public static final ItemChameleonArch chameleonArch = new ItemChameleonArch();
+		public static final Item testItem = new ItemOutline("test_item");
+		
 	}
-
-	public static class Blocks
-	{
-
+	
+	public static class Blocks {
+		
 	}
-
-	public static class SoundEvents
-	{
-
+	
+	public static class SoundEvents {
+		
 		public static final SoundEvent REGENERATION = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "regeneration")).setRegistryName(AcrossTheGalaxy.MODID, "regeneration");
 		public static final SoundEvent TIMEY_WIMEY = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "timey_wimey")).setRegistryName(AcrossTheGalaxy.MODID, "timey_wimey");
-
+		
 	}
-
-	public static class EntityEntries
-	{
-//		public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
-//		public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
+	
+	public static class EntityEntries {
+		// public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
+		// public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
 	}
-
-	public static class Superpowers
-	{
+	
+	public static class Superpowers {
 		public static final TimelordSuperpower timelord = TimelordSuperpower.INSTANCE;
 	}
-
-	public static class AbilityEntries
-	{
+	
+	public static class AbilityEntries {
 		public static final Ability.AbilityEntry bouncy = newAbilityEntry(TraitBouncy.class, "bouncy");
 		public static final Ability.AbilityEntry lucky = newAbilityEntry(TraitLucky.class, "lucky");
 		public static final Ability.AbilityEntry quick = newAbilityEntry(TraitQuick.class, "quick");
@@ -108,34 +100,26 @@ public class ATGObjects
 		public static final Ability.AbilityEntry dumb = newAbilityEntry(TraitDumb.class, "dumb");
 		public static final Ability.AbilityEntry obvious = newAbilityEntry(TraitObvious.class, "obvious");
 	}
-
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
-	public static void registerObjects(RegistryEvent event) throws Exception
-	{
-		if(event instanceof RegistryEvent.Register)
-		{
+	public static void registerObjects(RegistryEvent event) throws Exception {
+		if (event instanceof RegistryEvent.Register) {
 			IForgeRegistry registry = ((RegistryEvent.Register) event).getRegistry();
-
-			for (Class<?> aClass : ATGObjects.class.getDeclaredClasses())
-			{
-				if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType())))
-				{
+			
+			for (Class<?> aClass : ATGObjects.class.getDeclaredClasses()) {
+				if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType()))) {
 					ArrayList<IForgeRegistryEntry> entries = new ArrayList<>();
-
-					for (Field field : aClass.getDeclaredFields())
-					{
-						try
-						{
+					
+					for (Field field : aClass.getDeclaredFields()) {
+						try {
 							entries.add((IForgeRegistryEntry) field.get(null));
-						}
-						catch (IllegalAccessException e)
-						{
+						} catch (IllegalAccessException e) {
 							e.printStackTrace();
 						}
 					}
-
-					if(aClass.isAssignableFrom(Item.class)){
+					
+					if (aClass.isAssignableFrom(Item.class)) {
 						for (Field f : Blocks.class.getDeclaredFields()) {
 							Block block = (Block) f.get(null);
 							entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
@@ -143,20 +127,19 @@ public class ATGObjects
 					}
 					entries.forEach(registry::register);
 				}
-
+				
 			}
 		}
 	}
-
+	
 	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent e) throws ReflectiveOperationException
-	{
+	public static void registerModels(ModelRegistryEvent e) throws ReflectiveOperationException {
 		for (Field f : Items.class.getDeclaredFields()) {
 			Item item = (Item) f.get(null);
 			ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
 			ModelLoader.setCustomModelResourceLocation(item, 0, loc);
 		}
-
+		
 		for (Field f : Blocks.class.getDeclaredFields()) {
 			Block block = (Block) f.get(null);
 			Item item = Item.getItemFromBlock(block);
@@ -164,17 +147,16 @@ public class ATGObjects
 			ModelLoader.setCustomModelResourceLocation(item, 0, loc);
 		}
 	}
-
+	
 	private static Ability.AbilityEntry newAbilityEntry(Class<? extends Ability> ability, String name) {
 		return new Ability.AbilityEntry(ability, new ResourceLocation(AcrossTheGalaxy.MODID, name));
 	}
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public static void onModelBake(ModelBakeEvent e) {
-        for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
-            if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID) && loc.getResourcePath().equalsIgnoreCase("test_item"))
-                e.getModelRegistry().putObject(loc, new RenderItemModelBase(e.getModelRegistry().getObject(loc), new ModelTest(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/test.png")) {});
-        }
-    }
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void onModelBake(ModelBakeEvent e) {
+		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
+			if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID) && loc.getResourcePath().equalsIgnoreCase("test_item")) e.getModelRegistry().putObject(loc, new RenderItemModelBase(e.getModelRegistry().getObject(loc), new ModelTest(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/test.png")) {});
+		}
+	}
 }
