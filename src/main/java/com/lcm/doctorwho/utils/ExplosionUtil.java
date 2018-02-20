@@ -1,6 +1,7 @@
 package com.lcm.doctorwho.utils;
 
 import com.lcm.doctorwho.config.ATGConfig;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +21,7 @@ public class ExplosionUtil {
 	public static void explodeKnockback(Entity exploder, World world, BlockPos pos, float knockback, int range) {
 		world.getEntitiesWithinAABBExcludingEntity(exploder, getReach(pos, range)).forEach(entity -> {
 			if (!(entity instanceof EntityCreature) || exploder.isDead) return;
-			EntityCreature victim = (EntityCreature)entity;
+			EntityCreature victim = (EntityCreature) entity;
 			float densMod = world.getBlockDensity(new Vec3d(pos), entity.getEntityBoundingBox());
 			
 			int xr, zr;
@@ -42,11 +43,15 @@ public class ExplosionUtil {
 		return new AxisAlignedBB(pos.up(range).north(range).west(range), pos.down(range).south(range).east(range));
 	}
 	
-	
-	public static class RegenerativeDamageSource extends DamageSource { //useful for future extension / add-on hooking
+	public static class RegenerativeDamageSource extends DamageSource { // useful for future extension / add-on hooking
 		public static final DamageSource INSTANCE;
-		static { INSTANCE = new RegenerativeDamageSource(); }
-		public RegenerativeDamageSource() { super("regeneration"); }
+		static {
+			INSTANCE = new RegenerativeDamageSource();
+		}
+		
+		public RegenerativeDamageSource() {
+			super("regeneration");
+		}
 	}
 	
 }

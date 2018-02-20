@@ -22,6 +22,5 @@ public class ItemSonic extends Item {
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
         ATGUtils.playSound(entityLiving, sound);
-     }
-
+    }
 }

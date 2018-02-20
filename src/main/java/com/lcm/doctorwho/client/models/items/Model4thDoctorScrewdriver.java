@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class Model4thDoctorScrewdriver extends ModelBase implements ItemModelBase {
 
-
     ModelRenderer Indent5;
     ModelRenderer Indent6;
     ModelRenderer Darkbottom2;
@@ -612,4 +611,5 @@ public class Model4thDoctorScrewdriver extends ModelBase implements ItemModelBas
         map.put(ItemCameraTransforms.TransformType.FIXED, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(0F, 0F, 0F), new Vector3f(0.5F, 0.5F, 0.5F), new Vector3f(1F, 1F, 1F))));
         return new LCModelState(map);
     }
+
 }

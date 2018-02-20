@@ -4,8 +4,8 @@ import com.lcm.doctorwho.common.init.ATGObjects;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.config.ATGConfig;
-import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.ExplosionUtil;
+
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
 import lucraft.mods.lucraftcore.util.helper.StringHelper;
@@ -39,13 +39,11 @@ public class ATGEventHandler
         }
     }
 
-
 	@SubscribeEvent
 	public static void onAttacked(LivingAttackEvent e) {
 		if (!(e.getEntity() instanceof EntityPlayer) || !SuperpowerHandler.hasSuperpower((EntityPlayer) e.getEntity(), TimelordSuperpower.INSTANCE)) return;
 		EntityPlayer player = (EntityPlayer) e.getEntity();
-		if(player.getHealth() - e.getAmount() < 0 && SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerating && player.world.isRemote && Minecraft.getMinecraft().player.getUniqueID() == player.getUniqueID())
-			Minecraft.getMinecraft().gameSettings.thirdPersonView = 0;
+		if (player.getHealth() - e.getAmount() < 0 && SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerating && player.world.isRemote && Minecraft.getMinecraft().player.getUniqueID() == player.getUniqueID()) Minecraft.getMinecraft().gameSettings.thirdPersonView = 0;
 	}
 	
 	@SubscribeEvent
@@ -79,15 +77,14 @@ public class ATGEventHandler
 		if (!(e.getEntity() instanceof EntityPlayer)) return;
 		
 		EntityPlayer player = (EntityPlayer) e.getEntity();
-		if (player.getHealth()+player.getAbsorptionAmount() - e.getAmount() > 0 || !SuperpowerHandler.hasSuperpower(player, TimelordSuperpower.INSTANCE))
-			return;
+		if (player.getHealth() + player.getAbsorptionAmount() - e.getAmount() > 0 || !SuperpowerHandler.hasSuperpower(player, TimelordSuperpower.INSTANCE)) return;
 		
 		TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class);
 		
 		if ((handler.regenerating || player.posY < 0 || handler.regenerationsLeft == 0) && !ATGConfig.dontLoseUponDeath) {
 			SuperpowerHandler.removeSuperpower(player);
 			((CapabilitySuperpower) player.getCapability(CapabilitySuperpower.SUPERPOWER_CAP, null)).superpowerData.removeTag(TimelordSuperpower.INSTANCE.getRegistryName().toString());
-		} else if (handler.regenerationsLeft > 0 || handler.regenerationsLeft == -1) { //initiate regeneration
+		} else if (handler.regenerationsLeft > 0 || handler.regenerationsLeft == -1) { // initiate regeneration
 			e.setCanceled(true);
 			handler.regenerating = true;
 			SuperpowerHandler.syncToAll(player);
@@ -97,7 +94,7 @@ public class ATGEventHandler
 			if (ATGConfig.resetOxygen) player.setAir(300);
 			if (ATGConfig.resetHunger) player.getFoodStats().setFoodLevel(20);
 			player.clearActivePotions();
-			player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 10*20, ATGConfig.regenerationLevel, false, false)); //10 seconds of 20 ticks of Regeneration 2
+			player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 10 * 20, ATGConfig.regenerationLevel, false, false)); // 10 seconds of 20 ticks of Regeneration 2
 			player.extinguish();
 			
 			String time = "" + (handler.timesRegenerated + 1);

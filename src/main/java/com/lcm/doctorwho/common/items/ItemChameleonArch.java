@@ -5,6 +5,7 @@ import com.lcm.doctorwho.common.init.ATGObjects;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.config.ATGConfig;
+
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
 import lucraft.mods.lucraftcore.util.helper.StringHelper;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 /** Created by AFlyingGrayson on 8/28/17 */
 public class ItemChameleonArch extends Item {
 	
-	public ItemChameleonArch() { //TODO how does combining/repairing work out?
+	public ItemChameleonArch() { // TODO how does combining/repairing work out?
 		setUnlocalizedName("chameleonArch");
 		setRegistryName(AcrossTheGalaxy.MODID, "chameleonarch");
 		setCreativeTab(CreativeTabs.MISC);
@@ -30,13 +31,12 @@ public class ItemChameleonArch extends Item {
 		setMaxDamage(ATGConfig.regenCapacity);
 	}
 	
-	@Override //TODO where did the "new life" message go?
+	@Override // TODO where did the "new life" message go?
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack arch = player.getHeldItem(hand);
 		SuperpowerPlayerHandler handler = SuperpowerHandler.getSuperpowerPlayerHandler(player);
 		
-		
-		if (ATGConfig.regenCapacity == 0) { //with infinite regenerations the behavior is quite different
+		if (ATGConfig.regenCapacity == 0) { // with infinite regenerations the behavior is quite different
 			if (handler == null) {
 				SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE);
 				SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = -1;
@@ -68,11 +68,10 @@ public class ItemChameleonArch extends Item {
 				if (used == 0) {
 					if (tmh.regenerationsLeft == ATGConfig.regenCapacity)
 						player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullCycle", used)), true);
-					else if (arch.getItemDamage() == ATGConfig.regenCapacity)
-						player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch", used)), true);
+					else if (arch.getItemDamage() == ATGConfig.regenCapacity) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch", used)), true);
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
 				}
-				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.gainedRegenerations", used)), true); //too lazy to fix a single/plural issue here
+				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.gainedRegenerations", used)), true); // too lazy to fix a single/plural issue here
 			} else {
 				if (arch.getItemDamage() == 0) {
 					player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullArch")), true);
@@ -82,12 +81,13 @@ public class ItemChameleonArch extends Item {
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
 				}
 				
-				//TODO sound effect?
+				// TODO sound effect?
 				arch.setItemDamage(arch.getItemDamage() - 1);
 				tmh.regenerationsLeft--;
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer")), true);
 			}
-		} else return new ActionResult<>(EnumActionResult.FAIL, arch);
+		} else
+			return new ActionResult<>(EnumActionResult.FAIL, arch);
 		
 		player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.TIMEY_WIMEY, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		return new ActionResult<>(EnumActionResult.PASS, arch);
