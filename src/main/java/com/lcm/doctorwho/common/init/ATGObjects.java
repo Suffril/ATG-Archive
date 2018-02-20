@@ -1,10 +1,13 @@
 package com.lcm.doctorwho.common.init;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.client.ATGTabs;
 import com.lcm.doctorwho.client.models.ModelTest;
+import com.lcm.doctorwho.client.models.items.Model4thDoctorScrewdriver;
 import com.lcm.doctorwho.client.render.RenderItemModelBase;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemOutline;
+import com.lcm.doctorwho.common.items.ItemSonic;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.traits.negative.*;
 import com.lcm.doctorwho.common.traits.positive.*;
@@ -39,7 +42,7 @@ public class ATGObjects
 	{
 
         public static final ItemChameleonArch chameleonArch = new ItemChameleonArch();
-        public static final Item testItem = new ItemOutline("test_item");
+        public static final Item fourthDocSonic = new ItemSonic("fourthdocsonic", SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 
 	}
 
@@ -154,8 +157,8 @@ public class ATGObjects
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent e) {
         for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
-            if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID) && loc.getResourcePath().equalsIgnoreCase("test_item"))
-                e.getModelRegistry().putObject(loc, new RenderItemModelBase(e.getModelRegistry().getObject(loc), new ModelTest(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/test.png")) {});
+            if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID) && loc.getResourcePath().equalsIgnoreCase("fourthdocsonic"))
+                e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model4thDoctorScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/4th_sonic.png")) {});
         }
     }
 }

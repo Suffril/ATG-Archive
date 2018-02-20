@@ -35,6 +35,7 @@ public class ATGEventHandler
     @SubscribeEvent
     public static void playerTickEvent(TickEvent.PlayerTickEvent e) {
         if(!e.player.world.isRemote) {
+
         }
     }
 
