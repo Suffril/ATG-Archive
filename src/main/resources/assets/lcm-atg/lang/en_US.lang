@@ -1,7 +1,7 @@
 
 //Creative tabs
-itemGroup.tardis.name=TARDIS Blocks
-itemGroup.sonics.name=Sonics
+itemGroup.tardis=TARDIS Blocks
+itemGroup.sonics=Sonics
 
 //Super-powers
 superpower.timelord.name=Timelord

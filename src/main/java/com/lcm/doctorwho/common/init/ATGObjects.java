@@ -9,6 +9,7 @@ import com.lcm.doctorwho.client.ATGTabs;
 import com.lcm.doctorwho.client.models.ModelTest;
 import com.lcm.doctorwho.client.models.items.Model4thDoctorScrewdriver;
 import com.lcm.doctorwho.client.render.RenderItemModelBase;
+import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
@@ -36,6 +37,7 @@ import com.lcm.doctorwho.common.traits.positive.TraitTough;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -61,8 +63,12 @@ public class ATGObjects {
 		}
 
 		public static class Blocks {
+            public static final Block classicRoundelA = new BlockOutline(Material.CORAL, "classicroundela");
+            public static final Block classicRoundelB = new BlockOutline(Material.CORAL, "classicroundelb");
+            public static final Block classicRoundelC = new BlockOutline(Material.CORAL, "classicroundelc");
+            public static final Block classicRoundelD = new BlockOutline(Material.CORAL, "classicroundeld");
 
-		}
+        }
 
 		public static class SoundEvents {
 			public static final SoundEvent REGENERATION = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "regeneration")).setRegistryName(AcrossTheGalaxy.MODID, "regeneration");

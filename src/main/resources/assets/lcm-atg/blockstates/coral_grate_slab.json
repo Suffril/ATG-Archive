@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom": { "model": "lcm-atg:half_slab_coral_grate" },
+        "half=top": { "model": "lcm-atg:upper_slab_coral_grate" }
+    }
+}
