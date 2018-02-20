@@ -67,6 +67,9 @@ public class ATGObjects {
             public static final Block classicRoundelB = new BlockOutline(Material.CORAL, "classicroundelb");
             public static final Block classicRoundelC = new BlockOutline(Material.CORAL, "classicroundelc");
             public static final Block classicRoundelD = new BlockOutline(Material.CORAL, "classicroundeld");
+            public static final Block jodieRoundel = new BlockOutline(Material.CORAL, "jodieroundel");
+            public static final Block coral = new BlockOutline(Material.CORAL, "coral");
+            public static final Block coralroundel = new BlockOutline(Material.CORAL, "coralroundel");
 
         }
 
@@ -162,9 +165,14 @@ public class ATGObjects {
 		@SubscribeEvent
 		public static void onModelBake(ModelBakeEvent e) {
 			for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
-				if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID) && loc.getResourcePath().equalsIgnoreCase("fourthdocsonic"))
-					e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model4thDoctorScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/4th_sonic.png")) {
-					});
-			}
-		}
+				if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
+				    String path = loc.getResourcePath();
+
+				    //Fourth Doctor Sonic
+                if(path.equalsIgnoreCase("fourthdocsonic")) {e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model4thDoctorScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/4th_sonic.png")) {}); }
+
+
+				}
+            }
+	    }
 }
