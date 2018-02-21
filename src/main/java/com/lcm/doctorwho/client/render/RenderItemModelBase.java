@@ -25,24 +25,24 @@ import net.minecraftforge.common.model.IModelState;
 
 public class RenderItemModelBase implements IItemRenderer {
 	
-	public static ResourceLocation TEX = null;
+	public ResourceLocation modelTexture = null;
 	public static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-	
-	private static IBakedModel jsonModel;
-	private static ItemModelBase javaModel;
-	private static float scale = 0.0625F;
+
+	private IBakedModel jsonModel;
+	private ItemModelBase javaModel;
+	private float scale = 0.0625F;
 	
 	public RenderItemModelBase(IBakedModel jsonModel, ItemModelBase javaModel, ResourceLocation textureLoc) {
-		RenderItemModelBase.jsonModel = jsonModel;
-		RenderItemModelBase.javaModel = javaModel;
-		RenderItemModelBase.TEX = textureLoc;
+		this.jsonModel = jsonModel;
+		this.javaModel = javaModel;
+		modelTexture = textureLoc;
 	}
 	
 	public RenderItemModelBase(IBakedModel jsonModel, ItemModelBase javaModel, ResourceLocation textureLoc, float scale) {
-		RenderItemModelBase.jsonModel = jsonModel;
-		RenderItemModelBase.javaModel = javaModel;
-		RenderItemModelBase.TEX = textureLoc;
-		RenderItemModelBase.scale = scale;
+		this.jsonModel = jsonModel;
+		this.javaModel = javaModel;
+		modelTexture = textureLoc;
+		this.scale = scale;
 	}
 	
 	@Override
@@ -83,14 +83,14 @@ public class RenderItemModelBase implements IItemRenderer {
 		if (jsonModel != null && (transformType == TransformType.GUI || transformType == TransformType.FIXED))
 			Minecraft.getMinecraft().getRenderItem().renderItem(stack, jsonModel);
 		else {
-			Minecraft.getMinecraft().renderEngine.bindTexture(TEX);
+			Minecraft.getMinecraft().renderEngine.bindTexture(modelTexture);
 			
 			javaModel.renderModel(scale);
 			if (stack.isItemEnchanted()) renderEnchantedGlint(Minecraft.getMinecraft().player, javaModel);
 		}
 	}
 	
-	private static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model) {
+	private void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model) {
 		float f = (float) entity.ticksExisted + LCRenderHelper.renderTick;
 		Minecraft.getMinecraft().renderEngine.bindTexture(ENCHANTED_ITEM_GLINT_RES);
 		GlStateManager.enableBlend();
@@ -108,7 +108,7 @@ public class RenderItemModelBase implements IItemRenderer {
 			GlStateManager.rotate(30.0F - (float) i * 60.0F, 0.0F, 0.0F, 1.0F);
 			GlStateManager.translate(0.0F, f * (0.001F + (float) i * 0.003F) * 20.0F, 0.0F);
 			GlStateManager.matrixMode(5888);
-			javaModel.renderModel(scale);
+			javaModel.renderModel(this.scale);
 		}
 		
 		GlStateManager.matrixMode(5890);

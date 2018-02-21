@@ -173,19 +173,13 @@ public class ATGObjects
 	{
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys())
 		{
-			if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID))
-			{
-				String path = loc.getResourcePath();
-
-				 if(path.equalsIgnoreCase("sonic_fourth_doc")) {
+				 if(loc.getResourcePath().equalsIgnoreCase("sonic_fourth_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
                      e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model4thDoctorScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/4th_sonic.png")));
                  }
-
-                if(path.equalsIgnoreCase("cane_first_doc")) {
+                if(loc.getResourcePath().equalsIgnoreCase("cane_first_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
                     e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
                 }
 
             }
-		}
 	}
 }

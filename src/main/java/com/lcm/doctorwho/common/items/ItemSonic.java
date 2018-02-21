@@ -15,6 +15,7 @@ public class ItemSonic extends Item {
     {
         setRegistryName(name);
         setUnlocalizedName(name);
+        setMaxStackSize(1);
         sound = sonicSound;
     }
 
