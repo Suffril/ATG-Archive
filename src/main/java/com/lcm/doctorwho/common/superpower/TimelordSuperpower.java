@@ -1,11 +1,33 @@
 package com.lcm.doctorwho.common.superpower;
 
+import java.util.List;
+import java.util.UUID;
+
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.init.ATGObjects;
-import com.lcm.doctorwho.common.traits.negative.*;
-import com.lcm.doctorwho.common.traits.positive.*;
 import com.lcm.doctorwho.client.gui.GuiRegenCustomizer;
 import com.lcm.doctorwho.client.gui.GuiTimelordPowerTab;
+import com.lcm.doctorwho.common.init.ATGObjects;
+import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
+import com.lcm.doctorwho.common.traits.negative.TraitDumb;
+import com.lcm.doctorwho.common.traits.negative.TraitFlimsy;
+import com.lcm.doctorwho.common.traits.negative.TraitFrail;
+import com.lcm.doctorwho.common.traits.negative.TraitObvious;
+import com.lcm.doctorwho.common.traits.negative.TraitRigid;
+import com.lcm.doctorwho.common.traits.negative.TraitSlow;
+import com.lcm.doctorwho.common.traits.negative.TraitUnhealthy;
+import com.lcm.doctorwho.common.traits.negative.TraitUnlucky;
+import com.lcm.doctorwho.common.traits.negative.TraitWeak;
+import com.lcm.doctorwho.common.traits.positive.TraitBouncy;
+import com.lcm.doctorwho.common.traits.positive.TraitLucky;
+import com.lcm.doctorwho.common.traits.positive.TraitQuick;
+import com.lcm.doctorwho.common.traits.positive.TraitSmart;
+import com.lcm.doctorwho.common.traits.positive.TraitSneaky;
+import com.lcm.doctorwho.common.traits.positive.TraitSpry;
+import com.lcm.doctorwho.common.traits.positive.TraitStrong;
+import com.lcm.doctorwho.common.traits.positive.TraitSturdy;
+import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
+import com.lcm.doctorwho.common.traits.positive.TraitTough;
+
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
@@ -22,9 +44,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-import java.util.UUID;
 
 /** Created by AFlyingGrayson on 8/7/17 */
 public class TimelordSuperpower extends Superpower {
@@ -47,7 +66,7 @@ public class TimelordSuperpower extends Superpower {
 	protected List<Ability> addDefaultAbilities(EntityPlayer player, List<Ability> list) {
 		UUID uuid = UUID.fromString("fe163548-51b9-4bb5-89d2-9283c3283f6b");
 		
-		//Positive
+		// Positive
 		list.add(new TraitLucky(player, uuid, 5.0f, 0));
 		list.add(new TraitQuick(player, uuid, 0.075f, 0));
 		list.add(new TraitStrong(player, uuid, 4.0f, 0));
@@ -59,7 +78,7 @@ public class TimelordSuperpower extends Superpower {
 		list.add(new TraitSneaky(player));
 		list.add(new TraitSmart(player));
 		
-		//Negative
+		// Negative
 		list.add(new TraitUnlucky(player, uuid, -5.0f, 0));
 		list.add(new TraitSlow(player, uuid, -0.035f, 0));
 		list.add(new TraitWeak(player, uuid, -0.25f, 0));

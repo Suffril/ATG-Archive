@@ -5,27 +5,23 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ATGTabs
-{
-    public static CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Items.CAKE);
-    public static CreativeTabs TABS_ITEMS_SONICS = new TabBase("sonics", Items.CAKE);
-
-    static class TabBase extends CreativeTabs
-    {
-
-        private static ItemStack stack = new ItemStack(Items.CAKE);
-
-        public TabBase(String label, Item item)
-        {
-            super(label);
-            stack = new ItemStack(item);
-        }
-
-        @Override
-        public ItemStack getTabIconItem()
-        {
-            return stack;
-        }
-
-    }
+public class ATGTabs {
+	public static CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Items.CAKE);
+	public static CreativeTabs TABS_ITEMS_SONICS = new TabBase("sonics", Items.CAKE);
+	
+	static class TabBase extends CreativeTabs {
+		
+		private static ItemStack stack = new ItemStack(Items.CAKE);
+		
+		public TabBase(String label, Item item) {
+			super(label);
+			stack = new ItemStack(item);
+		}
+		
+		@Override
+		public ItemStack getTabIconItem() {
+			return stack;
+		}
+		
+	}
 }

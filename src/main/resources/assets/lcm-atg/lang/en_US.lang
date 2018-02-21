@@ -1,6 +1,15 @@
-itemGroup.tardis.name=TARDIS Blocks
-itemGroup.sonics.name=Sonics
+
+//Creative tabs
+itemGroup.tardis=TARDIS Blocks
+itemGroup.sonics=Sonics
+
+//Super-powers
 superpower.timelord.name=Timelord
+
+//Items
+item.fourthdocsonic.name=Fourth Doctors sonic
+
+
 lcm-atg.abilities.bouncy.name=Trait: Bouncy
 lcm-atg.abilities.bouncy.desc=Take slightly less damage from falling
 lcm-atg.abilities.lucky.name=Trait: Lucky
