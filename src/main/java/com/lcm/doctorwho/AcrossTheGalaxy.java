@@ -45,7 +45,6 @@ public class AcrossTheGalaxy
         LOG.info("Entered " + MODID + " init stage");
     }
 
-
     @SubscribeEvent
     public static void registerLoot(LootTableLoadEvent e) { //TODO can this loot table actually be overriden in resource packs?
         if (!e.getName().toString().toLowerCase().matches(ATGConfig.lootRegex) || ATGConfig.disableArch) return;
