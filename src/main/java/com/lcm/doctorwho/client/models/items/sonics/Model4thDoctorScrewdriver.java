@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.models.items;
+package com.lcm.doctorwho.client.models.items.sonics;
 
 import com.lcm.doctorwho.client.models.ItemModelBase;
 import lucraft.mods.lucraftcore.util.render.LCModelState;

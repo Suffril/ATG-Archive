@@ -8,8 +8,18 @@ superpower.timelord.name=Timelord
 
 //Items
 item.fourthdocsonic.name=Fourth Doctors sonic
+item.chameleonArch.name=Chameleon Arch
 
+//Blocks
+tile.classicroundela.name=Classic Roundel A
+tile.classicroundelb.name=Classic Roundel B
+tile.classicroundelc.name=Classic Roundel C
+tile.classicroundeld.name=Classic Roundel D
+tile.pinkroundel.name=Pink Roundel
+tile.coral_wall_1.name=Coral wall A
+tile.coralroundel.name=Coral Roundel
 
+//Traits
 lcm-atg.abilities.bouncy.name=Trait: Bouncy
 lcm-atg.abilities.bouncy.desc=Take slightly less damage from falling
 lcm-atg.abilities.lucky.name=Trait: Lucky
@@ -50,12 +60,17 @@ lcm-atg.abilities.dumb.name=Trait: Dumb
 lcm-atg.abilities.dumb.desc=You gain experience slower
 lcm-atg.abilities.obvious.name=Trait: Obvious
 lcm-atg.abilities.obvious.desc=Enemies will notice you from a greater range
-item.chameleonArch.name=Chameleon Arch
+
+//GUI
 lcm-atg.info.primary=Primary Color
 lcm-atg.info.secondary=Secondary Color
 lcm-atg.info.textured=Textured Regeneration?
+
+//Subtitles
 lcm-atg.subtitles.regeneration=Regeneration energy
 lcm-atg.subtitles.timey_wimey=Timey Wimey Woosh
+
+//Messages
 lcm-atg.messages.traitsDisabled=TRAITS ARE NOT ENABLED
 lcm-atg.messages.becomeTimelord=You've become a timelord!
 lcm-atg.messages.alreadyTimelord=You're already a timelord!

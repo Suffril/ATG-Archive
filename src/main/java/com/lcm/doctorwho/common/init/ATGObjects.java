@@ -2,8 +2,12 @@ package com.lcm.doctorwho.common.init;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.ATGTabs;
+import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
+import com.lcm.doctorwho.client.models.items.sonics.Model4thDoctorScrewdriver;
+import com.lcm.doctorwho.client.render.RenderItemModelBase;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
+import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.traits.negative.*;
@@ -22,7 +26,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -42,28 +45,27 @@ public class ATGObjects
 	public static class Items
 	{
 
-		public static final ItemChameleonArch chameleonArch = new ItemChameleonArch();
-		public static final Item fourthDocSonic = new ItemSonic("fourthdocsonic", SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+		public static final Item chameleonArch = new ItemChameleonArch();
+		public static final Item fourthDocSonic = new ItemSonic("sonic_fourth_doc", SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+        public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 	}
 
 	public static class Blocks
 	{
-		public static final Block classicRoundelA = new BlockOutline(Material.CORAL, "classicroundela");
-		public static final Block classicRoundelB = new BlockOutline(Material.CORAL, "classicroundelb");
-		public static final Block classicRoundelC = new BlockOutline(Material.CORAL, "classicroundelc");
-		public static final Block classicRoundelD = new BlockOutline(Material.CORAL, "classicroundeld");
-		public static final Block jodieRoundel = new BlockOutline(Material.CORAL, "jodieroundel");
-		public static final Block coral = new BlockOutline(Material.CORAL, "coral");
-		public static final Block coralroundel = new BlockOutline(Material.CORAL, "coralroundel");
+		public static final Block classicRoundelA = new BlockOutline(Material.CORAL, "classicroundela").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block classicRoundelB = new BlockOutline(Material.CORAL, "classicroundelb").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block classicRoundelC = new BlockOutline(Material.CORAL, "classicroundelc").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block classicRoundelD = new BlockOutline(Material.CORAL, "classicroundeld").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block pinkRoundel = new BlockOutline(Material.CORAL, "pinkroundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block coral = new BlockOutline(Material.CORAL, "coral_wall_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block coralroundel = new BlockOutline(Material.CORAL, "coralroundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
 	}
 
 	public static class SoundEvents
 	{
-		public static final SoundEvent REGENERATION = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "regeneration"))
-				.setRegistryName(AcrossTheGalaxy.MODID, "regeneration");
-		public static final SoundEvent TIMEY_WIMEY = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "timey_wimey"))
-				.setRegistryName(AcrossTheGalaxy.MODID, "timey_wimey");
+		public static final SoundEvent REGENERATION = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "regeneration")).setRegistryName(AcrossTheGalaxy.MODID, "regeneration");
+		public static final SoundEvent TIMEY_WIMEY = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "timey_wimey")).setRegistryName(AcrossTheGalaxy.MODID, "timey_wimey");
 	}
 
 	public static class EntityEntries
@@ -174,7 +176,16 @@ public class ATGObjects
 			if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID))
 			{
 				String path = loc.getResourcePath();
-			}
+
+				 if(path.equalsIgnoreCase("sonic_fourth_doc")) {
+                     e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model4thDoctorScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/4th_sonic.png")));
+                 }
+
+                if(path.equalsIgnoreCase("cane_first_doc")) {
+                    e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
+                }
+
+            }
 		}
 	}
 }
