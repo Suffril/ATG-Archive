@@ -1,0 +1,11 @@
+Sub/Sea - Code
+Waffle - Code
+Lucraft - Code
+Nictogen - Code
+
+Lucy/Clockwork - Models/Textures
+Ford - Models/Textures
+Neon - Models/Textures
+Hydro - Textures/Writing
+deathstrike2105 - Models/Textures
+GasMask - Models/Textures
