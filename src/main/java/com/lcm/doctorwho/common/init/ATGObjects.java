@@ -49,6 +49,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -58,7 +59,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class ATGObjects {
 
 	public static class Items {
-		public static final ItemChameleonArch chameleonArch = new ItemChameleonArch();
+		public static final Item chameleonArch = new ItemChameleonArch();
 		public static final Item fourthDocSonic = new ItemSonic("fourthdocsonic", SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		}
 
@@ -129,7 +130,7 @@ public class ATGObjects {
 						}
 
 						if (aClass.isAssignableFrom(Item.class)) {
-							for (Field f : Blocks.class.getDeclaredFields()) {
+							for (Field f : ATGObjects.Blocks.class.getDeclaredFields()) {
 								Block block = (Block) f.get(null);
 								entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
 							}
