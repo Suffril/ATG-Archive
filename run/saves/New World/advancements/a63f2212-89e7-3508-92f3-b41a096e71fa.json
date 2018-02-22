@@ -1,0 +1,15 @@
+{
+  "minecraft:end/elytra": {
+    "criteria": {
+      "elytra": "2018-02-22 20:58:24 +1000"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "forest_hills": "2018-02-22 20:56:44 +1000",
+      "plains": "2018-02-22 20:56:14 +1000"
+    },
+    "done": false
+  }
+}

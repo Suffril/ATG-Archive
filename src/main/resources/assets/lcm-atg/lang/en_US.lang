@@ -12,13 +12,13 @@ item.chameleonArch.name=Chameleon Arch
 item.cane_first_doc.name=First Doctor cane
 
 //Blocks
-tile.classicroundela.name=Classic Roundel A
-tile.classicroundelb.name=Classic Roundel B
-tile.classicroundelc.name=Classic Roundel C
-tile.classicroundeld.name=Classic Roundel D
-tile.pinkroundel.name=Pink Roundel
-tile.coral_wall_1.name=Coral wall A
-tile.coralroundel.name=Coral Roundel
+tile.cream_roundel.name=Cream Roundel 
+tile.cream_roundel_alt.name=Cream Roundel (Alt)
+tile.white_roundel.name=White Roundel
+tile.white_roundel_alt.name=White Roundel (Alt)
+tile.pink_roundel.name=Pink Roundel
+tile.coral_wall.name=Coral Wall
+tile.coral_roundel.name=Coral Roundel
 
 //Traits
 lcm-atg.abilities.bouncy.name=Trait: Bouncy
