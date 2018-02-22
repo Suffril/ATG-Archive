@@ -1,9 +1,11 @@
-package com.lcm.doctorwho.client.render;
+package com.lcm.doctorwho.client.render.item;
 
 import java.util.List;
 
 import javax.vecmath.Matrix4f;
 
+import com.lcm.doctorwho.utils.ATGUtils;
+import net.minecraft.potion.Potion;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.lcm.doctorwho.client.models.ItemModelBase;
@@ -25,8 +27,8 @@ import net.minecraftforge.common.model.IModelState;
 
 public class RenderItemModelBase implements IItemRenderer {
 	
-	public ResourceLocation modelTexture = null;
-	public static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+	private ResourceLocation modelTexture = null;
+	private static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
 	private IBakedModel jsonModel;
 	private ItemModelBase javaModel;
@@ -86,38 +88,11 @@ public class RenderItemModelBase implements IItemRenderer {
 			Minecraft.getMinecraft().renderEngine.bindTexture(modelTexture);
 			
 			javaModel.renderModel(scale);
-			if (stack.isItemEnchanted()) renderEnchantedGlint(Minecraft.getMinecraft().player, javaModel);
+			if (stack.isItemEnchanted()) {
+				ATGUtils.renderEnchantedGlint(Minecraft.getMinecraft().player, javaModel, ENCHANTED_ITEM_GLINT_RES, scale);
+			}
 		}
 	}
-	
-	private void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model) {
-		float f = (float) entity.ticksExisted + LCRenderHelper.renderTick;
-		Minecraft.getMinecraft().renderEngine.bindTexture(ENCHANTED_ITEM_GLINT_RES);
-		GlStateManager.enableBlend();
-		GlStateManager.depthFunc(514);
-		GlStateManager.depthMask(false);
-		GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-		
-		for (int i = 0; i < 2; ++i) {
-			GlStateManager.disableLighting();
-			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_COLOR, GlStateManager.DestFactor.ONE);
-			GlStateManager.color(0.38F, 0.19F, 0.608F, 1.0F);
-			GlStateManager.matrixMode(5890);
-			GlStateManager.loadIdentity();
-			GlStateManager.scale(0.33333334F, 0.33333334F, 0.33333334F);
-			GlStateManager.rotate(30.0F - (float) i * 60.0F, 0.0F, 0.0F, 1.0F);
-			GlStateManager.translate(0.0F, f * (0.001F + (float) i * 0.003F) * 20.0F, 0.0F);
-			GlStateManager.matrixMode(5888);
-			javaModel.renderModel(this.scale);
-		}
-		
-		GlStateManager.matrixMode(5890);
-		GlStateManager.loadIdentity();
-		GlStateManager.matrixMode(5888);
-		GlStateManager.enableLighting();
-		GlStateManager.depthMask(true);
-		GlStateManager.depthFunc(515);
-		GlStateManager.disableBlend();
-	}
+
 	
 }

@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase
 {
-    //fields
     ModelRenderer Handle1;
     ModelRenderer Handle2;
     ModelRenderer Silver1;

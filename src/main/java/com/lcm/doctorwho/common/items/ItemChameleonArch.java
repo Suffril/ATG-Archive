@@ -13,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -35,12 +36,19 @@ public class ItemChameleonArch extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack arch = player.getHeldItem(hand);
 		SuperpowerPlayerHandler handler = SuperpowerHandler.getSuperpowerPlayerHandler(player);
-		
+
+		if(arch.getTagCompound() == null) {
+			arch.setTagCompound(new NBTTagCompound());
+			arch.getTagCompound().setBoolean("open", true);
+		}
+
 		if (ATGConfig.regenCapacity == 0) { // with infinite regenerations the behavior is quite different
 			if (handler == null) {
+                arch.getTagCompound().setBoolean("open", true);
 				SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE);
 				SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = -1;
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
+                arch.getTagCompound().setBoolean("open", false);
 				return new ActionResult<>(EnumActionResult.PASS, arch);
 			} else {
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.alreadyTimelord")), true);
@@ -66,14 +74,17 @@ public class ItemChameleonArch extends Item {
 			if (!player.isSneaking()) {
 				int used = doUsageDamage(arch, tmh);
 				if (used == 0) {
-					if (tmh.regenerationsLeft == ATGConfig.regenCapacity)
-						player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullCycle", used)), true);
-					else if (arch.getItemDamage() == ATGConfig.regenCapacity) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch", used)), true);
+                    if (tmh.regenerationsLeft == ATGConfig.regenCapacity) {
+                        arch.getTagCompound().setBoolean("open", false);
+                    player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullCycle", used)), true);
+                }
+                else if (arch.getItemDamage() == ATGConfig.regenCapacity) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch", used)), true);
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
 				}
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.gainedRegenerations", used)), true); // too lazy to fix a single/plural issue here
 			} else {
 				if (arch.getItemDamage() == 0) {
+
 					player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullArch")), true);
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
 				} else if (tmh.regenerationsLeft < 1) {
@@ -85,6 +96,7 @@ public class ItemChameleonArch extends Item {
 				arch.setItemDamage(arch.getItemDamage() - 1);
 				tmh.regenerationsLeft--;
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer")), true);
+				arch.getTagCompound().setBoolean("open", false);
 			}
 		} else
 			return new ActionResult<>(EnumActionResult.FAIL, arch);

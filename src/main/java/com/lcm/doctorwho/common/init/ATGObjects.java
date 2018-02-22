@@ -3,8 +3,9 @@ package com.lcm.doctorwho.common.init;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.ATGTabs;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
-import com.lcm.doctorwho.client.models.items.sonics.Model4thDoctorScrewdriver;
-import com.lcm.doctorwho.client.render.RenderItemModelBase;
+import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
+import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
+import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemOutline;
@@ -46,7 +47,7 @@ public class ATGObjects
 	{
 
 		public static final Item chameleonArch = new ItemChameleonArch();
-		public static final Item fourthDocSonic = new ItemSonic("sonic_fourth_doc", SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
         public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 	}
 
@@ -59,7 +60,6 @@ public class ATGObjects
 		public static final Block pinkRoundel = new BlockOutline(Material.CORAL, "pinkroundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coral = new BlockOutline(Material.CORAL, "coral_wall_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coralroundel = new BlockOutline(Material.CORAL, "coralroundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-
 	}
 
 	public static class SoundEvents
@@ -138,7 +138,6 @@ public class ATGObjects
 					}
 					entries.forEach(registry::register);
 				}
-
 			}
 		}
 	}
@@ -173,12 +172,16 @@ public class ATGObjects
 	{
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys())
 		{
-				 if(loc.getResourcePath().equalsIgnoreCase("sonic_fourth_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
-                     e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model4thDoctorScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/4th_sonic.png")));
+				 if(loc.getResourcePath().equalsIgnoreCase("sonic_eleventh_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
+                     e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model11thDocScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/11th_sonic.png")));
                  }
                 if(loc.getResourcePath().equalsIgnoreCase("cane_first_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
                     e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
                 }
+
+			if(loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
+				e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
+			}
 
             }
 	}
