@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 
-@SuppressWarnings("deprecation") // FIXME deprecation is bad
+//FIXME deprecation is bad
 public class ModelTest extends ModelBase implements ItemModelBase {
 	// fields
 	ModelRenderer Wall;
