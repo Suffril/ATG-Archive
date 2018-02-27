@@ -150,8 +150,8 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase
     @Override
     public IModelState getTransforms() {
         Map map = new HashMap<ItemCameraTransforms.TransformType, TRSRTransformation>();
-        map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(0F, 1.0F, 0F), new Vector3f(0.5F, 0.5F, 0), new Vector3f(1F, 1F, 1F))));
-        map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(-90F, 0F, 0F), new Vector3f(0.5F, 0.3F, 0.5F), new Vector3f(0.5F, 0.5F, 0.5F))));
+        map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, 0F, 0F), new Vector3f(0.5F, 1.7F, 0), new Vector3f(1F, 1F, 1F))));
+        map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 0F, 180F), new Vector3f(0F, 0.3F, 1.0F), new Vector3f(0.9F, 0.9F, 0.9F))));
         map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, -120F, 0F), new Vector3f(1F, 1.5F, 0F), new Vector3f(1F, 1F, 1F))));
         map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, -110, 0F), new Vector3f(1F, 1.5F, 0F), new Vector3f(1F, 1F, 1F))));
         map.put(ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 90F, 90F), new Vector3f(0.45F, 0.6F, 0.5F), new Vector3f(0.7F, 0.7F, 0.7F))));

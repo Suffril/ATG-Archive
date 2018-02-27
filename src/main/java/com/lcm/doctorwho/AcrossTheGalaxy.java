@@ -1,5 +1,9 @@
 package com.lcm.doctorwho;
 
+import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
+import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
+import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.apache.logging.log4j.Logger;
 
 import com.lcm.doctorwho.config.ATGConfig;
@@ -45,19 +49,9 @@ public class AcrossTheGalaxy
     public void init(FMLInitializationEvent event)
     {
         LOG.info("Entered " + MODID + " init stage");
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase(new ModelWeepingAngel(), "weeping_angel", 1.0F));
+
     }
-
-
-    @SubscribeEvent
-    public static void registerLoot(LootTableLoadEvent e) { //TODO can this loot table actually be overriden in resource packs?
-        if (!e.getName().toString().toLowerCase().matches(ATGConfig.lootRegex) || ATGConfig.disableArch) return;
-
-        LootCondition[] condAlways = new LootCondition[] { new RandomChance(1F) };
-        LootEntry entry = new LootEntryTable(new ResourceLocation(MODID, "inject/arch_loot"), 1, 1, condAlways, "lcm-regen:arch-entry");
-        LootPool lootPool = new LootPool(new LootEntry[] { entry }, condAlways, new RandomValueRange(1), new RandomValueRange(1), "lcm-regen:arch-pool");
-        e.getTable().addPool(lootPool);
-    }
-
-
 
 }
