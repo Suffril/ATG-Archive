@@ -8,6 +8,6 @@ public class ATGSoundEvent extends SoundEvent {
 
     public ATGSoundEvent(String name) {
         super(new ResourceLocation(AcrossTheGalaxy.MODID, name));
-        setRegistryName(AcrossTheGalaxy.VERSION, name);
+        setRegistryName(AcrossTheGalaxy.MODID, name);
     }
 }
