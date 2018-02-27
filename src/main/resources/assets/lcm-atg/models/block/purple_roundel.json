@@ -2,7 +2,7 @@
 	"__comment": "Created by CommandrMoose with Cubik Studio. Any attempts to claim this modl as your own will have conciquences",
 	"textures": {
 		"particle": "blocks/e_particle",
-		"texture": "lcm-atg:blocks/cream_roundel"
+		"texture": "lcm-atg:blocks/purple_roundel"
 	},
 	"elements": [
 		{
@@ -1305,36 +1305,5 @@
 				"east": { "uv": [ 8, 14, 9, 14.5 ], "texture": "#texture" }
 			}
 		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"rotation":  [ 75, 45, 0 ],
-			"translation":  [ 0, 2.5, 0 ],
-			"scale":  [ 0.375, 0.375, 0.375 ]
-		},
-		"thirdperson_lefthand": {
-			"rotation":  [ 75, 45, 0 ],
-			"translation":  [ 0, 2.5, 0 ],
-			"scale":  [ 0.375, 0.375, 0.375 ]
-		},
-		"firstperson_righthand": {
-			"rotation":  [ 0, 45, 0 ],
-			"scale":  [ 0.4, 0.4, 0.4 ]
-		},
-		"firstperson_lefthand": {
-			"rotation":  [ 0, 45, 0 ],
-			"scale":  [ 0.4, 0.4, 0.4 ]
-		},
-		"gui": {
-			"rotation":  [ 30, 225, 0 ],
-			"scale":  [ 0.625, 0.625, 0.625 ]
-		},
-		"ground": {
-			"translation":  [ 0, 3, 0 ],
-			"scale":  [ 0.25, 0.25, 0.25 ]
-		},
-		"fixed": {
-			"scale":  [ 0.5, 0.5, 0.5 ]
-		}
-	}
+	]
 }
