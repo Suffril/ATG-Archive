@@ -16,6 +16,7 @@ import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.traits.negative.*;
 import com.lcm.doctorwho.common.traits.positive.*;
 
+import com.lcm.doctorwho.utils.ATGSoundEvent;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -100,8 +101,8 @@ public class ATGObjects
 
 	public static class SoundEvents
 	{
-		public static final SoundEvent REGENERATION = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "regeneration")).setRegistryName(AcrossTheGalaxy.MODID, "regeneration");
-		public static final SoundEvent TIMEY_WIMEY = new SoundEvent(new ResourceLocation(AcrossTheGalaxy.MODID, "timey_wimey")).setRegistryName(AcrossTheGalaxy.MODID, "timey_wimey");
+		public static final SoundEvent REGENERATION = new ATGSoundEvent("regeneration");
+		public static final SoundEvent TIMEY_WIMEY = new ATGSoundEvent("timey_wimey");
 	}
 
 	public static class EntityEntries

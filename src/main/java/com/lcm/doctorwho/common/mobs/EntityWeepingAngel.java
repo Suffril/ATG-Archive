@@ -9,8 +9,12 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -18,17 +22,18 @@ import net.minecraft.world.World;
 
 public class EntityWeepingAngel extends EntityMob {
 
-	private static final DataParameter<Boolean> VIEWED = EntityDataManager.<Boolean>createKey(EntityWeepingAngel.class, DataSerializers.BOOLEAN);
+	private static DataParameter<Boolean> VIEWED = EntityDataManager.<Boolean>createKey(EntityWeepingAngel.class, DataSerializers.BOOLEAN);
 	
-	private static final DataParameter<Integer> TIME_SEEN = EntityDataManager.<Integer>createKey(EntityWeepingAngel.class, DataSerializers.VARINT);
+	private static DataParameter<Integer> TIME_SEEN = EntityDataManager.<Integer>createKey(EntityWeepingAngel.class, DataSerializers.VARINT);
 	
 	public EntityWeepingAngel(World world) {
 		super(world);
-        this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-    }
+        tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
+        tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		experienceValue = 9;
+	}
 	
 	@Override
 	protected void entityInit() {
@@ -85,5 +90,76 @@ public class EntityWeepingAngel extends EntityMob {
 			}
 		}
 	}
+
+    /**
+     * Drop 0-2 items of this living's type
+     */
+    protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
+        dropItem(Item.getItemFromBlock(Blocks.STONE), 2);
+    }
+
+    @Override
+    public void setMoveForward(float amount)
+    {
+        if(!isSeen()) {
+        moveForward = amount;
+        } else
+            {
+                moveForward = 0;
+            }
+    }
+
+    @Override
+    public void setMoveVertical(float amount)
+    {
+        if(!isSeen()) {
+            moveVertical = amount;
+        } else
+        {
+            moveVertical = 0;
+        }
+    }
+
+    @Override
+    public void setMoveStrafing(float amount)
+    {
+        if(!isSeen()) {
+            moveStrafing = amount;
+        } else
+        {
+            moveStrafing = 0;
+        }
+    }
+
+
+    /**
+     * Protected helper method to write subclass entity data to NBT.
+     */
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+        compound.setBoolean("isSeen", isSeen());
+        compound.setInteger("timeSeen", getSeenTime());
+    }
+
+    /**
+     * Protected helper method to read subclass entity data from NBT.
+     */
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        if (compound.hasKey("isSeen"))
+        {
+            setSeen(compound.getBoolean("isSeen"));
+        }
+
+        if (compound.hasKey("timeSeen"))
+        {
+            setSeenTime(compound.getInteger("timeSeen"));
+        }
+    }
 	
 }
