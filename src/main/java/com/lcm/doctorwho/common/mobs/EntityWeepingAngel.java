@@ -2,6 +2,7 @@ package com.lcm.doctorwho.common.mobs;
 
 import com.lcm.doctorwho.utils.ATGUtils;
 
+import net.minecraft.block.BlockLog;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.*;
@@ -70,7 +71,7 @@ public class EntityWeepingAngel extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		
+
 		if (!world.isRemote) {
 			if (isSeen()) {
 				setSeenTime(getSeenTime() + 1);

@@ -8,6 +8,7 @@ import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
+import com.lcm.doctorwho.common.blocks.LogsOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
@@ -90,8 +91,8 @@ public class ATGObjects
 		public static final Block yellowRoundel = new BlockOutline(Material.CORAL, "yellow_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block yellowRoundelAlt = new BlockOutline(Material.CORAL, "yellow_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
-		public static final Block alfLog = new BlockOutline(Material.CORAL, "alf_log").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block alfLeaves = new LeavesOutline(Material.CORAL, MapColor.DIAMOND, "alf_leaves").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block alfLog = new LogsOutline("alf_log").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block alfLeaves = new LeavesOutline("alf_leaves").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
 		public static final Block coralWall = new BlockOutline(Material.CORAL, "coral_wall").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
