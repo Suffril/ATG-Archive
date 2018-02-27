@@ -4,25 +4,21 @@ import java.util.List;
 
 import javax.vecmath.Matrix4f;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.client.models.ItemModelBase;
 import com.lcm.doctorwho.client.models.items.ModelFobwatchClosed;
 import com.lcm.doctorwho.client.models.items.ModelFobwatchOpen;
 import com.lcm.doctorwho.utils.ATGUtils;
-import net.minecraft.potion.Potion;
-import org.apache.commons.lang3.tuple.Pair;
 
-import com.lcm.doctorwho.client.models.ItemModelBase;
-
-import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import lucraft.mods.lucraftcore.util.render.IItemRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -69,7 +65,6 @@ public class RenderItemFobwatch implements IItemRenderer {
        return IItemRenderer.super.handlePerspective(cameraTransformType);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public ItemCameraTransforms getItemCameraTransforms() {
         return IItemRenderer.super.getItemCameraTransforms();

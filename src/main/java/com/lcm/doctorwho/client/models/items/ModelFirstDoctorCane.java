@@ -1,18 +1,19 @@
 package com.lcm.doctorwho.client.models.items;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.lwjgl.util.vector.Vector3f;
+
 import com.lcm.doctorwho.client.models.ItemModelBase;
+
 import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
-import net.minecraft.entity.Entity;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
-import org.lwjgl.util.vector.Vector3f;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase
 {
@@ -121,14 +122,14 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase
         CaneBase.mirror = true;
         setRotation(CaneBase, 0F, 0F, 0F);
     }
-    
+
     private void setRotation(ModelRenderer model, float x, float y, float z)
     {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-    
+
     @Override
     public void renderModel(float scale) {
         Handle1.render(scale);
@@ -149,9 +150,9 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase
 
     @Override
     public IModelState getTransforms() {
-        Map map = new HashMap<ItemCameraTransforms.TransformType, TRSRTransformation>();
-        map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, 0F, 0F), new Vector3f(0.5F, 1.7F, 0), new Vector3f(1F, 1F, 1F))));
-        map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 0F, 180F), new Vector3f(0F, 0.3F, 1.0F), new Vector3f(0.9F, 0.9F, 0.9F))));
+        Map<ItemCameraTransforms.TransformType, TRSRTransformation> map = new HashMap<>();
+        map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(0F, 1.0F, 0F), new Vector3f(0.5F, 0.5F, 0), new Vector3f(1F, 1F, 1F))));
+        map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(-90F, 0F, 0F), new Vector3f(0.5F, 0.3F, 0.5F), new Vector3f(0.5F, 0.5F, 0.5F))));
         map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, -120F, 0F), new Vector3f(1F, 1.5F, 0F), new Vector3f(1F, 1F, 1F))));
         map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, -110, 0F), new Vector3f(1F, 1.5F, 0F), new Vector3f(1F, 1F, 1F))));
         map.put(ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 90F, 90F), new Vector3f(0.45F, 0.6F, 0.5F), new Vector3f(0.7F, 0.7F, 0.7F))));

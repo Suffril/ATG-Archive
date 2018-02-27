@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ATGTabs {
-	public static CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Item.getItemFromBlock(ATGObjects.Blocks.classicRoundelA));
+	public static CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Item.getItemFromBlock(ATGObjects.Blocks.creamRoundel));
 	public static CreativeTabs TABS_ITEMS_SONICS = new TabBase("sonics", Items.CAKE);
 	
 	static class TabBase extends CreativeTabs {
