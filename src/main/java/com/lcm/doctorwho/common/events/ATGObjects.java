@@ -139,44 +139,56 @@ public class ATGObjects {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
-	public static void registerObjects(RegistryEvent event) throws Exception // FIXME update exception handling according to ATGObjects
-	{
-		if (event instanceof RegistryEvent.Register) {
-			IForgeRegistry registry = ((RegistryEvent.Register) event).getRegistry();
+	public static void registerObjects(RegistryEvent ev)  {
+		if (!(ev instanceof RegistryEvent.Register)) return;
+		IForgeRegistry registry = ((RegistryEvent.Register) ev).getRegistry();
+		
+		for (Class<?> aClass : ATGObjects.class.getDeclaredClasses()) {
+			if (Arrays.stream(aClass.getDeclaredFields()).noneMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType()))) continue;
+			ArrayList<IForgeRegistryEntry> entries = new ArrayList<>();
 			
-			for (Class<?> aClass : ATGObjects.class.getDeclaredClasses())
-				if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType()))) {
-					ArrayList<IForgeRegistryEntry> entries = new ArrayList<>();
-					
-					for (Field field : aClass.getDeclaredFields())
-						try {
-							entries.add((IForgeRegistryEntry) field.get(null));
-						} catch (IllegalAccessException e) {
-							e.printStackTrace();
-						}
-					
-					if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> Item.class.isAssignableFrom(field.getType()))) for (Field f : Blocks.class.getDeclaredFields()) {
+			for (Field field : aClass.getDeclaredFields()) try {
+				entries.add((IForgeRegistryEntry) field.get(null));
+			} catch (IllegalAccessException | ClassCastException e) {
+				throw new RuntimeException("Incorrect field in object sub-class", e);
+			}
+			
+			if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> Item.class.isAssignableFrom(field.getType()))) {
+				for (Field f : Blocks.class.getDeclaredFields()) {
+					try {
 						Block block = (Block) f.get(null);
 						entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
+					} catch (IllegalAccessException | ClassCastException e) {
+						throw new RuntimeException("Incorrect field in object sub-class", e);
 					}
-					entries.forEach(registry::register);
 				}
+			}
+			
+			entries.forEach(registry::register);
 		}
 	}
 	
 	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent e) throws ReflectiveOperationException {
+	public static void registerModels(ModelRegistryEvent ev) {
 		for (Field f : Items.class.getDeclaredFields()) {
-			Item item = (Item) f.get(null);
-			ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
-			ModelLoader.setCustomModelResourceLocation(item, 0, loc);
+			try {
+				Item item = (Item) f.get(null);
+				ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
+				ModelLoader.setCustomModelResourceLocation(item, 0, loc);
+			} catch (IllegalAccessException | ClassCastException e) {
+				throw new RuntimeException("Incorrect field in item sub-class", e);
+			}
 		}
 		
 		for (Field f : Blocks.class.getDeclaredFields()) {
-			Block block = (Block) f.get(null);
-			Item item = Item.getItemFromBlock(block);
-			ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
-			ModelLoader.setCustomModelResourceLocation(item, 0, loc);
+			try {
+				Block block = (Block) f.get(null);
+				Item item = Item.getItemFromBlock(block);
+				ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
+				ModelLoader.setCustomModelResourceLocation(item, 0, loc);
+			} catch (IllegalAccessException | ClassCastException e) {
+				throw new RuntimeException("Incorrect field in item sub-class", e);
+			}
 		}
 	}
 	
