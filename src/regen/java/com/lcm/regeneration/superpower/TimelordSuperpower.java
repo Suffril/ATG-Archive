@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.init.ATGObjects;
 import com.lcm.regeneration.client.gui.GuiRegenCustomizer;
 import com.lcm.regeneration.client.gui.GuiTimelordPowerTab;
 import com.lcm.regeneration.traits.negative.TraitClumsy;
@@ -27,6 +26,7 @@ import com.lcm.regeneration.traits.positive.TraitStrong;
 import com.lcm.regeneration.traits.positive.TraitSturdy;
 import com.lcm.regeneration.traits.positive.TraitThickSkinned;
 import com.lcm.regeneration.traits.positive.TraitTough;
+import com.lcm.regeneration.util.RegenObjects;
 
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
@@ -124,7 +124,7 @@ public class TimelordSuperpower extends Superpower {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, 0);
 		GlStateManager.scale(2, 2, 1);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(new ItemStack(ATGObjects.Items.chameleonArch), 0, 0);
+		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(new ItemStack(RegenObjects.Items.chameleonArch), 0, 0);
 		GlStateManager.popMatrix();
 		Minecraft.getMinecraft().getRenderItem().zLevel = zLevel;
 	}

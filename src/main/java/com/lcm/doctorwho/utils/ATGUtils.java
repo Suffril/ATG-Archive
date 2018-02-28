@@ -1,8 +1,7 @@
 package com.lcm.doctorwho.utils;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
-
 import com.lcm.doctorwho.client.models.ItemModelBase;
+
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,6 +12,7 @@ import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,7 +30,7 @@ public class ATGUtils {
 	 * Checks whether we are on a client or not
 	 */
 	public static boolean isClient() {
-		return AcrossTheGalaxy.FML.getSide().isClient();
+		return FMLCommonHandler.instance().getSide().isClient();
 	}
 	
 	/**

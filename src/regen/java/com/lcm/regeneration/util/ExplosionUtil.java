@@ -1,6 +1,4 @@
-package com.lcm.regeneration;
-
-import com.lcm.doctorwho.config.ATGConfig;
+package com.lcm.regeneration.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -14,8 +12,8 @@ import net.minecraft.world.World;
 public class ExplosionUtil {
 	
 	public static void regenerationExplosion(EntityPlayer player) {
-		explodeKill(player, player.world, player.getPosition(), ATGConfig.regenerativeKillRange);
-		explodeKnockback(player, player.world, player.getPosition(), ATGConfig.regenerativeKnockback, ATGConfig.regenerativeKnockbackRange);
+		explodeKill(player, player.world, player.getPosition(), RegenConfig.regenerativeKillRange);
+		explodeKnockback(player, player.world, player.getPosition(), RegenConfig.regenerativeKnockback, RegenConfig.regenerativeKnockbackRange);
 	}
 	
 	public static void explodeKnockback(Entity exploder, World world, BlockPos pos, float knockback, int range) {

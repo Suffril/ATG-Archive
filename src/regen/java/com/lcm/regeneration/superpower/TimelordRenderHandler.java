@@ -3,7 +3,7 @@ package com.lcm.regeneration.superpower;
 import java.awt.Color;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.regeneration.LimbManipulationUtil;
+import com.lcm.regeneration.util.LimbManipulationUtil;
 
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;

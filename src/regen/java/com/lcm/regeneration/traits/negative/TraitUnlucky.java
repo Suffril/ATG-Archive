@@ -2,7 +2,7 @@ package com.lcm.regeneration.traits.negative;
 
 import java.util.UUID;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.regeneration.RegenerationATG;
 import com.lcm.regeneration.traits.positive.TraitLucky;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
@@ -35,7 +35,7 @@ public class TraitUnlucky extends AbilityAttributeModifier implements INegativeT
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {
-		mc.renderEngine.bindTexture(AcrossTheGalaxy.ICONS);
+		mc.renderEngine.bindTexture(RegenerationATG.ICONS);
 		gui.drawTexturedModalRect(x, y, 16, 0, 16, 16);
 	}
 }

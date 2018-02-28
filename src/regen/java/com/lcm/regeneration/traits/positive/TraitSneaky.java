@@ -2,7 +2,7 @@ package com.lcm.regeneration.traits.positive;
 
 import java.util.List;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.regeneration.RegenerationATG;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
@@ -43,7 +43,7 @@ public class TraitSneaky extends AbilityConstant {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {
-		mc.renderEngine.bindTexture(AcrossTheGalaxy.ICONS);
+		mc.renderEngine.bindTexture(RegenerationATG.ICONS);
 		gui.drawTexturedModalRect(x, y, 0, 0, 16, 16);
 	}
 	

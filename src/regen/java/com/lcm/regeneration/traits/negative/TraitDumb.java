@@ -2,7 +2,7 @@ package com.lcm.regeneration.traits.negative;
 
 import java.util.List;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.regeneration.RegenerationATG;
 import com.lcm.regeneration.traits.positive.TraitSmart;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
@@ -52,7 +52,7 @@ public class TraitDumb extends AbilityConstant implements INegativeTrait {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {
-		mc.renderEngine.bindTexture(AcrossTheGalaxy.ICONS);
+		mc.renderEngine.bindTexture(RegenerationATG.ICONS);
 		gui.drawTexturedModalRect(x, y, 16, 0, 16, 16);
 	}
 	

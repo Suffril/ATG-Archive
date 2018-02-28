@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.render.item;
+package com.lcm.regeneration.client.models;
 
 import java.util.List;
 
@@ -8,8 +8,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.ItemModelBase;
-import com.lcm.doctorwho.client.models.items.ModelFobwatchClosed;
-import com.lcm.doctorwho.client.models.items.ModelFobwatchOpen;
 import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.util.render.IItemRenderer;

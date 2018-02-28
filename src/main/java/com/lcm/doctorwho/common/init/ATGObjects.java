@@ -1,31 +1,27 @@
 package com.lcm.doctorwho.common.init;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.ATGTabs;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
-import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
 import com.lcm.doctorwho.common.blocks.LogsOutline;
-import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
-import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
-import com.lcm.doctorwho.common.traits.negative.*;
-import com.lcm.doctorwho.common.traits.positive.*;
+import com.lcm.regeneration.util.RegenObjects;
 
-import com.lcm.doctorwho.utils.ATGSoundEvent;
-import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -37,10 +33,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Created by Nictogen on 2/18/18
  */
@@ -49,9 +41,7 @@ public class ATGObjects
 {
 	public static class Items
 	{
-
-		public static final Item chameleonArch = new ItemChameleonArch();
-		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", RegenObjects.SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 	}
 
@@ -99,49 +89,14 @@ public class ATGObjects
 		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 	}
 
-	public static class SoundEvents
-	{
-		public static final SoundEvent REGENERATION = new ATGSoundEvent("regeneration");
-		public static final SoundEvent TIMEY_WIMEY = new ATGSoundEvent("timey_wimey");
-	}
-
 	public static class EntityEntries
 	{
 		// public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
 	}
 
-	public static class Superpowers
-	{
-		public static final TimelordSuperpower timelord = TimelordSuperpower.INSTANCE;
-	}
-
-	public static class AbilityEntries
-	{
-		public static final Ability.AbilityEntry bouncy = newAbilityEntry(TraitBouncy.class, "bouncy");
-		public static final Ability.AbilityEntry lucky = newAbilityEntry(TraitLucky.class, "lucky");
-		public static final Ability.AbilityEntry quick = newAbilityEntry(TraitQuick.class, "quick");
-		public static final Ability.AbilityEntry spry = newAbilityEntry(TraitSpry.class, "spry");
-		public static final Ability.AbilityEntry strong = newAbilityEntry(TraitStrong.class, "strong");
-		public static final Ability.AbilityEntry sturdy = newAbilityEntry(TraitSturdy.class, "sturdy");
-		public static final Ability.AbilityEntry thickSkinned = newAbilityEntry(TraitThickSkinned.class, "thickskinned");
-		public static final Ability.AbilityEntry tough = newAbilityEntry(TraitTough.class, "tough");
-		public static final Ability.AbilityEntry smart = newAbilityEntry(TraitSmart.class, "smart");
-		public static final Ability.AbilityEntry sneaky = newAbilityEntry(TraitSneaky.class, "sneaky");
-		public static final Ability.AbilityEntry clumsy = newAbilityEntry(TraitClumsy.class, "clumsy");
-		public static final Ability.AbilityEntry flimsy = newAbilityEntry(TraitFlimsy.class, "flimsy");
-		public static final Ability.AbilityEntry frail = newAbilityEntry(TraitFrail.class, "frail");
-		public static final Ability.AbilityEntry rigid = newAbilityEntry(TraitRigid.class, "rigid");
-		public static final Ability.AbilityEntry slow = newAbilityEntry(TraitSlow.class, "slow");
-		public static final Ability.AbilityEntry unhealthy = newAbilityEntry(TraitUnhealthy.class, "unhealthy");
-		public static final Ability.AbilityEntry unlucky = newAbilityEntry(TraitUnlucky.class, "unlucky");
-		public static final Ability.AbilityEntry weak = newAbilityEntry(TraitWeak.class, "weak");
-		public static final Ability.AbilityEntry dumb = newAbilityEntry(TraitDumb.class, "dumb");
-		public static final Ability.AbilityEntry obvious = newAbilityEntry(TraitObvious.class, "obvious");
-	}
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
-	public static void registerObjects(RegistryEvent event) throws Exception
+	public static void registerObjects(RegistryEvent event) throws Exception //FIXME update exception handling according to RegenObjects
 	{
 		if (event instanceof RegistryEvent.Register)
 		{
@@ -198,11 +153,6 @@ public class ATGObjects
 		}
 	}
 
-	private static Ability.AbilityEntry newAbilityEntry(Class<? extends Ability> ability, String name)
-	{
-		return new Ability.AbilityEntry(ability, new ResourceLocation(AcrossTheGalaxy.MODID, name));
-	}
-
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent e)
@@ -215,11 +165,6 @@ public class ATGObjects
 			if(loc.getResourcePath().equalsIgnoreCase("cane_first_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
 				e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
 			}
-
-			if(loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
-				e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
-			}
-
 		}
 	}
 }

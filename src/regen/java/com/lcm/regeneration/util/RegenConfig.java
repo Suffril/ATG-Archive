@@ -1,15 +1,14 @@
-package com.lcm.doctorwho.config;
+package com.lcm.regeneration.util;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.relauncher.Side;
 
-public class ATGConfig {
+public class RegenConfig {
 	public static boolean resetHunger, resetOxygen, dontLoseUponDeath, startAsTimelord, disableArch;
 	public static int regenerativeKillRange, regenerativeKnockbackRange, regenCapacity, regenerationLevel, postRegenerationLevel, postRegenerationDuration;
 	public static float regenerativeKnockback, absorbtionLevel;
 	public static String lootRegex;
 	
-	public static void init(Configuration cfg, Side side) {
+	public static void init(Configuration cfg) {
 		cfg.load();
 		
 		lootRegex = cfg.getString("lootRegex", "loot", "minecraft:chests\\/.*", "The loot pool for chameleon arch's will only be added to loot tables whose name matches this regular expression");
