@@ -43,6 +43,7 @@ public class ATGUtils {
 	/**
 	 * Stops a mob in it's tracks, FULLY.
 	 */
+	@Deprecated
 	public static void freezeMob(Entity entity, boolean considerYlevel) {
 		entity.motionX = 0;
 		if(considerYlevel & entity.onGround) { entity.motionY = 0; }
