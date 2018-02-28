@@ -2,6 +2,7 @@ package com.lcm.doctorwho.common.traits.negative;
 
 import java.util.List;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.traits.positive.TraitSneaky;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
@@ -49,7 +50,7 @@ public class TraitObvious extends AbilityConstant implements INegativeTrait {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {
-		mc.renderEngine.bindTexture(RegenerationATG.ICONS);
+		mc.renderEngine.bindTexture(AcrossTheGalaxy.ICONS);
 		gui.drawTexturedModalRect(x, y, 16, 0, 16, 16);
 	}
 	

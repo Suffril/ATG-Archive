@@ -1,9 +1,10 @@
 package com.lcm.doctorwho.common.events;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
+import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ExplosionUtil;
-import com.lcm.regeneration.util.RegenObjects;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
@@ -38,10 +39,10 @@ public class RegenEventHandler {
 	
 	@SubscribeEvent
 	public static void registerLoot(LootTableLoadEvent e) { // TODO can this loot table actually be overriden in resource packs?
-		if (!e.getName().toString().toLowerCase().matches(RegenConfig.lootRegex) || RegenConfig.disableArch) return;
+		if (!e.getName().toString().toLowerCase().matches(ATGConfig.lootRegex) || ATGConfig.disableArch) return;
 		
 		LootCondition[] condAlways = new LootCondition[] { new RandomChance(1F) };
-		LootEntry entry = new LootEntryTable(new ResourceLocation(RegenerationATG.MODID, "inject/arch_loot"), 1, 1, condAlways, "lcm-regen:arch-entry");
+		LootEntry entry = new LootEntryTable(new ResourceLocation(AcrossTheGalaxy.MODID, "inject/arch_loot"), 1, 1, condAlways, "lcm-regen:arch-entry");
 		LootPool lootPool = new LootPool(new LootEntry[] { entry }, condAlways, new RandomValueRange(1), new RandomValueRange(1), "lcm-regen:arch-pool");
 		e.getTable().addPool(lootPool);
 	}
@@ -76,12 +77,12 @@ public class RegenEventHandler {
 	
 	@SubscribeEvent
 	public static void onLogin(PlayerEvent.PlayerLoggedInEvent e) {
-		if (!RegenConfig.startAsTimelord || !e.player.world.isRemote) return;
+		if (!ATGConfig.startAsTimelord || !e.player.world.isRemote) return;
 		
 		NBTTagCompound nbt = e.player.getEntityData();
 		boolean loggedInBefore = nbt.getBoolean("loggedInBefore");
 		if (!loggedInBefore) {
-			e.player.inventory.addItemStackToInventory(new ItemStack(RegenObjects.Items.chameleonArch));
+			e.player.inventory.addItemStackToInventory(new ItemStack(ATGObjects.Items.chameleonArch));
 			nbt.setBoolean("loggedInBefore", true);
 		}
 	}
@@ -95,7 +96,7 @@ public class RegenEventHandler {
 		
 		TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class);
 		
-		if ((handler.regenerating || player.posY < 0 || handler.regenerationsLeft == 0) && !RegenConfig.dontLoseUponDeath) {
+		if ((handler.regenerating || player.posY < 0 || handler.regenerationsLeft == 0) && !ATGConfig.dontLoseUponDeath) {
 			SuperpowerHandler.removeSuperpower(player);
 			((CapabilitySuperpower) player.getCapability(CapabilitySuperpower.SUPERPOWER_CAP, null)).superpowerData.removeTag(TimelordSuperpower.INSTANCE.getRegistryName().toString());
 		} else if (handler.regenerationsLeft > 0 || handler.regenerationsLeft == -1) { // initiate regeneration
@@ -104,11 +105,11 @@ public class RegenEventHandler {
 			SuperpowerHandler.syncToAll(player);
 			
 			player.setHealth(.5f);
-			player.setAbsorptionAmount(RegenConfig.absorbtionLevel);
-			if (RegenConfig.resetOxygen) player.setAir(300);
-			if (RegenConfig.resetHunger) player.getFoodStats().setFoodLevel(20);
+			player.setAbsorptionAmount(ATGConfig.absorbtionLevel);
+			if (ATGConfig.resetOxygen) player.setAir(300);
+			if (ATGConfig.resetHunger) player.getFoodStats().setFoodLevel(20);
 			player.clearActivePotions();
-			player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 10 * 20, RegenConfig.regenerationLevel, false, false)); // 10 seconds of 20 ticks of Regeneration 2
+			player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 10 * 20, ATGConfig.regenerationLevel, false, false)); // 10 seconds of 20 ticks of Regeneration 2
 			player.extinguish();
 			
 			String time = "" + (handler.timesRegenerated + 1);
@@ -122,7 +123,7 @@ public class RegenEventHandler {
 				time = time + StringHelper.translateToLocal("lcm-atg.messages.numsuffix.ext");
 			
 			if (handler.regenerationsLeft != -1) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.regenLeftExt", time, (handler.regenerationsLeft - 1))), true);
-			player.world.playSound(null, player.posX, player.posY, player.posZ, RegenObjects.SoundEvents.REGENERATION, SoundCategory.PLAYERS, 1.0F, 1.0F);
+			player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.REGENERATION, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			ExplosionUtil.regenerationExplosion(player);
 		}
 	}

@@ -2,6 +2,7 @@ package com.lcm.doctorwho.common.traits.positive;
 
 import java.util.UUID;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import lucraft.mods.lucraftcore.superpowers.abilities.AbilityAttributeModifier;
 import lucraft.mods.lucraftcore.util.attributes.LCAttributes;
 import net.minecraft.client.Minecraft;
@@ -26,7 +27,7 @@ public class TraitBouncy extends AbilityAttributeModifier {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {
-		mc.renderEngine.bindTexture(RegenerationATG.ICONS);
+		mc.renderEngine.bindTexture(AcrossTheGalaxy.ICONS);
 		gui.drawTexturedModalRect(x, y, 0, 0, 16, 16);
 	}
 }

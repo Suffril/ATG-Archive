@@ -3,6 +3,7 @@ package com.lcm.doctorwho.common.superpower;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.common.traits.negative.INegativeTrait;
 
@@ -31,7 +32,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 /** Created by AFlyingGrayson on 8/7/17 */
 @Mod.EventBusSubscriber
 public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
-	public int regenerationsLeft = RegenConfig.regenCapacity, timesRegenerated, regenTicks;
+	public int regenerationsLeft = ATGConfig.regenCapacity, timesRegenerated, regenTicks;
 	public boolean regenerating = false;
 	
 	public TimelordSuperpowerHandler(ISuperpowerCapability cap, Superpower superpower) {
@@ -63,7 +64,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				}
 			} else if (regenTicks >= 200) { // end regeneration
 				player.setHealth(player.getMaxHealth());
-				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, RegenConfig.postRegenerationDuration, RegenConfig.postRegenerationLevel, false, false)); // 180 seconds of 20 ticks of Regeneration 4
+				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, ATGConfig.postRegenerationDuration, ATGConfig.postRegenerationLevel, false, false)); // 180 seconds of 20 ticks of Regeneration 4
 				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F); // FIXME broken
 				regenerating = false;
 				regenTicks = 0;

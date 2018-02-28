@@ -1,10 +1,10 @@
 package com.lcm.doctorwho.common.items;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.common.events.ATGObjects;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.utils.ATGConfig;
-import com.lcm.regeneration.util.RegenObjects;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
@@ -98,7 +98,7 @@ public class ItemChameleonArch extends Item {
 		} else
 			return new ActionResult<>(EnumActionResult.FAIL, arch);
 		
-		player.world.playSound(null, player.posX, player.posY, player.posZ, RegenObjects.SoundEvents.TIMEY_WIMEY, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.TIMEY_WIMEY, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		return new ActionResult<>(EnumActionResult.PASS, arch);
 	}
 	

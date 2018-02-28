@@ -12,15 +12,15 @@ import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
 import com.lcm.doctorwho.common.blocks.LogsOutline;
+import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.traits.negative.*;
 import com.lcm.doctorwho.common.traits.positive.*;
-import com.lcm.doctorwho.utils.ATGSoundEvent;
 import com.lcm.doctorwho.utils.ATGTabs;
-import com.lcm.regeneration.util.RegenObjects;
+import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
@@ -49,9 +49,10 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 @Mod.EventBusSubscriber
 public class ATGObjects {
 	public static class Items {
-		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", RegenObjects.SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", ATGObjects.SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
-	}
+        public static final Item chameleonArch = new ItemChameleonArch();
+    }
 	
 	public static class Blocks {
 		public static final Block creamRoundel = new BlockOutline(Material.CORAL, "cream_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
@@ -101,8 +102,8 @@ public class ATGObjects {
 	}
 
 	public static class SoundEvents {
-		public static final SoundEvent REGENERATION = new ATGSoundEvent("regeneration");
-		public static final SoundEvent TIMEY_WIMEY = new ATGSoundEvent("timey_wimey");
+		public static final SoundEvent REGENERATION = new ATGUtils.ATGSoundEvent("regeneration");
+		public static final SoundEvent TIMEY_WIMEY = new ATGUtils.ATGSoundEvent("timey_wimey");
 	}
 
     public static class Superpowers {
@@ -138,7 +139,7 @@ public class ATGObjects {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
-	public static void registerObjects(RegistryEvent event) throws Exception // FIXME update exception handling according to RegenObjects
+	public static void registerObjects(RegistryEvent event) throws Exception // FIXME update exception handling according to ATGObjects
 	{
 		if (event instanceof RegistryEvent.Register) {
 			IForgeRegistry registry = ((RegistryEvent.Register) event).getRegistry();

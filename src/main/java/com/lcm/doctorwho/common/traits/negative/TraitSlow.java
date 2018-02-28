@@ -2,6 +2,7 @@ package com.lcm.doctorwho.common.traits.negative;
 
 import java.util.UUID;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.traits.positive.TraitQuick;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
@@ -34,7 +35,7 @@ public class TraitSlow extends AbilityAttributeModifier implements INegativeTrai
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {
-		mc.renderEngine.bindTexture(RegenerationATG.ICONS);
+		mc.renderEngine.bindTexture(AcrossTheGalaxy.ICONS);
 		gui.drawTexturedModalRect(x, y, 16, 0, 16, 16);
 	}
 }

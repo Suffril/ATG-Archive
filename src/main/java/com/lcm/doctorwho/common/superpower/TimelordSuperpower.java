@@ -3,8 +3,10 @@ package com.lcm.doctorwho.common.superpower;
 import java.util.List;
 import java.util.UUID;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.gui.GuiRegenCustomizer;
 import com.lcm.doctorwho.client.gui.GuiTimelordPowerTab;
+import com.lcm.doctorwho.common.events.ATGObjects;
 import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
 import com.lcm.doctorwho.common.traits.negative.TraitDumb;
 import com.lcm.doctorwho.common.traits.negative.TraitFlimsy;
@@ -25,7 +27,6 @@ import com.lcm.doctorwho.common.traits.positive.TraitStrong;
 import com.lcm.doctorwho.common.traits.positive.TraitSturdy;
 import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
 import com.lcm.doctorwho.common.traits.positive.TraitTough;
-import com.lcm.regeneration.util.RegenObjects;
 
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
@@ -52,7 +53,7 @@ public class TimelordSuperpower extends Superpower {
 	
 	public TimelordSuperpower() {
 		super("timelord");
-		this.setRegistryName(RegenerationATG.MODID, "timelord");
+		this.setRegistryName(AcrossTheGalaxy.MODID, "timelord");
 	}
 	
 	@Override
@@ -123,7 +124,7 @@ public class TimelordSuperpower extends Superpower {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, 0);
 		GlStateManager.scale(2, 2, 1);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(new ItemStack(RegenObjects.Items.chameleonArch), 0, 0);
+		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(new ItemStack(ATGObjects.Items.chameleonArch), 0, 0);
 		GlStateManager.popMatrix();
 		Minecraft.getMinecraft().getRenderItem().zLevel = zLevel;
 	}
