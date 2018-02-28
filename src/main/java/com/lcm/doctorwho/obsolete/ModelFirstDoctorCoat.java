@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.models.clothing;
+package com.lcm.doctorwho.obsolete;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;

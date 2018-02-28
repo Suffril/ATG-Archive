@@ -1,9 +1,11 @@
-package com.lcm.doctorwho.client.models;
+package com.lcm.doctorwho.obsolete;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.lwjgl.util.vector.Vector3f;
+
+import com.lcm.doctorwho.client.models.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.client.model.ModelBase;

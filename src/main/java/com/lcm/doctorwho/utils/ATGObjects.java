@@ -1,11 +1,10 @@
-package com.lcm.doctorwho.common.init;
+package com.lcm.doctorwho.utils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.ATGTabs;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;

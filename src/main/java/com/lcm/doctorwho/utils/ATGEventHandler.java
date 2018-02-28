@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.events;
+package com.lcm.doctorwho.utils;
 
 import net.minecraftforge.fml.common.Mod;
 

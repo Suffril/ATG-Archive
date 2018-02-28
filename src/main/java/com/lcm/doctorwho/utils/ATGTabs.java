@@ -1,6 +1,4 @@
-package com.lcm.doctorwho.client;
-
-import com.lcm.doctorwho.common.init.ATGObjects;
+package com.lcm.doctorwho.utils;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
