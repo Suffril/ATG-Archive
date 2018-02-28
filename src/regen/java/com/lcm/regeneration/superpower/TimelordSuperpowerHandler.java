@@ -51,7 +51,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f);
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); //FIXME broken
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
 					double x = player.posX + player.getRNG().nextGaussian() * 2;
@@ -66,7 +66,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 			} else if (regenTicks >= 200) { // end regeneration
 				player.setHealth(player.getMaxHealth());
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, RegenConfig.postRegenerationDuration, RegenConfig.postRegenerationLevel, false, false)); // 180 seconds of 20 ticks of Regeneration 4
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F);
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F); //FIXME broken
 				regenerating = false;
 				regenTicks = 0;
 				if (regenerationsLeft != -1) regenerationsLeft--;

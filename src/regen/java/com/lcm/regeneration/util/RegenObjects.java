@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.utils.ATGSoundEvent;
 import com.lcm.regeneration.ItemChameleonArch;
+import com.lcm.regeneration.RegenerationATG;
 import com.lcm.regeneration.client.models.RenderItemFobwatch;
 import com.lcm.regeneration.superpower.TimelordSuperpower;
 import com.lcm.regeneration.traits.negative.TraitClumsy;
@@ -89,7 +89,7 @@ public class RegenObjects {
 		public static final AbilityEntry obvious = newAbilityEntry(TraitObvious.class, "obvious");
 
 		private static Ability.AbilityEntry newAbilityEntry(Class<? extends Ability> ability, String name) {
-			return new Ability.AbilityEntry(ability, new ResourceLocation(AcrossTheGalaxy.MODID, name)); //FIXME modid
+			return new Ability.AbilityEntry(ability, new ResourceLocation(RegenerationATG.MODID, name));
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class RegenObjects {
 	public static void onModelBake(ModelBakeEvent e) {
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
 			
-			if (loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) { //FIXME modid
+			if (loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(RegenerationATG.MODID)) {
 				e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
 			}
 			

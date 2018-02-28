@@ -2,7 +2,7 @@ package com.lcm.regeneration.superpower;
 
 import java.awt.Color;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.regeneration.RegenerationATG;
 import com.lcm.regeneration.util.LimbManipulationUtil;
 
 import lucraft.mods.lucraftcore.superpowers.Superpower;
@@ -34,7 +34,7 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 	
 	private static final ModelPlayer playerModelLargeArms = new ModelPlayer(0.1F, false);
 	private static final ModelPlayer playerModelSmallArms = new ModelPlayer(0.1F, true);
-	private static final ResourceLocation REGEN_TEXTURE = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/entity/regen.png");
+	private static final ResourceLocation REGEN_TEXTURE = new ResourceLocation(RegenerationATG.MODID, "textures/entity/regen.png");
 	
 	static {
 		LimbManipulationUtil.getLimbManipulator(playerModelLargeArms, LimbManipulationUtil.Limb.LEFT_ARM).setAngles(0, 0, -75);

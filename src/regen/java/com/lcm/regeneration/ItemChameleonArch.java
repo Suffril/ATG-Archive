@@ -1,6 +1,5 @@
 package com.lcm.regeneration;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.regeneration.superpower.TimelordSuperpower;
 import com.lcm.regeneration.superpower.TimelordSuperpowerHandler;
 import com.lcm.regeneration.util.RegenConfig;
@@ -26,7 +25,7 @@ public class ItemChameleonArch extends Item {
 	
 	public ItemChameleonArch() { // TODO how does combining/repairing work out?
 		setUnlocalizedName("chameleonArch");
-		setRegistryName(AcrossTheGalaxy.MODID, "chameleonarch");
+		setRegistryName(RegenerationATG.MODID, "chameleonarch");
 		setCreativeTab(CreativeTabs.MISC);
 		setMaxStackSize(1);
 		setMaxDamage(RegenConfig.regenCapacity);

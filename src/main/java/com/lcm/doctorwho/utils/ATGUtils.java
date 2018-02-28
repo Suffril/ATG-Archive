@@ -36,7 +36,7 @@ public class ATGUtils {
 	/**
 	 * Set's the players walk speed serverside
 	 */
-	public static void setWalkSpeed(EntityPlayerMP p, float speed) {
+	public static void setWalkSpeed(EntityPlayerMP p, float speed) { //TODO in both
 		ReflectionHelper.setPrivateValue(PlayerCapabilities.class, p.capabilities, speed, 6);
 	}
 	
@@ -54,7 +54,7 @@ public class ATGUtils {
 	 * Rendering a enchanted effect onto modelled items
 	 */
 	@SideOnly(Side.CLIENT)
-	public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) {
+	public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) { //TODO in both
 		float f = (float) entity.ticksExisted + LCRenderHelper.renderTick;
 		Minecraft.getMinecraft().renderEngine.bindTexture(loc);
 		GlStateManager.enableBlend();

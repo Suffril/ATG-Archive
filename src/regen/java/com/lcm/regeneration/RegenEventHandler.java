@@ -1,6 +1,5 @@
 package com.lcm.regeneration;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.regeneration.superpower.TimelordSuperpower;
 import com.lcm.regeneration.superpower.TimelordSuperpowerHandler;
 import com.lcm.regeneration.util.ExplosionUtil;
@@ -43,7 +42,7 @@ public class RegenEventHandler {
 		if (!e.getName().toString().toLowerCase().matches(RegenConfig.lootRegex) || RegenConfig.disableArch) return;
 
 		LootCondition[] condAlways = new LootCondition[] { new RandomChance(1F) };
-		LootEntry entry = new LootEntryTable(new ResourceLocation(AcrossTheGalaxy.MODID, "inject/arch_loot"), 1, 1, condAlways, "lcm-regen:arch-entry");
+		LootEntry entry = new LootEntryTable(new ResourceLocation(RegenerationATG.MODID, "inject/arch_loot"), 1, 1, condAlways, "lcm-regen:arch-entry");
 		LootPool lootPool = new LootPool(new LootEntry[] { entry }, condAlways, new RandomValueRange(1), new RandomValueRange(1), "lcm-regen:arch-pool");
 		e.getTable().addPool(lootPool);
 	}

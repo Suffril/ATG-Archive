@@ -3,7 +3,7 @@ package com.lcm.regeneration.superpower;
 import java.util.List;
 import java.util.UUID;
 
-import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.regeneration.RegenerationATG;
 import com.lcm.regeneration.client.gui.GuiRegenCustomizer;
 import com.lcm.regeneration.client.gui.GuiTimelordPowerTab;
 import com.lcm.regeneration.traits.negative.TraitClumsy;
@@ -53,7 +53,7 @@ public class TimelordSuperpower extends Superpower {
 	
 	public TimelordSuperpower() {
 		super("timelord");
-		this.setRegistryName(AcrossTheGalaxy.MODID, "timelord");
+		this.setRegistryName(RegenerationATG.MODID, "timelord");
 	}
 	
 	@Override
