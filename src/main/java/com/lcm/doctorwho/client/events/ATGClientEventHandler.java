@@ -18,7 +18,6 @@ public class ATGClientEventHandler {
     @SubscribeEvent
     public void AngelsRender(RenderLivingEvent.Post<EntityWeepingAngel> e) {
         EntityLivingBase entity = e.getEntity();
-
         if (entity instanceof EntityWeepingAngel) {
             EntityWeepingAngel angel = (EntityWeepingAngel) entity;
             if(!angel.isSeen()) {

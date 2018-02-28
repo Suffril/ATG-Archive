@@ -27,7 +27,7 @@ public class MessageAngelSeen implements IMessage {
           angelID = buf.readInt();
     }
 
-    public class AngelSeenHandler implements IMessageHandler<MessageAngelSeen, IMessage> {
+    public static class AngelSeenHandler implements IMessageHandler<MessageAngelSeen, IMessage> {
 
         @Override
         public IMessage onMessage(MessageAngelSeen message, MessageContext ctx) {
@@ -36,13 +36,12 @@ public class MessageAngelSeen implements IMessage {
 
             serverPlayer.getServerWorld().addScheduledTask(() -> {
 
-               Entity entity = serverPlayer.world.getEntityByID(angelID);
+               Entity entity = serverPlayer.world.getEntityByID(message.angelID);
 
                if(entity instanceof EntityWeepingAngel)
                {
                    EntityWeepingAngel angel = (EntityWeepingAngel) entity;
                    angel.setSeen(true);
-                   System.out.println(angel);
                }
 
             });
