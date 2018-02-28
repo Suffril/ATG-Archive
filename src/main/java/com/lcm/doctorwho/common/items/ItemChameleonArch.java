@@ -56,7 +56,7 @@ public class ItemChameleonArch extends Item {
 		
 		if (handler == null) {
 			if (arch.getItemDamage() == ATGConfig.regenCapacity) {
-				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.emptyArch")), true);
+				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch")), true);
 				return new ActionResult<>(EnumActionResult.FAIL, arch);
 			}
 			

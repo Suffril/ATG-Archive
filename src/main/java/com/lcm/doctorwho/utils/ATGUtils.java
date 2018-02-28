@@ -85,7 +85,7 @@ public class ATGUtils {
 		GlStateManager.disableBlend();
 	}
 	
-	public static class ATGSoundEvent extends SoundEvent { // TODO in both
+	public static class ATGSoundEvent extends SoundEvent {
 		public ATGSoundEvent(String name) {
 			super(new ResourceLocation(AcrossTheGalaxy.MODID, name));
 			setRegistryName(AcrossTheGalaxy.MODID, name);
