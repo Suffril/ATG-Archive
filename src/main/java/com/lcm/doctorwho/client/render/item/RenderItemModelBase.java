@@ -25,7 +25,7 @@ public class RenderItemModelBase implements IItemRenderer {
 	
 	private ResourceLocation modelTexture = null;
 	private static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-
+	
 	private IBakedModel jsonModel;
 	private ItemModelBase javaModel;
 	private float scale = 0.0625F;
@@ -83,11 +83,8 @@ public class RenderItemModelBase implements IItemRenderer {
 			Minecraft.getMinecraft().renderEngine.bindTexture(modelTexture);
 			
 			javaModel.renderModel(scale);
-			if (stack.isItemEnchanted()) {
-				ATGUtils.renderEnchantedGlint(Minecraft.getMinecraft().player, javaModel, ENCHANTED_ITEM_GLINT_RES, scale);
-			}
+			if (stack.isItemEnchanted()) ATGUtils.renderEnchantedGlint(Minecraft.getMinecraft().player, javaModel, ENCHANTED_ITEM_GLINT_RES, scale);
 		}
 	}
-
 	
 }

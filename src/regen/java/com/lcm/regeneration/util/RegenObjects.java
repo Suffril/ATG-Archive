@@ -87,12 +87,11 @@ public class RegenObjects {
 		public static final AbilityEntry weak = newAbilityEntry(TraitWeak.class, "weak");
 		public static final AbilityEntry dumb = newAbilityEntry(TraitDumb.class, "dumb");
 		public static final AbilityEntry obvious = newAbilityEntry(TraitObvious.class, "obvious");
-
+		
 		private static Ability.AbilityEntry newAbilityEntry(Class<? extends Ability> ability, String name) {
 			return new Ability.AbilityEntry(ability, new ResourceLocation(RegenerationATG.MODID, name));
 		}
 	}
-	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
@@ -104,20 +103,19 @@ public class RegenObjects {
 			if (Arrays.stream(subClass.getDeclaredFields()).noneMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType()))) continue;
 			ArrayList<IForgeRegistryEntry> entries = new ArrayList<>();
 			
-			for (Field field : subClass.getDeclaredFields()) {
+			for (Field field : subClass.getDeclaredFields())
 				try {
-					entries.add((IForgeRegistryEntry)field.get(null));
+					entries.add((IForgeRegistryEntry) field.get(null));
 				} catch (IllegalAccessException | ClassCastException e) {
 					throw new RuntimeException("Incorrect field in object sub-class", e);
 				}
-			}
 			entries.forEach(registry::register);
 		}
 	}
 	
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent ev) {// throws ReflectiveOperationException {
-		for (Field f : Items.class.getDeclaredFields()) {
+		for (Field f : Items.class.getDeclaredFields())
 			try {
 				Item item = (Item) f.get(null);
 				ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
@@ -125,19 +123,13 @@ public class RegenObjects {
 			} catch (IllegalAccessException | ClassCastException e) {
 				throw new RuntimeException("Incorrect field in item-object class", e);
 			}
-		}
 	}
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent e) {
-		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
-			
-			if (loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(RegenerationATG.MODID)) {
-				e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
-			}
-			
-		}
+		for (ModelResourceLocation loc : e.getModelRegistry().getKeys())
+			if (loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(RegenerationATG.MODID)) e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
 	}
 	
 }

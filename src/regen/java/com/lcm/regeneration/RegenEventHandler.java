@@ -38,22 +38,22 @@ import net.minecraftforge.fml.relauncher.Side;
 public class RegenEventHandler {
 	
 	@SubscribeEvent
-	public static void registerLoot(LootTableLoadEvent e) { //TODO can this loot table actually be overriden in resource packs?
+	public static void registerLoot(LootTableLoadEvent e) { // TODO can this loot table actually be overriden in resource packs?
 		if (!e.getName().toString().toLowerCase().matches(RegenConfig.lootRegex) || RegenConfig.disableArch) return;
-
+		
 		LootCondition[] condAlways = new LootCondition[] { new RandomChance(1F) };
 		LootEntry entry = new LootEntryTable(new ResourceLocation(RegenerationATG.MODID, "inject/arch_loot"), 1, 1, condAlways, "lcm-regen:arch-entry");
 		LootPool lootPool = new LootPool(new LootEntry[] { entry }, condAlways, new RandomValueRange(1), new RandomValueRange(1), "lcm-regen:arch-pool");
 		e.getTable().addPool(lootPool);
 	}
-
-    @SubscribeEvent
-    public static void playerTickEvent(TickEvent.PlayerTickEvent e) {
-        if(!e.player.world.isRemote) {
-
-        }
-    }
-
+	
+	@SubscribeEvent
+	public static void playerTickEvent(TickEvent.PlayerTickEvent e) {
+		if (!e.player.world.isRemote) {
+			
+		}
+	}
+	
 	@SubscribeEvent
 	public static void onAttacked(LivingAttackEvent e) {
 		if (!(e.getEntity() instanceof EntityPlayer) || !SuperpowerHandler.hasSuperpower((EntityPlayer) e.getEntity(), TimelordSuperpower.INSTANCE)) return;

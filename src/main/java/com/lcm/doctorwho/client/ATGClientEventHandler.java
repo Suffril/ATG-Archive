@@ -7,7 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
  * Created by Nictogen on 2/19/18
  */
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ATGClientEventHandler
-{
-
+public class ATGClientEventHandler {
+	
 }

@@ -51,7 +51,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); //FIXME broken
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); // FIXME broken
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
 					double x = player.posX + player.getRNG().nextGaussian() * 2;
@@ -59,14 +59,13 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 					double z = player.posZ + player.getRNG().nextGaussian() * 2;
 					
 					player.world.newExplosion(player, x, y, z, 1, true, false);
-					for (BlockPos bs : BlockPos.getAllInBox(player.getPosition().north().west(), player.getPosition().south().east())) {
+					for (BlockPos bs : BlockPos.getAllInBox(player.getPosition().north().west(), player.getPosition().south().east()))
 						if (player.world.getBlockState(bs).getBlock() instanceof BlockFire) player.world.setBlockToAir(bs);
-					}
 				}
 			} else if (regenTicks >= 200) { // end regeneration
 				player.setHealth(player.getMaxHealth());
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, RegenConfig.postRegenerationDuration, RegenConfig.postRegenerationLevel, false, false)); // 180 seconds of 20 ticks of Regeneration 4
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F); //FIXME broken
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F); // FIXME broken
 				regenerating = false;
 				regenTicks = 0;
 				if (regenerationsLeft != -1) regenerationsLeft--;
@@ -124,14 +123,11 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		}
 		
 		String s = "";
-		for (Ability ability : handler.getAbilities()) {
-			if (ability.isUnlocked()) {
-				if (s.equals(""))
-					s = ability.getDisplayName().substring(7);
-				else
-					s = s + ", " + ability.getDisplayName().substring(7);
-			}
-		}
+		for (Ability ability : handler.getAbilities())
+			if (ability.isUnlocked()) if (s.equals(""))
+				s = ability.getDisplayName().substring(7);
+			else
+				s = s + ", " + ability.getDisplayName().substring(7);
 		handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
 	}
 	

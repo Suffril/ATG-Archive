@@ -40,16 +40,13 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
  * Created by Nictogen on 2/18/18
  */
 @Mod.EventBusSubscriber
-public class ATGObjects
-{
-	public static class Items
-	{
+public class ATGObjects {
+	public static class Items {
 		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", RegenObjects.SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 	}
-
-	public static class Blocks
-	{
+	
+	public static class Blocks {
 		public static final Block creamRoundel = new BlockOutline(Material.CORAL, "cream_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block creamRoundelAlt = new BlockOutline(Material.CORAL, "cream_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block whiteRoundel = new BlockOutline(Material.CORAL, "white_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
@@ -84,90 +81,67 @@ public class ATGObjects
 		public static final Block redRoundelAlt = new BlockOutline(Material.CORAL, "red_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block yellowRoundel = new BlockOutline(Material.CORAL, "yellow_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block yellowRoundelAlt = new BlockOutline(Material.CORAL, "yellow_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-
+		
 		public static final Block alfLog = new LogsOutline("alf_log").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block alfLeaves = new LeavesOutline("alf_leaves").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-
+		
 		public static final Block coralWall = new BlockOutline(Material.CORAL, "coral_wall").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 	}
-
-	public static class EntityEntries
-	{
+	
+	public static class EntityEntries {
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).name("angel").tracker(80, 3, false).build();
 	}
-
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
-	public static void registerObjects(RegistryEvent event) throws Exception //FIXME update exception handling according to RegenObjects
+	public static void registerObjects(RegistryEvent event) throws Exception // FIXME update exception handling according to RegenObjects
 	{
-		if (event instanceof RegistryEvent.Register)
-		{
+		if (event instanceof RegistryEvent.Register) {
 			IForgeRegistry registry = ((RegistryEvent.Register) event).getRegistry();
-
+			
 			for (Class<?> aClass : ATGObjects.class.getDeclaredClasses())
-			{
-				if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType())))
-				{
+				if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType()))) {
 					ArrayList<IForgeRegistryEntry> entries = new ArrayList<>();
-
+					
 					for (Field field : aClass.getDeclaredFields())
-					{
-						try
-						{
+						try {
 							entries.add((IForgeRegistryEntry) field.get(null));
-						}
-						catch (IllegalAccessException e)
-						{
+						} catch (IllegalAccessException e) {
 							e.printStackTrace();
 						}
-					}
-
-					if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> Item.class.isAssignableFrom(field.getType())))
-					{
-						for (Field f : Blocks.class.getDeclaredFields())
-						{
-							Block block = (Block) f.get(null);
-							entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
-						}
+					
+					if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> Item.class.isAssignableFrom(field.getType()))) for (Field f : Blocks.class.getDeclaredFields()) {
+						Block block = (Block) f.get(null);
+						entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
 					}
 					entries.forEach(registry::register);
 				}
-			}
 		}
 	}
-
+	
 	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent e) throws ReflectiveOperationException
-	{
-		for (Field f : Items.class.getDeclaredFields())
-		{
+	public static void registerModels(ModelRegistryEvent e) throws ReflectiveOperationException {
+		for (Field f : Items.class.getDeclaredFields()) {
 			Item item = (Item) f.get(null);
 			ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
 			ModelLoader.setCustomModelResourceLocation(item, 0, loc);
 		}
-
-		for (Field f : Blocks.class.getDeclaredFields())
-		{
+		
+		for (Field f : Blocks.class.getDeclaredFields()) {
 			Block block = (Block) f.get(null);
 			Item item = Item.getItemFromBlock(block);
 			ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName(), "inventory");
 			ModelLoader.setCustomModelResourceLocation(item, 0, loc);
 		}
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public static void onModelBake(ModelBakeEvent e)
-	{
-		for (ModelResourceLocation loc : e.getModelRegistry().getKeys())
-		{
-			if(loc.getResourcePath().equalsIgnoreCase("sonic_eleventh_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
-				e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model11thDocScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/11th_sonic.png")));
-			}
-			if(loc.getResourcePath().equalsIgnoreCase("cane_first_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
-				e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
-			}
+	public static void onModelBake(ModelBakeEvent e) {
+		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
+			if (loc.getResourcePath().equalsIgnoreCase("sonic_eleventh_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model11thDocScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/11th_sonic.png")));
+			if (loc.getResourcePath().equalsIgnoreCase("cane_first_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
 		}
 	}
 }
