@@ -2,6 +2,7 @@ package com.lcm.doctorwho.utils;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.ItemModelBase;
+import com.lcm.regeneration.util.RegenRequires;
 
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import net.minecraft.client.Minecraft;
@@ -37,7 +38,8 @@ public class ATGUtils {
 	/**
 	 * Set's the players walk speed serverside
 	 */
-	public static void setWalkSpeed(EntityPlayerMP p, float speed) { // TODO in both
+	@RegenRequires
+	public static void setWalkSpeed(EntityPlayerMP p, float speed) {
 		ReflectionHelper.setPrivateValue(PlayerCapabilities.class, p.capabilities, speed, 6);
 	}
 	
@@ -55,7 +57,8 @@ public class ATGUtils {
 	 * Rendering a enchanted effect onto modelled items
 	 */
 	@SideOnly(Side.CLIENT)
-	public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) { // TODO in both
+	@RegenRequires
+	public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) {
 		float f = entity.ticksExisted + LCRenderHelper.renderTick;
 		Minecraft.getMinecraft().renderEngine.bindTexture(loc);
 		GlStateManager.enableBlend();
