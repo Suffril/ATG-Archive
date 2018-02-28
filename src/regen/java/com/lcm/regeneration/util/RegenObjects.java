@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.lcm.doctorwho.utils.ATGSoundEvent;
+import com.lcm.doctorwho.utils.ATGUtils.ATGSoundEvent;
 import com.lcm.regeneration.ItemChameleonArch;
 import com.lcm.regeneration.RegenerationATG;
 import com.lcm.regeneration.client.models.RenderItemFobwatch;
