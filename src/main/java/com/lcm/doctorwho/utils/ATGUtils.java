@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.utils;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
@@ -83,4 +84,13 @@ public class ATGUtils {
 		GlStateManager.depthFunc(515);
 		GlStateManager.disableBlend();
 	}
+
+
+	public class ATGSoundEvent extends SoundEvent { // TODO in both
+		public ATGSoundEvent(String name) {
+			super(new ResourceLocation(AcrossTheGalaxy.MODID, name));
+			setRegistryName(AcrossTheGalaxy.MODID, name);
+		}
+	}
+
 }

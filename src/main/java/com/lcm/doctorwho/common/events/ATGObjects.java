@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.utils;
+package com.lcm.doctorwho.common.events;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import com.lcm.doctorwho.common.blocks.LogsOutline;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.utils.ATGTabs;
 import com.lcm.regeneration.util.RegenObjects;
 
 import net.minecraft.block.Block;
