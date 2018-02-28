@@ -1,10 +1,10 @@
 package com.lcm.doctorwho.client.models.clothing;
 
-import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelFirstDoctorCoat extends ModelBase
+public class ModelFirstDoctorCoat extends ModelBiped
 {
     //fields
     ModelRenderer CoatBaseLeft;
@@ -204,37 +204,37 @@ public class ModelFirstDoctorCoat extends ModelBase
         setRotation(ButtonBack2, 0F, 0F, 0F);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale)
     {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5);
-        CoatBaseLeft.render(f5);
-        CoatBaseLeft2.render(f5);
-        CoatBaseRight.render(f5);
-        CoatBaseRight2.render(f5);
-        CoatBaseBack.render(f5);
-        CoatArmFrontRight.render(f5);
-        CoatArmTopRight.render(f5);
-        CoatArmLeftRight.render(f5);
-        CoatArmRightRight.render(f5);
-        CoatArmBackRight.render(f5);
-        CoatArmFrontLeft.render(f5);
-        CoatArmTopLeft.render(f5);
-        CoatArmBackLeft.render(f5);
-        CoatArmLeftLeft.render(f5);
-        CoatArmRightLeft.render(f5);
-        Button1.render(f5);
-        Button2.render(f5);
-        Button3.render(f5);
-        Button4.render(f5);
-        Button5.render(f5);
-        Button6.render(f5);
-        LapelRight1.render(f5);
-        LapelRight2.render(f5);
-        LapelLeft1.render(f5);
-        LapelLeft2.render(f5);
-        ButtonBack1.render(f5);
-        ButtonBack2.render(f5);
+        super.render(entity, f, f1, f2, f3, f4, scale);
+        setRotationAngles(f, f1, f2, f3, f4, scale);
+        CoatBaseLeft.render(scale);
+        CoatBaseLeft2.render(scale);
+        CoatBaseRight.render(scale);
+        CoatBaseRight2.render(scale);
+        CoatBaseBack.render(scale);
+        CoatArmFrontRight.render(scale);
+        CoatArmTopRight.render(scale);
+        CoatArmLeftRight.render(scale);
+        CoatArmRightRight.render(scale);
+        CoatArmBackRight.render(scale);
+        CoatArmFrontLeft.render(scale);
+        CoatArmTopLeft.render(scale);
+        CoatArmBackLeft.render(scale);
+        CoatArmLeftLeft.render(scale);
+        CoatArmRightLeft.render(scale);
+        Button1.render(scale);
+        Button2.render(scale);
+        Button3.render(scale);
+        Button4.render(scale);
+        Button5.render(scale);
+        Button6.render(scale);
+        LapelRight1.render(scale);
+        LapelRight2.render(scale);
+        LapelLeft1.render(scale);
+        LapelLeft2.render(scale);
+        ButtonBack1.render(scale);
+        ButtonBack2.render(scale);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -244,9 +244,9 @@ public class ModelFirstDoctorCoat extends ModelBase
         model.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
+    private void setRotationAngles(float f, float f1, float f2, float f3, float f4, float scale)
     {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
+        super.setRotationAngles(f, f1, f2, f3, f4, scale, null);
     }
 
 }

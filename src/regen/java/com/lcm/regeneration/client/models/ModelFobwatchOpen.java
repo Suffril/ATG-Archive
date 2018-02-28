@@ -199,12 +199,12 @@ public class ModelFobwatchOpen extends ModelBase implements ItemModelBase
     @Override
     public IModelState getTransforms() {
         Map<ItemCameraTransforms.TransformType, TRSRTransformation> map = new HashMap<>();
-        map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(0F, 1F, 180F), new Vector3f(0.5F, 9F, 0), new Vector3f(1F, 1F, 1F))));
-        map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(-90F, 0F, 0F), new Vector3f(0.5F, 0.3F, 0.5F), new Vector3f(0.5F, 0.5F, 0.5F))));    map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, -120F, 0F), new Vector3f(1F, 0.3F, 0F), new Vector3f(1F, 1F, 1F))));
-        map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, -110, 0F), new Vector3f(1.4F, 0.7F, 0.9F), new Vector3f(1F, 1F, 1F))));
-        map.put(ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 90F, 90F), new Vector3f(0.45F, 0.6F, 0.5F), new Vector3f(0.7F, 0.7F, 0.7F))));
-        map.put(ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 90F, 90F), new Vector3f(0.45F, 0.6F, -0.2F), new Vector3f(0.7F, 0.7F, 0.7F))));
-        map.put(ItemCameraTransforms.TransformType.FIXED, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(0F, 0F, 0F), new Vector3f(0.5F, 0.5F, 0.5F), new Vector3f(1F, 1F, 1F))));
+        map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, 1F, 0F), new Vector3f(0.5F, 1.7F, 0), new Vector3f(1F, 1F, 1F))));
+        map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, 1F, 0F), new Vector3f(0.5F, 1.2F, 0.5F), new Vector3f(0.5F, 0.5F, 0.5F))));    
+        map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, 395F, 0F), new Vector3f(1F, 1.7F, 0F), new Vector3f(1F, 1F, 1F))));
+        map.put(ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, -395, 0F), new Vector3f(1.3F, 1.7F, 1F), new Vector3f(1F, 1F, 1F))));
+        map.put(ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 90F, 90F), new Vector3f(0.45F, 1.4F, 0.5F), new Vector3f(0.7F, 0.7F, 0.7F))));
+        map.put(ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(90F, 90F, 90F), new Vector3f(0.45F, 1.4F, -0.2F), new Vector3f(0.7F, 0.7F, 0.7F))));
         return new LCModelState(map);
     }
 }

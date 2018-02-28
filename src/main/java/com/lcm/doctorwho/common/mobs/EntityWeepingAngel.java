@@ -1,7 +1,6 @@
 package com.lcm.doctorwho.common.mobs;
 
-import com.lcm.doctorwho.utils.ATGUtils;
-
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
@@ -15,6 +14,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+import net.minecraft.world.border.WorldBorder;
 
 public class EntityWeepingAngel extends EntityMob {
 
@@ -76,7 +76,6 @@ public class EntityWeepingAngel extends EntityMob {
 		if (!world.isRemote) {
 			if (isSeen()) {
 				setSeenTime(getSeenTime() + 1);
-				ATGUtils.freezeMob(this, false);
 				
 				if (getSeenTime() > 15) {
 					setSeen(false);
@@ -90,8 +89,21 @@ public class EntityWeepingAngel extends EntityMob {
     /**
      * Drop 0-2 items of this living's type
      */
+	@Override
     protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
         dropItem(Item.getItemFromBlock(Blocks.STONE), 2);
+    }
+	
+	@Override
+    protected void collideWithEntity(Entity entity)
+    {
+        entity.applyEntityCollision(this);
+            WorldBorder border = entity.getEntityWorld().getWorldBorder();
+            int x = rand.nextInt(border.getSize());
+            int z = rand.nextInt(border.getSize());
+            int y = world.getSpawnPoint().getY();
+            System.out.println(x + " " + y + " " + " " + z);
+            entity.setPositionAndUpdate(x,y,z);
     }
 
     @Override
@@ -110,8 +122,9 @@ public class EntityWeepingAngel extends EntityMob {
     {
         if(!isSeen()) {
             moveVertical = amount;
-        } else
-        {
+        }
+        
+        if(isSeen() && !isAirBorne){
             moveVertical = 0;
         }
     }

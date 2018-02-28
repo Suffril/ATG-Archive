@@ -14,6 +14,7 @@ import com.lcm.doctorwho.common.blocks.LeavesOutline;
 import com.lcm.doctorwho.common.blocks.LogsOutline;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
+import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
 import com.lcm.regeneration.util.RegenObjects;
 
 import net.minecraft.block.Block;
@@ -28,6 +29,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -91,7 +94,7 @@ public class ATGObjects
 
 	public static class EntityEntries
 	{
-		// public static final EntityEntry example = EntityEntryBuilder.create().id(new ResourceLocation(AcrossTheGalaxy.MODID, "NAME"), ID_NUMBER).name("NAME");
+		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).name("angel").tracker(80, 3, false).build();
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
