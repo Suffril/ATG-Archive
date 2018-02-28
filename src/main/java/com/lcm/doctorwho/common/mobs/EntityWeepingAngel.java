@@ -72,9 +72,9 @@ public class EntityWeepingAngel extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-
+		
 		System.out.println(isSeen());
-
+		
 		if (!world.isRemote) if (isSeen()) {
 			setSeenTime(getSeenTime() + 1);
 			

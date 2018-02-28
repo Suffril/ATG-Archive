@@ -55,7 +55,7 @@ public class ATGUtils {
 	 * Rendering a enchanted effect onto modelled items
 	 */
 	@SideOnly(Side.CLIENT)
-    public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) {
+	public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) {
 		float f = entity.ticksExisted + LCRenderHelper.renderTick;
 		Minecraft.getMinecraft().renderEngine.bindTexture(loc);
 		GlStateManager.enableBlend();
@@ -84,12 +84,12 @@ public class ATGUtils {
 		GlStateManager.depthFunc(515);
 		GlStateManager.disableBlend();
 	}
-
+	
 	public static class ATGSoundEvent extends SoundEvent { // TODO in both
 		public ATGSoundEvent(String name) {
 			super(new ResourceLocation(AcrossTheGalaxy.MODID, name));
 			setRegistryName(AcrossTheGalaxy.MODID, name);
 		}
 	}
-
+	
 }

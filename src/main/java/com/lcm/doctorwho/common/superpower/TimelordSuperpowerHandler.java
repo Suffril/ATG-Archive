@@ -3,9 +3,9 @@ package com.lcm.doctorwho.common.superpower;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import com.lcm.doctorwho.common.traits.negative.INegativeTrait;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
-import com.lcm.doctorwho.common.traits.negative.INegativeTrait;
 
 import lucraft.mods.lucraftcore.LCConfig;
 import lucraft.mods.lucraftcore.karma.KarmaHandler;
