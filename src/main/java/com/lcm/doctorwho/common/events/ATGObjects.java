@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.client.models.RenderItemFobwatch;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
@@ -14,15 +15,21 @@ import com.lcm.doctorwho.common.blocks.LogsOutline;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
+import com.lcm.doctorwho.common.traits.negative.*;
+import com.lcm.doctorwho.common.traits.positive.*;
+import com.lcm.doctorwho.utils.ATGSoundEvent;
 import com.lcm.doctorwho.utils.ATGTabs;
 import com.lcm.regeneration.util.RegenObjects;
 
+import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -92,6 +99,42 @@ public class ATGObjects {
 	public static class EntityEntries {
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).name("angel").tracker(80, 3, false).build();
 	}
+
+	public static class SoundEvents {
+		public static final SoundEvent REGENERATION = new ATGSoundEvent("regeneration");
+		public static final SoundEvent TIMEY_WIMEY = new ATGSoundEvent("timey_wimey");
+	}
+
+    public static class Superpowers {
+        public static final TimelordSuperpower timelord = TimelordSuperpower.INSTANCE;
+    }
+
+    public static class AbilityEntries {
+        public static final Ability.AbilityEntry bouncy = newAbilityEntry(TraitBouncy.class, "bouncy");
+        public static final Ability.AbilityEntry lucky = newAbilityEntry(TraitLucky.class, "lucky");
+        public static final Ability.AbilityEntry quick = newAbilityEntry(TraitQuick.class, "quick");
+        public static final Ability.AbilityEntry spry = newAbilityEntry(TraitSpry.class, "spry");
+        public static final Ability.AbilityEntry strong = newAbilityEntry(TraitStrong.class, "strong");
+        public static final Ability.AbilityEntry sturdy = newAbilityEntry(TraitSturdy.class, "sturdy");
+        public static final Ability.AbilityEntry thickSkinned = newAbilityEntry(TraitThickSkinned.class, "thickskinned");
+        public static final Ability.AbilityEntry tough = newAbilityEntry(TraitTough.class, "tough");
+        public static final Ability.AbilityEntry smart = newAbilityEntry(TraitSmart.class, "smart");
+        public static final Ability.AbilityEntry sneaky = newAbilityEntry(TraitSneaky.class, "sneaky");
+        public static final Ability.AbilityEntry clumsy = newAbilityEntry(TraitClumsy.class, "clumsy");
+        public static final Ability.AbilityEntry flimsy = newAbilityEntry(TraitFlimsy.class, "flimsy");
+        public static final Ability.AbilityEntry frail = newAbilityEntry(TraitFrail.class, "frail");
+        public static final Ability.AbilityEntry rigid = newAbilityEntry(TraitRigid.class, "rigid");
+        public static final Ability.AbilityEntry slow = newAbilityEntry(TraitSlow.class, "slow");
+        public static final Ability.AbilityEntry unhealthy = newAbilityEntry(TraitUnhealthy.class, "unhealthy");
+        public static final Ability.AbilityEntry unlucky = newAbilityEntry(TraitUnlucky.class, "unlucky");
+        public static final Ability.AbilityEntry weak = newAbilityEntry(TraitWeak.class, "weak");
+        public static final Ability.AbilityEntry dumb = newAbilityEntry(TraitDumb.class, "dumb");
+        public static final Ability.AbilityEntry obvious = newAbilityEntry(TraitObvious.class, "obvious");
+
+        private static Ability.AbilityEntry newAbilityEntry(Class<? extends Ability> ability, String name) {
+            return new Ability.AbilityEntry(ability, new ResourceLocation(AcrossTheGalaxy.MODID, name));
+        }
+    }
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
@@ -142,6 +185,7 @@ public class ATGObjects {
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
 			if (loc.getResourcePath().equalsIgnoreCase("sonic_eleventh_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model11thDocScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/11th_sonic.png")));
 			if (loc.getResourcePath().equalsIgnoreCase("cane_first_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
-		}
+            if (loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
+        }
 	}
 }

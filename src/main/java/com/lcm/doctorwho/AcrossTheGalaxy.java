@@ -3,6 +3,7 @@ package com.lcm.doctorwho;
 import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
 
@@ -27,6 +28,9 @@ public class AcrossTheGalaxy {
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+
+		ATGNetwork.init();
+
 		if (ATGUtils.isClient()) RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase<>(new ModelWeepingAngel(), "weeping_angel", 1.0F));
 	}
 	
