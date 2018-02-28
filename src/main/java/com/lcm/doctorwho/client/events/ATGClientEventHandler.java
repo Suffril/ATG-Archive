@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.obsolete;
+package com.lcm.doctorwho.client.events;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
