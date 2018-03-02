@@ -8,6 +8,7 @@ import com.lcm.doctorwho.utils.DebugCommand;
 
 import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -38,6 +39,7 @@ public class AcrossTheGalaxy {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		ATGNetwork.init();
+		MinecraftForge.EVENT_BUS.register(proxy);
 		proxy.init(event);
 	}
 	
