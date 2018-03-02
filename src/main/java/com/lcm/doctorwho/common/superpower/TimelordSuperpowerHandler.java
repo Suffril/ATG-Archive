@@ -50,7 +50,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); // FIXME broken
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); //XXX broken? maybe?
 				
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());

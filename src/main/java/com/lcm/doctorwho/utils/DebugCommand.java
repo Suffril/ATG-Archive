@@ -36,7 +36,7 @@ public class DebugCommand extends CommandBase {
 				break;
 			case "set":
 				try {
-					SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = Integer.valueOf(args[1]); //TODO return type can probably be inferred
+					SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = Integer.valueOf(args[1]);
 				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 					throw new CommandException("Invalid use of set", (Object[])args);
 				} catch (NullPointerException e) {
