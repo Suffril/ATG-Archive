@@ -103,11 +103,12 @@ public class GuiRegenCustomizer extends GuiCustomizer implements GuiSlider.ISlid
 	
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
-		if (button.id == 0) {
-			sendStyleNBTTagToServer();
+		if (button.id == 0) sendStyleNBTTagToServer();
+		if (button.id == 0 || button.id == 1) {
 			mc.player.closeScreen();
+			mc.getTutorial().openInventory();
+			mc.displayGuiScreen(new GuiTimelordPowerTab(mc.player)); //TODO mouse is reset to center of GUI
 		}
-		if (button.id == 1) mc.player.closeScreen();
 		if (button.id == 2) textured = !textured;
 	}
 	

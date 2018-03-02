@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 /** Created by AFlyingGrayson on 8/28/17 */
 public class ItemChameleonArch extends Item {
 	
-	public ItemChameleonArch() { // TODO how does combining/repairing work out?
+	public ItemChameleonArch() { //CHECK how should combining/repairing work out?
 		setUnlocalizedName("chameleonArch");
 		setRegistryName(AcrossTheGalaxy.MODID, "chameleonarch");
 		setCreativeTab(CreativeTabs.MISC);
@@ -32,7 +32,7 @@ public class ItemChameleonArch extends Item {
 		setMaxDamage(ATGConfig.regenCapacity);
 	}
 	
-	@Override // TODO where did the "new life" message go?
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack arch = player.getHeldItem(hand);
 		SuperpowerPlayerHandler handler = SuperpowerHandler.getSuperpowerPlayerHandler(player);
@@ -45,7 +45,7 @@ public class ItemChameleonArch extends Item {
 		//Handle inifite regeneration case
 		if (ATGConfig.regenCapacity == 0) if (handler == null) {
 			arch.getTagCompound().setBoolean("open", true);
-			SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE); //XXX change to 'give' superpower?
+			SuperpowerHandler.giveSuperpower(player, TimelordSuperpower.INSTANCE);
 			SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = -1;
 			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
 			arch.getTagCompound().setBoolean("open", false);

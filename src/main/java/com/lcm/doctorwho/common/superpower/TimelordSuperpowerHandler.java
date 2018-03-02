@@ -15,7 +15,6 @@ import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
 import lucraft.mods.lucraftcore.superpowers.capabilities.ISuperpowerCapability;
-import lucraft.mods.lucraftcore.util.helper.StringHelper;
 import net.minecraft.block.BlockFire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +23,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -50,7 +48,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); //XXX broken? maybe?
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); //FIXME broken, sometimes
 				
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
@@ -126,7 +124,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				s = ability.getDisplayName().substring(7);
 			else
 				s = s + ", " + ability.getDisplayName().substring(7);
-		handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
+		//handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
 	}
 	
 	protected static boolean isAbilityUnlocked(SuperpowerPlayerHandler handler, Class<? extends Ability> ability) {

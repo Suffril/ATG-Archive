@@ -19,12 +19,13 @@ public class DebugCommand extends CommandBase {
 
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "regdebug <kill|set <amount>|quick-regen>";
+		return "/regdebug <kill|set <amount>|quick-regen>";
 	}
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (!(sender.getCommandSenderEntity() instanceof EntityPlayer)) throw new CommandException("Can only use regeneration debug commands as player", (Object[])args);
+		if (args.length == 0) throw new CommandException("No arguments given", (Object[])args);
 		EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 		
 		switch (args[0]) {
@@ -48,7 +49,7 @@ public class DebugCommand extends CommandBase {
 	}
 	
 	public static class QuickRegenDamageSource extends DamageSource {
-		public static DamageSource INSTANCE = new NoRegenDamageSource();
+		public static DamageSource INSTANCE = new QuickRegenDamageSource();
 		public QuickRegenDamageSource() { super("quickregen"); }
 	}
 	
