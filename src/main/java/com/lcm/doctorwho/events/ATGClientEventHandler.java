@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * Created by Nictogen on 2/19/18
  */
 @Mod.EventBusSubscriber(Side.CLIENT) //*physicaly* client
-public class ATGClientEventHandler {
+public class ATGClientEventHandler { // NO_UCD (unused code)
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
