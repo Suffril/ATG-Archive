@@ -63,7 +63,7 @@ public class ItemChameleonArch extends Item {
 			SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE);
 			
 			int used = doUsageDamage(arch, SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class));
-			if (arch.getItemDamage() < ATGConfig.regenCapacity) throw new RuntimeException("Did not fully use arch when receiving superpower (" + used + "," + arch.getCount() + ")");
+			if (arch.getItemDamage() < ATGConfig.regenCapacity && !player.isCreative()) throw new RuntimeException("Did not fully use arch when receiving superpower (" + used + "," + arch.getCount() + ")");
 			
 			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
 		} else if (handler instanceof TimelordSuperpowerHandler) {
@@ -80,8 +80,7 @@ public class ItemChameleonArch extends Item {
 				}
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.gainedRegenerations", used)), true); // too lazy to fix a single/plural issue here
 			} else {
-				if (arch.getItemDamage() == 0) {
-					
+				if (arch.getItemDamage() == 0 && !player.isCreative()) {
 					player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullArch")), true);
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
 				} else if (tmh.regenerationsLeft < 1) {
@@ -104,12 +103,12 @@ public class ItemChameleonArch extends Item {
 	
 	private int doUsageDamage(ItemStack stack, TimelordSuperpowerHandler handler) {
 		int supply = ATGConfig.regenCapacity - stack.getItemDamage(), needed = ATGConfig.regenCapacity - handler.regenerationsLeft, used = Math.min(supply, needed);
-		
 		if (used == 0) return 0;
 		
 		handler.regenerationsLeft += used;
-		stack.setItemDamage(stack.getItemDamage() + used);
 		SuperpowerHandler.syncToAll(handler.getPlayer());
+		
+		if (!handler.getPlayer().isCreative()) stack.setItemDamage(stack.getItemDamage() + used);
 		return used;
 	}
 }

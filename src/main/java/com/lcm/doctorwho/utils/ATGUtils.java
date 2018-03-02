@@ -30,7 +30,7 @@ public class ATGUtils {
 	/**
 	 * Checks whether we are on a client or not
 	 */
-	public static boolean isClient() {
+	public static boolean isPhysicalClient() {
 		return FMLCommonHandler.instance().getSide().isClient();
 	}
 	
@@ -47,7 +47,7 @@ public class ATGUtils {
 	@Deprecated
 	public static void freezeMob(Entity entity, boolean considerYlevel) {
 		entity.motionX = 0;
-		if (considerYlevel & entity.onGround) entity.motionY = 0;
+		if (considerYlevel && entity.onGround) entity.motionY = 0;
 		entity.motionZ = 0;
 	}
 	
