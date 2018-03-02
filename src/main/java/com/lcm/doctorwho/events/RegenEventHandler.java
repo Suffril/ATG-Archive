@@ -52,13 +52,6 @@ public class RegenEventHandler { // NO_UCD (unused code)
 	}
 	
 	@SubscribeEvent
-	public static void playerTickEvent(TickEvent.PlayerTickEvent e) {
-		if (!e.player.world.isRemote) {
-			
-		}
-	}
-	
-	@SubscribeEvent
 	public static void onAttacked(LivingAttackEvent e) {
 		if (!(e.getEntity() instanceof EntityPlayer) || !SuperpowerHandler.hasSuperpower((EntityPlayer) e.getEntity(), TimelordSuperpower.INSTANCE)) return;
 		EntityPlayer player = (EntityPlayer) e.getEntity();

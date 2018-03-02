@@ -58,7 +58,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 					double y = player.posY + 0.5 + player.getRNG().nextGaussian() * 2;
 					double z = player.posZ + player.getRNG().nextGaussian() * 2;
 					
-					player.world.newExplosion(player, x, y, z, 1, true, false);
+					player.world.newExplosion(player, x, y, z, 1, ATGConfig.fieryRegen, false);
 					for (BlockPos bs : BlockPos.getAllInBox(player.getPosition().north().west(), player.getPosition().south().east()))
 						if (player.world.getBlockState(bs).getBlock() instanceof BlockFire) player.world.setBlockToAir(bs);
 				}

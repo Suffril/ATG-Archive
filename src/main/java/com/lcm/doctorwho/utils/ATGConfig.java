@@ -4,7 +4,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class ATGConfig {
 	
-	public static boolean resetHunger, resetOxygen, dontLoseUponDeath, startAsTimelord, disableArch, angelTeleporting;
+	public static boolean resetHunger, resetOxygen, dontLoseUponDeath, startAsTimelord, disableArch, angelTeleporting, fieryRegen;
 	public static int regenerativeKillRange, regenerativeKnockbackRange, regenCapacity, regenerationLevel, postRegenerationLevel, postRegenerationDuration;
 	public static float regenerativeKnockback, absorbtionLevel;
 	public static String lootRegex;
@@ -30,6 +30,8 @@ public class ATGConfig {
 		regenerativeKillRange = cfg.getInt("immediateKillRange", "regeneration", 4, 0, Integer.MAX_VALUE, "Upon regeneration every mob inside of this radius is immediately killed. Keep in mind that you should round up to accomodate for mobs that aren't standing in the center of a block");
 		regenerativeKnockbackRange = cfg.getInt("knockbackRange", "regeneration", 7, 0, 30000000, "Range wherein every mob is knocked back upon regeneration");
 		regenerativeKnockback = cfg.getFloat("knockback", "regeneration", 2.5F, 0, Float.MAX_VALUE, "The amount of knockback every mob inside of the knock back radius gets");
+		
+		fieryRegen = cfg.getBoolean("fieryRegen", "regeneration", true, "Spawn fire when regenerating");
 		
 		cfg.setCategoryComment("Weeping Angel", "These options are used to edit Weeping angel behaviour");
 		angelTeleporting = cfg.getBoolean("angelTeleporting", "Weeping Angel", false, "If this is true, angels have a chance of teleporting you on collision with them");
