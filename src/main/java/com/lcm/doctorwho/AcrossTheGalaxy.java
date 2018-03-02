@@ -3,6 +3,7 @@ package com.lcm.doctorwho;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
+import com.lcm.doctorwho.utils.DebugCommand;
 
 import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
@@ -12,6 +13,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = AcrossTheGalaxy.MODID, name = AcrossTheGalaxy.NAME, version = AcrossTheGalaxy.VERSION, dependencies = "required:forge@[14.23.1.2574,); required-after:lucraftcore@[1.12-2.0.4,)", acceptedMinecraftVersions = "1.12, 1.12.1, 1.12.2")
 @Mod.EventBusSubscriber
@@ -35,6 +37,11 @@ public class AcrossTheGalaxy {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ItemInjection.registerInjection(new TimelordSuperpower.Injection(), TimelordSuperpower.INSTANCE.getRegistryName());
+	}
+	
+	@EventHandler
+	public void serverStart(FMLServerStartingEvent event) {
+		event.registerServerCommand(new DebugCommand());
 	}
 	
 }
