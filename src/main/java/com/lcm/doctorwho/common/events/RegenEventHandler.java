@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.events;
+package com.lcm.doctorwho.common.events;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
@@ -32,9 +32,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class RegenEventHandler { //TODO EBS XXX detected some weird behavior, registering manually for now
+public class RegenEventHandler {
 	
 	@SubscribeEvent
 	public static void registerLoot(LootTableLoadEvent e) { // TODO can this loot table actually be overriden in resource packs?
@@ -44,6 +45,13 @@ public class RegenEventHandler { //TODO EBS XXX detected some weird behavior, re
 		LootEntry entry = new LootEntryTable(new ResourceLocation(AcrossTheGalaxy.MODID, "inject/arch_loot"), 1, 1, condAlways, "lcm-regen:arch-entry");
 		LootPool lootPool = new LootPool(new LootEntry[] { entry }, condAlways, new RandomValueRange(1), new RandomValueRange(1), "lcm-regen:arch-pool");
 		e.getTable().addPool(lootPool);
+	}
+	
+	@SubscribeEvent
+	public static void playerTickEvent(TickEvent.PlayerTickEvent e) {
+		if (!e.player.world.isRemote) {
+			
+		}
 	}
 	
 	@SubscribeEvent
@@ -79,7 +87,7 @@ public class RegenEventHandler { //TODO EBS XXX detected some weird behavior, re
 		}
 	}
 	
-	@SubscribeEvent(priority = EventPriority.HIGH) //CHECK only on server right?
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onHurt(LivingHurtEvent e) {
 		if (!(e.getEntity() instanceof EntityPlayer)) return;
 		

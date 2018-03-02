@@ -28,9 +28,9 @@ public class ATGUtils {
 	}
 	
 	/**
-	 * Checks whether we are on a physical client or not
+	 * Checks whether we are on a client or not
 	 */
-	public static boolean isPhysicalClient() {
+	public static boolean isClient() {
 		return FMLCommonHandler.instance().getSide().isClient();
 	}
 	

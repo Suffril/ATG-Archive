@@ -1,9 +1,9 @@
 package com.lcm.doctorwho.common.items;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.common.events.ATGObjects;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
-import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.utils.ATGConfig;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
