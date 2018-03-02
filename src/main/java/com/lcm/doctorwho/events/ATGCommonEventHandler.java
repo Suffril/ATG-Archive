@@ -1,8 +1,6 @@
 package com.lcm.doctorwho.events;
 
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.relauncher.Side;
-
-@Mod.EventBusSubscriber(Side.SERVER)
+//@Mod.EventBusSubscriber(Side.SERVER) //*physical* server XXX detected some weird behavior, registering manually for now
 public class ATGCommonEventHandler {
+	
 }

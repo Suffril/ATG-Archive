@@ -115,7 +115,7 @@ public class ATGObjects {
 		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 	}
 	
-	public static class EntityEntries {
+	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).name("angel").tracker(80, 3, false).build();
 	}
 	
@@ -124,11 +124,11 @@ public class ATGObjects {
 		public static final SoundEvent TIMEY_WIMEY = new ATGUtils.ATGSoundEvent("timey_wimey");
 	}
 	
-	public static class Superpowers {
+	public static class Superpowers { // NO_UCD (unused code)
 		public static final TimelordSuperpower timelord = TimelordSuperpower.INSTANCE;
 	}
 	
-	public static class AbilityEntries {
+	public static class AbilityEntries { // NO_UCD (unused code)
 		public static final Ability.AbilityEntry bouncy = newAbilityEntry(TraitBouncy.class, "bouncy");
 		public static final Ability.AbilityEntry lucky = newAbilityEntry(TraitLucky.class, "lucky");
 		public static final Ability.AbilityEntry quick = newAbilityEntry(TraitQuick.class, "quick");

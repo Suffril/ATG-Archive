@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class RegenEventHandler { //TODO EBS
+public class RegenEventHandler { //TODO EBS XXX detected some weird behavior, registering manually for now
 	
 	@SubscribeEvent
 	public static void registerLoot(LootTableLoadEvent e) { // TODO can this loot table actually be overriden in resource packs?
