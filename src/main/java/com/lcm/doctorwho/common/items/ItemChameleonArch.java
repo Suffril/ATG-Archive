@@ -42,9 +42,10 @@ public class ItemChameleonArch extends Item {
 			arch.getTagCompound().setBoolean("open", true);
 		}
 		
+		//Handle inifite regeneration case
 		if (ATGConfig.regenCapacity == 0) if (handler == null) {
 			arch.getTagCompound().setBoolean("open", true);
-			SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE);
+			SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE); //XXX change to 'give' superpower?
 			SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = -1;
 			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
 			arch.getTagCompound().setBoolean("open", false);

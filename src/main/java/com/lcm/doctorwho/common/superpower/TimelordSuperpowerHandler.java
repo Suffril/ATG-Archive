@@ -11,7 +11,6 @@ import lucraft.mods.lucraftcore.LCConfig;
 import lucraft.mods.lucraftcore.karma.KarmaHandler;
 import lucraft.mods.lucraftcore.karma.KarmaStat;
 import lucraft.mods.lucraftcore.superpowers.Superpower;
-import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
@@ -52,7 +51,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				player.extinguish();
 				player.setArrowCountInEntity(0);
 				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); // FIXME broken
-								
+				
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
 					double x = player.posX + player.getRNG().nextGaussian() * 2;
@@ -77,7 +76,6 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 			} else if (regenTicks == 0 && regenerating) regenTicks = 1; // initiate regeneration
 		} else {
 			// Client Behavior
-			
 			if (regenTicks == 0 && regenerating) // initiate regeneration
 				regenTicks = 1;
 			
@@ -99,7 +97,6 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		TimelordSuperpower.INSTANCE.addDefaultAbilities(this.getPlayer(), this.getAbilities());
 		TimelordSuperpowerHandler.randomizeTraits(this);
 		this.regenerationsLeft = 0;
-		SuperpowerHandler.syncToAll(this.getPlayer());
 	}
 	
 	private static void randomizeTraits(SuperpowerPlayerHandler handler) {

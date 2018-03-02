@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.common.superpower;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ import com.lcm.doctorwho.common.traits.positive.TraitSturdy;
 import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
 import com.lcm.doctorwho.common.traits.positive.TraitTough;
 import com.lcm.doctorwho.events.ATGObjects;
+import com.lcm.doctorwho.utils.ATGConfig;
 
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
@@ -34,6 +36,7 @@ import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import lucraft.mods.lucraftcore.superpowers.capabilities.ISuperpowerCapability;
 import lucraft.mods.lucraftcore.superpowers.gui.GuiCustomizer;
+import lucraft.mods.lucraftcore.superpowers.items.SuperpowerItems.InjectionSuperpower;
 import lucraft.mods.lucraftcore.superpowers.render.SuperpowerRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -49,7 +52,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TimelordSuperpower extends Superpower {
 	
 	public static final TimelordSuperpower INSTANCE = new TimelordSuperpower();
-	private TimelordRenderHandler timelordRenderhandler;
+	private TimelordRenderHandler renderhandler;
 	
 	public TimelordSuperpower() {
 		super("timelord");
@@ -96,8 +99,8 @@ public class TimelordSuperpower extends Superpower {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public SuperpowerRenderer.ISuperpowerRenderer getPlayerRenderer() {
-		if (timelordRenderhandler == null) timelordRenderhandler = new TimelordRenderHandler();
-		return timelordRenderhandler;
+		if (renderhandler == null) renderhandler = new TimelordRenderHandler();
+		return renderhandler;
 	}
 	
 	@Override
@@ -140,6 +143,28 @@ public class TimelordSuperpower extends Superpower {
 		nbt.setFloat("SecondaryBlue", 0.0f);
 		nbt.setBoolean("textured", false);
 		return nbt;
+	}
+	
+	@Override
+	public int getCapsuleColor() {
+		return Color.ORANGE.getRGB();
+	}
+	
+	public static class Injection extends InjectionSuperpower {
+		
+		public Injection() {
+			super(TimelordSuperpower.INSTANCE);
+		}
+		
+		@Override
+		public ItemStack inject(EntityPlayer player, ItemStack stack) {
+			super.inject(player, stack);
+			TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class);
+			if (handler != null) handler.regenerationsLeft = ATGConfig.regenCapacity;
+			SuperpowerHandler.syncToAll(player);
+			return stack;
+		}
+		
 	}
 	
 }
