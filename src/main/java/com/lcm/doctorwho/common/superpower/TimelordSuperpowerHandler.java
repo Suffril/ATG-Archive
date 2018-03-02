@@ -52,6 +52,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				player.extinguish();
 				player.setArrowCountInEntity(0);
 				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); // FIXME broken
+								
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
 					double x = player.posX + player.getRNG().nextGaussian() * 2;
@@ -65,7 +66,8 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 			} else if (regenTicks >= 200) { // end regeneration
 				player.setHealth(player.getMaxHealth());
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, ATGConfig.postRegenerationDuration, ATGConfig.postRegenerationLevel, false, false)); // 180 seconds of 20 ticks of Regeneration 4
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F); // FIXME broken
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F);
+				
 				regenerating = false;
 				regenTicks = 0;
 				if (regenerationsLeft != -1) regenerationsLeft--;
@@ -82,7 +84,6 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 			if (regenTicks > 0) { // regenerating
 				if (Minecraft.getMinecraft().player.getUniqueID() == player.getUniqueID()) Minecraft.getMinecraft().gameSettings.thirdPersonView = 2;
 				regenTicks++;
-				
 			}
 			
 			if (regenTicks >= 200 && !regenerating) { // end regeneration
