@@ -6,7 +6,6 @@ import java.util.UUID;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.gui.GuiRegenCustomizer;
 import com.lcm.doctorwho.client.gui.GuiTimelordPowerTab;
-import com.lcm.doctorwho.common.events.ATGObjects;
 import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
 import com.lcm.doctorwho.common.traits.negative.TraitDumb;
 import com.lcm.doctorwho.common.traits.negative.TraitFlimsy;
@@ -27,6 +26,7 @@ import com.lcm.doctorwho.common.traits.positive.TraitStrong;
 import com.lcm.doctorwho.common.traits.positive.TraitSturdy;
 import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
 import com.lcm.doctorwho.common.traits.positive.TraitTough;
+import com.lcm.doctorwho.events.ATGObjects;
 
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;

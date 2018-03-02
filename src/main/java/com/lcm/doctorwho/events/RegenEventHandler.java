@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.events;
+package com.lcm.doctorwho.events;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
