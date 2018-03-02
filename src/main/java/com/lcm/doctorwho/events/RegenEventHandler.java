@@ -4,6 +4,8 @@ import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.utils.ATGConfig;
+import com.lcm.doctorwho.utils.DebugCommand.NoRegenDamageSource;
+import com.lcm.doctorwho.utils.DebugCommand.QuickRegenDamageSource;
 import com.lcm.doctorwho.utils.ExplosionUtil;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
@@ -98,7 +100,7 @@ public class RegenEventHandler { // NO_UCD (unused code)
 		
 		TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class);
 		
-		if ((handler.regenerating || player.posY < 0 || handler.regenerationsLeft == 0) && !ATGConfig.dontLoseUponDeath) {
+		if ((handler.regenerating || player.posY < 0 || handler.regenerationsLeft == 0 || e.getSource() instanceof NoRegenDamageSource) && !ATGConfig.dontLoseUponDeath) {
 			SuperpowerHandler.removeSuperpower(player);
 			((CapabilitySuperpower) player.getCapability(CapabilitySuperpower.SUPERPOWER_CAP, null)).superpowerData.removeTag(TimelordSuperpower.INSTANCE.getRegistryName().toString());
 		} else if (handler.regenerationsLeft > 0 || handler.regenerationsLeft == -1) { // initiate regeneration
@@ -127,6 +129,7 @@ public class RegenEventHandler { // NO_UCD (unused code)
 			if (handler.regenerationsLeft != -1) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.regenLeftExt", time, (handler.regenerationsLeft - 1))), true);
 			player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.REGENERATION, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			ExplosionUtil.regenerationExplosion(player);
+			if (e.getSource() instanceof QuickRegenDamageSource) handler.regenTicks = 201;
 		}
 	}
 	
