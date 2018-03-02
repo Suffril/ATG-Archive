@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.events;
+package com.lcm.doctorwho.events;
 
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
 import com.lcm.doctorwho.networking.ATGNetwork;

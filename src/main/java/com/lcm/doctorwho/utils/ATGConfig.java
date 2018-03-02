@@ -34,7 +34,7 @@ public class ATGConfig {
 		cfg.setCategoryComment("Weeping Angel", "These options are used to edit Weeping angel behaviour");
 		angelTeleporting = cfg.getBoolean("angelTeleporting", "Weeping Angel", false, "If this is true, angels have a chance of teleporting you on collision with them");
 		
-		
 		cfg.save();
 	}
+	
 }

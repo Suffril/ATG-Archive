@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.events;
+package com.lcm.doctorwho.events;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -210,7 +210,7 @@ public class ATGObjects {
 		}
 	}
 	
-	@SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT) //note: this means *physical* side
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent e) {
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
