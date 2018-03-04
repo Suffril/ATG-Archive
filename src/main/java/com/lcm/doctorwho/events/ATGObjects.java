@@ -23,13 +23,11 @@ import com.lcm.doctorwho.common.traits.negative.TraitFlimsy;
 import com.lcm.doctorwho.common.traits.negative.TraitFrail;
 import com.lcm.doctorwho.common.traits.negative.TraitObvious;
 import com.lcm.doctorwho.common.traits.negative.TraitRigid;
-import com.lcm.doctorwho.common.traits.negative.TraitSlow;
 import com.lcm.doctorwho.common.traits.negative.TraitUnhealthy;
 import com.lcm.doctorwho.common.traits.negative.TraitUnlucky;
 import com.lcm.doctorwho.common.traits.negative.TraitWeak;
 import com.lcm.doctorwho.common.traits.positive.TraitBouncy;
 import com.lcm.doctorwho.common.traits.positive.TraitLucky;
-import com.lcm.doctorwho.common.traits.positive.TraitQuick;
 import com.lcm.doctorwho.common.traits.positive.TraitSmart;
 import com.lcm.doctorwho.common.traits.positive.TraitSneaky;
 import com.lcm.doctorwho.common.traits.positive.TraitSpry;
@@ -131,7 +129,6 @@ public class ATGObjects {
 	public static class AbilityEntries { // NO_UCD (unused code)
 		public static final Ability.AbilityEntry bouncy = newAbilityEntry(TraitBouncy.class, "bouncy");
 		public static final Ability.AbilityEntry lucky = newAbilityEntry(TraitLucky.class, "lucky");
-		public static final Ability.AbilityEntry quick = newAbilityEntry(TraitQuick.class, "quick");
 		public static final Ability.AbilityEntry spry = newAbilityEntry(TraitSpry.class, "spry");
 		public static final Ability.AbilityEntry strong = newAbilityEntry(TraitStrong.class, "strong");
 		public static final Ability.AbilityEntry sturdy = newAbilityEntry(TraitSturdy.class, "sturdy");
@@ -143,7 +140,6 @@ public class ATGObjects {
 		public static final Ability.AbilityEntry flimsy = newAbilityEntry(TraitFlimsy.class, "flimsy");
 		public static final Ability.AbilityEntry frail = newAbilityEntry(TraitFrail.class, "frail");
 		public static final Ability.AbilityEntry rigid = newAbilityEntry(TraitRigid.class, "rigid");
-		public static final Ability.AbilityEntry slow = newAbilityEntry(TraitSlow.class, "slow");
 		public static final Ability.AbilityEntry unhealthy = newAbilityEntry(TraitUnhealthy.class, "unhealthy");
 		public static final Ability.AbilityEntry unlucky = newAbilityEntry(TraitUnlucky.class, "unlucky");
 		public static final Ability.AbilityEntry weak = newAbilityEntry(TraitWeak.class, "weak");
