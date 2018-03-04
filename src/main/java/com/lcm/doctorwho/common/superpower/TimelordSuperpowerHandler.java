@@ -43,12 +43,20 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		EntityPlayer player = cap.getPlayer();
 		
 		if (!player.world.isRemote) {
+
+			if(player.isInWater() || player.isInLava())
+			{
+                player.motionX = 0;
+                player.motionY = 0;
+                player.motionZ = 0;
+			}
+
 			// Server Behavior
 			if (regenTicks > 0 && regenTicks < 200) { // regenerating
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); //FIXME broken, sometimes
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.0f); //FIXME broken, sometimes
 				
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());

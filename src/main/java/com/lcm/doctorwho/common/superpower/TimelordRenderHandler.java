@@ -50,7 +50,14 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 		TimelordSuperpowerHandler handler = (TimelordSuperpowerHandler) superpowerPlayerHandler;
 		
 		if (!(handler.regenTicks > 0 && handler.regenTicks < 200)) return;
-		
+
+		if(entityPlayer.isInWater() && handler.regenTicks > 0 && handler.regenTicks < 200 || entityPlayer.isInLava() && handler.regenTicks > 0 && handler.regenTicks < 200)
+		{
+            entityPlayer.motionX = 0;
+            entityPlayer.motionY = 0;
+            entityPlayer.motionZ = 0;
+		}
+
 		NBTTagCompound style = handler.getStyleNBTTag();
 		
 		if (style.getBoolean("textured"))
