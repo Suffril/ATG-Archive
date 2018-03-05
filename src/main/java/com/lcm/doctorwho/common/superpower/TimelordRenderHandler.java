@@ -23,6 +23,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -50,13 +52,6 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 		TimelordSuperpowerHandler handler = (TimelordSuperpowerHandler) superpowerPlayerHandler;
 		
 		if (!(handler.regenTicks > 0 && handler.regenTicks < 200)) return;
-
-		if(entityPlayer.isInWater() && handler.regenTicks > 0 && handler.regenTicks < 200 || entityPlayer.isInLava() && handler.regenTicks > 0 && handler.regenTicks < 200)
-		{
-            entityPlayer.motionX = 0;
-            entityPlayer.motionY = 0;
-            entityPlayer.motionZ = 0;
-		}
 
 		NBTTagCompound style = handler.getStyleNBTTag();
 		
@@ -281,7 +276,7 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 			GlStateManager.popMatrix();
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onRenderPlayerPre(RenderPlayerEvent.Pre e) {
 		TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(e.getEntityPlayer(), TimelordSuperpowerHandler.class);
@@ -291,4 +286,5 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.HEAD).setAngles(-20, 0, 0);
 		}
 	}
+
 }

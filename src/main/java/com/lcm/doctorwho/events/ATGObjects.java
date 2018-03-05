@@ -10,6 +10,7 @@ import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
+import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
 import com.lcm.doctorwho.common.blocks.LogsOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
@@ -111,6 +112,9 @@ public class ATGObjects {
 		
 		public static final Block coralWall = new BlockOutline(Material.CORAL, "coral_wall").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+
+		public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+
 	}
 	
 	public static class EntityEntries { // NO_UCD (unused code)

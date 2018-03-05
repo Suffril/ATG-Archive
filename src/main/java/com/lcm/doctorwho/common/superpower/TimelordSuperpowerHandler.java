@@ -44,13 +44,6 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		
 		if (!player.world.isRemote) {
 
-			if(player.isInWater() || player.isInLava())
-			{
-                player.motionX = 0;
-                player.motionY = 0;
-                player.motionZ = 0;
-			}
-
 			// Server Behavior
 			if (regenTicks > 0 && regenTicks < 200) { // regenerating
 				regenTicks++;

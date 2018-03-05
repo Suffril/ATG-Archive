@@ -1,5 +1,7 @@
 package com.lcm.doctorwho;
 
+import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
+import com.lcm.doctorwho.common.capabilities.iTardis;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.events.ATGCommonProxy;
 import com.lcm.doctorwho.networking.ATGNetwork;
@@ -9,6 +11,7 @@ import com.lcm.doctorwho.utils.DebugCommand;
 import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -41,6 +44,7 @@ public class AcrossTheGalaxy {
 		ATGNetwork.init();
 		MinecraftForge.EVENT_BUS.register(proxy);
 		proxy.init(event);
+		CapabilityManager.INSTANCE.register(iTardis.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
 	}
 	
 	@EventHandler
@@ -53,5 +57,6 @@ public class AcrossTheGalaxy {
 	public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new DebugCommand());
 	}
-	
+
+
 }
