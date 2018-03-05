@@ -1,16 +1,14 @@
 package com.lcm.doctorwho;
 
-import com.lcm.doctorwho.client.events.ATGClientEventHandler;
 import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
+import com.lcm.doctorwho.client.render.entity.RenderWindow;
+import com.lcm.doctorwho.client.windows.EntityWindow;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -30,6 +28,12 @@ public class AcrossTheGalaxy {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
+
+		if (ATGUtils.isClient())
+		{
+			RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, manager -> new RenderEntityBase<>(new ModelWeepingAngel(), "weeping_angel", 1.0F));
+			RenderingRegistry.registerEntityRenderingHandler(EntityWindow.class, RenderWindow::new);
+		}
 	}
 	
 	@EventHandler
@@ -37,12 +41,7 @@ public class AcrossTheGalaxy {
 
 		ATGNetwork.init();
 
-		if (ATGUtils.isClient())
-        {
-            RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase<>(new ModelWeepingAngel(), "weeping_angel", 1.0F));
-            MinecraftForge.EVENT_BUS.register(new ATGClientEventHandler());
 
-        }
 	}
 	
 }

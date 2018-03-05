@@ -1,6 +1,7 @@
 package com.lcm.doctorwho.networking;
 
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
+import com.lcm.doctorwho.networking.packets.MessageChunkData;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -12,6 +13,7 @@ public class ATGNetwork {
     public static void init()
     {
         INSTANCE.registerMessage(MessageAngelSeen.AngelSeenHandler.class, MessageAngelSeen.class, 0, Side.SERVER);
+        INSTANCE.registerMessage(MessageChunkData.Handler.class, MessageChunkData.class, 1, Side.CLIENT);
     }
 
 }

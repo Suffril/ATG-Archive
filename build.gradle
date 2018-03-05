@@ -15,11 +15,12 @@ archivesBaseName = "lcm-doctorwho"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
+
 minecraft {
 	version = "1.12.2-14.23.2.2618"
 	runDir = "run"
 	mappings = "snapshot_20171003"
-	makeObfSourceJar = false 
+	makeObfSourceJar = false
 }
 
 repositories {
@@ -35,13 +36,7 @@ dependencies {
 	}
 }
 
-sourceSets {
-	main {
-		java {
-			srcDirs 'src/regen/java'
-		}
-	}
-}
+
 
 processResources {
 	// this will ensure that this task is redone when the versions change.
