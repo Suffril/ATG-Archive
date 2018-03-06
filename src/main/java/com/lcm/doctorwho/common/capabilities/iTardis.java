@@ -9,5 +9,15 @@ public interface iTardis
     void readNBT(NBTTagCompound nbt);
     int getTardisID();
     void setTardisID(int id);
+
+    int getModelID();
+    void setModelID(int id);
+
+    boolean isDoorOpen();
+    void setDoorOpen(boolean open);
+
+    String getOwner();
+    void setOwner(String uuid);
     BlockPos getInteriorPos();
+    void setBlockPos(BlockPos pos);
 }

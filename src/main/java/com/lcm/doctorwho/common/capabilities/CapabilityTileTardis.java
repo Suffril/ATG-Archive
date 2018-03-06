@@ -1,9 +1,7 @@
 package com.lcm.doctorwho.common.capabilities;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.TileEntityTardis;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -26,7 +24,10 @@ public class CapabilityTileTardis implements iTardis
 
     TileEntityTardis tardis;
 
-    public int tardisID;
+    private int tardisID, modelID;
+    private String ownerUUID = "no one owns me yet :(";
+    private boolean doorOpen;
+    BlockPos interiorPos;
 
     public CapabilityTileTardis(TileEntityTardis tile)
     {
@@ -44,8 +45,44 @@ public class CapabilityTileTardis implements iTardis
     }
 
     @Override
+    public int getModelID() {
+        return modelID;
+    }
+
+    @Override
+    public void setModelID(int id) {
+        modelID = id;
+    }
+
+    @Override
+    public boolean isDoorOpen() {
+        return doorOpen;
+    }
+
+    @Override
+    public void setDoorOpen(boolean open) {
+        doorOpen = open;
+    }
+
+    @Override
+    public String getOwner() {
+        return ownerUUID;
+    }
+
+    @Override
+    public void setOwner(String uuid) {
+        ownerUUID = uuid;
+    }
+
+    @Override
     public BlockPos getInteriorPos() {
         return null;
+    }
+
+    @Override
+    public void setBlockPos(BlockPos pos)
+    {
+       interiorPos = pos;
     }
 
     @Override
@@ -53,6 +90,9 @@ public class CapabilityTileTardis implements iTardis
     {
         NBTTagCompound compound = new NBTTagCompound();
         compound.setInteger("tardisID", tardisID);
+        compound.setString("ownerUUID", ownerUUID);
+        compound.setInteger("modelID", modelID);
+        compound.setBoolean("doorOpen", doorOpen);
         System.out.println(compound);
         return compound;
     }
@@ -61,6 +101,9 @@ public class CapabilityTileTardis implements iTardis
     public void readNBT(NBTTagCompound nbt)
     {
         tardisID = nbt.getInteger("tardisID");
+        ownerUUID = nbt.getString("ownerUUID");
+        modelID = nbt.getInteger("modelID");
+        doorOpen = nbt.getBoolean("doorOpen");
     }
 
 
@@ -94,19 +137,6 @@ public class CapabilityTileTardis implements iTardis
             TARDIS.getStorage().readNBT(TARDIS, this.capability, null, nbt);
         }
     }
-
-    public static class EventHandler
-    {
-        @SubscribeEvent
-        public void onAttachCapabilities(AttachCapabilitiesEvent<TileEntity> event) {
-            if (!(event.getObject() instanceof TileEntityTardis) || event.getObject().hasCapability(TARDIS, null))
-                return;
-            event.addCapability(new ResourceLocation(AcrossTheGalaxy.MODID, "tardis"),
-                    new CapabilityTardisProvider(new CapabilityTileTardis((TileEntityTardis) event.getObject())));
-
-        }
-    }
-
 
     public static class Storage implements Capability.IStorage<iTardis>
     {

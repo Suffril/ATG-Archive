@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.utils;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.ItemModelBase;
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import net.minecraft.client.Minecraft;

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import com.lcm.doctorwho.client.models.ItemModelBase;
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.client.model.ModelBase;

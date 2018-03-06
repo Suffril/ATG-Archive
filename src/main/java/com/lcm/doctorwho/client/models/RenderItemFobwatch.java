@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.vecmath.Matrix4f;
 
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
