@@ -32,7 +32,8 @@ public class MessageAngelSeen implements IMessage {
 		
 		@Override
 		public IMessage onMessage(MessageAngelSeen message, MessageContext ctx) {
-			
+
+
 			EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
 			
 			serverPlayer.getServerWorld().addScheduledTask(() -> {

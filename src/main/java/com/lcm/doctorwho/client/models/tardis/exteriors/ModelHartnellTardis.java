@@ -6,7 +6,10 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.Random;
 
 public class ModelHartnellTardis extends ModelBase implements iTardisModel
 
@@ -1306,6 +1309,13 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
 
     @Override
     public void renderLeftDoor(float scale) {
+
+        GlStateManager.pushMatrix();
+
+        if(isDoorOpen()) {
+            GlStateManager.translate(-0.6F, 0.0F, 0.2F);
+            GlStateManager.rotate(-40, 0.0F, 1.0F, 0.0F);
+        }
         LD1.render(scale);
         LD2.render(scale);
         LD3.render(scale);
@@ -1334,6 +1344,8 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
         W28.render(scale);
         W31.render(scale);
         W43.render(scale);
+
+        GlStateManager.popMatrix();
     }
 
     @Override
@@ -1480,10 +1492,16 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
         L2.render(scale);
         L3.render(scale);
         L4.render(scale);
-        L5.render(scale);
         L7.render(scale);
+        L5.render(scale);
 
         //This is the bulb
+       if(new Random().nextBoolean()) {
+           int bright = 0xF0;
+           int brightX = bright % 65536;
+           int brightY = bright / 65536;
+           OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
+       }
         L6.render(scale);
     }
 
@@ -1500,15 +1518,12 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
     @Override
     public void renderAll(float scale) {
 
-        int bright = 0xF0;
-        int brightX = bright % 65536;
-        int brightY = bright / 65536;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
+        renderLamp(scale);
 
+        RenderHelper.enableStandardItemLighting();
         renderRightDoor(scale);
         renderLeftDoor(scale);
         renderShell(scale);
-        renderLamp(scale);
         renderText(scale);
         other(scale);
     }

@@ -8,11 +8,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -40,8 +42,16 @@ public class ATGUtils {
 	public static void setWalkSpeed(EntityPlayerMP p, float speed) {
 		ReflectionHelper.setPrivateValue(PlayerCapabilities.class, p.capabilities, speed, 6);
 	}
-	
-	/**
+
+    public static void sendPlayerMessage(EntityPlayer p, String message)
+    {
+        if(!p.world.isRemote) {
+            p.sendMessage(new TextComponentString(message));
+        }
+    }
+
+
+    /**
 	 * Stops a mob in it's tracks, FULLY.
 	 */
 	@Deprecated

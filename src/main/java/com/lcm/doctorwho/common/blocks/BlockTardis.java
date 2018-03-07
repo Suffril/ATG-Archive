@@ -3,30 +3,37 @@ package com.lcm.doctorwho.common.blocks;
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.iTardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
+import com.lcm.doctorwho.networking.ATGNetwork;
+import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
+import com.lcm.doctorwho.utils.ATGUtils;
+import com.lcm.doctorwho.utils.TardisUtils;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityShulkerBox;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nullable;
 
 public class BlockTardis extends BlockOutline {
     public BlockTardis(Material material, MapColor color, String name) {
         super(material, color, name);
-        this.setLightLevel(1.0F);
+        setLightLevel(1.0F);
     }
 
     public BlockTardis(Material material, String name) {
         super(material, name);
-        this.setLightLevel(1.0F);
+        setLightLevel(1.0F);
     }
 
     /**
@@ -53,12 +60,14 @@ public class BlockTardis extends BlockOutline {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
         iTardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
-
-        if(!worldIn.isRemote) {
+        TileEntityShulkerBox
+        if(playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
             capa.setDoorOpen(!capa.isDoorOpen());
-            System.out.println(capa.isDoorOpen());
-            return true;
-        }
+            ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
+        } else
+            {
+                ATGUtils.sendPlayerMessage(playerIn, "This ain't your TARDIS, Piss Off!");
+            }
 
         return true;
     }

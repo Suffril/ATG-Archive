@@ -7,7 +7,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
@@ -30,25 +33,12 @@ public class TileEntityTardis extends TileEntity {
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         return (T)handler;
     }
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        iTardis capa = this.getCapability(CapabilityTileTardis.TARDIS, null);
-        return nbtTag;
-    }
+
 
     @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        iTardis capa = this.getCapability(CapabilityTileTardis.TARDIS, null);
-        NBTTagCompound nbt = packet.getNbtCompound();
-        this.readFromNBT(packet.getNbtCompound());
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox() {
+        return super.getRenderBoundingBox().grow(8, 8, 8);
     }
 
 }
