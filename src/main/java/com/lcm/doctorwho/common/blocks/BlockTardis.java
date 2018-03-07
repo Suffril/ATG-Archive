@@ -60,13 +60,14 @@ public class BlockTardis extends BlockOutline {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
         iTardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
-        TileEntityShulkerBox
+
         if(playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
             capa.setDoorOpen(!capa.isDoorOpen());
             ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
-        } else
+        }
+        else
             {
-                ATGUtils.sendPlayerMessage(playerIn, "This ain't your TARDIS, Piss Off!");
+                ATGUtils.sendPlayerMessage(playerIn, "This is not your TARDIS!");
             }
 
         return true;

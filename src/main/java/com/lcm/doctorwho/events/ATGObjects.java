@@ -71,6 +71,8 @@ public class ATGObjects {
 	}
 	
 	public static class Blocks {
+
+		//Moose
 		public static final Block creamRoundel = new BlockOutline(Material.CORAL, "cream_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block creamRoundelAlt = new BlockOutline(Material.CORAL, "cream_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block whiteRoundel = new BlockOutline(Material.CORAL, "white_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
@@ -105,16 +107,38 @@ public class ATGObjects {
 		public static final Block redRoundelAlt = new BlockOutline(Material.CORAL, "red_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block yellowRoundel = new BlockOutline(Material.CORAL, "yellow_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block yellowRoundelAlt = new BlockOutline(Material.CORAL, "yellow_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
 		public static final Block alfLog = new BlockOutline(Material.WOOD,"alf_log").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block alfLeaves = new LeavesOutline("alf_leaves").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
 		public static final Block coralWall = new BlockOutline(Material.CORAL, "coral_wall").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
+		//Tardis
 		public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
-	}
+		//Troughton - Fault Locator
+		public static final Block tro_fault_1 = new BlockOutline(Material.CORAL, "tro_fault_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block tro_fault_2 = new BlockOutline(Material.CORAL, "tro_fault_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block tro_fault_3 = new BlockOutline(Material.CORAL, "tro_fault_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block tro_fault_4 = new BlockOutline(Material.CORAL, "tro_fault_4").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block tro_fault_5 = new BlockOutline(Material.CORAL, "tro_fault_5").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block tro_fault_6 = new BlockOutline(Material.CORAL, "tro_fault_6").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block tro_fault_7 = new BlockOutline(Material.CORAL, "tro_fault_7").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block tro_fault_8 = new BlockOutline(Material.CORAL, "tro_fault_8").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+
+        //Troughton - Flat roundels
+        public static final Block tro_flatroundel_1 = new BlockOutline(Material.CORAL, "tro_flatroundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block tro_flatroundel_2 = new BlockOutline(Material.CORAL, "tro_flatroundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block tro_flatroundel_3 = new BlockOutline(Material.CORAL, "tro_flatroundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block tro_flatroundel_4 = new BlockOutline(Material.CORAL, "tro_flatroundel_4").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block tro_flatroundel_5 = new BlockOutline(Material.CORAL, "tro_flatroundel_5").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+
+        //Troughton - Roundel walls
+        public static final Block tro_roundel_1 = new BlockOutline(Material.CORAL, "tro_roundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block tro_roundel_2 = new BlockOutline(Material.CORAL, "tro_roundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block tro_roundel_3 = new BlockOutline(Material.CORAL, "tro_roundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+
+
+    }
 	
 	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).name("angel").tracker(80, 3, false).build();

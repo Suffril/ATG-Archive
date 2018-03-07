@@ -9,6 +9,7 @@ import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.DebugCommand;
 
+import com.lcm.doctorwho.utils.JsonUtils;
 import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,7 +31,7 @@ public class AcrossTheGalaxy {
 	@SidedProxy(serverSide = "com.lcm.doctorwho.events.ATGServerProxy", clientSide = "com.lcm.doctorwho.events.ATGClientProxy")
 
     public static ATGCommonProxy proxy;
-	
+
 	public static final String MODID = "lcm-atg";
 	public static final String NAME = "Doctor who - Across the galaxy";
 	public static final String VERSION = "1.0";
@@ -44,22 +45,27 @@ public class AcrossTheGalaxy {
 		ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
 		proxy.preInit(event);
 	}
-	
+
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+
+	    for(int i = 0; i < 6; i++) {
+            JsonUtils.Block("tro_flatroundel_" + i, "flat_roundel_walls/tro_flatroundel_" + i);
+        }
+
 		ATGNetwork.init();
 		MinecraftForge.EVENT_BUS.register(proxy);
 		GameRegistry.registerTileEntity(TileEntityTardis.class, "tardis");
 		proxy.init(event);
 		CapabilityManager.INSTANCE.register(iTardis.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
 	}
-	
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ItemInjection.registerInjection(new TimelordSuperpower.Injection(), TimelordSuperpower.INSTANCE.getRegistryName());
 		proxy.postInit(event);
 	}
-	
+
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new DebugCommand());

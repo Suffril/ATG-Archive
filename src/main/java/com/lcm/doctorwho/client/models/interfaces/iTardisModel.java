@@ -11,6 +11,8 @@ public interface iTardisModel {
     void other(float scale);
     void renderAll(float scale);
     boolean isDoorOpen();
+    boolean isLampOn();
+    void setLampOn(boolean on);
     void setDoorOpen(boolean open);
     ResourceLocation getTexture();
 }

@@ -16,6 +16,7 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
 {
     private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_hartnell.png");
     private boolean doorOpen = false;
+    private boolean lampOn;
 
     ModelRenderer B1;
     ModelRenderer P1;
@@ -194,6 +195,7 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
     ModelRenderer PBS18;
     ModelRenderer PBS19;
     ModelRenderer PBS20;
+
 
     public ModelHartnellTardis()
 {
@@ -1316,6 +1318,7 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
             GlStateManager.translate(-0.6F, 0.0F, 0.2F);
             GlStateManager.rotate(-40, 0.0F, 1.0F, 0.0F);
         }
+
         LD1.render(scale);
         LD2.render(scale);
         LD3.render(scale);
@@ -1488,6 +1491,9 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
 
     @Override
     public void renderLamp(float scale) {
+      GlStateManager.pushMatrix();
+
+
         L1.render(scale);
         L2.render(scale);
         L3.render(scale);
@@ -1495,14 +1501,30 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
         L7.render(scale);
         L5.render(scale);
 
-        //This is the bulb
-       if(new Random().nextBoolean()) {
-           int bright = 0xF0;
-           int brightX = bright % 65536;
-           int brightY = bright / 65536;
-           OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
-       }
+        if(isLampOn()) {
+
+            GlStateManager.enableAlpha();
+            GlStateManager.enableBlend();
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
+
+
+            int bright = 0xF0;
+            int brightX = bright % 65536;
+            int brightY = bright / 65536;
+            System.out.println("lamp on");
+
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
+        }
+
         L6.render(scale);
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
+
+
+        GlStateManager.disableAlpha();
+        GlStateManager.disableBlend();
+
+       GlStateManager.popMatrix();
     }
 
     @Override
@@ -1531,6 +1553,16 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
     @Override
     public boolean isDoorOpen() {
         return doorOpen;
+    }
+
+    @Override
+    public boolean isLampOn() {
+        return lampOn;
+    }
+
+    @Override
+    public void setLampOn(boolean on) {
+        lampOn = on;
     }
 
     @Override

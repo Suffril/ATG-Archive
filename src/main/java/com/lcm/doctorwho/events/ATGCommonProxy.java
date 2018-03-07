@@ -10,9 +10,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ATGCommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent ev) {}
-	public void init(FMLInitializationEvent ev) {
-
-	}
+	public void init(FMLInitializationEvent ev) { }
 	public void postInit(FMLPostInitializationEvent ev) {}
-	
+
+
 }

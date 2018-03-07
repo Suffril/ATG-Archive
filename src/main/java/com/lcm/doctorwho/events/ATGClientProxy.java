@@ -42,9 +42,8 @@ public class ATGClientProxy extends ATGCommonProxy {
 	}
 
 
-	public static void setupTardisModels()
+	private static void setupTardisModels()
 	{
-	    System.out.println("pls work");
 	    TARDIS_MODELS.clear();
 		TARDIS_MODELS.put(0, new ModelHartnellTardis());
 	}

@@ -43,6 +43,9 @@ public class ATGUtils {
 		ReflectionHelper.setPrivateValue(PlayerCapabilities.class, p.capabilities, speed, 6);
 	}
 
+    /**
+     * Send a message to the player
+     */
     public static void sendPlayerMessage(EntityPlayer p, String message)
     {
         if(!p.world.isRemote) {

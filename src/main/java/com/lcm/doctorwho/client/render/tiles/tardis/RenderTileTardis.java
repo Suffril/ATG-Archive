@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Random;
+
 
 public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis> {
 
@@ -37,7 +39,8 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glRotatef(180, 0.0F, 0.0F, 1.0F);
-        MODEL.setDoorOpen(tile.getCapability(CapabilityTileTardis.TARDIS, null).isDoorOpen());
+        MODEL.setDoorOpen(capa.isDoorOpen());
+        MODEL.setLampOn(new Random().nextBoolean());
         Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
         MODEL.renderAll(0.0625f);
         GL11.glPopMatrix();

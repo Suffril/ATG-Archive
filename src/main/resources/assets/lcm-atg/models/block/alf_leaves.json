@@ -1,7 +1,7 @@
 {
 	"__comment": "Designed by Mars075 with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "blocks/e_particle",
+
 		"texture": "lcm-atg:planets/alfern/blocks/leaves_alf"
 	},
 	"elements": [ 	 
