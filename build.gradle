@@ -25,7 +25,7 @@ archivesBaseName = "lcm-doctorwho"
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-	version = "1.12.2-14.23.2.2618"
+	version = "1.12.2-14.23.2.2624"
 	runDir = "run"
 	mappings = "snapshot_20171003"
 	makeObfSourceJar = false 
