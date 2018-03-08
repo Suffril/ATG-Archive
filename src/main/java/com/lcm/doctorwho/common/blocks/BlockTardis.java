@@ -45,7 +45,6 @@ public class BlockTardis extends BlockOutline {
         TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
         ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
         capa.setTardisID(700); //Need to figure out a way of assigning these
-        capa.setModelID(2);
         capa.setOwner(placer.getUniqueID().toString());
     }
 
@@ -60,13 +59,11 @@ public class BlockTardis extends BlockOutline {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
         ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
-
-        System.out.println("OWNER " + capa.getOwner());
-
         if(playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
-            System.out.println("DOOR OPENER:" + capa.getOwner());
-            capa.setModelID(2);
             capa.setDoorOpen(!capa.isDoorOpen());
+            NBTTagCompound whygod = tardis.writeToNBT(TardisUtils.tardisWriteToNBT(capa));
+            tardis.readFromNBT(whygod);
+            tardis.markDirty();
             ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
         }
         else

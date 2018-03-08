@@ -69,7 +69,12 @@ public class ATGUtils {
 		if (considerYlevel && entity.onGround) entity.motionY = 0;
 		entity.motionZ = 0;
 	}
-	
+
+	public static boolean isOnGround(Entity entity)
+    {
+        return entity.onGround;
+    }
+
 	/**
 	 * Rendering a enchanted effect onto modelled items
 	 */

@@ -1537,7 +1537,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
     public void renderAll(float scale) {
         GlStateManager.pushMatrix();
         GlStateManager.scale(0.95F, 0.95F, 0.95F);
-
+        GlStateManager.translate(0,0.1,0);
         renderLamp(scale);
         RenderHelper.enableStandardItemLighting();
         renderRightDoor(scale);

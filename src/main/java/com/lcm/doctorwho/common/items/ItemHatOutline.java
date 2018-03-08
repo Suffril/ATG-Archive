@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.common.items;
 
+import com.lcm.doctorwho.utils.ATGTabs;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLiving;

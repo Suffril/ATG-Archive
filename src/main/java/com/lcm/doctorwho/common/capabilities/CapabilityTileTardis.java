@@ -99,6 +99,7 @@ public class CapabilityTileTardis implements ITardis
     @Override
     public void readNBT(NBTTagCompound nbt)
     {
+        System.out.println("sadasdasdasdas");
         tardisID = nbt.getInteger("tardisID");
         ownerUUID = nbt.getString("ownerUUID");
         modelID = nbt.getInteger("modelID");

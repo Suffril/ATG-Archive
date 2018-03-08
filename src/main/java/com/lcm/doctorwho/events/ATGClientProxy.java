@@ -3,6 +3,7 @@ package com.lcm.doctorwho.events;
 import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelHartnellTardis;
+import com.lcm.doctorwho.client.models.tardis.exteriors.ModelMasqueTardis;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
@@ -65,6 +66,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 		TARDIS_MODELS.put(0, new ModelTTCapsuleHellbent());
 		TARDIS_MODELS.put(1, new ModelHartnellTardis());
 		TARDIS_MODELS.put(2, new ModelPertweeTARDIS());
+		TARDIS_MODELS.put(3, new ModelMasqueTardis());
 	}
 
 }
