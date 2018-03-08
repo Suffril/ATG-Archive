@@ -65,7 +65,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 @Mod.EventBusSubscriber
 public class ATGObjects {
 	public static class Items {
-		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", ATGObjects.SoundEvents.REGENERATION).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item chameleonArch = new ItemChameleonArch();
 	}
@@ -145,8 +145,8 @@ public class ATGObjects {
 	}
 	
 	public static class SoundEvents {
-		public static final SoundEvent REGENERATION = new ATGUtils.ATGSoundEvent("regeneration");
-		public static final SoundEvent TIMEY_WIMEY = new ATGUtils.ATGSoundEvent("timey_wimey");
+		public static final SoundEvent regeneration = new ATGUtils.ATGSoundEvent("regeneration");
+		public static final SoundEvent timeyWimey = new ATGUtils.ATGSoundEvent("timey_wimey");
 	}
 	
 	public static class Superpowers { // NO_UCD (unused code)
@@ -237,9 +237,12 @@ public class ATGObjects {
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent e) {
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
-			if (loc.getResourcePath().equalsIgnoreCase("sonic_eleventh_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model11thDocScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/11th_sonic.png")));
-			if (loc.getResourcePath().equalsIgnoreCase("cane_first_doc") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
-			if (loc.getResourcePath().equalsIgnoreCase("chameleonarch") && loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
+
+			if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
+				if (loc.getResourcePath().equalsIgnoreCase("sonic_eleventh_doc")) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model11thDocScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/11th_sonic.png")));
+				if (loc.getResourcePath().equalsIgnoreCase("cane_first_doc")) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));
+				if (loc.getResourcePath().equalsIgnoreCase("chameleonarch")) e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
+			}
 		}
 	}
 }

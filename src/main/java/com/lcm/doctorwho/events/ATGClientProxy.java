@@ -1,8 +1,9 @@
 package com.lcm.doctorwho.events;
 
 import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
-import com.lcm.doctorwho.client.models.interfaces.iTardisModel;
+import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelHartnellTardis;
+import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 public class ATGClientProxy extends ATGCommonProxy {
 
-	public static final Map<Integer, iTardisModel> TARDIS_MODELS = new HashMap<>();
+	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
 
 	@Override
 	public void init(FMLInitializationEvent event) {
@@ -45,7 +46,8 @@ public class ATGClientProxy extends ATGCommonProxy {
 	private static void setupTardisModels()
 	{
 	    TARDIS_MODELS.clear();
-		TARDIS_MODELS.put(0, new ModelHartnellTardis());
+		TARDIS_MODELS.put(0, new ModelTTCapsuleHellbent());
+		TARDIS_MODELS.put(1, new ModelHartnellTardis());
 	}
 
 }

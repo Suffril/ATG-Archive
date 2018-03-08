@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.common.blocks;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.iTardis;
+import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
@@ -43,7 +43,7 @@ public class BlockTardis extends BlockOutline {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
-        iTardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
+        ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
         capa.setTardisID(700); //Need to figure out a way of assigning these
         capa.setModelID(0);
         capa.setOwner(placer.getUniqueID().toString());
@@ -59,9 +59,13 @@ public class BlockTardis extends BlockOutline {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
-        iTardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
+        ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
+
+        System.out.println("OWNER " + capa.getOwner());
 
         if(playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
+            System.out.println("DOOR OPENER:" + capa.getOwner());
+            capa.setModelID(1);
             capa.setDoorOpen(!capa.isDoorOpen());
             ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
         }

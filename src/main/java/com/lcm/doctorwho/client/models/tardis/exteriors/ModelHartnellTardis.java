@@ -1,17 +1,18 @@
 package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.interfaces.iTardisModel;
+import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Random;
 
-public class ModelHartnellTardis extends ModelBase implements iTardisModel
+public class ModelHartnellTardis extends ModelBase implements ITardisModel
 
 {
     private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_hartnell.png");
@@ -1502,17 +1503,12 @@ public class ModelHartnellTardis extends ModelBase implements iTardisModel
         L5.render(scale);
 
         if(isLampOn()) {
-
             GlStateManager.enableAlpha();
             GlStateManager.enableBlend();
             GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
-
-
             int bright = 0xF0;
             int brightX = bright % 65536;
             int brightY = bright / 65536;
-            System.out.println("lamp on");
-
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
         }
 

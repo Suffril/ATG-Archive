@@ -1,7 +1,7 @@
 package com.lcm.doctorwho;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.iTardis;
+import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGCommonProxy;
@@ -48,16 +48,11 @@ public class AcrossTheGalaxy {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-
-	    for(int i = 0; i < 6; i++) {
-            JsonUtils.Block("tro_flatroundel_" + i, "flat_roundel_walls/tro_flatroundel_" + i);
-        }
-
 		ATGNetwork.init();
 		MinecraftForge.EVENT_BUS.register(proxy);
-		GameRegistry.registerTileEntity(TileEntityTardis.class, "tardis");
+		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID +":tardis");
 		proxy.init(event);
-		CapabilityManager.INSTANCE.register(iTardis.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
+		CapabilityManager.INSTANCE.register(ITardis.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
 	}
 
 	@EventHandler

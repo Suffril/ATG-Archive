@@ -17,15 +17,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CapabilityTileTardis implements iTardis
+public class CapabilityTileTardis implements ITardis
 {
-    @CapabilityInject(iTardis.class)
-    public static final Capability<iTardis> TARDIS = null;
+    @CapabilityInject(ITardis.class)
+    public static final Capability<ITardis> TARDIS = null;
 
     TileEntityTardis tardis;
 
     private int tardisID, modelID;
-    private String ownerUUID = "no one owns me yet :(";
+    private String ownerUUID = "No-one";
     private boolean doorOpen;
     BlockPos interiorPos;
 
@@ -92,8 +92,7 @@ public class CapabilityTileTardis implements iTardis
         compound.setInteger("tardisID", tardisID);
         compound.setString("ownerUUID", ownerUUID);
         compound.setInteger("modelID", modelID);
-        compound.setBoolean("doorOpen", doorOpen);
-        System.out.println(compound);
+        compound.setBoolean("doorOpen", doorOpen);;
         return compound;
     }
 
@@ -110,9 +109,9 @@ public class CapabilityTileTardis implements iTardis
     public static class CapabilityTardisProvider implements ICapabilitySerializable<NBTTagCompound>
     {
 
-        private iTardis capability;
+        private ITardis capability;
 
-        public CapabilityTardisProvider(iTardis capability)
+        public CapabilityTardisProvider(ITardis capability)
         {
             this.capability = capability;
         }
@@ -138,15 +137,15 @@ public class CapabilityTileTardis implements iTardis
         }
     }
 
-    public static class Storage implements Capability.IStorage<iTardis>
+    public static class Storage implements Capability.IStorage<ITardis>
     {
 
-        @Nullable @Override public NBTBase writeNBT(Capability<iTardis> capability, iTardis instance, EnumFacing side)
+        @Nullable @Override public NBTBase writeNBT(Capability<ITardis> capability, ITardis instance, EnumFacing side)
         {
             return instance.writeNBT();
         }
 
-        @Override public void readNBT(Capability<iTardis> capability, iTardis instance, EnumFacing side, NBTBase nbt)
+        @Override public void readNBT(Capability<ITardis> capability, ITardis instance, EnumFacing side, NBTBase nbt)
         {
             instance.readNBT((NBTTagCompound) nbt);
         }

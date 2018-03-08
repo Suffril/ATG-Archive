@@ -2,7 +2,7 @@ package com.lcm.doctorwho.client.models.interfaces;
 
 import net.minecraft.util.ResourceLocation;
 
-public interface iTardisModel {
+public interface ITardisModel {
     void renderRightDoor(float scale);
     void renderLeftDoor(float scale);
     void renderShell(float scale);

@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.networking.packets;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.iTardis;
+import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
 
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
@@ -59,8 +59,8 @@ public class MessageSyncTardis implements IMessage {
 
                 if(tile instanceof TileEntityTardis)
                 {
-                    iTardis capa = tile.getCapability(CapabilityTileTardis.TARDIS, null);
-                    iTardis new_capa = TardisUtils.tardisReadFromNBT(capa, message.nbt);
+                    ITardis capa = tile.getCapability(CapabilityTileTardis.TARDIS, null);
+                    ITardis new_capa = TardisUtils.tardisReadFromNBT(capa, message.nbt);
                     capa = new_capa;
                 }
                     });

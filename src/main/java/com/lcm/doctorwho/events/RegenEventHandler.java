@@ -125,7 +125,7 @@ public class RegenEventHandler { // NO_UCD (unused code)
 				time = time + StringHelper.translateToLocal("lcm-atg.messages.numsuffix.ext");
 			
 			if (handler.regenerationsLeft != -1) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.regenLeftExt", time, (handler.regenerationsLeft - 1))), true);
-			player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.REGENERATION, SoundCategory.PLAYERS, 1.0F, 1.0F);
+			player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.regeneration, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			ExplosionUtil.regenerationExplosion(player);
 			if (e.getSource() instanceof QuickRegenDamageSource) handler.regenTicks = 201;
 		}

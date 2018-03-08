@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.common.tiles;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.iTardis;
+import com.lcm.doctorwho.common.capabilities.ITardis;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;

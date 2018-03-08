@@ -1,8 +1,8 @@
 package com.lcm.doctorwho.client.render.tiles.tardis;
 
-import com.lcm.doctorwho.client.models.interfaces.iTardisModel;
+import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.iTardis;
+import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGClientProxy;
 import net.minecraft.client.Minecraft;
@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis> {
 
-    private iTardisModel MODEL = null;
+    private ITardisModel MODEL = null;
     private ResourceLocation TEXTURE = null;
 
     public RenderTileTardis() {
@@ -25,7 +25,7 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
     @Override
     public void render(TileEntityTardis tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 
-            iTardis capa = tile.getCapability(CapabilityTileTardis.TARDIS, null);
+            ITardis capa = tile.getCapability(CapabilityTileTardis.TARDIS, null);
            if(capa != null){
                MODEL = ATGClientProxy.TARDIS_MODELS.get(capa.getModelID());
                TEXTURE = MODEL.getTexture();
