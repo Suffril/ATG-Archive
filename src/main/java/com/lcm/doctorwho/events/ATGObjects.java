@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.RenderItemFobwatch;
+import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
@@ -13,6 +14,7 @@ import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
+import com.lcm.doctorwho.common.items.ItemHatOutline;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
@@ -67,7 +69,8 @@ public class ATGObjects {
 	public static class Items {
 		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
-		public static final Item chameleonArch = new ItemChameleonArch();
+        public static final Item chameleonArch = new ItemChameleonArch();
+        public static final Item fez = new ItemHatOutline("fez", new ModelFez());
 	}
 	
 	public static class Blocks {

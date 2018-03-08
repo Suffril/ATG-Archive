@@ -2,6 +2,7 @@ package com.lcm.doctorwho.events;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
+import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;

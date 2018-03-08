@@ -206,13 +206,12 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
         DoorLeft.setTextureSize(256, 256);
         DoorLeft.mirror = true;
         setRotation(DoorLeft, 0F, 0F, 0F);
-        DoorRight = new ModelRenderer(this, 19, 114);
+        DoorRight = new ModelRenderer(this, 84, 114);
         DoorRight.addBox(-7F, -15F, 0F, 7, 35, 1);
         DoorRight.setRotationPoint(7F, 0F, -8F);
         DoorRight.setTextureSize(256, 256);
         DoorRight.mirror = true;
         setRotation(DoorRight, 0F, 0F, 0F);
-        DoorRight.mirror = false;
         Void1 = new ModelRenderer(this, 38, 115);
         Void1.addBox(0F, -15F, 0F, 5, 35, 1);
         Void1.setRotationPoint(5F, 0F, 0F);
@@ -315,8 +314,8 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 
     @Override
     public void renderAll(float scale) {
-        renderLamp(scale);
 
+        renderLamp(scale);
         RenderHelper.enableStandardItemLighting();
         renderRightDoor(scale);
         renderLeftDoor(scale);

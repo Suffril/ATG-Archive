@@ -5,6 +5,8 @@ itemGroup.sonics=Sonics
 //Items
 item.sonic_eleventh_doc.name=Sonic Screwdriver | §aMark VII
 item.cane_first_doc.name=First Doctor cane
+item.fez.name=Fez
+
 
 //Blocks
 tile.cream_roundel.name=Cream Roundel 

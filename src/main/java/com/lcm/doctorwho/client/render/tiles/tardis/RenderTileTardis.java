@@ -5,6 +5,7 @@ import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGClientProxy;
+import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -41,7 +42,7 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
         GL11.glRotatef(180, 0.0F, 0.0F, 1.0F);
         MODEL.setDoorOpen(capa.isDoorOpen());
         MODEL.setLampOn(new Random().nextBoolean());
-        Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
+        ATGUtils.bindTexture(TEXTURE);
         MODEL.renderAll(0.0625f);
         GL11.glPopMatrix();
     }

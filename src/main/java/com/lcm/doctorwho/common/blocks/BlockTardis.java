@@ -45,7 +45,7 @@ public class BlockTardis extends BlockOutline {
         TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
         ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
         capa.setTardisID(700); //Need to figure out a way of assigning these
-        capa.setModelID(0);
+        capa.setModelID(2);
         capa.setOwner(placer.getUniqueID().toString());
     }
 
@@ -65,7 +65,7 @@ public class BlockTardis extends BlockOutline {
 
         if(playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
             System.out.println("DOOR OPENER:" + capa.getOwner());
-            capa.setModelID(1);
+            capa.setModelID(2);
             capa.setDoorOpen(!capa.isDoorOpen());
             ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
         }

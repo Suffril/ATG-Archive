@@ -2,6 +2,7 @@ package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -806,7 +807,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
     R3.mirror = true;
     setRotation(R3, 0F, 0F, 0F);
     R4 = new ModelRenderer(this, 0, 131);
-    R4.addBox(-9.5F, -23.7F, -9.5F, 19, 1, 19);
+    R4.addBox(-9.5F, -23.6F, -9.5F, 19, 1, 19);
     R4.setRotationPoint(0F, 0F, 0F);
     R4.setTextureSize(256, 256);
     R4.mirror = true;
@@ -1314,7 +1315,6 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
     public void renderLeftDoor(float scale) {
 
         GlStateManager.pushMatrix();
-
         if(isDoorOpen()) {
             GlStateManager.translate(-0.6F, 0.0F, 0.2F);
             GlStateManager.rotate(-40, 0.0F, 1.0F, 0.0F);
@@ -1324,7 +1324,6 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
         LD2.render(scale);
         LD3.render(scale);
         LD4.render(scale);
-        LD5.render(scale);
         LD6.render(scale);
         LD7.render(scale);
         LD8.render(scale);
@@ -1348,6 +1347,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
         W28.render(scale);
         W31.render(scale);
         W43.render(scale);
+        LD5.render(scale);
 
         GlStateManager.popMatrix();
     }
@@ -1510,11 +1510,11 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
             int brightX = bright % 65536;
             int brightY = bright / 65536;
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
         }
 
         L6.render(scale);
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
 
 
         GlStateManager.disableAlpha();
@@ -1535,15 +1535,18 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 
     @Override
     public void renderAll(float scale) {
+        GlStateManager.pushMatrix();
+        GlStateManager.scale(0.95F, 0.95F, 0.95F);
 
         renderLamp(scale);
-
         RenderHelper.enableStandardItemLighting();
         renderRightDoor(scale);
-        renderLeftDoor(scale);
         renderShell(scale);
         renderText(scale);
         other(scale);
+        renderLeftDoor(scale);
+
+        GlStateManager.popMatrix();
     }
 
     @Override
