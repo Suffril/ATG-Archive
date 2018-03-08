@@ -5,6 +5,7 @@ import java.awt.Color;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.utils.LimbManipulationUtil;
 
+import jdk.internal.util.xml.impl.Input;
 import lucraft.mods.lucraftcore.superpowers.Superpower;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
@@ -22,6 +23,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.MovementInput;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.InputUpdateEvent;
@@ -284,6 +286,23 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.LEFT_ARM).setAngles(0, 0, -75);
 			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.RIGHT_ARM).setAngles(0, 0, 75);
 			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.HEAD).setAngles(-20, 0, 0);
+		}
+	}
+
+	@SubscribeEvent
+	public static void keyInput(InputUpdateEvent e)
+	{
+		TimelordSuperpowerHandler sp = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(e.getEntityPlayer(), TimelordSuperpowerHandler.class);
+		if(sp != null && sp.regenTicks > 0 && sp.regenTicks <200)
+		{
+			MovementInput moveType = e.getMovementInput();
+			moveType.rightKeyDown = false;
+			moveType.leftKeyDown = false;
+			moveType.backKeyDown = false;
+			moveType.jump = false;
+			moveType.moveForward = 0.0F;
+			moveType.sneak = false;
+			moveType.moveStrafe = 0.0F;
 		}
 	}
 
