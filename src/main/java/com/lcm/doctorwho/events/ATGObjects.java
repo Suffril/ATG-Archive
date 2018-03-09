@@ -19,6 +19,7 @@ import com.lcm.doctorwho.common.items.ItemHatOutline;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
 import com.lcm.doctorwho.common.traits.negative.TraitDumb;
@@ -148,6 +149,7 @@ public class ATGObjects {
 	
 	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).egg(1,0).name("angel").tracker(80, 3, false).build();
+		public static final EntityEntry laser = EntityEntryBuilder.create().entity(EntityProjectile.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "laser"), 1).name("laser").tracker(80, 3, true).build();
 	}
 	
 	public static class SoundEvents {

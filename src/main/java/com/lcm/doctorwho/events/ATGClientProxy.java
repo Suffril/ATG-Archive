@@ -9,8 +9,10 @@ import com.lcm.doctorwho.client.models.tardis.exteriors.ModelMasqueTardis;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
+import com.lcm.doctorwho.client.render.entity.RenderEntityBaseProjectile;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
+import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
 import com.lcm.doctorwho.networking.ATGNetwork;
@@ -19,6 +21,7 @@ import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -45,7 +48,8 @@ public class ATGClientProxy extends ATGCommonProxy {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase<>(new ModelWeepingAngel(), "weeping_angel", 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase(new ModelWeepingAngel(), "weeping_angel", 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityProjectile.class, new RenderEntityBaseProjectile());
 	}
 
 	@Override
