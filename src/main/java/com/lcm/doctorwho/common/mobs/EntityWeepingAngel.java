@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.common.mobs;
 
+import com.lcm.doctorwho.utils.ATGConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -73,9 +74,7 @@ public class EntityWeepingAngel extends EntityMob implements IMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		
-		System.out.println(isSeen());
-		
+
 		if (!world.isRemote) if (isSeen()) {
 			setSeenTime(getSeenTime() + 1);
 			
@@ -95,12 +94,13 @@ public class EntityWeepingAngel extends EntityMob implements IMob {
 	@Override
 	protected void collideWithEntity(Entity entity) {
 		entity.applyEntityCollision(this);
-		WorldBorder border = entity.getEntityWorld().getWorldBorder();
-		int x = rand.nextInt(border.getSize());
-		int z = rand.nextInt(border.getSize());
-		int y = world.getSpawnPoint().getY();
-		System.out.println(x + " " + y + " " + " " + z);
-		entity.setPositionAndUpdate(x, y, z);
+		if(ATGConfig.angelTeleporting && this.rand.nextBoolean()) {
+			WorldBorder border = entity.getEntityWorld().getWorldBorder();
+			int x = rand.nextInt(border.getSize());
+			int z = rand.nextInt(border.getSize());
+			int y = world.getSpawnPoint().getY();
+			entity.setPositionAndUpdate(x, y, z);
+		}
 	}
 	
 	@Override

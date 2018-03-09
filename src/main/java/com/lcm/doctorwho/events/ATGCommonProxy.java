@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.events;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

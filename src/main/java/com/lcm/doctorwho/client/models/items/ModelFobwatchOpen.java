@@ -1,9 +1,11 @@
-package com.lcm.doctorwho.client.models;
+package com.lcm.doctorwho.client.models.items;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.util.vector.Vector3f;
 
 import lucraft.mods.lucraftcore.util.render.LCModelState;
@@ -170,12 +172,7 @@ public class ModelFobwatchOpen extends ModelBase implements ItemModelBase {
 	
 	@Override
 	public void renderModel(float scale) {
-		WatchFace.render(scale);
-		WatchFaceGold1.render(scale);
-		WatchFaceGold2.render(scale);
-		WatchFaceGold3.render(scale);
-		WatchFaceHand1.render(scale);
-		WatchFaceHand2.render(scale);
+		GlStateManager.pushMatrix();
 		WatchBaseTop.render(scale);
 		WatchBaseBottom.render(scale);
 		WatchBaseSide1.render(scale);
@@ -190,6 +187,14 @@ public class ModelFobwatchOpen extends ModelBase implements ItemModelBase {
 		WatchBackIndent1.render(scale);
 		WatchBackIndent2.render(scale);
 		WatchBackIndent3.render(scale);
+        WatchFaceHand1.render(scale);
+        WatchFaceHand2.render(scale);
+
+        WatchFace.render(scale);
+        WatchFaceGold1.render(scale);
+        WatchFaceGold2.render(scale);
+        WatchFaceGold3.render(scale);
+        GlStateManager.popMatrix();
 	}
 	
 	@Override

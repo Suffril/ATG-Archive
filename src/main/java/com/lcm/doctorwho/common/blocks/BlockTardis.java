@@ -5,8 +5,11 @@ import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
+import com.lcm.doctorwho.utils.ATGConfig;
+import com.lcm.doctorwho.utils.ATGTeleporter;
 import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.TardisUtils;
+import lucraft.mods.lucraftcore.util.helper.CustomTeleporter;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -61,8 +64,8 @@ public class BlockTardis extends BlockOutline {
         ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
         if(playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
             capa.setDoorOpen(!capa.isDoorOpen());
-            NBTTagCompound whygod = tardis.writeToNBT(TardisUtils.tardisWriteToNBT(capa));
-            tardis.readFromNBT(whygod);
+            NBTTagCompound tardisNBT = tardis.writeToNBT(TardisUtils.tardisWriteToNBT(capa));
+            tardis.readFromNBT(tardisNBT);
             tardis.markDirty();
             ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
         }

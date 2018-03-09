@@ -1,7 +1,6 @@
 package com.lcm.doctorwho.common.items;
 
-import com.lcm.doctorwho.utils.ATGTabs;
-import net.minecraft.client.model.ModelBase;
+import com.lcm.doctorwho.events.ATGClientProxy;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,19 +19,22 @@ import javax.annotation.Nullable;
 
 public class ItemHatOutline extends ItemArmor {
 
-    ModelBiped model;
-
-    public ItemHatOutline(String name, ModelBiped model) {
+    public ItemHatOutline(String name) {
         super(ArmorMaterial.LEATHER, 0, EntityEquipmentSlot.HEAD);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
-        this.model = model;
+    }
+
+    public ItemHatOutline(String name, ArmorMaterial mat) {
+        super(mat, 0, EntityEquipmentSlot.HEAD);
+        this.setUnlocalizedName(name);
+        this.setRegistryName(name);
     }
 
     @SideOnly(Side.CLIENT)
     public ModelBiped getModel()
     {
-        return model;
+        return ATGClientProxy.CLOTHING.get(this);
     }
 
     /**

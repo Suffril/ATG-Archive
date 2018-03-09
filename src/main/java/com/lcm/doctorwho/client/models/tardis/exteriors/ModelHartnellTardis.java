@@ -1574,6 +1574,11 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
         return TEX;
     }
 
+    @Override
+    public String getExteriorName() {
+        return "Hartnell";
+    }
+
     private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;

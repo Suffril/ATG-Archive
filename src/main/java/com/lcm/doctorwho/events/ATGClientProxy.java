@@ -1,5 +1,7 @@
 package com.lcm.doctorwho.events;
 
+import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
+import com.lcm.doctorwho.client.models.clothing.canon.ModelFirstDocHat;
 import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelHartnellTardis;
@@ -16,14 +18,19 @@ import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,15 +39,21 @@ import java.util.Map;
 public class ATGClientProxy extends ATGCommonProxy {
 
 	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
+	public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
 
     private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
 
 	@Override
 	public void init(FMLInitializationEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase<>(new ModelWeepingAngel(), "weeping_angel", 1.0F));
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
-        setupTardisModels();
 	}
+
+	@Override
+    public void postInit(FMLPostInitializationEvent ev) {
+        setupTardisModels();
+        setupClothingModels();
+        setupTileRendering();
+    }
 	
 	@SubscribeEvent
 	public void renderAngels(RenderLivingEvent.Post<EntityWeepingAngel> e) {
@@ -59,8 +72,8 @@ public class ATGClientProxy extends ATGCommonProxy {
         }
     }
 
-
-        private static void setupTardisModels()
+    @SideOnly(Side.CLIENT)
+    private static void setupTardisModels()
 	{
 	    TARDIS_MODELS.clear();
 		TARDIS_MODELS.put(0, new ModelTTCapsuleHellbent());
@@ -68,5 +81,19 @@ public class ATGClientProxy extends ATGCommonProxy {
 		TARDIS_MODELS.put(2, new ModelPertweeTARDIS());
 		TARDIS_MODELS.put(3, new ModelMasqueTardis());
 	}
+
+	@SideOnly(Side.CLIENT)
+	private static void setupClothingModels()
+	{
+		CLOTHING.clear();
+		CLOTHING.put(ATGObjects.Items.fez, new ModelFez());
+		CLOTHING.put(ATGObjects.Items.firstDocHat, new ModelFirstDocHat());
+	}
+
+    @SideOnly(Side.CLIENT)
+    private static void setupTileRendering()
+    {
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
+    }
 
 }

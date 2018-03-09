@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.models;
+package com.lcm.doctorwho.client.models.items;
 
 import java.util.HashMap;
 import java.util.Map;

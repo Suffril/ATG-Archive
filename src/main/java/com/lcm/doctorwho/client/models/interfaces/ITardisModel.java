@@ -15,4 +15,5 @@ public interface ITardisModel {
     void setLampOn(boolean on);
     void setDoorOpen(boolean open);
     ResourceLocation getTexture();
+    String getExteriorName();
 }
