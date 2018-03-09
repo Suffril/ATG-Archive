@@ -71,8 +71,8 @@ public class ATGObjects {
 		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
         public static final Item chameleonArch = new ItemChameleonArch();
-		public static final Item fez = new ItemHatOutline("fez", new ModelFez()).setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);;
-		public static final Item firstDocHat = new ItemHatOutline("firstDocHat", new ModelFirstDocHat()).setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);;
+		public static final Item fez = new ItemHatOutline("fez");//.setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
+		public static final Item firstDocHat = new ItemHatOutline("firstDocHat");//.setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
 
 	}
 	

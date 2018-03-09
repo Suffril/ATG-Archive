@@ -348,6 +348,12 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
     public ResourceLocation getTexture() {
         return TEX;
     }
+
+    @Override
+    public String getExteriorName() {
+        return "TT Capture - Hellbent";
+    }
+
     private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;

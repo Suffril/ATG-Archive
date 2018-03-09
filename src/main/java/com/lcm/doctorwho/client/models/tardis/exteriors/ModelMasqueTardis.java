@@ -1539,6 +1539,11 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
         return TEX;
     }
 
+    @Override
+    public String getExteriorName() {
+        return "Masque";
+    }
+
     private void setRotation(ModelRenderer model, float x, float y, float z)
     {
         model.rotateAngleX = x;
