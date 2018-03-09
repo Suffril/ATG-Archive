@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.RenderItemFobwatch;
+import com.lcm.doctorwho.client.models.clothing.canon.ModelFirstDocHat;
+import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
@@ -37,13 +38,12 @@ import com.lcm.doctorwho.common.traits.positive.TraitStrong;
 import com.lcm.doctorwho.common.traits.positive.TraitSturdy;
 import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
 import com.lcm.doctorwho.common.traits.positive.TraitTough;
-import com.lcm.doctorwho.utils.ATGTabs;
+import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -71,7 +71,9 @@ public class ATGObjects {
 		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
         public static final Item chameleonArch = new ItemChameleonArch();
-        public static final Item fez = new ItemHatOutline("fez", new ModelFez()).setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);;
+		public static final Item fez = new ItemHatOutline("fez", new ModelFez()).setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);;
+		public static final Item firstDocHat = new ItemHatOutline("firstDocHat", new ModelFirstDocHat()).setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);;
+
 	}
 	
 	public static class Blocks {

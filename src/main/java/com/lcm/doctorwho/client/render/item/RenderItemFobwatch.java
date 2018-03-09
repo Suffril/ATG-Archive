@@ -1,10 +1,12 @@
-package com.lcm.doctorwho.client.models;
+package com.lcm.doctorwho.client.render.item;
 
 import java.util.List;
 
 import javax.vecmath.Matrix4f;
 
 import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
+import com.lcm.doctorwho.client.models.items.ModelFobwatchClosed;
+import com.lcm.doctorwho.client.models.items.ModelFobwatchOpen;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;

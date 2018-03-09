@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.utils;
+package com.lcm.doctorwho.common;
 
 import com.lcm.doctorwho.events.ATGObjects;
 

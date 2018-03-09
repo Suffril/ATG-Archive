@@ -1,7 +1,5 @@
 package com.lcm.doctorwho.common.items;
 
-import com.lcm.doctorwho.utils.ATGTabs;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,6 +22,13 @@ public class ItemHatOutline extends ItemArmor {
 
     public ItemHatOutline(String name, ModelBiped model) {
         super(ArmorMaterial.LEATHER, 0, EntityEquipmentSlot.HEAD);
+        this.setUnlocalizedName(name);
+        this.setRegistryName(name);
+        this.model = model;
+    }
+
+    public ItemHatOutline(String name, ModelBiped model, ArmorMaterial mat) {
+        super(mat, 0, EntityEquipmentSlot.HEAD);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.model = model;
