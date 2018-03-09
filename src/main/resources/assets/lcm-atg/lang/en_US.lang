@@ -5,6 +5,8 @@ itemGroup.sonics=Sonics
 //Items
 item.sonic_eleventh_doc.name=Sonic Screwdriver | §aMark VII
 item.cane_first_doc.name=First Doctor cane
+item.fez.name=Fez
+
 
 //Blocks
 tile.cream_roundel.name=Cream Roundel 
@@ -14,6 +16,23 @@ tile.white_roundel_alt.name=White Roundel (Alt)
 tile.pink_roundel.name=Pink Roundel
 tile.coral_wall.name=Coral Wall
 tile.coral_roundel.name=Coral Roundel
+tile.tardis.name=TARDIS
+tile.tro_fault_1.name=War Games Fault Locator 1
+tile.tro_fault_2.name=War Games Fault Locator 2
+tile.tro_fault_3.name=War Games Fault Locator 3
+tile.tro_fault_4.name=War Games Fault Locator 4
+tile.tro_fault_5.name=War Games Fault Locator 5
+tile.tro_fault_6.name=War Games Fault Locator 6
+tile.tro_fault_7.name=War Games Fault Locator 7
+tile.tro_fault_8.name=War Games Fault Locator 8
+tile.tro_flatroundel_1.name=Flat Roundel 1
+tile.tro_flatroundel_2.name=Flat Roundel 2
+tile.tro_flatroundel_3.name=Flat Roundel 3
+tile.tro_flatroundel_4.name=Flat Roundel 4
+tile.tro_flatroundel_5.name=Flat Roundel 5
+tile.tro_roundel_1.name=War Games Roundel 1
+tile.tro_roundel_2.name=War Games Roundel 2
+tile.tro_roundel_3.name=War Games Roundel 3
 
 //Super-powers
 superpower.timelord.name=Timelord
@@ -83,7 +102,7 @@ lcm-atg.messages.numsuffix.0=st
 lcm-atg.messages.numsuffix.1=nd
 lcm-atg.messages.numsuffix.2=rd
 lcm-atg.messages.numsuffix.ext=th
-lcm-atg.messages.newLife=You've got a new life, with new traits: %s.
+//lcm-atg.messages.newLife=You've got a new life, with new traits: %s.
 lcm-atg.messages.transfer=You've transferred one of your regenerations into the arch
 lcm-atg.messages.transfer.fullArch=You can't store anymore regenerations in this arch
 lcm-atg.messages.transfer.emptyArch=This arch is empty!

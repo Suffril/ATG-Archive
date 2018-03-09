@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "lcm-atg:blocks/roundel_walls/tro_roundel_1"
+  }
+}

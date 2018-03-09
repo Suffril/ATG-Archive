@@ -9,7 +9,16 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.0"
+def getGitHash = { ->
+	def stdout = new ByteArrayOutputStream()
+	exec {
+		commandLine 'git', 'rev-parse', '--short', 'HEAD'
+		standardOutput = stdout
+	}
+	return stdout.toString().trim()
+}
+
+version = "1.0"+"-SNAPSHOT_"+getGitHash()
 group = "com.lcm.doctorwho"
 archivesBaseName = "lcm-doctorwho"
 
@@ -17,7 +26,7 @@ sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse t
 
 
 minecraft {
-	version = "1.12.2-14.23.2.2618"
+	version = "1.12.2-14.23.2.2624"
 	runDir = "run"
 	mappings = "snapshot_20171003"
 	makeObfSourceJar = false

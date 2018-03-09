@@ -3,6 +3,7 @@ package com.lcm.doctorwho.common.traits.positive;
 import java.util.List;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import lucraft.mods.lucraftcore.superpowers.abilities.AbilityConstant;

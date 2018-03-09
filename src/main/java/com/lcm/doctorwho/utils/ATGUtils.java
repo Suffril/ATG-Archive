@@ -1,18 +1,22 @@
 package com.lcm.doctorwho.utils;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.ItemModelBase;
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +34,7 @@ public class ATGUtils {
 	/**
 	 * Checks whether we are on a client or not
 	 */
-	public static boolean isClient() {
+	public static boolean isPhysicalClient() {
 		return FMLCommonHandler.instance().getSide().isClient();
 	}
 	
@@ -40,22 +44,42 @@ public class ATGUtils {
 	public static void setWalkSpeed(EntityPlayerMP p, float speed) {
 		ReflectionHelper.setPrivateValue(PlayerCapabilities.class, p.capabilities, speed, 6);
 	}
-	
+
+    /**
+     * Send a message to the player
+     */
+    public static void sendPlayerMessage(EntityPlayer p, String message)
+    {
+        if(!p.world.isRemote) {
+            p.sendMessage(new TextComponentString(message));
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+	public static void bindTexture(ResourceLocation resource) {
+        Minecraft.getMinecraft().renderEngine.bindTexture(resource);
+	}
+
 	/**
 	 * Stops a mob in it's tracks, FULLY.
 	 */
 	@Deprecated
 	public static void freezeMob(Entity entity, boolean considerYlevel) {
 		entity.motionX = 0;
-		if (considerYlevel & entity.onGround) entity.motionY = 0;
+		if (considerYlevel && entity.onGround) entity.motionY = 0;
 		entity.motionZ = 0;
 	}
-	
+
+	public static boolean isOnGround(Entity entity)
+    {
+        return entity.onGround;
+    }
+
 	/**
 	 * Rendering a enchanted effect onto modelled items
 	 */
 	@SideOnly(Side.CLIENT)
-    public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) {
+	public static void renderEnchantedGlint(EntityLivingBase entity, ItemModelBase model, ResourceLocation loc, float scale) {
 		float f = entity.ticksExisted + LCRenderHelper.renderTick;
 		Minecraft.getMinecraft().renderEngine.bindTexture(loc);
 		GlStateManager.enableBlend();
@@ -84,12 +108,12 @@ public class ATGUtils {
 		GlStateManager.depthFunc(515);
 		GlStateManager.disableBlend();
 	}
-
-	public static class ATGSoundEvent extends SoundEvent { // TODO in both
+	
+	public static class ATGSoundEvent extends SoundEvent {
 		public ATGSoundEvent(String name) {
 			super(new ResourceLocation(AcrossTheGalaxy.MODID, name));
 			setRegistryName(AcrossTheGalaxy.MODID, name);
 		}
 	}
-
+	
 }

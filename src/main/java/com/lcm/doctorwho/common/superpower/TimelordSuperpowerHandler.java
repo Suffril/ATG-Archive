@@ -3,20 +3,18 @@ package com.lcm.doctorwho.common.superpower;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import com.lcm.doctorwho.common.traits.negative.INegativeTrait;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
-import com.lcm.doctorwho.common.traits.negative.INegativeTrait;
 
 import lucraft.mods.lucraftcore.LCConfig;
 import lucraft.mods.lucraftcore.karma.KarmaHandler;
 import lucraft.mods.lucraftcore.karma.KarmaStat;
 import lucraft.mods.lucraftcore.superpowers.Superpower;
-import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
 import lucraft.mods.lucraftcore.superpowers.capabilities.ISuperpowerCapability;
-import lucraft.mods.lucraftcore.util.helper.StringHelper;
 import net.minecraft.block.BlockFire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +23,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -46,26 +43,29 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		EntityPlayer player = cap.getPlayer();
 		
 		if (!player.world.isRemote) {
+
 			// Server Behavior
 			if (regenTicks > 0 && regenTicks < 200) { // regenerating
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0f); // FIXME broken
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.0f); //FIXME broken, sometimes
+				
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
 					double x = player.posX + player.getRNG().nextGaussian() * 2;
 					double y = player.posY + 0.5 + player.getRNG().nextGaussian() * 2;
 					double z = player.posZ + player.getRNG().nextGaussian() * 2;
 					
-					player.world.newExplosion(player, x, y, z, 1, true, false);
+					player.world.newExplosion(player, x, y, z, 1, ATGConfig.fieryRegen, false);
 					for (BlockPos bs : BlockPos.getAllInBox(player.getPosition().north().west(), player.getPosition().south().east()))
 						if (player.world.getBlockState(bs).getBlock() instanceof BlockFire) player.world.setBlockToAir(bs);
 				}
 			} else if (regenTicks >= 200) { // end regeneration
 				player.setHealth(player.getMaxHealth());
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, ATGConfig.postRegenerationDuration, ATGConfig.postRegenerationLevel, false, false)); // 180 seconds of 20 ticks of Regeneration 4
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F); // FIXME broken
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.1F);
+				
 				regenerating = false;
 				regenTicks = 0;
 				if (regenerationsLeft != -1) regenerationsLeft--;
@@ -75,14 +75,12 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 			} else if (regenTicks == 0 && regenerating) regenTicks = 1; // initiate regeneration
 		} else {
 			// Client Behavior
-			
 			if (regenTicks == 0 && regenerating) // initiate regeneration
 				regenTicks = 1;
 			
 			if (regenTicks > 0) { // regenerating
 				if (Minecraft.getMinecraft().player.getUniqueID() == player.getUniqueID()) Minecraft.getMinecraft().gameSettings.thirdPersonView = 2;
 				regenTicks++;
-				
 			}
 			
 			if (regenTicks >= 200 && !regenerating) { // end regeneration
@@ -98,7 +96,6 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		TimelordSuperpower.INSTANCE.addDefaultAbilities(this.getPlayer(), this.getAbilities());
 		TimelordSuperpowerHandler.randomizeTraits(this);
 		this.regenerationsLeft = 0;
-		SuperpowerHandler.syncToAll(this.getPlayer());
 	}
 	
 	private static void randomizeTraits(SuperpowerPlayerHandler handler) {
@@ -128,7 +125,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				s = ability.getDisplayName().substring(7);
 			else
 				s = s + ", " + ability.getDisplayName().substring(7);
-		handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
+		//handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
 	}
 	
 	protected static boolean isAbilityUnlocked(SuperpowerPlayerHandler handler, Class<? extends Ability> ability) {

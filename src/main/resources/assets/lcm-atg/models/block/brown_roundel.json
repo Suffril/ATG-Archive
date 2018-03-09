@@ -1,7 +1,7 @@
 {
 	"__comment": "Created by CommandrMoose with Cubik Studio. Any attempts to claim this modl as your own will have conciquences",
 	"textures": {
-		"particle": "blocks/e_particle",
+
 		"texture": "lcm-atg:blocks/brown_roundel"
 	},
 	"elements": [

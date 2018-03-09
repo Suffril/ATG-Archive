@@ -1,6 +1,6 @@
 package com.lcm.doctorwho.utils;
 
-import com.lcm.doctorwho.common.events.ATGObjects;
+import com.lcm.doctorwho.events.ATGObjects;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 public class ATGTabs {
 	public static CreativeTabs TABS_BLOCKS_TARDIS = new TabBase("tardis", Item.getItemFromBlock(ATGObjects.Blocks.creamRoundel));
 	public static CreativeTabs TABS_ITEMS_SONICS = new TabBase("sonics", Items.CAKE);
+	public static CreativeTabs TABS_ITEMS_CLOTHING = new TabBase("clothing", ATGObjects.Items.fez);
 	
 	private static class TabBase extends CreativeTabs {
 		

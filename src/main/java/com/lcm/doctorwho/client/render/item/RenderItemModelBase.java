@@ -6,7 +6,7 @@ import javax.vecmath.Matrix4f;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.lcm.doctorwho.client.models.ItemModelBase;
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.util.render.IItemRenderer;
