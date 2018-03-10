@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.mobs;
+package com.lcm.doctorwho.common.mobs.hostile;
 
 import com.lcm.doctorwho.utils.ATGConfig;
 import net.minecraft.entity.Entity;

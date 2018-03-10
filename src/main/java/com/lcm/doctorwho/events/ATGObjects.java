@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.clothing.canon.ModelFirstDocHat;
 import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
-import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
@@ -15,10 +13,10 @@ import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
-import com.lcm.doctorwho.common.items.ItemHatOutline;
+import com.lcm.doctorwho.common.items.ItemClothingOutline;
 import com.lcm.doctorwho.common.items.ItemOutline;
 import com.lcm.doctorwho.common.items.ItemSonic;
-import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
@@ -46,7 +44,9 @@ import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -69,12 +69,12 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 @Mod.EventBusSubscriber
 public class ATGObjects {
 	public static class Items {
-		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
-		public static final Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
-        public static final Item chameleonArch = new ItemChameleonArch();
-		public static final Item fez = new ItemHatOutline("fez");//.setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
-		public static final Item firstDocHat = new ItemHatOutline("firstDocHat");//.setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
-
+		public static Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+		public static Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+        public static Item chameleonArch = new ItemChameleonArch();
+		public static Item fez = new ItemClothingOutline("fez", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);//.setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
+		public static Item firstDocHat = new ItemClothingOutline("firstDocHat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);//.setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
+		public static Item thirtenthDocCoat = new ItemClothingOutline("thirtenthDocCoat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.CHEST);
 	}
 	
 	public static class Blocks {

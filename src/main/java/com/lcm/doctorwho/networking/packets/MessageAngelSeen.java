@@ -1,6 +1,6 @@
 package com.lcm.doctorwho.networking.packets;
 
-import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -32,20 +32,14 @@ public class MessageAngelSeen implements IMessage {
 		
 		@Override
 		public IMessage onMessage(MessageAngelSeen message, MessageContext ctx) {
-
-
 			EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
-			
 			serverPlayer.getServerWorld().addScheduledTask(() -> {
-				
 				Entity entity = serverPlayer.world.getEntityByID(message.angelID);
-				
 				if(entity instanceof EntityWeepingAngel)
 				{
 					EntityWeepingAngel angel = (EntityWeepingAngel) entity;
 					angel.setSeen(true);
 				}
-				
 			});
 			return null;
 		}

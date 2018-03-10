@@ -17,16 +17,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class ItemHatOutline extends ItemArmor {
+public class ItemClothingOutline extends ItemArmor {
 
-    public ItemHatOutline(String name) {
+    public ItemClothingOutline(String name) {
         super(ArmorMaterial.LEATHER, 0, EntityEquipmentSlot.HEAD);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
     }
 
-    public ItemHatOutline(String name, ArmorMaterial mat) {
-        super(mat, 0, EntityEquipmentSlot.HEAD);
+    public ItemClothingOutline(String name, ArmorMaterial mat, EntityEquipmentSlot slot) {
+        super(mat, 0, slot);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
     }

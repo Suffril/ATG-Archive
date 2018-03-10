@@ -70,11 +70,6 @@ public class ATGUtils {
 		entity.motionZ = 0;
 	}
 
-	public static boolean isOnGround(Entity entity)
-    {
-        return entity.onGround;
-    }
-
 	/**
 	 * Rendering a enchanted effect onto modelled items
 	 */

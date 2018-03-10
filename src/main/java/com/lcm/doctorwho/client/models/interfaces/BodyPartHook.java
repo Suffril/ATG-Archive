@@ -5,27 +5,27 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.opengl.GL11;
 
-public class ModelHatHook extends ModelRenderer {
+public class BodyPartHook extends ModelRenderer {
 
-    public IRender render;
+    public IPartRenderer render;
 
-    public ModelHatHook(ModelBase model, String boxName) {
+    public BodyPartHook(ModelBase model, String boxName) {
         super(model, boxName);
     }
 
-    public ModelHatHook(ModelBase model, int texOffX, int texOffY) {
+    public BodyPartHook(ModelBase model, int texOffX, int texOffY) {
         super(model, texOffX, texOffY);
     }
 
-    public ModelHatHook(ModelBase model) {
+    public BodyPartHook(ModelBase model) {
         super(model);
     }
 
-    public void setRender(IRender render) {
+    public void setRender(IPartRenderer render) {
         this.render = render;
     }
 
-    public IRender getRender() {
+    public IPartRenderer getRender() {
         return render;
     }
 
@@ -83,7 +83,7 @@ public class ModelHatHook extends ModelRenderer {
         }
     }
 
-    public interface IRender{
+    public interface IPartRenderer{
         void render(float f);
     }
 

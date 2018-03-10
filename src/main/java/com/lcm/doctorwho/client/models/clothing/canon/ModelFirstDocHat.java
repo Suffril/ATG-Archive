@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.client.models.clothing.canon;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.interfaces.ModelHatHook;
+import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -78,11 +78,11 @@ public class ModelFirstDocHat extends ModelBiped
 
         this.bipedHeadwear.isHidden = true;
 
-        this.bipedHead = new ModelHatHook(this, 0, 0);
+        this.bipedHead = new BodyPartHook(this, 0, 0);
         this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0);
         this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
 
-        ((ModelHatHook)this.bipedHead).setRender(new ModelHatHook.IRender() {
+        ((BodyPartHook)this.bipedHead).setRender(new BodyPartHook.IPartRenderer() {
             @Override
             public void render(float scale) {
                 GlStateManager.pushMatrix();

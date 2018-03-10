@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.events;
 
+import com.lcm.doctorwho.client.models.clothing.canon.Model13thCoatSteve;
 import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
 import com.lcm.doctorwho.client.models.clothing.canon.ModelFirstDocHat;
 import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
@@ -10,18 +11,15 @@ import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBaseProjectile;
-import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
+import com.lcm.doctorwho.client.render.entity.layers.RenderLayerClothing;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
-import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 
-import com.lcm.doctorwho.utils.ATGUtils;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -72,7 +70,7 @@ public class ATGClientProxy extends ATGCommonProxy {
     public void onRenderPlayerPost(RenderPlayerEvent.Post e) {
         if (!layersAddedTo.contains(e.getEntityPlayer())) {
             layersAddedTo.add(e.getEntityPlayer());
-            e.getRenderer().addLayer(new RenderLayerHat());
+            e.getRenderer().addLayer(new RenderLayerClothing());
         }
     }
 
@@ -92,6 +90,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 		CLOTHING.clear();
 		CLOTHING.put(ATGObjects.Items.fez, new ModelFez());
 		CLOTHING.put(ATGObjects.Items.firstDocHat, new ModelFirstDocHat());
+		CLOTHING.put(ATGObjects.Items.thirtenthDocCoat, new Model13thCoatSteve());
 	}
 
     @SideOnly(Side.CLIENT)
