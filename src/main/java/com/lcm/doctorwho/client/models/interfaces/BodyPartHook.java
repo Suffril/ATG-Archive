@@ -84,7 +84,7 @@ public class BodyPartHook extends ModelRenderer {
     }
 
     public interface IPartRenderer{
-        void render(float f);
+        void render(float scale);
     }
 
 

@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.models.clothing.canon;
+package com.lcm.doctorwho.client.models.clothing.canon.hats;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
@@ -10,6 +10,11 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModelFez extends ModelBiped
 {
+    /**
+     * Model Fez
+     * @Author - Lucy
+     * @Date - 02/25/2018
+     */
 
     private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/fez.png");
 

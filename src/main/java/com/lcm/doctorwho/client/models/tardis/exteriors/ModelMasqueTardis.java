@@ -1261,8 +1261,8 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
         GlStateManager.pushMatrix();
 
         if(isDoorOpen()) {
-            GlStateManager.translate(0.6F, 0.0F, 0.2F);
-            GlStateManager.rotate(40, 0.0F, 1.0F, 0.0F);
+            GlStateManager.translate(0.8F, 0.0F, 0.2F);
+            GlStateManager.rotate(50, 0.0F, 1.0F, 0.0F);
         }
 
 
@@ -1291,8 +1291,8 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 
         GlStateManager.pushMatrix();
         if(isDoorOpen()) {
-            GlStateManager.translate(-0.6F, 0.0F, 0.2F);
-            GlStateManager.rotate(-40, 0.0F, 1.0F, 0.0F);
+            GlStateManager.translate(-0.8F, 0.0F, 0.2F);
+            GlStateManager.rotate(-50, 0.0F, 1.0F, 0.0F);
         }
 
         LDW1.render(scale);

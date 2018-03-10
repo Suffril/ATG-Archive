@@ -8,7 +8,8 @@ import net.minecraft.entity.Entity;
 
 public class ModelProjectile extends ModelBase
 {
-    //fields
+
+
     ModelRenderer GOD;
     ModelRenderer WEEN;
     ModelRenderer SATAN;

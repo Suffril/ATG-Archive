@@ -1,18 +1,21 @@
 package com.lcm.doctorwho.events;
 
-import com.lcm.doctorwho.client.models.clothing.canon.Model13thCoatSteve;
-import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
-import com.lcm.doctorwho.client.models.clothing.canon.ModelFirstDocHat;
-import com.lcm.doctorwho.client.models.entity.ModelWeepingAngel;
+import com.lcm.doctorwho.client.models.clothing.canon.body.Model13thCoatSteve;
+import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFez;
+import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFirstDocHat;
+import com.lcm.doctorwho.client.models.entity.angels.ModelWeepingAngel;
+import com.lcm.doctorwho.client.models.entity.hostile.cybermen.ModelCyberTenthPlanet;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelHartnellTardis;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelMasqueTardis;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
+import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBaseProjectile;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerClothing;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
+import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
@@ -46,8 +49,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase(new ModelWeepingAngel(), "weeping_angel", 1.0F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityProjectile.class, new RenderEntityBaseProjectile());
+		RenderMobsInit.init();
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.models.clothing.canon;
+package com.lcm.doctorwho.client.models.clothing.canon.hats;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
@@ -11,6 +11,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModelFirstDocHat extends ModelBiped
 {
+
+    /**
+     * Model First Doctor hats
+     * @Author - Lucy
+     * @Date - 02/19/2018
+     */
+
     private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/first_doc_hat.png");
 
     ModelRenderer Base;

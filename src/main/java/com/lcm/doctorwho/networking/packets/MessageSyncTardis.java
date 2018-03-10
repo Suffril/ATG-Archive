@@ -44,9 +44,6 @@ public class MessageSyncTardis implements IMessage {
 
         @Override
         public IMessage onMessage(MessageSyncTardis message, MessageContext ctx) {
-
-            System.out.println(message.nbt);
-
             EntityPlayerSP player = Minecraft.getMinecraft().player;
 
             Minecraft.getMinecraft().addScheduledTask(() -> {
@@ -55,8 +52,7 @@ public class MessageSyncTardis implements IMessage {
                 if(tile instanceof TileEntityTardis)
                 {
                     ITardis capa = tile.getCapability(CapabilityTileTardis.TARDIS, null);
-                    ITardis new_capa = TardisUtils.tardisReadFromNBT(capa, message.nbt);
-                    capa = new_capa;
+                    capa =  TardisUtils.tardisReadFromNBT(capa, message.nbt);
                 }
                     });
 

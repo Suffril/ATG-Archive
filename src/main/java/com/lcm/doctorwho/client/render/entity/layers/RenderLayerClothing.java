@@ -14,8 +14,8 @@ public class RenderLayerClothing implements LayerRenderer<EntityLivingBase> {
 
             if(!item.isEmpty() && item.getItem() instanceof ItemClothingOutline)
             {
-                ItemClothingOutline hat = (ItemClothingOutline)item.getItem();
-                hat.getModel().render(entity, limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scale);
+                ItemClothingOutline clothing = (ItemClothingOutline)item.getItem();
+                clothing.getModel().render(entity, limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scale);
             }
     }
 
