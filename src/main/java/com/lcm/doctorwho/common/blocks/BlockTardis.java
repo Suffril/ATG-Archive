@@ -4,21 +4,22 @@ import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
+import com.lcm.doctorwho.networking.packets.MessageChunkData;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGTeleporter;
 import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.TardisUtils;
-import lucraft.mods.lucraftcore.util.helper.CustomTeleporter;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityShulkerBox;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -49,11 +50,18 @@ public class BlockTardis extends BlockOutline {
         ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
         capa.setTardisID(700); //Need to figure out a way of assigning these
         capa.setOwner(placer.getUniqueID().toString());
+        if(!worldIn.isRemote){
+            World tardisWorld = worldIn.getMinecraftServer().getWorld(ATGConfig.tardisDIM);
+            tardisWorld.setBlockState(new BlockPos(0, 0, 0), Blocks.COBBLESTONE.getDefaultState());
+            ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(tardisWorld.getChunkProvider().provideChunk(0, 0), 65535, ATGConfig.tardisDIM));
+            ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(tardisWorld.getChunkProvider().provideChunk(0, 1), 65535, ATGConfig.tardisDIM));
+            ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(tardisWorld.getChunkProvider().provideChunk(1, 0), 65535, ATGConfig.tardisDIM));
+            ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(tardisWorld.getChunkProvider().provideChunk(-1, -1), 65535, ATGConfig.tardisDIM));
+            ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(tardisWorld.getChunkProvider().provideChunk(0, -1), 65535, ATGConfig.tardisDIM));
+            ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(tardisWorld.getChunkProvider().provideChunk(-1, 0), 65535, ATGConfig.tardisDIM));
+
+        }
     }
-
-
-
-
 
     /**
      * Called when the block is right clicked by a player.
@@ -68,6 +76,9 @@ public class BlockTardis extends BlockOutline {
             tardis.readFromNBT(tardisNBT);
             tardis.markDirty();
             ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
+
+            if(!worldIn.isRemote && playerIn.isSneaking())
+            ATGTeleporter.teleportToDimension(playerIn, ATGConfig.tardisDIM, 0, 1, 0);
         }
         else
             {
@@ -75,6 +86,13 @@ public class BlockTardis extends BlockOutline {
             }
 
         return true;
+    }
+
+    @Override public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        if(entityIn instanceof EntityPlayer)
+        {
+            ATGTeleporter.teleportToDimension((EntityPlayer) entityIn, ATGConfig.tardisDIM, 0, 1, 0);
+        }
     }
         /**
          * Called throughout the code as a replacement for block instanceof

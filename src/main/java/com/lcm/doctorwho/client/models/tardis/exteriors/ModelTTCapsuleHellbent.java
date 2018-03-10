@@ -239,8 +239,8 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
         GlStateManager.pushMatrix();
 
         if(isDoorOpen()) {
-            GlStateManager.translate(0.4F, 0.0F, 0.1F);
-            GlStateManager.rotate(40, 0.0F, 1.0F, 0.0F);
+            GlStateManager.translate(0.5F, 0.0F, 0.1F);
+            GlStateManager.rotate(50, 0.0F, 1.0F, 0.0F);
         }
         DoorRight.render(scale);
         GlStateManager.popMatrix();
@@ -251,8 +251,8 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
         GlStateManager.pushMatrix();
 
         if(isDoorOpen()) {
-            GlStateManager.translate(-0.4F, 0.0F, 0.1F);
-            GlStateManager.rotate(-40, 0.0F, 1.0F, 0.0F);
+            GlStateManager.translate(-0.5F, 0.0F, 0.1F);
+            GlStateManager.rotate(-50, 0.0F, 1.0F, 0.0F);
         }
         DoorLeft.render(scale);
         GlStateManager.popMatrix();

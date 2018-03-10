@@ -1,9 +1,5 @@
 package com.lcm.doctorwho.events;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.clothing.canon.ModelFirstDocHat;
 import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
@@ -11,6 +7,7 @@ import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
+import com.lcm.doctorwho.client.windows.EntityCamera;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
@@ -40,7 +37,6 @@ import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
 import com.lcm.doctorwho.common.traits.positive.TraitTough;
 import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.utils.ATGUtils;
-
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -62,10 +58,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by Nictogen on 2/18/18
  */
 @Mod.EventBusSubscriber
+@SuppressWarnings("unused")
 public class ATGObjects {
 	public static class Items {
 		public static final Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
@@ -148,6 +149,7 @@ public class ATGObjects {
 	
 	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).egg(1,0).name("angel").tracker(80, 3, false).build();
+		public static final EntityEntry camera = EntityEntryBuilder.create().entity(EntityCamera.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "camera"), 0).name("camera").build();
 	}
 	
 	public static class SoundEvents {

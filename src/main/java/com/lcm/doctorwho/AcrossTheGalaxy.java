@@ -1,5 +1,6 @@
 package com.lcm.doctorwho;
 
+import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.dimension.ATGDims;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
@@ -26,12 +27,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod(modid = AcrossTheGalaxy.MODID, name = AcrossTheGalaxy.NAME, version = AcrossTheGalaxy.VERSION, dependencies = "required:forge@[14.23.1.2574,); required-after:lucraftcore@[1.12-2.0.4,)", acceptedMinecraftVersions = "1.12, 1.12.1, 1.12.2")
 @EventBusSubscriber
 public class AcrossTheGalaxy {
-	@SidedProxy(serverSide = "com.lcm.doctorwho.events.ATGServerProxy", clientSide = "com.lcm.doctorwho.events.ATGClientProxy")
 
+	@SidedProxy(serverSide = "com.lcm.doctorwho.events.ATGServerProxy", clientSide = "com.lcm.doctorwho.events.ATGClientProxy")
     public static ATGCommonProxy proxy;
 
 	public static final String MODID = "lcm-atg";
-	public static final String NAME = "Doctor who - Across the galaxy";
+	public static final String NAME = "Doctor who - Across the Galaxy";
 	public static final String VERSION = "1.0";
 	public static final ResourceLocation ICONS = new ResourceLocation(MODID, "textures/gui/ability_icons.png");
 

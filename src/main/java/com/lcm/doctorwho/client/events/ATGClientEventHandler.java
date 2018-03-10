@@ -1,26 +1,24 @@
 package com.lcm.doctorwho.client.events;
 
-import com.lcm.doctorwho.client.windows.EntityWindow;
-import com.lcm.doctorwho.client.windows.FakeWorldHandler;
+import com.lcm.doctorwho.client.windows.EntityCamera;
+import com.lcm.doctorwho.client.windows.FakeWorld;
 import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
+import com.lcm.doctorwho.utils.ATGConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Created by Nictogen on 2/19/18
@@ -28,11 +26,11 @@ import org.lwjgl.opengl.GL11;
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ATGClientEventHandler
 {
-
-	public static Boolean reRendering = false;
+	public static int cameraID = -1;
+	private static boolean rendering = false;
 
 	@SubscribeEvent
-	public static void AngelsRender(RenderLivingEvent.Post<EntityWeepingAngel> e)
+	public static void angelsRender(RenderLivingEvent.Post<EntityWeepingAngel> e)
 	{
 		EntityLivingBase entity = e.getEntity();
 		if (entity instanceof EntityWeepingAngel)
@@ -46,50 +44,54 @@ public class ATGClientEventHandler
 	}
 
 	@SubscribeEvent
-	public static void renderWorldLast(RenderWorldLastEvent event)
+	public static void onRenderTick(TickEvent.RenderTickEvent event)
 	{
-		if (reRendering)
-			return;
 
-		if (FakeWorldHandler.fakeWorld != null)
-			Minecraft.getMinecraft().world.loadedEntityList.stream().filter(entity -> entity instanceof EntityWindow && ((EntityWindow) entity).rendering)
-					.forEach(entity -> {
-						((EntityWindow) entity).rendering = false;
-						reRendering = true;
-						GlStateManager.pushMatrix();
+		if(event.phase != TickEvent.Phase.END) return;
+		WorldClient worldClient = Minecraft.getMinecraft().world;
+		if (worldClient != null)
+		{
+			RenderGlobal renderGlobal = Minecraft.getMinecraft().renderGlobal;
 
-						WorldClient worldClient = Minecraft.getMinecraft().world;
-						RenderGlobal renderGlobal = Minecraft.getMinecraft().renderGlobal;
+			worldClient.loadedTileEntityList.forEach(tileEntity -> {
+				if (tileEntity instanceof TileEntityTardis)
+				{
+					FakeWorld fakeWorld = FakeWorld.getFakeWorld(ATGConfig.tardisDIM);
+					Minecraft.getMinecraft().world = fakeWorld;
+					Minecraft.getMinecraft().getRenderManager().setWorld(fakeWorld);
+					Minecraft.getMinecraft().renderGlobal = fakeWorld.renderGlobal;
 
-						Minecraft.getMinecraft().world = FakeWorldHandler.fakeWorld;
-						Minecraft.getMinecraft().getRenderManager().setWorld(FakeWorldHandler.fakeWorld);
-						Minecraft.getMinecraft().renderGlobal = FakeWorldHandler.renderGlobal;
-						((EntityWindow) entity).renderWorldToTexture(event.getPartialTicks());
+					EntityCamera camera = fakeWorld.getCamera(cameraID, new BlockPos(0.5, 1, 0.5));
+					cameraID = camera.getEntityId();
 
-						Minecraft.getMinecraft().world = worldClient;
-						Minecraft.getMinecraft().renderGlobal = renderGlobal;
-						Minecraft.getMinecraft().getRenderManager().setWorld(worldClient);
+					GlStateManager.pushMatrix();
+					GlStateManager.pushAttrib();
+//					renderGlobal.updateClouds();
+//					worldClient.doVoidFogParticles(MathHelper.floor(camera.posX), MathHelper.floor(camera.posY), MathHelper.floor(camera.posZ));
+					rendering = true;
+					camera.renderWorldToTexture(event.renderTickTime);
+					rendering = false;
+					GlStateManager.popAttrib();
+					GlStateManager.popMatrix();
 
-						GlStateManager.popMatrix();
-						GlStateManager.bindTexture(new DynamicTexture(((EntityWindow) entity).image).getGlTextureId());
-						reRendering = false;
+					GlStateManager.enableBlend();
+					GlStateManager.disableTexture2D();
+					GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+					GlStateManager.enableTexture2D();
+					GlStateManager.disableBlend();
 
-						GlStateManager.pushMatrix();
-						EntityPlayer player = Minecraft.getMinecraft().player;
-						GlStateManager.translate(-player.posX, -player.posY, -player.posZ);
-						GlStateManager.translate(entity.posX, entity.posY, entity.posZ);
-						Tessellator tessellator = Tessellator.getInstance();
-						GlStateManager.enableTexture2D();
-						BufferBuilder bufferBuilder = tessellator.getBuffer();
-						bufferBuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-						bufferBuilder.pos(0, 0, -1).tex(0, 1).endVertex();
-						bufferBuilder.pos(0, 0, 1).tex(1, 1).endVertex();
-						bufferBuilder.pos(0, 5, 1).tex(1, 0).endVertex();
-						bufferBuilder.pos(0, 5, -1).tex(0, 0).endVertex();
-						tessellator.draw();
-						GlStateManager.popMatrix();
-					});
-
+					Minecraft.getMinecraft().world = worldClient;
+					Minecraft.getMinecraft().renderGlobal = renderGlobal;
+					Minecraft.getMinecraft().getRenderManager().setWorld(worldClient);
+				}
+			});
+		}
 	}
 
+	@SubscribeEvent
+	public static void onCameraSetup(EntityViewRenderEvent.CameraSetup event){
+		if(rendering){
+//			event.setPitch(event.getPitch() + 10);
+		}
+	}
 }

@@ -3,6 +3,11 @@ package com.lcm.doctorwho.client.windows;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -14,21 +19,122 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.image.BufferedImage;
+import java.nio.IntBuffer;
 
 /**
  * Created by Nictogen on 3/5/18.
  */
 public class EntityCamera extends EntityPlayerSP
 {
-	public EntityCamera(World world){
-		super(Minecraft.getMinecraft(), FakeWorldHandler.fakeWorld, Minecraft.getMinecraft().getConnection(), null, null);
+	public BufferedImage image;
 
+	public EntityCamera(World world){
+		super(Minecraft.getMinecraft(), world, Minecraft.getMinecraft().getConnection(), null, null);
 	}
 
-	public EntityCamera(double x, double y, double z)
+	public EntityCamera(World world, double x, double y, double z)
 	{
-		super(Minecraft.getMinecraft(), FakeWorldHandler.fakeWorld, Minecraft.getMinecraft().getConnection(), null, null);
+		super(Minecraft.getMinecraft(), world, Minecraft.getMinecraft().getConnection(), null, null);
 		this.setPositionAndUpdate(x, y, z);
+	}
+
+	public void renderWorldToTexture(float partialRenderTicks) {
+		if(!world.isRemote) return;
+
+		Framebuffer mcBuffer = Minecraft.getMinecraft().getFramebuffer();
+
+		Minecraft.getMinecraft().setRenderViewEntity(this);
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
+		Minecraft.getMinecraft().player = this;
+
+		Framebuffer framebuffer = new Framebuffer(500, 500, true);
+
+		Minecraft mc = Minecraft.getMinecraft();
+		if (mc.skipRenderWorld) return;
+		EntityRenderer entityRenderer = mc.entityRenderer;
+
+		//Backup current render settings
+		int heightBackup = mc.displayHeight;
+		int widthBackup = mc.displayWidth;
+
+		int thirdPersonBackup = mc.gameSettings.thirdPersonView;
+		boolean hideGuiBackup = mc.gameSettings.hideGUI;
+		int particleBackup = mc.gameSettings.particleSetting;
+		boolean anaglyphBackup = mc.gameSettings.anaglyph;
+		int renderDistanceBackup = mc.gameSettings.renderDistanceChunks;
+		float FOVbackup = mc.gameSettings.fovSetting;
+
+		//Render world
+		try {
+			//Set all of the render setting to work on the proxy world
+			mc.displayHeight = framebuffer.framebufferWidth;
+			mc.displayWidth = framebuffer.framebufferHeight;
+
+			mc.gameSettings.thirdPersonView = 0;
+			mc.gameSettings.hideGUI = true;
+			mc.gameSettings.anaglyph = false;
+
+			//Set gl options
+			framebuffer.bindFramebuffer(true);
+
+			int i1 = mc.gameSettings.limitFramerate;
+			if (mc.isFramerateLimitBelowMax()) {
+				entityRenderer.renderWorld(partialRenderTicks, (1000000000 / i1));
+			} else {
+				entityRenderer.renderWorld(partialRenderTicks, 0L);
+			}
+
+			//toBufferedImage
+			int i = mc.displayHeight * mc.displayWidth;
+
+			IntBuffer pixelBuffer = BufferUtils.createIntBuffer(i);
+			int[] pixelValues = new int[i];
+
+			GlStateManager.glPixelStorei(3333, 1);
+			GlStateManager.glPixelStorei(3317, 1);
+			pixelBuffer.clear();
+
+			GlStateManager.glReadPixels(0, 0, mc.displayWidth, mc.displayHeight, 32993, 33639, pixelBuffer);
+
+			pixelBuffer.get(pixelValues);
+			TextureUtil.processPixelValues(pixelValues, mc.displayWidth, mc.displayHeight);
+			BufferedImage bufferedimage = new BufferedImage(mc.displayWidth, mc.displayHeight, 1);
+			bufferedimage.setRGB(0, 0, mc.displayWidth, mc.displayWidth, pixelValues, 0, mc.displayHeight);
+
+			this.image = bufferedimage;
+		} catch (Exception e) {
+			try {
+				//Clean up the tessellator, just in case.
+				Tessellator.getInstance().draw();
+			} catch (Exception e2) {
+				//It might throw an exception, but that just means we didn't need to clean it up (this time)
+			}
+			throw new RuntimeException("Error while rendering proxy world", e);
+		} finally {
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			framebuffer.bindFramebufferTexture();
+			GL11.glViewport(0, 0, widthBackup, heightBackup);
+			GL11.glLoadIdentity();
+
+			mc.player = player;
+			mc.gameSettings.thirdPersonView = thirdPersonBackup;
+			mc.gameSettings.hideGUI = hideGuiBackup;
+			mc.gameSettings.particleSetting = particleBackup;
+			mc.gameSettings.anaglyph = anaglyphBackup;
+			mc.gameSettings.renderDistanceChunks = renderDistanceBackup;
+			mc.gameSettings.fovSetting = FOVbackup;
+
+			mc.displayHeight = heightBackup;
+			mc.displayWidth = widthBackup;
+		}
+
+		framebuffer.deleteFramebuffer();
+		mcBuffer.bindFramebuffer(true);
+		Minecraft.getMinecraft().setRenderViewEntity(Minecraft.getMinecraft().player);
 	}
 
 	@Override
@@ -41,9 +147,7 @@ public class EntityCamera extends EntityPlayerSP
 	public void onUpdate() {}
 
 	@Override
-	protected int getExperiencePoints(EntityPlayer par1EntityPlayer) {
-		return 0;
-	}
+	protected int getExperiencePoints(EntityPlayer par1EntityPlayer) { return 0; }
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}

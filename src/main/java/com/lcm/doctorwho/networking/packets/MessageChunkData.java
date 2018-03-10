@@ -1,6 +1,6 @@
 package com.lcm.doctorwho.networking.packets;
 
-import com.lcm.doctorwho.client.windows.FakeWorldHandler;
+import com.lcm.doctorwho.client.windows.FakeWorld;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
@@ -27,10 +27,11 @@ public class MessageChunkData implements IMessage
 	private byte[] buffer;
 	private List<NBTTagCompound> tileEntityTags;
 	private boolean fullChunk;
+	private int dimensionID;
 	
 	public MessageChunkData(){}
 
-	public MessageChunkData(Chunk chunkIn, int changedSectionFilter)
+	public MessageChunkData(Chunk chunkIn, int changedSectionFilter, int dimensionID)
 	{
 		this.chunkX = chunkIn.x;
 		this.chunkZ = chunkIn.z;
@@ -38,6 +39,7 @@ public class MessageChunkData implements IMessage
 		boolean flag = chunkIn.getWorld().provider.hasSkyLight();
 		this.buffer = new byte[this.calculateChunkSize(chunkIn, flag, changedSectionFilter)];
 		this.availableSections = this.extractChunkData(new PacketBuffer(getWriteBuffer()), chunkIn, flag, changedSectionFilter);
+		this.dimensionID = dimensionID;
 //		this.tileEntityTags = Lists.<NBTTagCompound>newArrayList();
 //
 //		for (Map.Entry<BlockPos, TileEntity> entry : chunkIn.getTileEntityMap().entrySet())
@@ -61,6 +63,7 @@ public class MessageChunkData implements IMessage
 		this.chunkZ = packetBuffer.readInt();
 		this.fullChunk = packetBuffer.readBoolean();
 		this.availableSections = packetBuffer.readVarInt();
+		this.dimensionID = packetBuffer.readInt();
 		int i = packetBuffer.readVarInt();
 
 		if (i > 2097152)
@@ -88,6 +91,7 @@ public class MessageChunkData implements IMessage
 		packetBuffer.writeInt(this.chunkZ);
 		packetBuffer.writeBoolean(this.fullChunk);
 		packetBuffer.writeVarInt(this.availableSections);
+		packetBuffer.writeInt(this.dimensionID);
 		packetBuffer.writeVarInt(this.buffer.length);
 		packetBuffer.writeBytes(this.buffer);
 //		packetBuffer.writeVarInt(this.tileEntityTags.size());
@@ -113,21 +117,21 @@ public class MessageChunkData implements IMessage
 
 			Minecraft.getMinecraft().addScheduledTask(() -> {
 
-				FakeWorldHandler.createFakeWorld();
+				FakeWorld world = FakeWorld.getFakeWorld(message.dimensionID);
 
 				if (message.fullChunk)
 				{
-					FakeWorldHandler.fakeWorld.doPreChunk(message.chunkX, message.chunkZ, true);
+					world.doPreChunk(message.chunkX, message.chunkZ, true);
 				}
 
-				FakeWorldHandler.fakeWorld.invalidateBlockReceiveRegion(message.chunkX << 4, 0, message.chunkZ << 4, (message.chunkX << 4) + 15, 256, (message.chunkZ << 4) + 15);
-				Chunk chunk = FakeWorldHandler.fakeWorld.getChunkFromChunkCoords(message.chunkX, message.chunkZ);
+				world.invalidateBlockReceiveRegion(message.chunkX << 4, 0, message.chunkZ << 4, (message.chunkX << 4) + 15, 256, (message.chunkZ << 4) + 15);
+				Chunk chunk = world.getChunkFromChunkCoords(message.chunkX, message.chunkZ);
 
 				chunk.read(message.getReadBuffer(), message.availableSections, message.fullChunk);
 
-				FakeWorldHandler.fakeWorld.markBlockRangeForRenderUpdate(message.chunkX << 4, 0, message.chunkZ << 4, (message.chunkX << 4) + 15, 256, (message.chunkZ << 4) + 15);
+				world.markBlockRangeForRenderUpdate(message.chunkX << 4, 0, message.chunkZ << 4, (message.chunkX << 4) + 15, 256, (message.chunkZ << 4) + 15);
 
-				if (!message.fullChunk || FakeWorldHandler.fakeWorld.provider.shouldClientCheckLighting())
+				if (!message.fullChunk || world.provider.shouldClientCheckLighting())
 				{
 					chunk.resetRelightChecks();
 				}
