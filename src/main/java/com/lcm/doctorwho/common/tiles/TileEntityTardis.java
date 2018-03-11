@@ -6,8 +6,16 @@ import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
+import com.lcm.doctorwho.utils.ATGConfig;
+import com.lcm.doctorwho.utils.ATGTeleporter;
+import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.TardisUtils;
 
+import net.minecraft.block.BlockChorusPlant;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +26,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public class TileEntityTardis extends TileEntity implements ITickable {
+
+    AxisAlignedBB tardis_enter_AABB = new AxisAlignedBB(0,0,0,1,2,1);
 
 	protected CapabilityTileTardis handler;
 
@@ -69,7 +81,7 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
-		return super.getRenderBoundingBox().grow(8, 8, 8);
+	    return super.getRenderBoundingBox().grow(8, 8, 8);
 	}
 
 	/**
@@ -77,6 +89,28 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 	 */
 	@Override
 	public void update() {
+        if (!world.isRemote && getCapability(CapabilityTileTardis.TARDIS, null).isDoorOpen()) {
+            List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos()));
+                if(!entities.isEmpty())
+                {
+                    for(Entity e : entities)
+                    {
+                        if(!e.getPassengers().isEmpty())
+                        {
+                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, 9, 64, 68);
 
-	}
+                            for(Entity ep : e.getPassengers())
+                            {
+                                ep.dismountRidingEntity();
+                                ATGTeleporter.changeDim(ep, ATGConfig.tardisDIM, 9, 64, 68);
+                                ep.startRiding(e);
+                            }
+
+                        }else {
+                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, 9, 64, 68);
+                        }
+                    }
+                }
+        }
+    }
 }

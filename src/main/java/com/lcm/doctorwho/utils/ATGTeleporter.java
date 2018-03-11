@@ -1,8 +1,6 @@
 package com.lcm.doctorwho.utils;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
@@ -23,27 +21,26 @@ public class ATGTeleporter extends Teleporter {
 		this.z = z;
 	}
 
-	public static void teleportToDimension(EntityPlayer player, int dimension, double x, double y, double z) {
-		int oldDimension = player.world.provider.getDimension();
-		EntityPlayerMP playerMP = (EntityPlayerMP) player;
-		MinecraftServer server = playerMP.world.getMinecraftServer();
+	public static void changeDim(Entity entity, int dimension, double x, double y, double z) {
+		int oldDimension = entity.world.provider.getDimension();
+		MinecraftServer server = entity.world.getMinecraftServer();
 		WorldServer worldServer = server.getWorld(dimension);
 
 		if (worldServer == null || worldServer.getMinecraftServer() == null) { // Dimension doesn't exist
-
 			throw new IllegalArgumentException("Dimension: " + dimension + " doesn't exist!");
-
 		}
-		worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension(playerMP, dimension, new ATGTeleporter(worldServer, x, y, z));
-		player.setPositionAndUpdate(x, y, z);
+//		entity.changeDimension(dimension);
+		entity.setPositionAndUpdate(x, y, z);
 
 		if (oldDimension == 1) {
-			// For some reason teleporting out of the end does weird things.
-			player.setPositionAndUpdate(x, y, z);
-			worldServer.spawnEntity(player);
-			worldServer.updateEntityWithOptionalForce(player, false);
+			entity.setPositionAndUpdate(x, y, z);
+			worldServer.spawnEntity(entity);
+			worldServer.updateEntityWithOptionalForce(entity, false);
 		}
 	}
+
+
+
 
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {

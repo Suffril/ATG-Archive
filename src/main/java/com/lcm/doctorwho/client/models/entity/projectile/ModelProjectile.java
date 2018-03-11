@@ -1,12 +1,16 @@
 package com.lcm.doctorwho.client.models.entity.projectile;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 public class ModelProjectile extends ModelBase {
+	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/entity/projectile/laser.png");
 
 	ModelRenderer GOD;
 	ModelRenderer WEEN;
@@ -68,6 +72,7 @@ public class ModelProjectile extends ModelBase {
 		int brightY = bright / 65536;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
+		ATGUtils.bindTexture(TEX);
 		GOD.render(scale);
 		WEEN.render(scale);
 		SATAN.render(scale);

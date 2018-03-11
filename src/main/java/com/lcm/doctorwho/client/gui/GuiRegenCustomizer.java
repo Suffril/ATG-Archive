@@ -102,7 +102,7 @@ public class GuiRegenCustomizer extends GuiCustomizer implements GuiSlider.ISlid
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException {
+	protected void actionPerformed(GuiButton button)  {
 		if (button.id == 0) sendStyleNBTTagToServer();
 		if (button.id == 0 || button.id == 1) {
 			mc.player.closeScreen();

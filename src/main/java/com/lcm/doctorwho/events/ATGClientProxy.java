@@ -15,15 +15,18 @@ import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
 import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerClothing;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
+import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -59,6 +62,14 @@ public class ATGClientProxy extends ATGCommonProxy {
 			EntityWeepingAngel angel = (EntityWeepingAngel) entity;
 			if (!angel.isSeen()) ATGNetwork.INSTANCE.sendToServer(new MessageAngelSeen(angel.getEntityId()));
 		}
+	}
+
+	@SubscribeEvent
+	public void drawBlockOutline(DrawBlockHighlightEvent e) {
+        if (e.getTarget() != null && e.getTarget().getBlockPos() != null) {
+            Block block = e.getPlayer().getEntityWorld().getBlockState(e.getTarget().getBlockPos()).getBlock();
+            e.setCanceled(block instanceof BlockTardis);
+        }
 	}
 
 	@SubscribeEvent

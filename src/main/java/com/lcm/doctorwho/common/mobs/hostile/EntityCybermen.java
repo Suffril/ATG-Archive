@@ -74,6 +74,7 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
 		super.onUpdate();
 		setUpCyberman();
 
+
 	}
 
 	@Override

@@ -10,8 +10,11 @@ import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
 import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.TardisUtils;
 
+import net.minecraft.block.BlockFire;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,12 +24,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class BlockTardis extends BlockOutline {
-	public BlockTardis(Material material, MapColor color, String name) {
+
+    protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.6000000238418579D, 0.699999988079071D);
+
+
+    public BlockTardis(Material material, MapColor color, String name) {
 		super(material, color, name);
 		setLightLevel(1.0F);
 	}
@@ -47,7 +56,35 @@ public class BlockTardis extends BlockOutline {
 		capa.setOwner(placer.getUniqueID().toString());
 	}
 
-	/**
+	@Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return BlockFaceShape.UNDEFINED;
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return AABB;
+    }
+
+    @Nullable
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+    {
+        return NULL_AABB;
+    }
+
+    /**
+     * Determines if an entity can path through this block
+     */
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+    {
+        return true;
+    }
+
+
+    /**
 	 * Called when the block is right clicked by a player.
 	 */
 	@Override
