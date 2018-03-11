@@ -29,23 +29,23 @@ public class DebugCommand extends CommandBase {
 		EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 
 		switch (args[0]) {
-		case "kill":
-			player.attackEntityFrom(NoRegenDamageSource.INSTANCE, Float.MAX_VALUE);
-			break;
-		case "quick-regen":
-			player.attackEntityFrom(QuickRegenDamageSource.INSTANCE, Float.MAX_VALUE);
-			break;
-		case "set":
-			try {
-				SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = Integer.valueOf(args[1]);
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-				throw new CommandException("Invalid use of set", (Object[]) args);
-			} catch (NullPointerException e) {
-				throw new CommandException("Not a timelord", (Object[]) args);
-			}
-			break;
-		default:
-			throw new CommandException("Unknown option " + args[0], (Object[]) args);
+			case "kill":
+				player.attackEntityFrom(NoRegenDamageSource.INSTANCE, Float.MAX_VALUE);
+				break;
+			case "quick-regen":
+				player.attackEntityFrom(QuickRegenDamageSource.INSTANCE, Float.MAX_VALUE);
+				break;
+			case "set":
+				try {
+					SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = Integer.valueOf(args[1]);
+				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+					throw new CommandException("Invalid use of set", (Object[]) args);
+				} catch (NullPointerException e) {
+					throw new CommandException("Not a timelord", (Object[]) args);
+				}
+				break;
+			default:
+				throw new CommandException("Unknown option " + args[0], (Object[]) args);
 		}
 	}
 

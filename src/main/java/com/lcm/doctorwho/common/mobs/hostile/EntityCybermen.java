@@ -123,25 +123,25 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
 	private void setUpCyberman() {
 		int id = getTypeID();
 		switch (getTypeID()) {
-		case 0:
-			id = 0;
-			type = CyberType.TENTH_PLANET;
-			break;
+			case 0:
+				id = 0;
+				type = CyberType.TENTH_PLANET;
+				break;
 
-		case 1:
-			id = 1;
-			type = CyberType.EARTHSHOCK;
-			break;
+			case 1:
+				id = 1;
+				type = CyberType.EARTHSHOCK;
+				break;
 
-		case 2:
-			id = 2;
-			type = CyberType.CYBUS;
-			break;
+			case 2:
+				id = 2;
+				type = CyberType.CYBUS;
+				break;
 
-		case 3:
-			id = 3;
-			type = CyberType.MONDAS;
-			break;
+			case 3:
+				id = 3;
+				type = CyberType.MONDAS;
+				break;
 		}
 	}
 
