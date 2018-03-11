@@ -7,12 +7,12 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
 public class ATGTeleporter extends Teleporter {
-
+	
 	private final WorldServer worldServer;
 	private double x;
 	private double y;
 	private double z;
-
+	
 	public ATGTeleporter(WorldServer worldServer, double x, double y, double z) {
 		super(worldServer);
 		this.worldServer = worldServer;
@@ -20,28 +20,25 @@ public class ATGTeleporter extends Teleporter {
 		this.y = y;
 		this.z = z;
 	}
-
+	
 	public static void changeDim(Entity entity, int dimension, double x, double y, double z) {
 		int oldDimension = entity.world.provider.getDimension();
 		MinecraftServer server = entity.world.getMinecraftServer();
 		WorldServer worldServer = server.getWorld(dimension);
-
+		
 		if (worldServer == null || worldServer.getMinecraftServer() == null) { // Dimension doesn't exist
 			throw new IllegalArgumentException("Dimension: " + dimension + " doesn't exist!");
 		}
-//		entity.changeDimension(dimension);
+		// entity.changeDimension(dimension);
 		entity.setPositionAndUpdate(x, y, z);
-
+		
 		if (oldDimension == 1) {
 			entity.setPositionAndUpdate(x, y, z);
 			worldServer.spawnEntity(entity);
 			worldServer.updateEntityWithOptionalForce(entity, false);
 		}
 	}
-
-
-
-
+	
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
 		this.worldServer.getBlockState(new BlockPos((int) this.x, (int) this.y, (int) this.z));

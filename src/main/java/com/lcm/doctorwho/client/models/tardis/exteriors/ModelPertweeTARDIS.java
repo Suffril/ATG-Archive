@@ -15,7 +15,7 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_pertwee.png");
 	private boolean doorOpen = false;
 	private boolean lampOn;
-
+	
 	ModelRenderer B1;
 	ModelRenderer PIL1;
 	ModelRenderer PIL2;
@@ -185,12 +185,12 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 	ModelRenderer PS18;
 	ModelRenderer PS19;
 	ModelRenderer PS20;
-
+	
 	public ModelPertweeTARDIS() {
-
+		
 		textureWidth = 256;
 		textureHeight = 256;
-
+		
 		B1 = new ModelRenderer(this, 0, 0);
 		B1.addBox(-13.5F, 23F, -13.5F, 27, 1, 27);
 		B1.setRotationPoint(0F, 0F, 0F);
@@ -1207,19 +1207,19 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		PS20.setTextureSize(256, 256);
 		PS20.mirror = true;
 		ATGUtils.setRotation(PS20, 0F, 0F, 0F);
-
+		
 	}
-
+	
 	@Override
 	public void renderRightDoor(float scale) {
-
+		
 		GlStateManager.pushMatrix();
-
+		
 		if (isDoorOpen()) {
 			GlStateManager.translate(0.8F, 0.0F, 0.2F);
 			GlStateManager.rotate(50, 0.0F, 1.0F, 0.0F);
 		}
-
+		
 		RDW1.render(scale);
 		RDW2.render(scale);
 		RDW3.render(scale);
@@ -1242,16 +1242,16 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		RD13.render(scale);
 		GlStateManager.popMatrix();
 	}
-
+	
 	@Override
 	public void renderLeftDoor(float scale) {
-
+		
 		GlStateManager.pushMatrix();
 		if (isDoorOpen()) {
 			GlStateManager.translate(-0.8F, 0.0F, 0.2F);
 			GlStateManager.rotate(-50, 0.0F, 1.0F, 0.0F);
 		}
-
+		
 		LDW1.render(scale);
 		LDW2.render(scale);
 		LDW3.render(scale);
@@ -1274,10 +1274,10 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		LD13.render(scale);
 		LD14.render(scale);
 		LD15.render(scale);
-
+		
 		GlStateManager.popMatrix();
 	}
-
+	
 	@Override
 	public void renderShell(float scale) {
 		B1.render(scale);
@@ -1307,7 +1307,7 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		OUT12.render(scale);
 		OUT13.render(scale);
 		OUT14.render(scale);
-
+		
 		S11.render(scale);
 		S12.render(scale);
 		S13.render(scale);
@@ -1341,7 +1341,7 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		S39.render(scale);
 		S310.render(scale);
 		S311.render(scale);
-
+		
 		R1.render(scale);
 		R2.render(scale);
 		R3.render(scale);
@@ -1353,7 +1353,7 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		R9.render(scale);
 		R10.render(scale);
 		R11.render(scale);
-
+		
 		W1.render(scale);
 		W2.render(scale);
 		W3.render(scale);
@@ -1405,20 +1405,20 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		PS19.render(scale);
 		PS20.render(scale);
 	}
-
+	
 	@Override
 	public void renderLamp(float scale) {
 		GlStateManager.pushMatrix();
-
+		
 		GlStateManager.translate(0, 0.1, 0);
 		GlStateManager.scale(0.95F, 0.95F, 0.95F);
-
+		
 		LampBase.render(scale);
 		LT1.render(scale);
 		LT2.render(scale);
 		LT3.render(scale);
 		LT4.render(scale);
-
+		
 		if (isLampOn()) {
 			GlStateManager.enableAlpha();
 			GlStateManager.enableBlend();
@@ -1429,22 +1429,22 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
 		}
-
+		
 		LAMPGLOW.render(scale);
 		GlStateManager.popMatrix();
-
+		
 	}
-
+	
 	@Override
 	public void renderText(float scale) {
-
+		
 	}
-
+	
 	@Override
 	public void other(float scale) {
-
+		
 	}
-
+	
 	@Override
 	public void renderAll(float scale) {
 		GlStateManager.pushMatrix();
@@ -1457,38 +1457,38 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		other(scale);
 		renderLeftDoor(scale);
 		GlStateManager.popMatrix();
-
+		
 		renderLamp(scale);
 	}
-
+	
 	@Override
 	public boolean isDoorOpen() {
 		return doorOpen;
 	}
-
+	
 	@Override
 	public boolean isLampOn() {
 		return lampOn;
 	}
-
+	
 	@Override
 	public void setLampOn(boolean on) {
 		lampOn = on;
 	}
-
+	
 	@Override
 	public void setDoorOpen(boolean open) {
 		doorOpen = open;
 	}
-
+	
 	@Override
 	public ResourceLocation getTexture() {
 		return TEX;
 	}
-
+	
 	@Override
 	public String getExteriorName() {
 		return "Pertwee";
 	}
-
+	
 }

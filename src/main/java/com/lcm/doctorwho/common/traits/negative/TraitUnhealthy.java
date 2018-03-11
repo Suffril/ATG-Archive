@@ -17,21 +17,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 /** Created by AFlyingGrayson on 8/10/17 */
 public class TraitUnhealthy extends AbilityAttributeModifier implements INegativeTrait {
-
+	
 	public TraitUnhealthy(EntityPlayer player, UUID uuid, float factor, int operation) {
 		super(player, uuid, factor, operation);
 	}
-
+	
 	@Override
 	public IAttribute getAttribute() {
 		return SharedMonsterAttributes.MAX_HEALTH;
 	}
-
+	
 	@Override
 	public Class<? extends Ability> getPositiveTrait() {
 		return TraitTough.class;
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {

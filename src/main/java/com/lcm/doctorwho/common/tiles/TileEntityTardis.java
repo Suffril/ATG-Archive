@@ -31,25 +31,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class TileEntityTardis extends TileEntity implements ITickable {
-
-    AxisAlignedBB tardis_enter_AABB = new AxisAlignedBB(0,0,0,1,2,1);
-
+	
+	AxisAlignedBB tardis_enter_AABB = new AxisAlignedBB(0, 0, 0, 1, 2, 1);
+	
 	protected CapabilityTileTardis handler;
-
+	
 	public TileEntityTardis() {
 		handler = new CapabilityTileTardis(this);
 	}
-
+	
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
 		return capability == CapabilityTileTardis.TARDIS || super.hasCapability(capability, facing);
 	}
-
+	
 	@Override
 	public NBTTagCompound getUpdateTag() {
 		return writeToNBT(TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null)));
 	}
-
+	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTag;
@@ -57,7 +57,7 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 		writeToNBT(nbtTag);
 		return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
 	}
-
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		ITardis capa = getCapability(CapabilityTileTardis.TARDIS, null);
@@ -65,27 +65,27 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 		ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)));
 		super.readFromNBT(nbt);
 	}
-
+	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		tag = TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null));
 		super.writeToNBT(tag);
 		return tag;
 	}
-
+	
 	@SuppressWarnings("unchecked") // ASM black magic I presume?
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 		return (T) handler;
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
-	    return super.getRenderBoundingBox().grow(8, 8, 8);
+		return super.getRenderBoundingBox().grow(8, 8, 8);
 	}
-
+	
 	/**
 	 * Like the old updateEntity(), except more generic.
 	 */
