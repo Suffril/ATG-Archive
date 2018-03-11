@@ -77,9 +77,9 @@ public class ATGObjects {
 		public static Item firstDocHat = new ItemClothingOutline("firstDocHat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);// .setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
 		public static Item thirtenthDocCoat = new ItemClothingOutline("thirtenthDocCoat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.CHEST);
 	}
-	
+
 	public static class Blocks {
-		
+
 		// Moose
 		public static final Block creamRoundel = new BlockOutline(Material.CORAL, "cream_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block creamRoundelAlt = new BlockOutline(Material.CORAL, "cream_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
@@ -119,10 +119,10 @@ public class ATGObjects {
 		public static final Block alfLeaves = new LeavesOutline("alf_leaves").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coralWall = new BlockOutline(Material.CORAL, "coral_wall").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
+
 		// Tardis
 		public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
+
 		// Troughton - Fault Locator
 		public static final Block tro_fault_1 = new BlockOutline(Material.CORAL, "tro_fault_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_fault_2 = new BlockOutline(Material.CORAL, "tro_fault_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
@@ -132,36 +132,36 @@ public class ATGObjects {
 		public static final Block tro_fault_6 = new BlockOutline(Material.CORAL, "tro_fault_6").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_fault_7 = new BlockOutline(Material.CORAL, "tro_fault_7").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_fault_8 = new BlockOutline(Material.CORAL, "tro_fault_8").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
+
 		// Troughton - Flat roundels
 		public static final Block tro_flatroundel_1 = new BlockOutline(Material.CORAL, "tro_flatroundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_flatroundel_2 = new BlockOutline(Material.CORAL, "tro_flatroundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_flatroundel_3 = new BlockOutline(Material.CORAL, "tro_flatroundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_flatroundel_4 = new BlockOutline(Material.CORAL, "tro_flatroundel_4").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_flatroundel_5 = new BlockOutline(Material.CORAL, "tro_flatroundel_5").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
+
 		// Troughton - Roundel walls
 		public static final Block tro_roundel_1 = new BlockOutline(Material.CORAL, "tro_roundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_roundel_2 = new BlockOutline(Material.CORAL, "tro_roundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_roundel_3 = new BlockOutline(Material.CORAL, "tro_roundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
+
 	}
-	
+
 	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).egg(1, 0).name("angel").tracker(80, 3, false).build();
 		public static final EntityEntry laser = EntityEntryBuilder.create().entity(EntityProjectile.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "laser"), 1).name("laser").tracker(80, 3, true).build();
 		public static final EntityEntry cyberMan = EntityEntryBuilder.create().entity(EntityCybermen.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "cybermen"), 2).egg(1, 0).name("cybermen").tracker(80, 3, false).build();
 	}
-	
+
 	public static class SoundEvents {
 		public static final SoundEvent regeneration = new ATGUtils.ATGSoundEvent("regeneration");
 		public static final SoundEvent timeyWimey = new ATGUtils.ATGSoundEvent("timey_wimey");
 	}
-	
+
 	public static class Superpowers { // NO_UCD (unused code)
 		public static final TimelordSuperpower timelord = TimelordSuperpower.INSTANCE;
 	}
-	
+
 	public static class AbilityEntries { // NO_UCD (unused code)
 		public static final Ability.AbilityEntry bouncy = newAbilityEntry(TraitBouncy.class, "bouncy");
 		public static final Ability.AbilityEntry lucky = newAbilityEntry(TraitLucky.class, "lucky");
@@ -181,29 +181,29 @@ public class ATGObjects {
 		public static final Ability.AbilityEntry weak = newAbilityEntry(TraitWeak.class, "weak");
 		public static final Ability.AbilityEntry dumb = newAbilityEntry(TraitDumb.class, "dumb");
 		public static final Ability.AbilityEntry obvious = newAbilityEntry(TraitObvious.class, "obvious");
-		
+
 		private static Ability.AbilityEntry newAbilityEntry(Class<? extends Ability> ability, String name) {
 			return new Ability.AbilityEntry(ability, new ResourceLocation(AcrossTheGalaxy.MODID, name));
 		}
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SubscribeEvent
 	public static void registerObjects(RegistryEvent ev) {
 		if (!(ev instanceof RegistryEvent.Register)) return;
 		IForgeRegistry registry = ((RegistryEvent.Register) ev).getRegistry();
-		
+
 		for (Class<?> aClass : ATGObjects.class.getDeclaredClasses()) {
 			if (Arrays.stream(aClass.getDeclaredFields()).noneMatch(field -> registry.getRegistrySuperType().isAssignableFrom(field.getType()))) continue;
 			ArrayList<IForgeRegistryEntry> entries = new ArrayList<>();
-			
+
 			for (Field field : aClass.getDeclaredFields())
 				try {
 					entries.add((IForgeRegistryEntry) field.get(null));
 				} catch (IllegalAccessException | ClassCastException e) {
 					throw new RuntimeException("Incorrect field in object sub-class", e);
 				}
-			
+
 			if (Arrays.stream(aClass.getDeclaredFields()).anyMatch(field -> Item.class.isAssignableFrom(field.getType()))) {
 				for (Field f : Blocks.class.getDeclaredFields()) {
 					try {
@@ -214,11 +214,11 @@ public class ATGObjects {
 					}
 				}
 			}
-			
+
 			entries.forEach(registry::register);
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent ev) {
 		for (Field f : Items.class.getDeclaredFields()) {
@@ -230,7 +230,7 @@ public class ATGObjects {
 				throw new RuntimeException("Incorrect field in item sub-class", e);
 			}
 		}
-		
+
 		for (Field f : Blocks.class.getDeclaredFields()) {
 			try {
 				Block block = (Block) f.get(null);
@@ -242,12 +242,12 @@ public class ATGObjects {
 			}
 		}
 	}
-	
+
 	@SideOnly(Side.CLIENT) // note: this means *physical* side
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent e) {
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
-			
+
 			if (loc.getResourceDomain().equalsIgnoreCase(AcrossTheGalaxy.MODID)) {
 				if (loc.getResourcePath().equalsIgnoreCase("sonic_eleventh_doc")) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new Model11thDocScrewdriver(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/sonics/11th_sonic.png")));
 				if (loc.getResourcePath().equalsIgnoreCase("cane_first_doc")) e.getModelRegistry().putObject(loc, new RenderItemModelBase(null, new ModelFirstDoctorCane(), new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/first_doc_cane.png")));

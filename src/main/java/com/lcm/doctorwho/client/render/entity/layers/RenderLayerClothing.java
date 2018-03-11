@@ -8,17 +8,17 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 public class RenderLayerClothing implements LayerRenderer<EntityLivingBase> {
-	
+
 	@Override
 	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		ItemStack item = entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-		
+
 		if (!item.isEmpty() && item.getItem() instanceof ItemClothingOutline) {
 			ItemClothingOutline clothing = (ItemClothingOutline) item.getItem();
 			clothing.getModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		}
 	}
-	
+
 	@Override
 	public boolean shouldCombineTextures() {
 		return false;

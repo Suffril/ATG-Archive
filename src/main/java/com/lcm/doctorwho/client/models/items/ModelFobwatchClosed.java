@@ -36,11 +36,11 @@ public class ModelFobwatchClosed extends ModelBase implements ItemModelBase {
 	ModelRenderer WatchBackIndent1;
 	ModelRenderer WatchBackIndent2;
 	ModelRenderer WatchBackIndent3;
-	
+
 	public ModelFobwatchClosed() {
 		textureWidth = 64;
 		textureHeight = 64;
-		
+
 		WatchFace = new ModelRenderer(this, 0, 12);
 		WatchFace.addBox(0F, 0F, 0F, 6, 6, 1);
 		WatchFace.setRotationPoint(-3F, 17F, 0F);
@@ -162,13 +162,13 @@ public class ModelFobwatchClosed extends ModelBase implements ItemModelBase {
 		WatchBackIndent3.mirror = true;
 		setRotation(WatchBackIndent3, 0F, 0F, 0F);
 	}
-	
+
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-	
+
 	@Override
 	public void renderModel(float scale) {
 		WatchFace.render(scale);
@@ -192,7 +192,7 @@ public class ModelFobwatchClosed extends ModelBase implements ItemModelBase {
 		WatchBackIndent2.render(scale);
 		WatchBackIndent3.render(scale);
 	}
-	
+
 	@Override
 	public IModelState getTransforms() {
 		Map<ItemCameraTransforms.TransformType, TRSRTransformation> map = new HashMap<>();
