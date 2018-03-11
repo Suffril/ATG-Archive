@@ -14,11 +14,16 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
 public class EntityCybermen extends EntityMob implements IRangedAttackMob {
 
     CyberType type = CyberType.TENTH_PLANET;
+    private static final DataParameter<Integer> CYBER_TYPE = EntityDataManager.<Integer>createKey(EntityCybermen.class, DataSerializers.VARINT);
 
     public EntityCybermen(World worldIn) {
         super(worldIn);
@@ -42,15 +47,40 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
         targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, false));
         targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityIronGolem.class, true));
 
-       // if(getType().equals(CyberType.TENTH_PLANET))
-      //  {
-      //      System.out.println("true");
-            tasks.addTask(1, new EntityAIAttackMelee(this, 0.8D, false));
-      //  }
+        tasks.addTask(1, new EntityAIAttackMelee(this, 0.8D, false));
     }
 
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.getDataManager().register(CYBER_TYPE, 0);
+    }
 
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+        super.writeToNBT(compound);
+        compound.setInteger("cyber_type", getTypeID());
+        return compound;
+    }
 
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        setTypeID(compound.getInteger("cyber_type"));
+    }
+
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+        setUpCyberman();
+
+    }
 
     @Override
     protected void applyEntityAttributes()
@@ -62,15 +92,16 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
         getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
     }
 
-    public CyberType getType()
+    public void setTypeID(int id)
     {
-        return type;
+        this.getDataManager().set(CYBER_TYPE, id);
     }
 
-    public void setType(CyberType type)
+    public int getTypeID()
     {
-        this.type = type;
+        return getDataManager().get(CYBER_TYPE);
     }
+
 
 
         /**
@@ -82,12 +113,12 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
 
-        if(getType().equals(CyberType.CYBUS))
+        if(type.equals(CyberType.CYBUS))
         {
             //Cybus attack
         }
 
-        if(getType().equals(CyberType.EARTHSHOCK))
+        if(type.equals(CyberType.EARTHSHOCK))
         {
             //Earthshock atack
         }
@@ -96,6 +127,28 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
     @Override
     public void setSwingingArms(boolean swingingArms) {
 
+    }
+
+    private void setUpCyberman()
+    {
+        int id = getTypeID();
+        switch (getTypeID()) {
+            case 0:  id = 0;
+                type = CyberType.TENTH_PLANET;
+                break;
+
+            case 1:  id = 1;
+                type = CyberType.EARTHSHOCK;
+                break;
+
+            case 2:  id = 2;
+                type = CyberType.CYBUS;
+                break;
+
+            case 3:  id = 3;
+                type = CyberType.MONDAS;
+                break;
+        }
     }
 
     public enum CyberType

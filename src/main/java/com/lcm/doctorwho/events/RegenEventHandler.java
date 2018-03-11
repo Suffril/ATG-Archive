@@ -4,9 +4,9 @@ import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
 import com.lcm.doctorwho.utils.ATGConfig;
+import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.DebugCommand.NoRegenDamageSource;
 import com.lcm.doctorwho.utils.DebugCommand.QuickRegenDamageSource;
-import com.lcm.doctorwho.utils.ExplosionUtil;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
@@ -120,7 +120,7 @@ public class RegenEventHandler { // NO_UCD (unused code)
 			
 			if (handler.regenerationsLeft != -1) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.regenLeftExt", time, (handler.regenerationsLeft - 1))), true);
 			player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.regeneration, SoundCategory.PLAYERS, 1.0F, 1.0F);
-			ExplosionUtil.regenerationExplosion(player);
+			ATGUtils.regenerationExplosion(player);
 			if (e.getSource() instanceof QuickRegenDamageSource) handler.regenTicks = 201;
 		}
 	}
