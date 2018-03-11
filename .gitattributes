@@ -1,0 +1,6 @@
+# Force proper line endings
+* text=crlf
+
+# No annoying diffs when updating wrapper version
+gradlew binary
+gradlew.bat binary
