@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.vecmath.Matrix4f;
 
-import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
-import com.lcm.doctorwho.client.models.items.ModelFobwatchClosed;
-import com.lcm.doctorwho.client.models.items.ModelFobwatchOpen;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
+import com.lcm.doctorwho.client.models.items.ModelFobwatchClosed;
+import com.lcm.doctorwho.client.models.items.ModelFobwatchOpen;
 import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.util.render.IItemRenderer;

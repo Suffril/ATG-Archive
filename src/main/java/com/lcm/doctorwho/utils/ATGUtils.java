@@ -6,8 +6,6 @@ import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

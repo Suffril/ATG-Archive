@@ -1,5 +1,8 @@
 package com.lcm.doctorwho.client.render;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.lcm.doctorwho.client.models.entity.angels.ModelWeepingAngel;
 import com.lcm.doctorwho.client.models.entity.hostile.cybermen.ModelCyberTenthPlanet;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
@@ -7,12 +10,9 @@ import com.lcm.doctorwho.client.render.entity.RenderEntityBaseProjectile;
 import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
-import java.util.HashMap;
-import java.util.Map;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class RenderMobsInit {
 

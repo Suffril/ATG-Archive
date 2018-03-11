@@ -2,16 +2,13 @@ package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
-import net.minecraft.client.Minecraft;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.Random;
 
 public class ModelHartnellTardis extends ModelBase implements ITardisModel
 

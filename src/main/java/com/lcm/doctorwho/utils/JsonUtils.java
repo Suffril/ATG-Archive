@@ -11,8 +11,8 @@ import java.io.Writer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
-
 import com.lcm.doctorwho.AcrossTheGalaxy;
+
 import net.minecraft.client.Minecraft;
 
 public class JsonUtils {

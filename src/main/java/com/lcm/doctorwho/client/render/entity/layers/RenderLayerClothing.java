@@ -1,6 +1,7 @@
 package com.lcm.doctorwho.client.render.entity.layers;
 
 import com.lcm.doctorwho.common.items.ItemClothingOutline;
+
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;

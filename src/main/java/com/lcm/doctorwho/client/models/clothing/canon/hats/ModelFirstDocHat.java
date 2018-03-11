@@ -3,6 +3,7 @@ package com.lcm.doctorwho.client.models.clothing.canon.hats;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
 import com.lcm.doctorwho.utils.ATGUtils;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

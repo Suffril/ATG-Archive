@@ -3,8 +3,8 @@ package com.lcm.doctorwho.common.dimension.tardis;
 import javax.annotation.Nullable;
 
 import com.lcm.doctorwho.common.dimension.ATGDims;
+
 import lucraft.mods.lucraftcore.space.dimension.ChunkGeneratorSpace;
-import lucraft.mods.lucraftcore.space.dimension.SpaceDimension;
 import lucraft.mods.lucraftcore.space.dimension.SpaceSkyRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;

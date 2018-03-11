@@ -1,6 +1,9 @@
 package com.lcm.doctorwho.common.items;
 
+import javax.annotation.Nullable;
+
 import com.lcm.doctorwho.events.ATGClientProxy;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,8 +17,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
 
 public class ItemClothingOutline extends ItemArmor {
 

@@ -3,8 +3,9 @@ package com.lcm.doctorwho.client.models.items;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 import org.lwjgl.util.vector.Vector3f;
+
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.client.model.ModelBase;

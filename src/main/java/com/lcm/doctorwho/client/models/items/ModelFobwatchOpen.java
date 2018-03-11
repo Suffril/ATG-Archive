@@ -3,14 +3,14 @@ package com.lcm.doctorwho.client.models.items;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.util.vector.Vector3f;
+
+import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraftforge.common.model.IModelState;

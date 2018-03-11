@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
+import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
+import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
@@ -38,7 +39,6 @@ import com.lcm.doctorwho.common.traits.positive.TraitStrong;
 import com.lcm.doctorwho.common.traits.positive.TraitSturdy;
 import com.lcm.doctorwho.common.traits.positive.TraitThickSkinned;
 import com.lcm.doctorwho.common.traits.positive.TraitTough;
-import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;

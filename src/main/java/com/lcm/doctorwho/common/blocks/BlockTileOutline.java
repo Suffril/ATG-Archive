@@ -1,14 +1,13 @@
 package com.lcm.doctorwho.common.blocks;
 
-import com.lcm.doctorwho.common.tiles.TileEntityTardis;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class BlockTileOutline extends BlockOutline {
 
