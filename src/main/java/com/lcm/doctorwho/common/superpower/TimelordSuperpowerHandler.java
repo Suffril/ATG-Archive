@@ -101,7 +101,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 	private static void randomizeTraits(SuperpowerPlayerHandler handler) {
 		// Reset Karma
 		if (LCConfig.modules.karma) for (KarmaStat karmaStat : KarmaStat.getKarmaStats())
-				KarmaHandler.setKarmaStat(handler.getPlayer(), karmaStat, 0);
+			KarmaHandler.setKarmaStat(handler.getPlayer(), karmaStat, 0);
 
 		handler.getAbilities().forEach(ability -> ability.setUnlocked(false));
 
@@ -122,9 +122,9 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		String s = "";
 		for (Ability ability : handler.getAbilities())
 			if (ability.isUnlocked()) if (s.equals(""))
-					s = ability.getDisplayName().substring(7);
-				else
-					s = s + ", " + ability.getDisplayName().substring(7);
+				s = ability.getDisplayName().substring(7);
+			else
+				s = s + ", " + ability.getDisplayName().substring(7);
 		// handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
 	}
 

@@ -68,14 +68,7 @@ public class EntityProjectile extends EntityThrowable {
 			setDead();
 		}
 
-		if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
+		if (result.typeOfHit == RayTraceResult.Type.BLOCK || (result.typeOfHit == RayTraceResult.Type.MISS && onGround))
 			setDead();
-		}
-
-		if (result.typeOfHit == RayTraceResult.Type.MISS)
-
-			if (onGround) {
-				setDead();
-			}
 	}
 }

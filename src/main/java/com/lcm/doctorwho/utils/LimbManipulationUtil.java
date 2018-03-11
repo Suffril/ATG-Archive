@@ -161,10 +161,10 @@ public class LimbManipulationUtil {
 
 		private void reset() {
 			if (f != null) try {
-					this.f.set(modelBiped, this.old);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
+				this.f.set(modelBiped, this.old);
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
 
 		private void setAnglesRadians(float x, float y, float z) {
@@ -198,7 +198,7 @@ public class LimbManipulationUtil {
 						for (ModelRenderer modelRenderer : ((ModelBiped) field.get(layer)).boxList)
 							if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
 					} else if (field.getType() == ModelPlayer.class) for (ModelRenderer modelRenderer : ((ModelBiped) field.get(layer)).boxList)
-							if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
+						if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
 				}
 			for (ModelRenderer modelRenderer : event.getRenderer().getMainModel().boxList)
 				if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
