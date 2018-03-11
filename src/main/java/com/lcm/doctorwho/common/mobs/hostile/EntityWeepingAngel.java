@@ -76,16 +76,16 @@ public class EntityWeepingAngel extends EntityMob {
 		super.onUpdate();
 
 		if (!world.isRemote) if (isSeen()) {
-			setSeenTime(getSeenTime() + 1);
-			motionX = 0;
-			motionZ = 0;
-			if (onGround) {
+				setSeenTime(getSeenTime() + 1);
+				motionX = 0;
 				motionZ = 0;
-			}
+				if (onGround) {
+					motionZ = 0;
+				}
 
-			if (getSeenTime() > 15) setSeen(false);
-		} else
-			setSeenTime(0);
+				if (getSeenTime() > 15) setSeen(false);
+			} else
+				setSeenTime(0);
 	}
 
 	/**

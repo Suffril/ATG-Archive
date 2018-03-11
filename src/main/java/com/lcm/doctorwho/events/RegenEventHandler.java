@@ -111,7 +111,7 @@ public class RegenEventHandler { // NO_UCD (unused code)
 			String time = "" + (handler.timesRegenerated + 1);
 			int lastDigit = handler.timesRegenerated;
 			if (lastDigit > 20) while (lastDigit > 10)
-				lastDigit -= 10;
+					lastDigit -= 10;
 
 			if (lastDigit < 3)
 				time = time + StringHelper.translateToLocal("lcm-atg.messages.numsuffix." + lastDigit);

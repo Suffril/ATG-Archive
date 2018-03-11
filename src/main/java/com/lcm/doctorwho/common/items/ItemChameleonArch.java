@@ -44,16 +44,16 @@ public class ItemChameleonArch extends Item {
 
 		// Handle inifite regeneration case
 		if (ATGConfig.regenCapacity == 0) if (handler == null) {
-			arch.getTagCompound().setBoolean("open", true);
-			SuperpowerHandler.giveSuperpower(player, TimelordSuperpower.INSTANCE);
-			SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = -1;
-			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
-			arch.getTagCompound().setBoolean("open", false);
-			return new ActionResult<>(EnumActionResult.PASS, arch);
-		} else {
-			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.alreadyTimelord")), true);
-			return new ActionResult<>(EnumActionResult.FAIL, arch);
-		}
+				arch.getTagCompound().setBoolean("open", true);
+				SuperpowerHandler.giveSuperpower(player, TimelordSuperpower.INSTANCE);
+				SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = -1;
+				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
+				arch.getTagCompound().setBoolean("open", false);
+				return new ActionResult<>(EnumActionResult.PASS, arch);
+			} else {
+				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.alreadyTimelord")), true);
+				return new ActionResult<>(EnumActionResult.FAIL, arch);
+			}
 
 		if (handler == null) {
 			if (arch.getItemDamage() == ATGConfig.regenCapacity) {
