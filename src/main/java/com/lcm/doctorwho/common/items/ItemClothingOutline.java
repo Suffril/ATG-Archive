@@ -69,11 +69,11 @@ public class ItemClothingOutline extends ItemArmor {
         {
             playerIn.setItemStackToSlot(entityequipmentslot, itemstack.copy());
             itemstack.setCount(0);
-            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
         }
         else
         {
-            return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
+            return new ActionResult<>(EnumActionResult.FAIL, itemstack);
         }
     }
 

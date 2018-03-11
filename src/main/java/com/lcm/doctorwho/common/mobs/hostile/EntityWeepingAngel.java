@@ -8,7 +8,6 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -19,7 +18,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
 
-public class EntityWeepingAngel extends EntityMob implements IMob {
+public class EntityWeepingAngel extends EntityMob {
 	
 	private static DataParameter<Boolean> VIEWED = EntityDataManager.<Boolean>createKey(EntityWeepingAngel.class, DataSerializers.BOOLEAN);
 	

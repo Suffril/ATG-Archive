@@ -59,7 +59,8 @@ public class TileEntityTardis extends TileEntity implements ITickable {
         return tag;
     }
 
-    @Nullable
+    @SuppressWarnings("unchecked") //ASM black magic I presume?
+	@Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         return (T)handler;

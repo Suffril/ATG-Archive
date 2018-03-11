@@ -24,9 +24,9 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 
     @Override
     public void render(TileEntityTardis tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-
             ITardis capa = tile.getCapability(CapabilityTileTardis.TARDIS, null);
-           if(capa != null && capa.getModelID() <= ATGClientProxy.TARDIS_MODELS.size()){
+            if (capa == null) throw new Error("TARDIS does not have capability");
+           if(capa.getModelID() <= ATGClientProxy.TARDIS_MODELS.size()){
                MODEL = ATGClientProxy.TARDIS_MODELS.get(capa.getModelID());
            }
 

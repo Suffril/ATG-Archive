@@ -38,9 +38,9 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
     protected void applyEntityAI()
     {
         tasks.addTask(6, new EntityAIMoveThroughVillage(this, 1.0D, false));
-        targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
-        targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, false));
+        targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityIronGolem.class, true));
 
        // if(getType().equals(CyberType.TENTH_PLANET))
       //  {

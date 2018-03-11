@@ -88,7 +88,7 @@ public class CapabilityTileTardis implements ITardis
         compound.setInteger("tardisID", tardisID);
         compound.setString("ownerUUID", ownerUUID);
         compound.setInteger("modelID", modelID);
-        compound.setBoolean("doorOpen", doorOpen);;
+        compound.setBoolean("doorOpen", doorOpen);
         return compound;
     }
 
