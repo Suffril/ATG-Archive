@@ -9,14 +9,20 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.PlayerCapabilities;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -69,6 +75,42 @@ public class ATGUtils {
 		if (considerYlevel && entity.onGround) entity.motionY = 0;
 		entity.motionZ = 0;
 	}
+
+	public static void regenerationExplosion(EntityPlayer player) {
+		explodeKill(player, player.world, player.getPosition(), ATGConfig.regenerativeKillRange);
+		explodeKnockback(player, player.world, player.getPosition(), ATGConfig.regenerativeKnockback, ATGConfig.regenerativeKnockbackRange);
+	}
+
+	public static void explodeKnockback(Entity exploder, World world, BlockPos pos, float knockback, int range) {
+		world.getEntitiesWithinAABBExcludingEntity(exploder, getReach(pos, range)).forEach(entity -> {
+			if (!(entity instanceof EntityLiving || entity instanceof EntityPlayer) || exploder.isDead) return;
+			EntityLivingBase victim = (EntityLivingBase) entity;
+			float densMod = world.getBlockDensity(new Vec3d(pos), entity.getEntityBoundingBox());
+
+			int xr, zr;
+			xr = (int) -(victim.posX - exploder.posX);
+			zr = (int) -(victim.posZ - exploder.posZ);
+
+			victim.knockBack(exploder, knockback * densMod, xr, zr);
+		});
+	}
+
+	public static void explodeKill(Entity exploder, World world, BlockPos pos, int range) {
+		world.getEntitiesWithinAABBExcludingEntity(exploder, getReach(pos, range)).forEach(entity -> {
+			if (!(entity instanceof EntityLiving || entity instanceof EntityPlayer) || !entity.isNonBoss()) return;
+			entity.attackEntityFrom(ATGUtils.RegenerativeDamageSource.INSTANCE, Float.MAX_VALUE);
+		});
+	}
+
+	public static AxisAlignedBB getReach(BlockPos pos, int range) {
+		return new AxisAlignedBB(pos.up(range).north(range).west(range), pos.down(range).south(range).east(range));
+	}
+
+	public static class RegenerativeDamageSource extends DamageSource { // useful for future extension / add-on hooking
+		public static final DamageSource INSTANCE = new ATGUtils.RegenerativeDamageSource();
+		private RegenerativeDamageSource() { super("regeneration"); }
+	}
+
 
 	/**
 	 * Rendering a enchanted effect onto modelled items

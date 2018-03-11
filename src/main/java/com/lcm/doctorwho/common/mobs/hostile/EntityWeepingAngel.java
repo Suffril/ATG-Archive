@@ -77,7 +77,12 @@ public class EntityWeepingAngel extends EntityMob implements IMob {
 
 		if (!world.isRemote) if (isSeen()) {
 			setSeenTime(getSeenTime() + 1);
-			
+			motionX = 0;
+			motionZ = 0;
+            if(onGround) {
+                motionZ = 0;
+            }
+
 			if (getSeenTime() > 15) setSeen(false);
 		} else
 			setSeenTime(0);
@@ -101,27 +106,6 @@ public class EntityWeepingAngel extends EntityMob implements IMob {
 			int y = world.getSpawnPoint().getY();
 			entity.setPositionAndUpdate(x, y, z);
 		}
-	}
-	
-	@Override
-	public void setMoveForward(float amount) {
-		if (!isSeen()) moveForward = amount;
-		else
-			moveForward = 0;
-	}
-	
-	@Override
-	public void setMoveVertical(float amount) {
-		if (!isSeen()) moveVertical = amount;
-		
-		if (isSeen() && !isAirBorne) moveVertical = 0;
-	}
-	
-	@Override
-	public void setMoveStrafing(float amount) {
-		if (!isSeen()) moveStrafing = amount;
-		else
-			moveStrafing = 0;
 	}
 	
 	/**

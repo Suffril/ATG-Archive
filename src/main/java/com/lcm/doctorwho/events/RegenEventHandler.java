@@ -1,15 +1,12 @@
 package com.lcm.doctorwho.events;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
-import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.utils.ATGConfig;
+import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.DebugCommand.NoRegenDamageSource;
 import com.lcm.doctorwho.utils.DebugCommand.QuickRegenDamageSource;
-import com.lcm.doctorwho.utils.ExplosionUtil;
 
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import lucraft.mods.lucraftcore.superpowers.capabilities.CapabilitySuperpower;
@@ -20,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentString;
@@ -30,7 +26,6 @@ import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.conditions.RandomChance;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -41,8 +36,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
-
-import static com.lcm.doctorwho.common.capabilities.CapabilityTileTardis.TARDIS;
 
 @EventBusSubscriber
 public class RegenEventHandler { // NO_UCD (unused code)
@@ -127,7 +120,7 @@ public class RegenEventHandler { // NO_UCD (unused code)
 			
 			if (handler.regenerationsLeft != -1) player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.regenLeftExt", time, (handler.regenerationsLeft - 1))), true);
 			player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.regeneration, SoundCategory.PLAYERS, 1.0F, 1.0F);
-			ExplosionUtil.regenerationExplosion(player);
+			ATGUtils.regenerationExplosion(player);
 			if (e.getSource() instanceof QuickRegenDamageSource) handler.regenTicks = 201;
 		}
 	}
