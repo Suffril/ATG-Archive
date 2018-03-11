@@ -17,21 +17,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 /** Created by AFlyingGrayson on 8/7/17 */
 public class TraitWeak extends AbilityAttributeModifier implements INegativeTrait {
-	
+
 	public TraitWeak(EntityPlayer player, UUID uuid, float factor, int operation) {
 		super(player, uuid, factor, operation);
 	}
-	
+
 	@Override
 	public IAttribute getAttribute() {
 		return LCAttributes.PUNCH_DAMAGE;
 	}
-	
+
 	@Override
 	public Class<? extends Ability> getPositiveTrait() {
 		return TraitStrong.class;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {

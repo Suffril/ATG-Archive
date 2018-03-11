@@ -23,26 +23,26 @@ import net.minecraft.world.World;
 
 /** Created by AFlyingGrayson on 8/28/17 */
 public class ItemChameleonArch extends Item {
-	
-	public ItemChameleonArch() { //CHECK how should combining/repairing work out?
+
+	public ItemChameleonArch() { // CHECK how should combining/repairing work out?
 		setUnlocalizedName("chameleonArch");
 		setRegistryName(AcrossTheGalaxy.MODID, "chameleonarch");
 		setCreativeTab(CreativeTabs.MISC);
 		setMaxStackSize(1);
 		setMaxDamage(ATGConfig.regenCapacity);
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack arch = player.getHeldItem(hand);
 		SuperpowerPlayerHandler handler = SuperpowerHandler.getSuperpowerPlayerHandler(player);
-		
+
 		if (arch.getTagCompound() == null) {
 			arch.setTagCompound(new NBTTagCompound());
 			arch.getTagCompound().setBoolean("open", true);
 		}
-		
-		//Handle inifite regeneration case
+
+		// Handle inifite regeneration case
 		if (ATGConfig.regenCapacity == 0) if (handler == null) {
 			arch.getTagCompound().setBoolean("open", true);
 			SuperpowerHandler.giveSuperpower(player, TimelordSuperpower.INSTANCE);
@@ -54,22 +54,22 @@ public class ItemChameleonArch extends Item {
 			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.alreadyTimelord")), true);
 			return new ActionResult<>(EnumActionResult.FAIL, arch);
 		}
-		
+
 		if (handler == null) {
 			if (arch.getItemDamage() == ATGConfig.regenCapacity) {
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch")), true);
 				return new ActionResult<>(EnumActionResult.FAIL, arch);
 			}
-			
+
 			SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE);
-			
+
 			int used = doUsageDamage(arch, SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class));
 			if (arch.getItemDamage() < ATGConfig.regenCapacity && !player.isCreative()) throw new RuntimeException("Did not fully use arch when receiving superpower (" + used + "," + arch.getCount() + ")");
-			
+
 			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
 		} else if (handler instanceof TimelordSuperpowerHandler) {
 			TimelordSuperpowerHandler tmh = ((TimelordSuperpowerHandler) handler);
-			
+
 			if (!player.isSneaking()) {
 				int used = doUsageDamage(arch, tmh);
 				if (used == 0) {
@@ -88,7 +88,7 @@ public class ItemChameleonArch extends Item {
 					player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyCycle")), true);
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
 				}
-				
+
 				// TODO sound effect?
 				arch.setItemDamage(arch.getItemDamage() - 1);
 				tmh.regenerationsLeft--;
@@ -97,18 +97,18 @@ public class ItemChameleonArch extends Item {
 			}
 		} else
 			return new ActionResult<>(EnumActionResult.FAIL, arch);
-		
+
 		player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.timeyWimey, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		return new ActionResult<>(EnumActionResult.PASS, arch);
 	}
-	
+
 	private int doUsageDamage(ItemStack stack, TimelordSuperpowerHandler handler) {
 		int supply = ATGConfig.regenCapacity - stack.getItemDamage(), needed = ATGConfig.regenCapacity - handler.regenerationsLeft, used = Math.min(supply, needed);
 		if (used == 0) return 0;
-		
+
 		handler.regenerationsLeft += used;
 		SuperpowerHandler.syncToAll(handler.getPlayer());
-		
+
 		if (!handler.getPlayer().isCreative()) stack.setItemDamage(stack.getItemDamage() + used);
 		return used;
 	}

@@ -6,8 +6,6 @@ import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,21 +27,21 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ATGUtils {
-	
+
 	/**
 	 * Really easy way of playing sounds
 	 */
 	public static void playSound(Entity entity, SoundEvent sound) {
 		entity.world.playSound(null, entity.posX, entity.posY, entity.posZ, sound, SoundCategory.PLAYERS, 1.0F, 1.0F);
 	}
-	
+
 	/**
 	 * Checks whether we are on a client or not
 	 */
 	public static boolean isPhysicalClient() {
 		return FMLCommonHandler.instance().getSide().isClient();
 	}
-	
+
 	/**
 	 * Set's the players walk speed serverside
 	 */
@@ -51,19 +49,18 @@ public class ATGUtils {
 		ReflectionHelper.setPrivateValue(PlayerCapabilities.class, p.capabilities, speed, 6);
 	}
 
-    /**
-     * Send a message to the player
-     */
-    public static void sendPlayerMessage(EntityPlayer p, String message)
-    {
-        if(!p.world.isRemote) {
-            p.sendMessage(new TextComponentString(message));
-        }
-    }
+	/**
+	 * Send a message to the player
+	 */
+	public static void sendPlayerMessage(EntityPlayer p, String message) {
+		if (!p.world.isRemote) {
+			p.sendMessage(new TextComponentString(message));
+		}
+	}
 
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public static void bindTexture(ResourceLocation resource) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(resource);
+		Minecraft.getMinecraft().renderEngine.bindTexture(resource);
 	}
 
 	/**
@@ -108,9 +105,11 @@ public class ATGUtils {
 
 	public static class RegenerativeDamageSource extends DamageSource { // useful for future extension / add-on hooking
 		public static final DamageSource INSTANCE = new ATGUtils.RegenerativeDamageSource();
-		private RegenerativeDamageSource() { super("regeneration"); }
-	}
 
+		private RegenerativeDamageSource() {
+			super("regeneration");
+		}
+	}
 
 	/**
 	 * Rendering a enchanted effect onto modelled items
@@ -123,7 +122,7 @@ public class ATGUtils {
 		GlStateManager.depthFunc(514);
 		GlStateManager.depthMask(false);
 		GlStateManager.color(0.5F, 0.5F, 0.5F, 1.0F);
-		
+
 		for (int i = 0; i < 2; ++i) {
 			GlStateManager.disableLighting();
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_COLOR, GlStateManager.DestFactor.ONE);
@@ -136,7 +135,7 @@ public class ATGUtils {
 			GlStateManager.matrixMode(5888);
 			model.renderModel(scale);
 		}
-		
+
 		GlStateManager.matrixMode(5890);
 		GlStateManager.loadIdentity();
 		GlStateManager.matrixMode(5888);
@@ -145,12 +144,12 @@ public class ATGUtils {
 		GlStateManager.depthFunc(515);
 		GlStateManager.disableBlend();
 	}
-	
+
 	public static class ATGSoundEvent extends SoundEvent {
 		public ATGSoundEvent(String name) {
 			super(new ResourceLocation(AcrossTheGalaxy.MODID, name));
 			setRegistryName(AcrossTheGalaxy.MODID, name);
 		}
 	}
-	
+
 }

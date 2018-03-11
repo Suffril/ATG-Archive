@@ -23,15 +23,15 @@ import net.minecraftforge.fml.relauncher.Side;
 public class LimbManipulationUtil {
 	private static Field textureOffsetXField = ModelRenderer.class.getDeclaredFields()[2];
 	private static Field textureOffsetYField = ModelRenderer.class.getDeclaredFields()[3];
-	
+
 	public static LimbManipulator getLimbManipulator(RenderPlayer renderPlayer, Limb limb) {
 		LimbManipulator manipulator = new LimbManipulator();
 		try {
 			textureOffsetXField.setAccessible(true);
 			textureOffsetYField.setAccessible(true);
-			
+
 			List<LayerRenderer<AbstractClientPlayer>> layerList = ReflectionHelper.getPrivateValue(RenderLivingBase.class, renderPlayer, 4);
-			
+
 			for (LayerRenderer<AbstractClientPlayer> layer : layerList)
 				for (Field field : layer.getClass().getDeclaredFields()) {
 					field.setAccessible(true);
@@ -51,39 +51,39 @@ public class LimbManipulationUtil {
 						manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.secondaryRendererField));
 					}
 				}
-			
+
 			ModelPlayer model = renderPlayer.getMainModel();
-			
+
 			ModelRenderer modelRenderer = (ModelRenderer) limb.rendererField.get(model);
-			
+
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.rendererField));
 			modelRenderer = (ModelRenderer) limb.secondaryRendererField.get(model);
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.secondaryRendererField));
-			
+
 			textureOffsetXField.setAccessible(false);
 			textureOffsetYField.setAccessible(false);
 		} catch (IllegalAccessException ignored) {}
 		return manipulator;
 	}
-	
+
 	public static LimbManipulator getLimbManipulator(ModelPlayer model, Limb limb) {
 		LimbManipulator manipulator = new LimbManipulator();
 		try {
 			textureOffsetXField.setAccessible(true);
 			textureOffsetYField.setAccessible(true);
-			
+
 			ModelRenderer modelRenderer = (ModelRenderer) limb.rendererField.get(model);
-			
+
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.rendererField));
 			modelRenderer = (ModelRenderer) limb.secondaryRendererField.get(model);
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.secondaryRendererField));
-			
+
 			textureOffsetXField.setAccessible(false);
 			textureOffsetYField.setAccessible(false);
 		} catch (IllegalAccessException ignored) {}
 		return manipulator;
 	}
-	
+
 	//@formatter:off
 	public enum Limb {
 		HEAD(ModelBiped.class.getDeclaredFields()[0], ModelBiped.class.getDeclaredFields()[1]),
@@ -92,33 +92,33 @@ public class LimbManipulationUtil {
 		RIGHT_ARM(ModelBiped.class.getDeclaredFields()[3], ModelPlayer.class.getDeclaredFields()[1]),
 		LEFT_LEG(ModelBiped.class.getDeclaredFields()[6], ModelPlayer.class.getDeclaredFields()[2]),
 		RIGHT_LEG(ModelBiped.class.getDeclaredFields()[5], ModelPlayer.class.getDeclaredFields()[3]);
-		
+
 		private Field rendererField, secondaryRendererField;
-		
+
 		Limb(Field rendererField, Field secondaryRendererField) {
 			this.rendererField = rendererField;
 			this.secondaryRendererField = secondaryRendererField;
 		}
 	}
 	//@formatter:on
-	
+
 	public static class LimbManipulator {
-		
+
 		private ArrayList<CustomModelRenderer> limbs = new ArrayList<>();
-		
+
 		public LimbManipulator setAngles(float x, float y, float z) {
 			for (CustomModelRenderer limb : limbs)
 				limb.setAngles(x, y, z);
 			return this;
 		}
-		
+
 		public LimbManipulator setOffsets(float x, float y, float z) {
 			for (CustomModelRenderer limb : limbs)
 				limb.setOffsets(x, y, z);
 			return this;
 		}
 	}
-	
+
 	private static class CustomModelRenderer extends ModelRenderer {
 		private float actualX, actualY, actualZ;
 		private float offX, offY, offZ;
@@ -126,7 +126,7 @@ public class LimbManipulationUtil {
 		private ModelBiped modelBiped;
 		private ModelRenderer old;
 		private Field f;
-		
+
 		private CustomModelRenderer(ModelBiped model, int texOffX, int texOffY, ModelRenderer old, Field field) throws IllegalAccessException {
 			super(model, "");
 			this.modelBiped = model;
@@ -137,7 +137,7 @@ public class LimbManipulationUtil {
 			this.setRotationPoint(old.rotationPointX, old.rotationPointY, old.rotationPointZ);
 			field.set(model, this);
 		}
-		
+
 		@Override
 		public void render(float scale) {
 			if (this.changeAngles) {
@@ -158,7 +158,7 @@ public class LimbManipulationUtil {
 			super.render(scale);
 			GlStateManager.popMatrix();
 		}
-		
+
 		private void reset() {
 			if (f != null) try {
 				this.f.set(modelBiped, this.old);
@@ -166,25 +166,25 @@ public class LimbManipulationUtil {
 				e.printStackTrace();
 			}
 		}
-		
+
 		private void setAnglesRadians(float x, float y, float z) {
 			this.actualX = x;
 			this.actualY = y;
 			this.actualZ = z;
 			this.changeAngles = true;
 		}
-		
+
 		private void setAngles(float x, float y, float z) {
 			this.setAnglesRadians((float) Math.toRadians(x), (float) Math.toRadians(y), (float) Math.toRadians(z));
 		}
-		
+
 		private void setOffsets(float x, float y, float z) {
 			this.offX = x;
 			this.offY = y;
 			this.offZ = z;
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onRenderPlayerPost(RenderPlayerEvent.Post event) {
 		@SuppressWarnings("rawtypes")
@@ -204,5 +204,5 @@ public class LimbManipulationUtil {
 				if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
 		} catch (IllegalAccessException ignored) {}
 	}
-	
+
 }

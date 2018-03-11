@@ -10,16 +10,15 @@ import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.DebugCommand;
 
-import com.lcm.doctorwho.utils.JsonUtils;
 import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -31,15 +30,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class AcrossTheGalaxy {
 	@SidedProxy(serverSide = "com.lcm.doctorwho.events.ATGServerProxy", clientSide = "com.lcm.doctorwho.events.ATGClientProxy")
 
-    public static ATGCommonProxy proxy;
+	public static ATGCommonProxy proxy;
 
 	public static final String MODID = "lcm-atg";
 	public static final String NAME = "Doctor who - Across the galaxy";
 	public static final String VERSION = "1.0";
 	public static final ResourceLocation ICONS = new ResourceLocation(MODID, "textures/gui/ability_icons.png");
 
-    @Mod.Instance("lcm-atg")
-    public static AcrossTheGalaxy instance;
+	@Mod.Instance("lcm-atg")
+	public static AcrossTheGalaxy instance;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -53,8 +52,8 @@ public class AcrossTheGalaxy {
 		MinecraftForge.EVENT_BUS.register(proxy);
 		proxy.init(event);
 		CapabilityManager.INSTANCE.register(ITardis.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
-        GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID +":tardis");
-        ATGDims.dimSetup();
+		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
+		ATGDims.dimSetup();
 	}
 
 	@EventHandler
@@ -67,6 +66,5 @@ public class AcrossTheGalaxy {
 	public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new DebugCommand());
 	}
-
 
 }
