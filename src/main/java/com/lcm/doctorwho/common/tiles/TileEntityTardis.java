@@ -23,6 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -99,7 +100,8 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 							getCapability(CapabilityTileTardis.TARDIS, null).setDoorOpen(false);
                             ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null))));
 							ATGUtils.playSound(e, ATGObjects.SoundEvents.tardis_pb_close);
-                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, -1441, 4, 312);
+							BlockPos pos = BlockPos.fromLong(getCapability(CapabilityTileTardis.TARDIS, null).getInteriorPos());
+                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, pos.getX(), pos.getY(), pos.getZ());
                    	 	}
                 }
 

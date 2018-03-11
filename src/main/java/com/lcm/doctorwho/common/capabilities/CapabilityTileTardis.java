@@ -22,7 +22,8 @@ public class CapabilityTileTardis implements ITardis {
 	private int tardisID, modelID;
 	private String ownerUUID = "No-one";
 	private boolean doorOpen;
-	BlockPos interiorPos;
+	long interiorPos;
+	long exteriorPos;
 
 	public CapabilityTileTardis(TileEntityTardis tile) {
 		tardis = tile;
@@ -69,13 +70,23 @@ public class CapabilityTileTardis implements ITardis {
 	}
 
 	@Override
-	public BlockPos getInteriorPos() {
-		return null;
+	public long getInteriorPos() {
+		return interiorPos;
 	}
 
 	@Override
-	public void setBlockPos(BlockPos pos) {
-		interiorPos = pos;
+	public void setInteriorPos(long pos) {
+        exteriorPos = pos;
+	}
+
+	@Override
+	public long getExteriorPos() {
+		return exteriorPos;
+	}
+
+	@Override
+	public void setExteriorPos(long pos) {
+        exteriorPos = pos;
 	}
 
 	@Override
@@ -85,6 +96,8 @@ public class CapabilityTileTardis implements ITardis {
 		compound.setString("ownerUUID", ownerUUID);
 		compound.setInteger("modelID", modelID);
 		compound.setBoolean("doorOpen", doorOpen);
+		compound.setLong("interiorPos", interiorPos);
+		compound.setLong("exteriorPos", exteriorPos);
 		return compound;
 	}
 
@@ -94,6 +107,8 @@ public class CapabilityTileTardis implements ITardis {
 		ownerUUID = nbt.getString("ownerUUID");
 		modelID = nbt.getInteger("modelID");
 		doorOpen = nbt.getBoolean("doorOpen");
+		interiorPos = nbt.getLong("interiorPos");
+		exteriorPos = nbt.getLong("exteriorPos");
 	}
 
 	public static class CapabilityTardisProvider implements ICapabilitySerializable<NBTTagCompound> {

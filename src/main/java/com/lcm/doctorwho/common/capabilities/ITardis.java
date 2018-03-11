@@ -24,7 +24,11 @@ public interface ITardis {
 
 	void setOwner(String uuid);
 
-	BlockPos getInteriorPos();
+	long getInteriorPos();
 
-	void setBlockPos(BlockPos pos);
+	void setInteriorPos(long pos);
+
+	long getExteriorPos();
+
+	void setExteriorPos(long pos);
 }
