@@ -20,7 +20,7 @@ build
 # other
 eclipse
 run
-cleaning-backup/
+formatter/
 
 # notify @HoldYourWaffle if you need to remove this
 gradle.properties
