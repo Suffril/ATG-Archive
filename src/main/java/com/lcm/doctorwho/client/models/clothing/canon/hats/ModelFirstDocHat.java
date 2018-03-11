@@ -10,16 +10,16 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelFirstDocHat extends ModelBiped {
-	
+
 	/**
 	 * Model First Doctor hats
-	 * 
+	 *
 	 * @Author - Lucy
 	 * @Date - 02/19/2018
 	 */
-	
+
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/first_doc_hat.png");
-	
+
 	ModelRenderer Base;
 	ModelRenderer Hat2;
 	ModelRenderer Hat3;
@@ -28,11 +28,11 @@ public class ModelFirstDocHat extends ModelBiped {
 	ModelRenderer Hat6;
 	ModelRenderer Hat7;
 	ModelRenderer Hat8;
-	
+
 	public ModelFirstDocHat() {
 		textureWidth = 64;
 		textureHeight = 64;
-		
+
 		Base = new ModelRenderer(this, 2, 16);
 		Base.addBox(0F, 0F, 0F, 9, 2, 9);
 		Base.setRotationPoint(-4.5F, -14F, -5F);
@@ -81,13 +81,13 @@ public class ModelFirstDocHat extends ModelBiped {
 		Hat8.setTextureSize(64, 64);
 		Hat8.mirror = true;
 		setRotation(Hat8, 0F, 0F, 0F);
-		
+
 		this.bipedHeadwear.isHidden = true;
-		
+
 		this.bipedHead = new BodyPartHook(this, 0, 0);
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0);
 		this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-		
+
 		((BodyPartHook) this.bipedHead).setRender(new BodyPartHook.IPartRenderer() {
 			@Override
 			public void render(float scale) {
@@ -105,9 +105,9 @@ public class ModelFirstDocHat extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 	}
-	
+
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;

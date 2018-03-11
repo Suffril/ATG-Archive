@@ -7,18 +7,18 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
 
 public class ModelProjectile extends ModelBase {
-	
+
 	ModelRenderer GOD;
 	ModelRenderer WEEN;
 	ModelRenderer SATAN;
 	ModelRenderer THE;
 	ModelRenderer ONE;
 	ModelRenderer NESS;
-	
+
 	public ModelProjectile() {
 		textureWidth = 32;
 		textureHeight = 32;
-		
+
 		GOD = new ModelRenderer(this, 0, 9);
 		GOD.addBox(0F, -1F, -3.5F, 0, 2, 7);
 		GOD.setRotationPoint(0F, 0F, 0F);
@@ -56,7 +56,7 @@ public class ModelProjectile extends ModelBase {
 		NESS.mirror = true;
 		setRotation(NESS, 0F, 0F, 1.832596F);
 	}
-	
+
 	public void render(Entity entity, float scale) {
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(entity.world.getWorldTime() * 60, 0, 0, 1);
@@ -78,11 +78,11 @@ public class ModelProjectile extends ModelBase {
 		GlStateManager.disableBlend();
 		GlStateManager.popMatrix();
 	}
-	
+
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-	
+
 }

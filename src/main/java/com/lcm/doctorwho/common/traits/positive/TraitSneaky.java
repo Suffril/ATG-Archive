@@ -20,11 +20,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @formatter:off
  */
 public class TraitSneaky extends AbilityConstant {
-	
+
 	public TraitSneaky(EntityPlayer player) {
 		super(player);
 	}
-	
+
 	@SubscribeEvent
 	public static void onVisibilityCalc(PlayerEvent.Visibility event) {
 		if (SuperpowerHandler.getSuperpowerPlayerHandler(event.getEntityPlayer()) == null) return;
@@ -32,18 +32,18 @@ public class TraitSneaky extends AbilityConstant {
 		if (abilityList == null) return;
 		for (Ability ability : abilityList) if (ability instanceof TraitSneaky && ability.isUnlocked()) event.modifyVisibility(0.5);
 	}
-	
+
 	@Override
 	public boolean showInAbilityBar() {
 		return false;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {
 		mc.renderEngine.bindTexture(AcrossTheGalaxy.ICONS);
 		gui.drawTexturedModalRect(x, y, 0, 0, 16, 16);
 	}
-	
+
 	@Override public void updateTick() {}
 }

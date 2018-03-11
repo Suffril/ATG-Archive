@@ -17,21 +17,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 /** Created by AFlyingGrayson on 8/10/17 */
 public class TraitFrail extends AbilityAttributeModifier implements INegativeTrait {
-	
+
 	public TraitFrail(EntityPlayer player, UUID uuid, float factor, int operation) {
 		super(player, uuid, factor, operation);
 	}
-	
+
 	@Override
 	public IAttribute getAttribute() {
 		return SharedMonsterAttributes.ARMOR;
 	}
-	
+
 	@Override
 	public Class<? extends Ability> getPositiveTrait() {
 		return TraitThickSkinned.class;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {

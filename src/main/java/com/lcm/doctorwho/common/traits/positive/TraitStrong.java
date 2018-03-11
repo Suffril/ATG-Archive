@@ -15,16 +15,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 /** Created by AFlyingGrayson on 8/7/17 */
 public class TraitStrong extends AbilityAttributeModifier {
-	
+
 	public TraitStrong(EntityPlayer player, UUID uuid, float factor, int operation) {
 		super(player, uuid, factor, operation);
 	}
-	
+
 	@Override
 	public IAttribute getAttribute() {
 		return LCAttributes.PUNCH_DAMAGE;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void drawIcon(Minecraft mc, Gui gui, int x, int y) {

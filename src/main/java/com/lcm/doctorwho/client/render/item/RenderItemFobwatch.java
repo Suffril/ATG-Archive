@@ -25,59 +25,59 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
 
 public class RenderItemFobwatch implements IItemRenderer {
-	
+
 	// Textures
 	private ResourceLocation modelTextureOpen = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/fob_watch/fob_open.png");
 	private ResourceLocation modelTextureClosed = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/fob_watch/fob_closed.png");
 	private ResourceLocation modelTexture = modelTextureClosed;
-	
+
 	private static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-	
+
 	// Models
 	private ItemModelBase modelFobWatchClosed = new ModelFobwatchClosed();
 	private ItemModelBase modelfobWatchOpen = new ModelFobwatchOpen();
 	private ItemModelBase modelInUse = modelFobWatchClosed;
-	
+
 	private float scale = 0.0625F;
-	
+
 	public RenderItemFobwatch() {
-		
+
 	}
-	
+
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
 		return IItemRenderer.super.getQuads(state, side, rand);
 	}
-	
+
 	@Override
 	public boolean isAmbientOcclusion() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isGui3d() {
 		return false;
 	}
-	
+
 	@Override
 	public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType) {
 		return IItemRenderer.super.handlePerspective(cameraTransformType);
 	}
-	
+
 	@Override
 	public ItemCameraTransforms getItemCameraTransforms() {
 		return IItemRenderer.super.getItemCameraTransforms();
 	}
-	
+
 	@Override
 	public IModelState getTransforms() {
 		return modelInUse.getTransforms();
 	}
-	
+
 	@Override
 	public void renderItem(ItemStack stack, TransformType transformType) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(modelTexture);
-		
+
 		if (stack.getTagCompound() != null && stack.getTagCompound().getBoolean("open")) {
 			modelInUse = modelfobWatchOpen;
 			modelTexture = modelTextureOpen;
@@ -85,10 +85,10 @@ public class RenderItemFobwatch implements IItemRenderer {
 			modelInUse = modelFobWatchClosed;
 			modelTexture = modelTextureClosed;
 		}
-		
+
 		modelInUse.renderModel(scale);
-		
+
 		if (stack.isItemEnchanted()) ATGUtils.renderEnchantedGlint(Minecraft.getMinecraft().player, modelInUse, ENCHANTED_ITEM_GLINT_RES, scale);
 	}
-	
+
 }

@@ -19,24 +19,24 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemClothingOutline extends ItemArmor {
-	
+
 	public ItemClothingOutline(String name) {
 		super(ArmorMaterial.LEATHER, 0, EntityEquipmentSlot.HEAD);
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 	}
-	
+
 	public ItemClothingOutline(String name, ArmorMaterial mat, EntityEquipmentSlot slot) {
 		super(mat, 0, slot);
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getModel() {
 		return ATGClientProxy.CLOTHING.get(this);
 	}
-	
+
 	/**
 	 * Override this method to have an item handle its own armor rendering.
 	 *
@@ -52,7 +52,7 @@ public class ItemClothingOutline extends ItemArmor {
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, net.minecraft.client.model.ModelBiped _default) {
 		return getModel();
 	}
-	
+
 	/**
 	 * Called when the equipped item is right clicked.
 	 */
@@ -61,7 +61,7 @@ public class ItemClothingOutline extends ItemArmor {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		EntityEquipmentSlot entityequipmentslot = EntityLiving.getSlotForItemStack(itemstack);
 		ItemStack itemstack1 = playerIn.getItemStackFromSlot(entityequipmentslot);
-		
+
 		if (itemstack1.isEmpty()) {
 			playerIn.setItemStackToSlot(entityequipmentslot, itemstack.copy());
 			itemstack.setCount(0);
@@ -70,5 +70,5 @@ public class ItemClothingOutline extends ItemArmor {
 			return new ActionResult<>(EnumActionResult.FAIL, itemstack);
 		}
 	}
-	
+
 }
