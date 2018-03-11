@@ -37,24 +37,24 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ATGClientProxy extends ATGCommonProxy {
-
+	
 	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
 	public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
-
+	
 	private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
-
+	
 	@Override
 	public void init(FMLInitializationEvent event) {
 		RenderMobsInit.init();
 	}
-
+	
 	@Override
 	public void postInit(FMLPostInitializationEvent ev) {
 		setupTardisModels();
 		setupClothingModels();
 		setupTileRendering();
 	}
-
+	
 	@SubscribeEvent
 	public void renderAngels(RenderLivingEvent.Post<EntityWeepingAngel> e) {
 		EntityLivingBase entity = e.getEntity();
@@ -63,15 +63,15 @@ public class ATGClientProxy extends ATGCommonProxy {
 			if (!angel.isSeen()) ATGNetwork.INSTANCE.sendToServer(new MessageAngelSeen(angel.getEntityId()));
 		}
 	}
-
+	
 	@SubscribeEvent
 	public void drawBlockOutline(DrawBlockHighlightEvent e) {
-        if (e.getTarget() != null && e.getTarget().getBlockPos() != null) {
-            Block block = e.getPlayer().getEntityWorld().getBlockState(e.getTarget().getBlockPos()).getBlock();
-            e.setCanceled(block instanceof BlockTardis);
-        }
+		if (e.getTarget() != null && e.getTarget().getBlockPos() != null) {
+			Block block = e.getPlayer().getEntityWorld().getBlockState(e.getTarget().getBlockPos()).getBlock();
+			e.setCanceled(block instanceof BlockTardis);
+		}
 	}
-
+	
 	@SubscribeEvent
 	public void onRenderPlayerPost(RenderPlayerEvent.Post e) {
 		if (!layersAddedTo.contains(e.getEntityPlayer())) {
@@ -79,7 +79,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 			e.getRenderer().addLayer(new RenderLayerClothing());
 		}
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	private static void setupTardisModels() {
 		TARDIS_MODELS.clear();
@@ -88,7 +88,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 		TARDIS_MODELS.put(2, new ModelPertweeTARDIS());
 		TARDIS_MODELS.put(3, new ModelMasqueTardis());
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	private static void setupClothingModels() {
 		CLOTHING.clear();
@@ -96,10 +96,10 @@ public class ATGClientProxy extends ATGCommonProxy {
 		CLOTHING.put(ATGObjects.Items.firstDocHat, new ModelFirstDocHat());
 		CLOTHING.put(ATGObjects.Items.thirtenthDocCoat, new Model13thCoatSteve());
 	}
-
+	
 	@SideOnly(Side.CLIENT)
 	private static void setupTileRendering() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
 	}
-
+	
 }

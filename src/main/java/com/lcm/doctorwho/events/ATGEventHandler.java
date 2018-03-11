@@ -5,8 +5,6 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
 public class ATGEventHandler {
-
-    public static void blockBreak(PlayerEvent e)
-    {
-    }
+	
+	public static void blockBreak(PlayerEvent e) {}
 }

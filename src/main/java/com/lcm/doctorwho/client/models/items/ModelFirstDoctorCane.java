@@ -31,11 +31,11 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase {
 	ModelRenderer CaneCurve7;
 	ModelRenderer CaneCurve8;
 	ModelRenderer CaneBase;
-
+	
 	public ModelFirstDoctorCane() {
 		textureWidth = 64;
 		textureHeight = 64;
-
+		
 		Handle1 = new ModelRenderer(this, 13, 1);
 		Handle1.addBox(0F, 0F, 0F, 6, 2, 2);
 		Handle1.setRotationPoint(0F, 0F, 0F);
@@ -121,7 +121,7 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase {
 		CaneBase.mirror = true;
 		ATGUtils.setRotation(CaneBase, 0F, 0F, 0F);
 	}
-
+	
 	@Override
 	public void renderModel(float scale) {
 		Handle1.render(scale);
@@ -139,7 +139,7 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase {
 		CaneCurve8.render(scale);
 		CaneBase.render(scale);
 	}
-
+	
 	@Override
 	public IModelState getTransforms() {
 		Map<ItemCameraTransforms.TransformType, TRSRTransformation> map = new HashMap<>();

@@ -7,12 +7,12 @@ import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 
 public class ATGDims {
-
+	
 	public static DimensionType tardisDim;
-
+	
 	public static void dimSetup() {
 		tardisDim = DimensionType.register("TARDIS", "_tardis", ATGConfig.tardisDIM, WorldProviderTardisDim.class, false);
 		DimensionManager.registerDimension(ATGConfig.tardisDIM, tardisDim);
 	}
-
+	
 }

@@ -11,18 +11,18 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModelProjectile extends ModelBase {
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/entity/projectile/laser.png");
-
+	
 	ModelRenderer GOD;
 	ModelRenderer WEEN;
 	ModelRenderer SATAN;
 	ModelRenderer THE;
 	ModelRenderer ONE;
 	ModelRenderer NESS;
-
+	
 	public ModelProjectile() {
 		textureWidth = 32;
 		textureHeight = 32;
-
+		
 		GOD = new ModelRenderer(this, 0, 9);
 		GOD.addBox(0F, -1F, -3.5F, 0, 2, 7);
 		GOD.setRotationPoint(0F, 0F, 0F);
@@ -60,7 +60,7 @@ public class ModelProjectile extends ModelBase {
 		NESS.mirror = true;
 		ATGUtils.setRotation(NESS, 0F, 0F, 1.832596F);
 	}
-
+	
 	public void render(Entity entity, float scale) {
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(entity.world.getWorldTime() * 60, 0, 0, 1);
