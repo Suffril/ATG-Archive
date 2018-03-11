@@ -44,7 +44,6 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
         targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
         targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
-
         tasks.addTask(1, new EntityAIAttackMelee(this, 0.8D, false));
     }
 
@@ -52,7 +51,7 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(CYBER_TYPE, 0);
+        getDataManager().register(CYBER_TYPE, 0);
     }
 
     @Override
@@ -100,9 +99,11 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
         return getDataManager().get(CYBER_TYPE);
     }
 
+    public CyberType getType() {
+        return type;
+    }
 
-
-        /**
+    /**
          * Attack the specified entity using a ranged attack.
          *
          * @param target
