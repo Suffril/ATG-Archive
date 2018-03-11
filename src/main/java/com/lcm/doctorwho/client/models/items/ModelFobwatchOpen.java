@@ -187,14 +187,14 @@ public class ModelFobwatchOpen extends ModelBase implements ItemModelBase {
 		WatchBackIndent1.render(scale);
 		WatchBackIndent2.render(scale);
 		WatchBackIndent3.render(scale);
-        WatchFaceHand1.render(scale);
-        WatchFaceHand2.render(scale);
-
-        WatchFace.render(scale);
-        WatchFaceGold1.render(scale);
-        WatchFaceGold2.render(scale);
-        WatchFaceGold3.render(scale);
-        GlStateManager.popMatrix();
+		WatchFaceHand1.render(scale);
+		WatchFaceHand2.render(scale);
+		
+		WatchFace.render(scale);
+		WatchFaceGold1.render(scale);
+		WatchFaceGold2.render(scale);
+		WatchFaceGold3.render(scale);
+		GlStateManager.popMatrix();
 	}
 	
 	@Override

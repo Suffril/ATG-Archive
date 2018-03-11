@@ -34,64 +34,61 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ATGClientProxy extends ATGCommonProxy {
-
+	
 	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
 	public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
-
-    private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
-
+	
+	private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
+	
 	@Override
 	public void init(FMLInitializationEvent event) {
 		RenderMobsInit.init();
 	}
-
+	
 	@Override
-    public void postInit(FMLPostInitializationEvent ev) {
-        setupTardisModels();
-        setupClothingModels();
-        setupTileRendering();
-    }
+	public void postInit(FMLPostInitializationEvent ev) {
+		setupTardisModels();
+		setupClothingModels();
+		setupTileRendering();
+	}
 	
 	@SubscribeEvent
 	public void renderAngels(RenderLivingEvent.Post<EntityWeepingAngel> e) {
 		EntityLivingBase entity = e.getEntity();
 		if (entity instanceof EntityWeepingAngel) {
 			EntityWeepingAngel angel = (EntityWeepingAngel) entity;
-			if(!angel.isSeen()) ATGNetwork.INSTANCE.sendToServer(new MessageAngelSeen(angel.getEntityId()));
+			if (!angel.isSeen()) ATGNetwork.INSTANCE.sendToServer(new MessageAngelSeen(angel.getEntityId()));
 		}
 	}
-
-    @SubscribeEvent
-    public void onRenderPlayerPost(RenderPlayerEvent.Post e) {
-        if (!layersAddedTo.contains(e.getEntityPlayer())) {
-            layersAddedTo.add(e.getEntityPlayer());
-            e.getRenderer().addLayer(new RenderLayerClothing());
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static void setupTardisModels()
-	{
-	    TARDIS_MODELS.clear();
+	
+	@SubscribeEvent
+	public void onRenderPlayerPost(RenderPlayerEvent.Post e) {
+		if (!layersAddedTo.contains(e.getEntityPlayer())) {
+			layersAddedTo.add(e.getEntityPlayer());
+			e.getRenderer().addLayer(new RenderLayerClothing());
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	private static void setupTardisModels() {
+		TARDIS_MODELS.clear();
 		TARDIS_MODELS.put(0, new ModelTTCapsuleHellbent());
 		TARDIS_MODELS.put(1, new ModelHartnellTardis());
 		TARDIS_MODELS.put(2, new ModelPertweeTARDIS());
 		TARDIS_MODELS.put(3, new ModelMasqueTardis());
 	}
-
+	
 	@SideOnly(Side.CLIENT)
-	private static void setupClothingModels()
-	{
+	private static void setupClothingModels() {
 		CLOTHING.clear();
 		CLOTHING.put(ATGObjects.Items.fez, new ModelFez());
 		CLOTHING.put(ATGObjects.Items.firstDocHat, new ModelFirstDocHat());
 		CLOTHING.put(ATGObjects.Items.thirtenthDocCoat, new Model13thCoatSteve());
 	}
-
-    @SideOnly(Side.CLIENT)
-    private static void setupTileRendering()
-    {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
-    }
-
+	
+	@SideOnly(Side.CLIENT)
+	private static void setupTileRendering() {
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
+	}
+	
 }

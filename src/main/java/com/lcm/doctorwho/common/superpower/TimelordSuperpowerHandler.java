@@ -43,13 +43,13 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		EntityPlayer player = cap.getPlayer();
 		
 		if (!player.world.isRemote) {
-
+			
 			// Server Behavior
 			if (regenTicks > 0 && regenTicks < 200) { // regenerating
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.0f); //FIXME broken, sometimes
+				ATGUtils.setWalkSpeed((EntityPlayerMP) player, 0.0f); // FIXME broken, sometimes
 				
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
@@ -125,7 +125,7 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 				s = ability.getDisplayName().substring(7);
 			else
 				s = s + ", " + ability.getDisplayName().substring(7);
-		//handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
+		// handler.getPlayer().sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.newLife", s)), true);
 	}
 	
 	protected static boolean isAbilityUnlocked(SuperpowerPlayerHandler handler, Class<? extends Ability> ability) {

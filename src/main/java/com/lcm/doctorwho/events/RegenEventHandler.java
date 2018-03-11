@@ -39,9 +39,9 @@ import net.minecraftforge.fml.relauncher.Side;
 
 @EventBusSubscriber
 public class RegenEventHandler { // NO_UCD (unused code)
-
+	
 	@SubscribeEvent
-	public static void registerLoot(LootTableLoadEvent e) { //CHECK can this loot table actually be overriden in resource packs?
+	public static void registerLoot(LootTableLoadEvent e) { // CHECK can this loot table actually be overriden in resource packs?
 		if (!e.getName().toString().toLowerCase().matches(ATGConfig.lootRegex) || ATGConfig.disableArch) return;
 		
 		LootCondition[] condAlways = new LootCondition[] { new RandomChance(1F) };

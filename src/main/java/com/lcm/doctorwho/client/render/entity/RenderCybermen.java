@@ -12,24 +12,23 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderCybermen extends RenderLiving<EntityCybermen> {
-
-    ModelBiped model = null;
-
-    public RenderCybermen(ModelBase modelbaseIn) {
-        super(Minecraft.getMinecraft().getRenderManager(), modelbaseIn, 1.0F);
-    }
-
-    @Override
-    protected void renderModel(EntityCybermen entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
-    {
-        super.renderModel(entity, limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch, scaleFactor);
-        model = RenderMobsInit.CYBERS.get(entity.getType());
-        model.render(entity,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch,scaleFactor);
-    }
-
-    @Nullable
-    @Override
-    protected ResourceLocation getEntityTexture(EntityCybermen entity) {
-        return null;
-    }
+	
+	ModelBiped model = null;
+	
+	public RenderCybermen(ModelBase modelbaseIn) {
+		super(Minecraft.getMinecraft().getRenderManager(), modelbaseIn, 1.0F);
+	}
+	
+	@Override
+	protected void renderModel(EntityCybermen entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+		model = RenderMobsInit.CYBERS.get(entity.getType());
+		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+	}
+	
+	@Nullable
+	@Override
+	protected ResourceLocation getEntityTexture(EntityCybermen entity) {
+		return null;
+	}
 }

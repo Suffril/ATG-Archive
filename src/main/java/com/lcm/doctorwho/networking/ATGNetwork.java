@@ -11,8 +11,7 @@ public class ATGNetwork {
 	
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("lcm-atg");
 	
-	public static void init()
-	{
+	public static void init() {
 		INSTANCE.registerMessage(MessageAngelSeen.AngelSeenHandler.class, MessageAngelSeen.class, 0, Side.SERVER);
 		INSTANCE.registerMessage(MessageSyncTardis.TardisSyncHandler.class, MessageSyncTardis.class, 1, Side.CLIENT);
 	}

@@ -35,11 +35,10 @@ public class ATGConfig {
 		
 		cfg.setCategoryComment("Weeping Angel", "These options are used to edit Weeping angel behaviour");
 		angelTeleporting = cfg.getBoolean("angelTeleporting", "Weeping Angel", false, "If this is true, angels have a chance of teleporting you on collision with them");
-
+		
 		cfg.setCategoryComment("Dimension IDs", "These values will allow you to change Dimension IDs");
-		tardisDIM = cfg.getInt("Tardis_DIM", "dimensions",41, 0, Integer.MAX_VALUE, "Change TARDIS Dim ID");
-
-
+		tardisDIM = cfg.getInt("Tardis_DIM", "dimensions", 41, 0, Integer.MAX_VALUE, "Change TARDIS Dim ID");
+		
 		cfg.save();
 	}
 }

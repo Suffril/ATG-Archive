@@ -11,9 +11,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageAngelSeen implements IMessage {
 	
-	public MessageAngelSeen(){}
+	public MessageAngelSeen() {}
 	
 	private int angelID;
+	
 	public MessageAngelSeen(int angelID) {
 		this.angelID = angelID;
 	}
@@ -35,8 +36,7 @@ public class MessageAngelSeen implements IMessage {
 			EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
 			serverPlayer.getServerWorld().addScheduledTask(() -> {
 				Entity entity = serverPlayer.world.getEntityByID(message.angelID);
-				if(entity instanceof EntityWeepingAngel)
-				{
+				if (entity instanceof EntityWeepingAngel) {
 					EntityWeepingAngel angel = (EntityWeepingAngel) entity;
 					angel.setSeen(true);
 				}

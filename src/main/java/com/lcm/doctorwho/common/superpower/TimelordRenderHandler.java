@@ -52,7 +52,7 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 		TimelordSuperpowerHandler handler = (TimelordSuperpowerHandler) superpowerPlayerHandler;
 		
 		if (!(handler.regenTicks > 0 && handler.regenTicks < 200)) return;
-
+		
 		NBTTagCompound style = handler.getStyleNBTTag();
 		
 		if (style.getBoolean("textured"))
@@ -276,7 +276,7 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 			GlStateManager.popMatrix();
 		}
 	}
-
+	
 	@SubscribeEvent
 	public static void onRenderPlayerPre(RenderPlayerEvent.Pre e) {
 		TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(e.getEntityPlayer(), TimelordSuperpowerHandler.class);
@@ -286,13 +286,11 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.HEAD).setAngles(-20, 0, 0);
 		}
 	}
-
+	
 	@SubscribeEvent
-	public static void keyInput(InputUpdateEvent e)
-	{
+	public static void keyInput(InputUpdateEvent e) {
 		TimelordSuperpowerHandler sp = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(e.getEntityPlayer(), TimelordSuperpowerHandler.class);
-		if(sp != null && sp.regenTicks > 0 && sp.regenTicks <200)
-		{
+		if (sp != null && sp.regenTicks > 0 && sp.regenTicks < 200) {
 			MovementInput moveType = e.getMovementInput();
 			moveType.rightKeyDown = false;
 			moveType.leftKeyDown = false;
@@ -303,5 +301,5 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 			moveType.moveStrafe = 0.0F;
 		}
 	}
-
+	
 }

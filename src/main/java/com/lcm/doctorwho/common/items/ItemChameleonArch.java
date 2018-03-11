@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 /** Created by AFlyingGrayson on 8/28/17 */
 public class ItemChameleonArch extends Item {
 	
-	public ItemChameleonArch() { //CHECK how should combining/repairing work out?
+	public ItemChameleonArch() { // CHECK how should combining/repairing work out?
 		setUnlocalizedName("chameleonArch");
 		setRegistryName(AcrossTheGalaxy.MODID, "chameleonarch");
 		setCreativeTab(CreativeTabs.MISC);
@@ -42,7 +42,7 @@ public class ItemChameleonArch extends Item {
 			arch.getTagCompound().setBoolean("open", true);
 		}
 		
-		//Handle inifite regeneration case
+		// Handle inifite regeneration case
 		if (ATGConfig.regenCapacity == 0) if (handler == null) {
 			arch.getTagCompound().setBoolean("open", true);
 			SuperpowerHandler.giveSuperpower(player, TimelordSuperpower.INSTANCE);

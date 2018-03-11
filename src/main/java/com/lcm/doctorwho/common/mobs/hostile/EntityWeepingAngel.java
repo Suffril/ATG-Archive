@@ -74,15 +74,15 @@ public class EntityWeepingAngel extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-
+		
 		if (!world.isRemote) if (isSeen()) {
 			setSeenTime(getSeenTime() + 1);
 			motionX = 0;
 			motionZ = 0;
-            if(onGround) {
-                motionZ = 0;
-            }
-
+			if (onGround) {
+				motionZ = 0;
+			}
+			
 			if (getSeenTime() > 15) setSeen(false);
 		} else
 			setSeenTime(0);
@@ -99,7 +99,7 @@ public class EntityWeepingAngel extends EntityMob {
 	@Override
 	protected void collideWithEntity(Entity entity) {
 		entity.applyEntityCollision(this);
-		if(ATGConfig.angelTeleporting && this.rand.nextBoolean()) {
+		if (ATGConfig.angelTeleporting && this.rand.nextBoolean()) {
 			WorldBorder border = entity.getEntityWorld().getWorldBorder();
 			int x = rand.nextInt(border.getSize());
 			int z = rand.nextInt(border.getSize());
