@@ -156,6 +156,8 @@ public class ATGObjects {
 	public static class SoundEvents {
 		public static final SoundEvent regeneration = new ATGUtils.ATGSoundEvent("regeneration");
 		public static final SoundEvent timeyWimey = new ATGUtils.ATGSoundEvent("timey_wimey");
+		public static final SoundEvent tardis_pb_open = new ATGUtils.ATGSoundEvent("tardis_pb_open");
+		public static final SoundEvent tardis_pb_close = new ATGUtils.ATGSoundEvent("tardis_pb_close");
 	}
 
 	public static class Superpowers { // NO_UCD (unused code)

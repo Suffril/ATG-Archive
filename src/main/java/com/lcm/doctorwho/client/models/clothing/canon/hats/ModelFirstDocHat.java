@@ -38,49 +38,49 @@ public class ModelFirstDocHat extends ModelBiped {
 		Base.setRotationPoint(-4.5F, -14F, -5F);
 		Base.setTextureSize(64, 64);
 		Base.mirror = true;
-		setRotation(Base, 0F, 0F, 0F);
+		ATGUtils.setRotation(Base, 0F, 0F, 0F);
 		Hat2 = new ModelRenderer(this, 4, 6);
 		Hat2.addBox(0F, 0F, 0F, 8, 1, 8);
 		Hat2.setRotationPoint(-4F, -15F, -4.5F);
 		Hat2.setTextureSize(64, 64);
 		Hat2.mirror = true;
-		setRotation(Hat2, 0F, 0F, 0F);
+		ATGUtils.setRotation(Hat2, 0F, 0F, 0F);
 		Hat3 = new ModelRenderer(this, 37, 38);
 		Hat3.addBox(0F, 0F, 0F, 2, 1, 6);
 		Hat3.setRotationPoint(-3F, -17F, -3.5F);
 		Hat3.setTextureSize(64, 64);
 		Hat3.mirror = true;
-		setRotation(Hat3, 0F, 0F, 0F);
+		ATGUtils.setRotation(Hat3, 0F, 0F, 0F);
 		Hat4 = new ModelRenderer(this, 37, 30);
 		Hat4.addBox(0F, 0F, 0F, 2, 1, 6);
 		Hat4.setRotationPoint(1F, -17F, -3.5F);
 		Hat4.setTextureSize(64, 64);
 		Hat4.mirror = true;
-		setRotation(Hat4, 0F, 0F, 0F);
+		ATGUtils.setRotation(Hat4, 0F, 0F, 0F);
 		Hat5 = new ModelRenderer(this, 22, 39);
 		Hat5.addBox(0F, 0F, 0F, 1, 1, 5);
 		Hat5.setRotationPoint(-2.5F, -17.5F, -3F);
 		Hat5.setTextureSize(64, 64);
 		Hat5.mirror = true;
-		setRotation(Hat5, 0F, 0F, 0F);
+		ATGUtils.setRotation(Hat5, 0F, 0F, 0F);
 		Hat6 = new ModelRenderer(this, 8, 39);
 		Hat6.addBox(0F, 0F, 0F, 1, 1, 5);
 		Hat6.setRotationPoint(1.5F, -17.5F, -3F);
 		Hat6.setTextureSize(64, 64);
 		Hat6.mirror = true;
-		setRotation(Hat6, 0F, 0F, 0F);
+		ATGUtils.setRotation(Hat6, 0F, 0F, 0F);
 		Hat7 = new ModelRenderer(this, 7, 29);
 		Hat7.addBox(0F, 0F, 0F, 7, 1, 7);
 		Hat7.setRotationPoint(-3.5F, -16F, -4F);
 		Hat7.setTextureSize(64, 64);
 		Hat7.mirror = true;
-		setRotation(Hat7, 0F, 0F, 0F);
+		ATGUtils.setRotation(Hat7, 0F, 0F, 0F);
 		Hat8 = new ModelRenderer(this, 40, 7);
 		Hat8.addBox(0F, 0F, 0F, 2, 1, 6);
 		Hat8.setRotationPoint(-1F, -16.5F, -3.5F);
 		Hat8.setTextureSize(64, 64);
 		Hat8.mirror = true;
-		setRotation(Hat8, 0F, 0F, 0F);
+		ATGUtils.setRotation(Hat8, 0F, 0F, 0F);
 
 		this.bipedHeadwear.isHidden = true;
 
@@ -106,11 +106,5 @@ public class ModelFirstDocHat extends ModelBiped {
 			}
 		});
 
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 }

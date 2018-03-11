@@ -5,6 +5,7 @@ import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
 
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -62,6 +63,18 @@ public class ATGUtils {
 	public static void bindTexture(ResourceLocation resource) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(resource);
 	}
+
+	/**
+	 * Didn't see the need to have the same method
+	 * used over and over in a load of model classes
+	 */
+	@SideOnly(Side.CLIENT)
+	public static void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
 
 	/**
 	 * Stops a mob in it's tracks, FULLY.

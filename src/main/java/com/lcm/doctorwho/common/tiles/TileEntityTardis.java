@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
+import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
 import com.lcm.doctorwho.utils.ATGConfig;
@@ -94,23 +95,14 @@ public class TileEntityTardis extends TileEntity implements ITickable {
                 if(!entities.isEmpty())
                 {
                     for(Entity e : entities)
-                    {
-                        if(!e.getPassengers().isEmpty())
-                        {
-                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, 9, 64, 68);
-
-                            for(Entity ep : e.getPassengers())
-                            {
-                                ep.dismountRidingEntity();
-                                ATGTeleporter.changeDim(ep, ATGConfig.tardisDIM, 9, 64, 68);
-                                ep.startRiding(e);
-                            }
-
-                        }else {
-                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, 9, 64, 68);
-                        }
-                    }
+                    	{
+							getCapability(CapabilityTileTardis.TARDIS, null).setDoorOpen(false);
+                            ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null))));
+							ATGUtils.playSound(e, ATGObjects.SoundEvents.tardis_pb_close);
+                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, -1441, 4, 312);
+                   	 	}
                 }
+
         }
     }
 }
