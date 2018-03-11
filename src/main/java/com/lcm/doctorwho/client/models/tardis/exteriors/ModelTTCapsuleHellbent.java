@@ -10,11 +10,11 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
-
+	
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_hellbent.png");
 	private boolean doorOpen = false;
 	private boolean lampOn;
-
+	
 	ModelRenderer MS1;
 	ModelRenderer MS2;
 	ModelRenderer MS3;
@@ -45,11 +45,11 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 	ModelRenderer Void1;
 	ModelRenderer Void2;
 	ModelRenderer Void3;
-
+	
 	public ModelTTCapsuleHellbent() {
 		textureWidth = 256;
 		textureHeight = 256;
-
+		
 		MS1 = new ModelRenderer(this, 65, 60);
 		MS1.addBox(-8F, -15F, -9F, 1, 35, 1);
 		MS1.setRotationPoint(0F, 0F, 0F);
@@ -231,11 +231,11 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 		Void3.mirror = true;
 		setRotation(Void3, 0F, -0.7853982F, 0F);
 	}
-
+	
 	@Override
 	public void renderRightDoor(float scale) {
 		GlStateManager.pushMatrix();
-
+		
 		if (isDoorOpen()) {
 			GlStateManager.translate(0.4F, 0.0F, 0.1F);
 			GlStateManager.rotate(40, 0.0F, 1.0F, 0.0F);
@@ -243,11 +243,11 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 		DoorRight.render(scale);
 		GlStateManager.popMatrix();
 	}
-
+	
 	@Override
 	public void renderLeftDoor(float scale) {
 		GlStateManager.pushMatrix();
-
+		
 		if (isDoorOpen()) {
 			GlStateManager.translate(-0.4F, 0.0F, 0.1F);
 			GlStateManager.rotate(-40, 0.0F, 1.0F, 0.0F);
@@ -255,7 +255,7 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 		DoorLeft.render(scale);
 		GlStateManager.popMatrix();
 	}
-
+	
 	@Override
 	public void renderShell(float scale) {
 		// Main
@@ -272,9 +272,9 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 		MS11.render(scale);
 		MS12.render(scale);
 		MS13.render(scale);
-
+		
 		// base
-
+		
 		PO1.render(scale);
 		PO2.render(scale);
 		PO3.render(scale);
@@ -287,31 +287,31 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 		PO10.render(scale);
 		PO11.render(scale);
 		PO12.render(scale);
-
+		
 		Void1.render(scale);
 		Void2.render(scale);
 		Void3.render(scale);
-
+		
 	}
-
+	
 	@Override
 	public void renderLamp(float scale) {
-
+		
 	}
-
+	
 	@Override
 	public void renderText(float scale) {
-
+		
 	}
-
+	
 	@Override
 	public void other(float scale) {
-
+		
 	}
-
+	
 	@Override
 	public void renderAll(float scale) {
-
+		
 		renderLamp(scale);
 		RenderHelper.enableStandardItemLighting();
 		renderRightDoor(scale);
@@ -320,37 +320,37 @@ public class ModelTTCapsuleHellbent extends ModelBase implements ITardisModel {
 		renderText(scale);
 		other(scale);
 	}
-
+	
 	@Override
 	public boolean isDoorOpen() {
 		return doorOpen;
 	}
-
+	
 	@Override
 	public boolean isLampOn() {
 		return lampOn;
 	}
-
+	
 	@Override
 	public void setLampOn(boolean on) {
 		lampOn = on;
 	}
-
+	
 	@Override
 	public void setDoorOpen(boolean open) {
 		doorOpen = open;
 	}
-
+	
 	@Override
 	public ResourceLocation getTexture() {
 		return TEX;
 	}
-
+	
 	@Override
 	public String getExteriorName() {
 		return "TT Capture - Hellbent";
 	}
-
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;

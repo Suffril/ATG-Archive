@@ -30,12 +30,12 @@ public class BlockTardis extends BlockOutline {
 		super(material, color, name);
 		setLightLevel(1.0F);
 	}
-
+	
 	public BlockTardis(Material material, String name) {
 		super(material, name);
 		setLightLevel(1.0F);
 	}
-
+	
 	/**
 	 * Called by ItemBlocks after a block is set in the world, to allow post-place logic
 	 */
@@ -46,7 +46,7 @@ public class BlockTardis extends BlockOutline {
 		capa.setTardisID(700); // Need to figure out a way of assigning these
 		capa.setOwner(placer.getUniqueID().toString());
 	}
-
+	
 	/**
 	 * Called when the block is right clicked by a player.
 	 */
@@ -63,10 +63,10 @@ public class BlockTardis extends BlockOutline {
 		} else {
 			ATGUtils.sendPlayerMessage(playerIn, "This is not your TARDIS!");
 		}
-
+		
 		return true;
 	}
-
+	
 	/**
 	 * Called throughout the code as a replacement for block instanceof BlockContainer Moving this to the Block base class allows for mods that wish to extend vanilla blocks, and also want to have a tile entity on that block, may.
 	 *
@@ -79,7 +79,7 @@ public class BlockTardis extends BlockOutline {
 	public boolean hasTileEntity(IBlockState state) {
 		return true;
 	}
-
+	
 	/**
 	 * Called throughout the code as a replacement for ITileEntityProvider.createNewTileEntity Return the same thing you would from that function. This will fall back to ITileEntityProvider.createNewTileEntity(World) if this block is a ITileEntityProvider
 	 *
@@ -91,7 +91,7 @@ public class BlockTardis extends BlockOutline {
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileEntityTardis();
 	}
-
+	
 	/**
 	 * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only, LIQUID for vanilla liquids, INVISIBLE to skip all rendering
 	 */
@@ -100,5 +100,5 @@ public class BlockTardis extends BlockOutline {
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
-
+	
 }

@@ -16,18 +16,18 @@ public class ModelFez extends ModelBiped {
 	 * @Author - Lucy
 	 * @Date - 02/25/2018
 	 */
-
+	
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/fez.png");
-
+	
 	ModelRenderer FezSubBase;
 	ModelRenderer FezSubTassleBase;
 	ModelRenderer FezSubTassle1;
 	ModelRenderer FezSubTassle2;
-
+	
 	public ModelFez() {
 		textureWidth = 64;
 		textureHeight = 32;
-
+		
 		FezSubBase = new ModelRenderer(this, 0, 4);
 		FezSubBase.addBox(0F, 0F, 0F, 4, 3, 4);
 		FezSubBase.setRotationPoint(-1F, 21F, -2F);
@@ -52,13 +52,13 @@ public class ModelFez extends ModelBiped {
 		FezSubTassle2.setTextureSize(64, 32);
 		FezSubTassle2.mirror = true;
 		setRotation(FezSubTassle2, 0F, -1.570796F, 0F);
-
+		
 		this.bipedHeadwear.isHidden = true;
-
+		
 		this.bipedHead = new BodyPartHook(this, 0, 0);
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0);
 		this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-
+		
 		((BodyPartHook) this.bipedHead).setRender(new BodyPartHook.IPartRenderer() {
 			@Override
 			public void render(float scale) {
@@ -72,13 +72,13 @@ public class ModelFez extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-
+		
 	}
-
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
+	
 }

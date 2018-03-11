@@ -85,11 +85,11 @@ public class ModelWeepingAngel extends ModelBase {
 	ModelRenderer head24;
 	ModelRenderer head25;
 	ModelRenderer head26;
-
+	
 	public ModelWeepingAngel() {
 		textureWidth = 128;
 		textureHeight = 128;
-
+		
 		InnerChin = new ModelRenderer(this, 26, 48);
 		InnerChin.addBox(-4F, -1F, -3F, 8, 1, 7);
 		InnerChin.setRotationPoint(0F, 0F, 0F);
@@ -573,7 +573,7 @@ public class ModelWeepingAngel extends ModelBase {
 		head26.mirror = true;
 		setRotation(head26, 0F, 0F, 0F);
 	}
-
+	
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
@@ -658,11 +658,11 @@ public class ModelWeepingAngel extends ModelBase {
 		head25.render(scale);
 		head26.render(scale);
 	}
-
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
+	
 }

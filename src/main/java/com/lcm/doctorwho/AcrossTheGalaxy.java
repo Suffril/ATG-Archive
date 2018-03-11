@@ -29,23 +29,23 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @EventBusSubscriber
 public class AcrossTheGalaxy {
 	@SidedProxy(serverSide = "com.lcm.doctorwho.events.ATGServerProxy", clientSide = "com.lcm.doctorwho.events.ATGClientProxy")
-
+	
 	public static ATGCommonProxy proxy;
-
+	
 	public static final String MODID = "lcm-atg";
 	public static final String NAME = "Doctor who - Across the galaxy";
 	public static final String VERSION = "1.0";
 	public static final ResourceLocation ICONS = new ResourceLocation(MODID, "textures/gui/ability_icons.png");
-
+	
 	@Mod.Instance("lcm-atg")
 	public static AcrossTheGalaxy instance;
-
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
 		proxy.preInit(event);
 	}
-
+	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		ATGNetwork.init();
@@ -55,16 +55,16 @@ public class AcrossTheGalaxy {
 		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
 		ATGDims.dimSetup();
 	}
-
+	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ItemInjection.registerInjection(new TimelordSuperpower.Injection(), TimelordSuperpower.INSTANCE.getRegistryName());
 		proxy.postInit(event);
 	}
-
+	
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new DebugCommand());
 	}
-
+	
 }

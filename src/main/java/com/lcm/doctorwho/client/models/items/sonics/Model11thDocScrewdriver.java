@@ -16,7 +16,7 @@ import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 
 public class Model11thDocScrewdriver extends ModelBase implements ItemModelBase {
-
+	
 	ModelRenderer P1;
 	ModelRenderer P2;
 	ModelRenderer P4;
@@ -114,11 +114,11 @@ public class Model11thDocScrewdriver extends ModelBase implements ItemModelBase 
 	ModelRenderer P99;
 	ModelRenderer P100;
 	ModelRenderer P101;
-
+	
 	public Model11thDocScrewdriver() {
 		textureWidth = 128;
 		textureHeight = 26;
-
+		
 		P1 = new ModelRenderer(this, 0, 10);
 		P1.addBox(-1.5F, 11.3F, -1.5F, 3, 1, 3);
 		P1.setRotationPoint(0F, 2.7F, 0F);
@@ -702,13 +702,13 @@ public class Model11thDocScrewdriver extends ModelBase implements ItemModelBase 
 		P101.mirror = true;
 		setRotation(P101, 0F, 0F, 0F);
 	}
-
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
+	
 	@Override
 	public void renderModel(float scale) {
 		P1.render(scale);
@@ -809,7 +809,7 @@ public class Model11thDocScrewdriver extends ModelBase implements ItemModelBase 
 		P100.render(scale);
 		P101.render(scale);
 	}
-
+	
 	@Override
 	public IModelState getTransforms() {
 		Map<ItemCameraTransforms.TransformType, TRSRTransformation> map = new HashMap<>();
@@ -822,5 +822,5 @@ public class Model11thDocScrewdriver extends ModelBase implements ItemModelBase 
 		map.put(ItemCameraTransforms.TransformType.FIXED, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(0F, 0F, 0F), new Vector3f(0.5F, 0.5F, 0.5F), new Vector3f(1F, 1F, 1F))));
 		return new LCModelState(map);
 	}
-
+	
 }
