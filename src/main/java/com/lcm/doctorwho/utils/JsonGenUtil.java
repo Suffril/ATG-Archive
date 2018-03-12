@@ -13,11 +13,12 @@ import com.google.gson.stream.JsonWriter;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class JsonGenUtil {
 	
 	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	private static String mod_path = Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + "/mods/Json Files"; // FIXME WTF
+	private static String mod_path = FMLCommonHandler.instance().getMinecraftServerInstance().getDataDirectory().getAbsolutePath() + "/mods/Json Files";
 	
 	// Generates basic item jsons
 	public static void item(String itemName, String textureName) throws IOException {

@@ -8,17 +8,19 @@ import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
+import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.TardisUtils;
 
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -28,6 +30,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import java.io.IOException;
@@ -65,7 +68,13 @@ public class BlockTardis extends BlockOutline {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
+            // TODO Generating Interior here
+            TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
+            MinecraftServer server = placer.world.getMinecraftServer();
+            WorldServer tardis_dim = server.getWorld(ATGConfig.tardisDIM);
+            //This is a test, hush
+            tardis_dim.setBlockState(new BlockPos(info.getInteriorX(), info.getInteriorY(), info.getInteriorZ()), ATGObjects.Blocks.creamRoundel.getDefaultState());
 		}
 	}
 	

@@ -12,19 +12,4 @@
   "logoFile": "atg_logo.png",
   "screenshots": [],
   "dependencies": []
-},
-{
-  "modid": "lcm-regen-atg",
-  "name": "Regeneration (ATG)",
-  "description": "Submod of ATG that adds regeneration",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["Nictogen, HoldYourWaffle, Sub"],
-  "credits": "Lucraft, for the core, SmokedOak for the idea, Sheriff for item textures",
-  "logoFile": "atg_logo.png",
-  "screenshots": [],
-  "dependencies": []
-}
-]
+}]

@@ -13,6 +13,7 @@ import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
+import com.lcm.doctorwho.common.blocks.slabs.BlockSlabOutline;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.ItemClothingOutline;
 import com.lcm.doctorwho.common.items.ItemOutline;
@@ -43,12 +44,13 @@ import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -144,8 +146,12 @@ public class ATGObjects {
 		public static final Block tro_roundel_1 = new BlockOutline(Material.CORAL, "tro_roundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_roundel_2 = new BlockOutline(Material.CORAL, "tro_roundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_roundel_3 = new BlockOutline(Material.CORAL, "tro_roundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
-	}
+
+       // public static final Block dummy = new BlockOutline(Material.WOOD, "slab_test");
+     //   public static final Block slabTestTop = new BlockSlabOutline("top_test", null, true);
+     //   public static final Block slabTestBottom = new BlockSlabOutline("bottom_test", null, false);
+
+    }
 	
 	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).egg(1, 0).name("angel").tracker(80, 3, false).build();
@@ -210,8 +216,10 @@ public class ATGObjects {
 				for (Field f : Blocks.class.getDeclaredFields()) {
 					try {
 						Block block = (Block) f.get(null);
-						entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
-					} catch (IllegalAccessException | ClassCastException e) {
+						if(!(block instanceof BlockSlabOutline)) {
+                            entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
+                        }
+						} catch (IllegalAccessException | ClassCastException e) {
 						throw new RuntimeException("Incorrect field in object sub-class", e);
 					}
 				}

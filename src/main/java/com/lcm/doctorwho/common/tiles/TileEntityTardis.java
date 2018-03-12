@@ -95,13 +95,12 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 	public void update() {
 		if (!world.isRemote && getCapability(CapabilityTileTardis.TARDIS, null).isDoorOpen()) {
 			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos()));
-			ITardis capa = getCapability(CapabilityTileTardis.TARDIS, null);
 			if (!entities.isEmpty()) {
 				for (Entity e : entities) {
+					ITardis capa = getCapability(CapabilityTileTardis.TARDIS, null);
 					ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null))));
 					TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
-					ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, info.getInteriorX(), info.getInteriorY(), info.getInteriorZ());
-				}
+					ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, info.getInteriorX(), info.getInteriorY(), info.getInteriorZ()); }
 			}
 			
 		}
