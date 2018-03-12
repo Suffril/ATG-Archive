@@ -23,12 +23,4 @@ public interface ITardis {
 	String getOwner();
 	
 	void setOwner(String uuid);
-
-	long getInteriorPos();
-
-	void setInteriorPos(long pos);
-
-	long getExteriorPos();
-
-	void setExteriorPos(long pos);
 }

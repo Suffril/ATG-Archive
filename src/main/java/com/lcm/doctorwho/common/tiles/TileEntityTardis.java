@@ -2,16 +2,16 @@ package com.lcm.doctorwho.common.tiles;
 
 import javax.annotation.Nullable;
 
+import com.google.gson.JsonObject;
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
-import com.lcm.doctorwho.utils.ATGConfig;
-import com.lcm.doctorwho.utils.ATGTeleporter;
-import com.lcm.doctorwho.utils.ATGUtils;
-import com.lcm.doctorwho.utils.TardisUtils;
+import com.lcm.doctorwho.utils.*;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChorusPlant;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.entity.Entity;
@@ -22,12 +22,14 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.JsonUtils;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.io.File;
 import java.util.List;
 
 public class TileEntityTardis extends TileEntity implements ITickable {
@@ -91,20 +93,17 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 	 */
 	@Override
 	public void update() {
-        if (!world.isRemote && getCapability(CapabilityTileTardis.TARDIS, null).isDoorOpen()) {
-            List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos()));
-                if(!entities.isEmpty())
-                {
-                    for(Entity e : entities)
-                    	{
-							getCapability(CapabilityTileTardis.TARDIS, null).setDoorOpen(false);
-                            ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null))));
-							ATGUtils.playSound(e, ATGObjects.SoundEvents.tardis_pb_close);
-							BlockPos pos = BlockPos.fromLong(getCapability(CapabilityTileTardis.TARDIS, null).getInteriorPos());
-                            ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, pos.getX(), pos.getY(), pos.getZ());
-                   	 	}
-                }
-
-        }
-    }
+		if (!world.isRemote && getCapability(CapabilityTileTardis.TARDIS, null).isDoorOpen()) {
+			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos()));
+			ITardis capa = getCapability(CapabilityTileTardis.TARDIS, null);
+			if (!entities.isEmpty()) {
+				for (Entity e : entities) {
+					ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null))));
+					TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
+					ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, info.getInteriorX(), info.getInteriorY(), info.getInteriorZ());
+				}
+			}
+			
+		}
+	}
 }

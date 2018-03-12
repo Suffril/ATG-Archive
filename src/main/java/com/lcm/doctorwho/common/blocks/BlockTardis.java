@@ -33,9 +33,9 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import java.io.IOException;
 
 public class BlockTardis extends BlockOutline {
-
-    protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.6000000238418579D, 0.699999988079071D);
-
+	
+	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.6000000238418579D, 0.699999988079071D);
+	
 	public BlockTardis(Material material, String name) {
 		super(material, name);
 		setLightLevel(1.0F);
@@ -48,29 +48,25 @@ public class BlockTardis extends BlockOutline {
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
 		ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
-
-		if(!worldIn.isRemote) {
-            try {
-                capa.setTardisID(TardisUtils.getTardisAmount());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            capa.setOwner(placer.getUniqueID().toString());
-            capa.setDoorOpen(false);
-            capa.setModelID(0);
-
-            capa.setExteriorPos(pos.toLong());
-            capa.setInteriorPos(pos.toLong());
-
-            try {
-                TardisUtils.saveTardis(capa.getTardisID(), pos, pos, worldIn.provider.getDimension());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
+		
+		if (!worldIn.isRemote) {
+			try {
+				capa.setTardisID(TardisUtils.getTardisAmount());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			capa.setOwner(placer.getUniqueID().toString());
+			capa.setDoorOpen(false);
+			capa.setModelID(0);
+			
+			try {
+				TardisUtils.saveTardis(capa, TardisUtils.newInteriorPos(), pos, worldIn.provider.getDimension());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	@Override
@@ -103,29 +99,27 @@ public class BlockTardis extends BlockOutline {
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
 		ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
-
+		
 		if (playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
 			capa.setDoorOpen(!capa.isDoorOpen());
 			SoundEvent sound = capa.isDoorOpen() ? ATGObjects.SoundEvents.tardis_pb_open : ATGObjects.SoundEvents.tardis_pb_close;
 			ATGUtils.playSound(playerIn, sound);
-
-            if(!worldIn.isRemote) {
-			NBTTagCompound tardisNBT = tardis.writeToNBT(TardisUtils.tardisWriteToNBT(capa));
-			tardis.readFromNBT(tardisNBT);
-			tardis.markDirty();
-
-            try {
-                TardisUtils.saveTardis(capa.getTardisID(), pos, pos, worldIn.provider.getDimension());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            capa.setExteriorPos(pos.toLong());
-            capa.setInteriorPos(pos.toLong());
-
-            ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
-		    }
-		}else {
+			
+			if (!worldIn.isRemote) {
+				NBTTagCompound tardisNBT = tardis.writeToNBT(TardisUtils.tardisWriteToNBT(capa));
+				tardis.readFromNBT(tardisNBT);
+				tardis.markDirty();
+				
+				try {
+					TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
+					TardisUtils.saveTardis(capa, new BlockPos(info.getInteriorX(), info.getInteriorY(), info.getInteriorZ()), pos, worldIn.provider.getDimension());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
+			}
+		} else {
 			ATGUtils.sendPlayerMessage(playerIn, "This is not your TARDIS!");
 		}
 		

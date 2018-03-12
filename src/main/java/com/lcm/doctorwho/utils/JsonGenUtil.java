@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 
 public class JsonGenUtil {
 	
+	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private static String mod_path = Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + "/mods/Json Files"; // FIXME WTF
 	
 	// Generates basic item jsons
@@ -23,7 +24,6 @@ public class JsonGenUtil {
 		File fileDir = new File(mod_path + "\\models\\item\\");
 		if (!fileDir.exists()) fileDir.mkdirs();
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (Writer writer = new OutputStreamWriter(new FileOutputStream(fileDir + "\\" + itemName + ".json"), "UTF-8"); JsonWriter jw = gson.newJsonWriter(writer)) {
 			
 			jw.beginObject();
@@ -43,7 +43,6 @@ public class JsonGenUtil {
 		File fileDir = new File(mod_path + "\\blockstates\\");
 		if (!fileDir.exists()) fileDir.mkdirs();
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try (Writer writer = new OutputStreamWriter(new FileOutputStream(fileDir + "\\" + blockName + ".json"), "UTF-8"); JsonWriter jw = gson.newJsonWriter(writer)) {
 			jw.beginObject();
 			jw.name("variants");
