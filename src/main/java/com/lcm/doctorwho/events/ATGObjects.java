@@ -14,10 +14,7 @@ import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;
 import com.lcm.doctorwho.common.blocks.slabs.BlockSlabOutline;
-import com.lcm.doctorwho.common.items.ItemChameleonArch;
-import com.lcm.doctorwho.common.items.ItemClothingOutline;
-import com.lcm.doctorwho.common.items.ItemOutline;
-import com.lcm.doctorwho.common.items.ItemSonic;
+import com.lcm.doctorwho.common.items.*;
 import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
@@ -45,10 +42,13 @@ import com.lcm.doctorwho.utils.ATGUtils;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
@@ -71,15 +71,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
  */
 @Mod.EventBusSubscriber
 public class ATGObjects {
-	public static class Items {
-		public static Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
-		public static Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
-		public static Item chameleonArch = new ItemChameleonArch();
-		public static Item fez = new ItemClothingOutline("fez", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);// .setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
-		public static Item firstDocHat = new ItemClothingOutline("firstDocHat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);// .setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
-		public static Item thirtenthDocCoat = new ItemClothingOutline("thirtenthDocCoat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.CHEST);
-	}
-	
+
 	public static class Blocks {
 		
 		// Moose
@@ -145,20 +137,25 @@ public class ATGObjects {
 		// Troughton - Roundel walls
 		public static final Block tro_roundel_1 = new BlockOutline(Material.CORAL, "tro_roundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block tro_roundel_2 = new BlockOutline(Material.CORAL, "tro_roundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_roundel_3 = new BlockOutline(Material.CORAL, "tro_roundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block tro_roundel_3 = new BlockOutline(Material.CORAL, "tro_roundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
-       // public static final Block dummy = new BlockOutline(Material.WOOD, "slab_test");
-     //   public static final Block slabTestTop = new BlockSlabOutline("top_test", null, true);
-     //   public static final Block slabTestBottom = new BlockSlabOutline("bottom_test", null, false);
-
-    }
+        public static final Block type_1 = new BlockSlabOutline("testicles",tro_fault_1.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);}
 	
 	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).egg(1, 0).name("angel").tracker(80, 3, false).build();
 		public static final EntityEntry laser = EntityEntryBuilder.create().entity(EntityProjectile.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "laser"), 1).name("laser").tracker(80, 3, true).build();
 		public static final EntityEntry cyberMan = EntityEntryBuilder.create().entity(EntityCybermen.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "cybermen"), 2).egg(1, 0).name("cybermen").tracker(80, 3, false).build();
 	}
-	
+
+    public static class Items {
+        public static Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+        public static Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
+        public static Item chameleonArch = new ItemChameleonArch();
+        public static Item fez = new ItemClothingOutline("fez", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);// .setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
+        public static Item firstDocHat = new ItemClothingOutline("firstDocHat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);// .setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
+        public static Item thirtenthDocCoat = new ItemClothingOutline("thirtenthDocCoat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.CHEST);
+    }
+
 	public static class SoundEvents {
 		public static final SoundEvent regeneration = new ATGUtils.ATGSoundEvent("regeneration");
 		public static final SoundEvent timeyWimey = new ATGUtils.ATGSoundEvent("timey_wimey");
@@ -216,10 +213,8 @@ public class ATGObjects {
 				for (Field f : Blocks.class.getDeclaredFields()) {
 					try {
 						Block block = (Block) f.get(null);
-						if(!(block instanceof BlockSlabOutline)) {
-                            entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
-                        }
-						} catch (IllegalAccessException | ClassCastException e) {
+							entries.add(new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
+					} catch (IllegalAccessException | ClassCastException e) {
 						throw new RuntimeException("Incorrect field in object sub-class", e);
 					}
 				}

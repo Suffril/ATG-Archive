@@ -34,19 +34,18 @@ public class ATGTeleporter extends Teleporter {
 		if (worldServer == null || worldServer.getMinecraftServer() == null) { // Dimension doesn't exist
 			throw new IllegalArgumentException("Dimension: " + dimension + " doesn't exist!");
 		}
-
-		if(entity instanceof EntityPlayerMP) {
-			EntityPlayerMP p = (EntityPlayerMP)entity;
-			FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(p, dimension, new ATGTeleporter(p.getServerWorld(), x, y, z ));
-		} else
-		    {
-                entity.setPositionAndUpdate(x, y, z);
-                worldServer.spawnEntity(entity);
-                worldServer.updateEntityWithOptionalForce(entity, false);
-                entity.changeDimension(dimension);
-                System.out.println(entity.dimension);
-                System.out.println(entity.getPosition());
-            }
+		
+		if (entity instanceof EntityPlayerMP) {
+			EntityPlayerMP p = (EntityPlayerMP) entity;
+			FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(p, dimension, new ATGTeleporter(p.getServerWorld(), x, y, z));
+		} else {
+			entity.setPositionAndUpdate(x, y, z);
+			worldServer.spawnEntity(entity);
+			worldServer.updateEntityWithOptionalForce(entity, false);
+			entity.changeDimension(dimension);
+			System.out.println(entity.dimension);
+			System.out.println(entity.getPosition());
+		}
 		entity.setPositionAndUpdate(x, y, z);
 		
 		if (oldDimension == 1) {
@@ -55,8 +54,7 @@ public class ATGTeleporter extends Teleporter {
 			worldServer.updateEntityWithOptionalForce(entity, false);
 		}
 	}
-
-
+	
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
 		this.worldServer.getBlockState(new BlockPos((int) this.x, (int) this.y, (int) this.z));

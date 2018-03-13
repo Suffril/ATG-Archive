@@ -68,13 +68,13 @@ public class BlockTardis extends BlockOutline {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-            // TODO Generating Interior here
-            TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
-            MinecraftServer server = placer.world.getMinecraftServer();
-            WorldServer tardis_dim = server.getWorld(ATGConfig.tardisDIM);
-            //This is a test, hush
-            tardis_dim.setBlockState(new BlockPos(info.getInteriorX(), info.getInteriorY(), info.getInteriorZ()), ATGObjects.Blocks.creamRoundel.getDefaultState());
+			
+			// TODO Generating Interior here
+			TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
+			MinecraftServer server = placer.world.getMinecraftServer();
+			WorldServer tardis_dim = server.getWorld(ATGConfig.tardisDIM);
+			// This is a test, hush
+			tardis_dim.setBlockState(new BlockPos(info.getInteriorX(), info.getInteriorY(), info.getInteriorZ()), ATGObjects.Blocks.creamRoundel.getDefaultState());
 		}
 	}
 	
