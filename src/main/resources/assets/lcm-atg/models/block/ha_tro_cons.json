@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "lcm-atg:blocks/ha_tro_cons"
+  }
+}

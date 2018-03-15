@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.tiles;
+package com.lcm.doctorwho.common.tiles.tardis;
 
 import javax.annotation.Nullable;
 

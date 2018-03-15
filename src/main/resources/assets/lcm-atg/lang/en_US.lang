@@ -1,10 +1,10 @@
-//Creative tabs
+﻿//Creative tabs
 itemGroup.tardis=TARDIS Blocks
 itemGroup.sonics=Sonics
 
 //Items
-item.sonic_eleventh_doc.name=Sonic Screwdriver | §aMark VII
-item.cane_first_doc.name=First Doctor cane
+item.sonic_eleventh_doc.name=Sonic Screwdriver | §aEleventh Doctor’s
+item.cane_first_doc.name=First Doctor’s Cane
 item.fez.name=Fez
 
 
@@ -108,3 +108,5 @@ lcm-atg.messages.transfer.fullArch=You can't store anymore regenerations in this
 lcm-atg.messages.transfer.emptyArch=This arch is empty!
 lcm-atg.messages.transfer.fullCycle=You already have a full cycle of regenerations
 lcm-atg.messages.transfer.emptyCycle=You don't have any regenerations left to transfer
+
+

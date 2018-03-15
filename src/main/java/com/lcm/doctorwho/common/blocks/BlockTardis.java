@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
-import com.lcm.doctorwho.common.tiles.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
@@ -17,7 +17,6 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;

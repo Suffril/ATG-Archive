@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ATGTeleporter extends Teleporter {
@@ -25,7 +26,7 @@ public class ATGTeleporter extends Teleporter {
 		this.y = y;
 		this.z = z;
 	}
-	
+
 	public static void changeDim(Entity entity, int dimension, double x, double y, double z) {
 		int oldDimension = entity.world.provider.getDimension();
 		MinecraftServer server = entity.world.getMinecraftServer();
@@ -38,15 +39,13 @@ public class ATGTeleporter extends Teleporter {
 		if (entity instanceof EntityPlayerMP) {
 			EntityPlayerMP p = (EntityPlayerMP) entity;
 			FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(p, dimension, new ATGTeleporter(p.getServerWorld(), x, y, z));
+            entity.setPositionAndUpdate(x, y, z);
 		} else {
-			entity.setPositionAndUpdate(x, y, z);
-			worldServer.spawnEntity(entity);
-			worldServer.updateEntityWithOptionalForce(entity, false);
-			entity.changeDimension(dimension);
-			System.out.println(entity.dimension);
-			System.out.println(entity.getPosition());
+			//entity.setPositionAndUpdate(x, y, z);
+		//	worldServer.spawnEntity(entity);
+		//	worldServer.updateEntityWithOptionalForce(entity, false);
 		}
-		entity.setPositionAndUpdate(x, y, z);
+		//entity.setPositionAndUpdate(x, y, z);
 		
 		if (oldDimension == 1) {
 			entity.setPositionAndUpdate(x, y, z);
@@ -54,7 +53,9 @@ public class ATGTeleporter extends Teleporter {
 			worldServer.updateEntityWithOptionalForce(entity, false);
 		}
 	}
-	
+
+
+
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
 		this.worldServer.getBlockState(new BlockPos((int) this.x, (int) this.y, (int) this.z));

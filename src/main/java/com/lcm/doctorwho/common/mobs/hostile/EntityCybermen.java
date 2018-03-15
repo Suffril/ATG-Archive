@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.common.mobs.hostile;
 
+import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -73,7 +74,6 @@ public class EntityCybermen extends EntityMob implements IRangedAttackMob {
 	public void onUpdate() {
 		super.onUpdate();
 		setUpCyberman();
-		
 	}
 	
 	@Override

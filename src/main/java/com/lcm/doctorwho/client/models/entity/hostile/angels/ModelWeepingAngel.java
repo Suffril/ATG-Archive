@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.models.entity.angels;
+package com.lcm.doctorwho.client.models.entity.hostile.angels;
 
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;

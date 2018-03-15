@@ -3,8 +3,9 @@ package com.lcm.doctorwho.client.render;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lcm.doctorwho.client.models.entity.angels.ModelWeepingAngel;
+import com.lcm.doctorwho.client.models.entity.hostile.angels.ModelWeepingAngel;
 import com.lcm.doctorwho.client.models.entity.hostile.cybermen.ModelCyberTenthPlanet;
+import com.lcm.doctorwho.client.render.entity.RenderCybermen;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBase;
 import com.lcm.doctorwho.client.render.entity.RenderEntityBaseProjectile;
 import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
@@ -21,7 +22,7 @@ public class RenderMobsInit {
 	public static void init() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, new RenderEntityBase<>(new ModelWeepingAngel(), "weeping_angel", 1.0F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectile.class, new RenderEntityBaseProjectile());
-		RenderingRegistry.registerEntityRenderingHandler(EntityCybermen.class, new RenderEntityBase<>(new ModelCyberTenthPlanet(), null, 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCybermen.class, new RenderCybermen(new ModelCyberTenthPlanet()));
 		cyberModels();
 	}
 	

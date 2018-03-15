@@ -2,7 +2,7 @@ package com.lcm.doctorwho.networking.packets;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
-import com.lcm.doctorwho.common.tiles.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.utils.TardisUtils;
 
 import io.netty.buffer.ByteBuf;

@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "lcm-atg:blocks/slabs/tro_slab_2",
+        "top": "lcm-atg:blocks/slabs/tro_slab_2",
+        "side": "lcm-atg:blocks/slabs/tro_slab_2"
+    }
+}

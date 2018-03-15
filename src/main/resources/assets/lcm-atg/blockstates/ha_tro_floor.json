@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "lcm-atg:ha_tro_floor"
+    }
+  }
+}

@@ -3,12 +3,11 @@ package com.lcm.doctorwho.common.capabilities;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.lcm.doctorwho.common.tiles.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;

@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class JsonGenUtil {
 	
 	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	private static String mod_path = FMLCommonHandler.instance().getMinecraftServerInstance().getDataDirectory().getAbsolutePath() + "/mods/Json Files";
+	private static String mod_path = Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + "/mods/Json Files";
 	
 	// Generates basic item jsons
 	public static void item(String itemName, String textureName) throws IOException {

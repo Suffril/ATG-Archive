@@ -36,6 +36,17 @@ public class BlockSlabOutline extends Block {
         setDefaultState(blockState.getBaseState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM));
     }
 
+
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+    {
+        if (net.minecraftforge.common.ForgeModContainer.disableStairSlabCulling)
+            return super.doesSideBlockRendering(state, world, pos, face);
+
+        BlockSlab.EnumBlockHalf side = state.getValue(HALF);
+        return (side == BlockSlab.EnumBlockHalf.TOP && face == EnumFacing.UP) || (side == BlockSlab.EnumBlockHalf.BOTTOM && face == EnumFacing.DOWN);
+    }
+
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 
@@ -53,9 +64,7 @@ public class BlockSlabOutline extends Block {
         return BlockRenderLayer.SOLID;
     }
 
-    /**
-     * Determines if the block is solid enough on the top side to support other blocks, like redstone components.
-     */
+
     @Override
     public boolean isTopSolid(IBlockState state)
     {

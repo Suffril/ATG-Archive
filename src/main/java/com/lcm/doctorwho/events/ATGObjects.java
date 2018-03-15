@@ -10,15 +10,15 @@ import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.ATGTabs;
-import com.lcm.doctorwho.common.blocks.BlockOutline;
-import com.lcm.doctorwho.common.blocks.BlockTardis;
-import com.lcm.doctorwho.common.blocks.LeavesOutline;
+import com.lcm.doctorwho.common.blocks.*;
 import com.lcm.doctorwho.common.blocks.slabs.BlockSlabOutline;
 import com.lcm.doctorwho.common.items.*;
 import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
 import com.lcm.doctorwho.common.traits.negative.TraitDumb;
 import com.lcm.doctorwho.common.traits.negative.TraitFlimsy;
@@ -73,74 +73,96 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class ATGObjects {
 
 	public static class Blocks {
-		
-		// Moose
-		public static final Block creamRoundel = new BlockOutline(Material.CORAL, "cream_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block creamRoundelAlt = new BlockOutline(Material.CORAL, "cream_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block whiteRoundel = new BlockOutline(Material.CORAL, "white_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block whiteRoundelAlt = new BlockOutline(Material.CORAL, "white_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block pinkRoundel = new BlockOutline(Material.CORAL, "pink_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block pinkRoundelAlt = new BlockOutline(Material.CORAL, "pink_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block blackRoundel = new BlockOutline(Material.CORAL, "black_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block blackRoundelAlt = new BlockOutline(Material.CORAL, "black_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block blueRoundel = new BlockOutline(Material.CORAL, "blue_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block blueRoundelAlt = new BlockOutline(Material.CORAL, "blue_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block brownRoundel = new BlockOutline(Material.CORAL, "brown_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block brownRoundelAlt = new BlockOutline(Material.CORAL, "brown_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block cyanRoundel = new BlockOutline(Material.CORAL, "cyan_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block cyanRoundelAlt = new BlockOutline(Material.CORAL, "cyan_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block darkGreyRoundel = new BlockOutline(Material.CORAL, "dark_grey_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block darkGreyRoundelAlt = new BlockOutline(Material.CORAL, "dark_grey_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block greenRoundel = new BlockOutline(Material.CORAL, "green_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block greenRoundelAlt = new BlockOutline(Material.CORAL, "green_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block lightBlueRoundel = new BlockOutline(Material.CORAL, "light_blue_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block lightBlueRoundelAlt = new BlockOutline(Material.CORAL, "light_blue_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block lightGreyRoundel = new BlockOutline(Material.CORAL, "light_grey_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block lightGreyRoundelAlt = new BlockOutline(Material.CORAL, "light_grey_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block limeRoundel = new BlockOutline(Material.CORAL, "lime_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block limeRoundelAlt = new BlockOutline(Material.CORAL, "lime_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block magentaRoundel = new BlockOutline(Material.CORAL, "magenta_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block magentaRoundelAlt = new BlockOutline(Material.CORAL, "magenta_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block orangeRoundel = new BlockOutline(Material.CORAL, "orange_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block orangeRoundelAlt = new BlockOutline(Material.CORAL, "orange_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block purpleRoundel = new BlockOutline(Material.CORAL, "purple_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block purpleRoundelAlt = new BlockOutline(Material.CORAL, "purple_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block redRoundel = new BlockOutline(Material.CORAL, "red_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block redRoundelAlt = new BlockOutline(Material.CORAL, "red_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block yellowRoundel = new BlockOutline(Material.CORAL, "yellow_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block yellowRoundelAlt = new BlockOutline(Material.CORAL, "yellow_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block alfLog = new BlockOutline(Material.WOOD, "alf_log").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block alfLeaves = new LeavesOutline("alf_leaves").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block coralWall = new BlockOutline(Material.CORAL, "coral_wall").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
-		// Tardis
-		public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
-		// Troughton - Fault Locator
-		public static final Block tro_fault_1 = new BlockOutline(Material.CORAL, "tro_fault_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_fault_2 = new BlockOutline(Material.CORAL, "tro_fault_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_fault_3 = new BlockOutline(Material.CORAL, "tro_fault_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_fault_4 = new BlockOutline(Material.CORAL, "tro_fault_4").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_fault_5 = new BlockOutline(Material.CORAL, "tro_fault_5").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_fault_6 = new BlockOutline(Material.CORAL, "tro_fault_6").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_fault_7 = new BlockOutline(Material.CORAL, "tro_fault_7").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_fault_8 = new BlockOutline(Material.CORAL, "tro_fault_8").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
-		// Troughton - Flat roundels
-		public static final Block tro_flatroundel_1 = new BlockOutline(Material.CORAL, "tro_flatroundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_flatroundel_2 = new BlockOutline(Material.CORAL, "tro_flatroundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_flatroundel_3 = new BlockOutline(Material.CORAL, "tro_flatroundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_flatroundel_4 = new BlockOutline(Material.CORAL, "tro_flatroundel_4").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_flatroundel_5 = new BlockOutline(Material.CORAL, "tro_flatroundel_5").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		
-		// Troughton - Roundel walls
-		public static final Block tro_roundel_1 = new BlockOutline(Material.CORAL, "tro_roundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-		public static final Block tro_roundel_2 = new BlockOutline(Material.CORAL, "tro_roundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
-        public static final Block tro_roundel_3 = new BlockOutline(Material.CORAL, "tro_roundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
-        public static final Block type_1 = new BlockSlabOutline("testicles",tro_fault_1.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);}
-	
+        // Moose
+        public static final Block creamRoundel = new BlockOutline(Material.CORAL, "cream_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block creamRoundelAlt = new BlockOutline(Material.CORAL, "cream_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block whiteRoundel = new BlockOutline(Material.CORAL, "white_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block whiteRoundelAlt = new BlockOutline(Material.CORAL, "white_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block pinkRoundel = new BlockOutline(Material.CORAL, "pink_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block pinkRoundelAlt = new BlockOutline(Material.CORAL, "pink_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block blackRoundel = new BlockOutline(Material.CORAL, "black_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block blackRoundelAlt = new BlockOutline(Material.CORAL, "black_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block blueRoundel = new BlockOutline(Material.CORAL, "blue_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block blueRoundelAlt = new BlockOutline(Material.CORAL, "blue_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block brownRoundel = new BlockOutline(Material.CORAL, "brown_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block brownRoundelAlt = new BlockOutline(Material.CORAL, "brown_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block cyanRoundel = new BlockOutline(Material.CORAL, "cyan_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block cyanRoundelAlt = new BlockOutline(Material.CORAL, "cyan_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block darkGreyRoundel = new BlockOutline(Material.CORAL, "dark_grey_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block darkGreyRoundelAlt = new BlockOutline(Material.CORAL, "dark_grey_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block greenRoundel = new BlockOutline(Material.CORAL, "green_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block greenRoundelAlt = new BlockOutline(Material.CORAL, "green_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block lightBlueRoundel = new BlockOutline(Material.CORAL, "light_blue_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block lightBlueRoundelAlt = new BlockOutline(Material.CORAL, "light_blue_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block lightGreyRoundel = new BlockOutline(Material.CORAL, "light_grey_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block lightGreyRoundelAlt = new BlockOutline(Material.CORAL, "light_grey_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block limeRoundel = new BlockOutline(Material.CORAL, "lime_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block limeRoundelAlt = new BlockOutline(Material.CORAL, "lime_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block magentaRoundel = new BlockOutline(Material.CORAL, "magenta_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block magentaRoundelAlt = new BlockOutline(Material.CORAL, "magenta_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block orangeRoundel = new BlockOutline(Material.CORAL, "orange_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block orangeRoundelAlt = new BlockOutline(Material.CORAL, "orange_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block purpleRoundel = new BlockOutline(Material.CORAL, "purple_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block purpleRoundelAlt = new BlockOutline(Material.CORAL, "purple_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block redRoundel = new BlockOutline(Material.CORAL, "red_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block redRoundelAlt = new BlockOutline(Material.CORAL, "red_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block yellowRoundel = new BlockOutline(Material.CORAL, "yellow_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block yellowRoundelAlt = new BlockOutline(Material.CORAL, "yellow_roundel_alt").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block alfLog = new BlockOutline(Material.WOOD, "alf_log").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block alfLeaves = new LeavesOutline("alf_leaves").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block coralWall = new BlockOutline(Material.CORAL, "coral_wall").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+        public static final Block coralRoundel = new BlockOutline(Material.CORAL, "coral_roundel").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+
+        // Tardis
+        public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+
+        // Troughton - Fault Locator
+        public static final Block tro_fault_1 = new BlockOutline(Material.CORAL, "tro_fault_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_fault_2 = new BlockOutline(Material.CORAL, "tro_fault_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_fault_3 = new BlockOutline(Material.CORAL, "tro_fault_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_fault_4 = new BlockOutline(Material.CORAL, "tro_fault_4").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_fault_5 = new BlockOutline(Material.CORAL, "tro_fault_5").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_fault_6 = new BlockOutline(Material.CORAL, "tro_fault_6").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_fault_7 = new BlockOutline(Material.CORAL, "tro_fault_7").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_fault_8 = new BlockOutline(Material.CORAL, "tro_fault_8").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+
+        // Troughton - Flat roundels
+        public static final Block tro_flatroundel_1 = new BlockOutline(Material.CORAL, "tro_flatroundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_flatroundel_2 = new BlockOutline(Material.CORAL, "tro_flatroundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_flatroundel_3 = new BlockOutline(Material.CORAL, "tro_flatroundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_flatroundel_4 = new BlockOutline(Material.CORAL, "tro_flatroundel_4").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_flatroundel_5 = new BlockOutline(Material.CORAL, "tro_flatroundel_5").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);;
+
+        // Troughton - Roundel walls
+        public static final Block tro_roundel_1 = new BlockOutline(Material.CORAL, "tro_roundel_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_roundel_2 = new BlockOutline(Material.CORAL, "tro_roundel_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_roundel_3 = new BlockOutline(Material.CORAL, "tro_roundel_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);;
+
+        public static final Block tro_slab_full_1 = new BlockOutline(Material.CORAL, "tro_slab_full_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_slab_full_2 = new BlockOutline(Material.CORAL, "tro_slab_full_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_slab_1 = new BlockSlabOutline("tro_slab_1", tro_slab_full_1.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block tro_slab_2 = new BlockSlabOutline("tro_slab_2", tro_slab_full_2.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+
+		public static final Block tro_flatroundel_slab_full_1 = new BlockOutline(Material.CORAL, "tro_flatroundel_slab_full_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+		public static final Block tro_flatroundel_slab_full_2 = new BlockOutline(Material.CORAL, "tro_flatroundel_slab_full_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+		public static final Block tro_flatroundel_slab_full_3 = new BlockOutline(Material.CORAL, "tro_flatroundel_slab_full_3").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+
+		public static final Block tro_flatroundel_slab_1 = new BlockSlabOutline("tro_flatroundel_slab_1", tro_flatroundel_slab_full_1.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+		public static final Block tro_flatroundel_slab_2 = new BlockSlabOutline("tro_flatroundel_slab_2", tro_flatroundel_slab_full_2.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+		public static final Block tro_flatroundel_slab_3 = new BlockSlabOutline("tro_flatroundel_slab_3", tro_flatroundel_slab_full_3.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+
+		public static final Block rotor1963 = new BlockTileOutline(Material.CORAL,"rotor1963", new TileEntity1963Rotor()).setLightLevel(1.0F).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block light = new BlockLight().setRegistryName("light").setUnlocalizedName("light").setLightLevel(1.0F);
+        public static final Block chair1963 = new BlockTileOutline(Material.CORAL,"chair1963", new TileEntity1963Chair()).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+
+        public static final Block ha_tro_cons = new BlockOutline(Material.CORAL, "ha_tro_cons").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block ha_tro_floor = new BlockOutline(Material.CORAL, "ha_tro_floor").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block ha_tro_roof = new BlockOutline(Material.CORAL, "ha_tro_roof").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+
+
+    }
+
 	public static class EntityEntries { // NO_UCD (unused code)
 		public static final EntityEntry weepingAngel = EntityEntryBuilder.create().entity(EntityWeepingAngel.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "weeping_angel"), 0).egg(1, 0).name("angel").tracker(80, 3, false).build();
 		public static final EntityEntry laser = EntityEntryBuilder.create().entity(EntityProjectile.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "laser"), 1).name("laser").tracker(80, 3, true).build();

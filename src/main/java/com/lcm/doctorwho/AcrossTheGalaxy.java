@@ -4,12 +4,15 @@ import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.dimension.ATGDims;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
-import com.lcm.doctorwho.common.tiles.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.events.ATGCommonProxy;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.DebugCommand;
 
+import com.lcm.doctorwho.utils.JsonGenUtil;
 import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,6 +27,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.io.IOException;
 
 @Mod(modid = AcrossTheGalaxy.MODID, name = AcrossTheGalaxy.NAME, version = AcrossTheGalaxy.VERSION, dependencies = "required:forge@[14.23.1.2574,); required-after:lucraftcore@[1.12-2.0.4,)", acceptedMinecraftVersions = "1.12, 1.12.1, 1.12.2")
 @EventBusSubscriber
@@ -42,18 +47,24 @@ public class AcrossTheGalaxy {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
+        setUpTiles();
+	    ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
 		proxy.preInit(event);
 	}
 	
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public void init(FMLInitializationEvent event) throws IOException {
 		ATGNetwork.init();
 		MinecraftForge.EVENT_BUS.register(proxy);
 		proxy.init(event);
 		CapabilityManager.INSTANCE.register(ITardis.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
-		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
 		ATGDims.dimSetup();
+	}
+
+	public static void setUpTiles() {
+		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
+        GameRegistry.registerTileEntity(TileEntity1963Rotor.class, AcrossTheGalaxy.MODID + ":1963rotor");
+        GameRegistry.registerTileEntity(TileEntity1963Chair.class, AcrossTheGalaxy.MODID + ":1963chair");
 	}
 	
 	@EventHandler
