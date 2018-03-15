@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.clothing.canon.body.Model13thCoatSteve;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFez;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFirstDocHat;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
-import com.lcm.doctorwho.client.models.tardis.controls.Model1963Rotor;
+import com.lcm.doctorwho.client.models.interfaces.ITileModel;
+import com.lcm.doctorwho.client.models.tardis.decoration.Model1963Rotor;
 import com.lcm.doctorwho.client.models.tardis.decoration.Model1963ChairSmall;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelHartnellTardis;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelMasqueTardis;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
+import com.lcm.doctorwho.client.models.tardis.exteriors.*;
 import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerClothing;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileBase;
@@ -34,9 +33,11 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,10 +45,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ATGClientProxy extends ATGCommonProxy {
 	
 	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
-	public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
+    public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
 	
 	private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
-	
+
+    @Override
+    public void preInit(FMLPreInitializationEvent ev) {
+        OBJLoader.INSTANCE.addDomain(AcrossTheGalaxy.MODID);
+    }
+
 	@Override
 	public void init(FMLInitializationEvent event) {
 		RenderMobsInit.init();
@@ -92,6 +98,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 		TARDIS_MODELS.put(1, new ModelHartnellTardis());
 		TARDIS_MODELS.put(2, new ModelPertweeTARDIS());
 		TARDIS_MODELS.put(3, new ModelMasqueTardis());
+		//TARDIS_MODELS.put(-1, new ModelMooseWoodTardis());
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -108,5 +115,8 @@ public class ATGClientProxy extends ATGCommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Rotor.class, new RenderTileBase(new Model1963Rotor()));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Chair.class, new RenderTileBase(new Model1963ChairSmall()));
 	}
-	
+
+	public static void setupTileModels(){
+
+    }
 }

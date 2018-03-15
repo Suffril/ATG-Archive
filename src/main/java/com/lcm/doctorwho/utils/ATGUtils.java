@@ -27,8 +27,12 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 public class ATGUtils {
-	
+
+	public static Random RANDOM = new Random();
+
 	/**
 	 * Really easy way of playing sounds
 	 */

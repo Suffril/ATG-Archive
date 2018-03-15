@@ -3,7 +3,7 @@ package com.lcm.doctorwho.common.blocks;
 import javax.annotation.Nullable;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.ITardis;
+import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
@@ -49,7 +49,7 @@ public class BlockTardis extends BlockOutline {
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
-		ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
+		ITardisTile capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
 		
 		if (!worldIn.isRemote) {
 			try {
@@ -106,7 +106,7 @@ public class BlockTardis extends BlockOutline {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
-		ITardis capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
+		ITardisTile capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
 		
 		if (playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
 			capa.setDoorOpen(!capa.isDoorOpen());

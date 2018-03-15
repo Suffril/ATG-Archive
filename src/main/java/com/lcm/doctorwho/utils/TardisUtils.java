@@ -3,7 +3,7 @@ package com.lcm.doctorwho.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
-import com.lcm.doctorwho.common.capabilities.ITardis;
+import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 
 public class TardisUtils {
 	
-	public static NBTTagCompound tardisWriteToNBT(ITardis capa) {
+	public static NBTTagCompound tardisWriteToNBT(ITardisTile capa) {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		nbtTag.setInteger("tardisID", capa.getTardisID());
 		nbtTag.setString("ownerUUID", capa.getOwner());
@@ -24,7 +24,7 @@ public class TardisUtils {
 		return nbtTag;
 	}
 	
-	public static ITardis tardisReadFromNBT(ITardis capa, NBTTagCompound nbt) {
+	public static ITardisTile tardisReadFromNBT(ITardisTile capa, NBTTagCompound nbt) {
 		capa.setTardisID(nbt.getInteger("tardisID"));
 		capa.setOwner(nbt.getString("ownerUUID"));
 		capa.setModelID(nbt.getInteger("modelID"));
@@ -32,7 +32,7 @@ public class TardisUtils {
 		return capa;
 	}
 	
-	public static void saveTardis(ITardis capa, BlockPos interior, BlockPos exterior, int dim_id) throws IOException {
+	public static void saveTardis(ITardisTile capa, BlockPos interior, BlockPos exterior, int dim_id) throws IOException {
 		FMLCommonHandler fml = FMLCommonHandler.instance();
 		File fileDir = new File(FMLCommonHandler.instance().getSavesDirectory() + "\\" + fml.getMinecraftServerInstance().getWorldName() + "\\data\\tardis_info\\");
 		if (!fileDir.exists()) fileDir.mkdirs();

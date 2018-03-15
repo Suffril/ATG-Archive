@@ -6,6 +6,7 @@ import com.lcm.doctorwho.client.models.interfaces.ITileModel;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 public class Model1963ChairSmall extends ModelBase implements ITileModel {
 
@@ -482,6 +483,9 @@ public class Model1963ChairSmall extends ModelBase implements ITileModel {
     
     @Override
     public void render(float scale) {
+        GlStateManager.pushMatrix();
+        GlStateManager.scale(0.90, 0.90, 0.90);
+        GlStateManager.translate(0,0.2,0);
         MS1.render(scale);
         insert_name.render(scale);
         MS3.render(scale);
@@ -548,6 +552,7 @@ public class Model1963ChairSmall extends ModelBase implements ITileModel {
         Sup29.render(scale);
         Sup30.render(scale);
         Sup31.render(scale);
+        GlStateManager.popMatrix();
     }
 
     @Override

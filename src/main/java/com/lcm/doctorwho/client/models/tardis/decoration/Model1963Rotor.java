@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.client.models.tardis.controls;
+package com.lcm.doctorwho.client.models.tardis.decoration;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITileModel;

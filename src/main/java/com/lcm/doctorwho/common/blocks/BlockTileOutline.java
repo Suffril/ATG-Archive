@@ -2,6 +2,7 @@ package com.lcm.doctorwho.common.blocks;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,12 +12,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTileOutline extends BlockOutline implements ITileEntityProvider {
+public class BlockTileOutline extends BlockContainer implements ITileEntityProvider {
 	
-	private TileEntity tileEntity = null;
+	private Class<? extends TileEntity> tileEntity;
 
-	public BlockTileOutline(Material material, String name, TileEntity tileEntity) {
-		super(material, name);
+	public BlockTileOutline(Material material, String name, Class<? extends TileEntity> tileEntity) {
+		super(material);
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
 		this.tileEntity = tileEntity;
         this.translucent = true;
 	}
@@ -24,6 +27,7 @@ public class BlockTileOutline extends BlockOutline implements ITileEntityProvide
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
@@ -41,13 +45,22 @@ public class BlockTileOutline extends BlockOutline implements ITileEntityProvide
 	@Deprecated
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.INVISIBLE;
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return tileEntity;
+        try {
+            return tileEntity.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+
+
 }

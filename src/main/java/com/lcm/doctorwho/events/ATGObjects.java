@@ -11,12 +11,18 @@ import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.*;
-import com.lcm.doctorwho.common.blocks.slabs.BlockSlabOutline;
+import com.lcm.doctorwho.common.blocks.BlockSlabOutline;
+import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
+import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
 import com.lcm.doctorwho.common.items.*;
+import com.lcm.doctorwho.common.items.outlines.ItemClothingOutline;
+import com.lcm.doctorwho.common.items.outlines.ItemOutline;
+import com.lcm.doctorwho.common.items.outlines.ItemSonic;
 import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.common.traits.negative.TraitClumsy;
@@ -41,14 +47,8 @@ import com.lcm.doctorwho.utils.ATGUtils;
 
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
@@ -56,11 +56,13 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -152,9 +154,9 @@ public class ATGObjects {
 		public static final Block tro_flatroundel_slab_2 = new BlockSlabOutline("tro_flatroundel_slab_2", tro_flatroundel_slab_full_2.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 		public static final Block tro_flatroundel_slab_3 = new BlockSlabOutline("tro_flatroundel_slab_3", tro_flatroundel_slab_full_3.getDefaultState(), Material.CORAL).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 
-		public static final Block rotor1963 = new BlockTileOutline(Material.CORAL,"rotor1963", new TileEntity1963Rotor()).setLightLevel(1.0F).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+		public static final Block rotor1963 = new BlockTileOutline(Material.CORAL,"rotor1963", TileEntity1963Rotor.class).setLightLevel(1.0F).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
         public static final Block light = new BlockLight().setRegistryName("light").setUnlocalizedName("light").setLightLevel(1.0F);
-        public static final Block chair1963 = new BlockTileOutline(Material.CORAL,"chair1963", new TileEntity1963Chair()).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+        public static final Block chair1963 = new BlockTileOutline(Material.CORAL,"chair1963", TileEntity1963Chair.class).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 
         public static final Block ha_tro_cons = new BlockOutline(Material.CORAL, "ha_tro_cons").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
         public static final Block ha_tro_floor = new BlockOutline(Material.CORAL, "ha_tro_floor").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
@@ -269,7 +271,18 @@ public class ATGObjects {
 			}
 		}
 	}
-	
+
+	public static void setUpTiles() {
+		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
+		GameRegistry.registerTileEntity(TileEntity1963Rotor.class, AcrossTheGalaxy.MODID + ":1963rotor");
+		GameRegistry.registerTileEntity(TileEntity1963Chair.class, AcrossTheGalaxy.MODID + ":1963chair");
+	}
+
+	public static void setUpCapabilities()
+    {
+        CapabilityManager.INSTANCE.register(ITardisTile.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
+    }
+
 	@SideOnly(Side.CLIENT) // note: this means *physical* side
 	@SubscribeEvent
 	public static void onModelBake(ModelBakeEvent e) {

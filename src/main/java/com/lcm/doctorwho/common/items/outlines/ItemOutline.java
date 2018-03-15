@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.items;
+package com.lcm.doctorwho.common.items.outlines;
 
 import net.minecraft.item.Item;
 

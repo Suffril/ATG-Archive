@@ -2,34 +2,23 @@ package com.lcm.doctorwho.common.tiles.tardis;
 
 import javax.annotation.Nullable;
 
-import com.google.gson.JsonObject;
-import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.ITardis;
-import com.lcm.doctorwho.events.ATGObjects;
+import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
 import com.lcm.doctorwho.utils.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChorusPlant;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.JsonUtils;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.io.File;
 import java.util.List;
 
 public class TileEntityTardis extends TileEntity implements ITickable {
@@ -62,7 +51,7 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-		ITardis capa = getCapability(CapabilityTileTardis.TARDIS, null);
+		ITardisTile capa = getCapability(CapabilityTileTardis.TARDIS, null);
 		capa = TardisUtils.tardisReadFromNBT(capa, nbt);
 		ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)));
 		super.readFromNBT(nbt);
@@ -97,7 +86,7 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos()));
 			if (!entities.isEmpty()) {
 				for (Entity e : entities) {
-					ITardis capa = getCapability(CapabilityTileTardis.TARDIS, null);
+					ITardisTile capa = getCapability(CapabilityTileTardis.TARDIS, null);
 					ATGNetwork.INSTANCE.sendToAll(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(getCapability(CapabilityTileTardis.TARDIS, null))));
 					TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
 					ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, info.getInteriorX(), info.getInteriorY(), info.getInteriorZ());

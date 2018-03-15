@@ -3,6 +3,7 @@ package com.lcm.doctorwho.common.capabilities;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 
 import net.minecraft.nbt.NBTBase;
@@ -12,9 +13,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-public class CapabilityTileTardis implements ITardis {
-	@CapabilityInject(ITardis.class)
-	public static final Capability<ITardis> TARDIS = null;
+public class CapabilityTileTardis implements ITardisTile {
+	@CapabilityInject(ITardisTile.class)
+	public static final Capability<ITardisTile> TARDIS = null;
 	
 	TileEntityTardis tardis;
 	
@@ -86,9 +87,9 @@ public class CapabilityTileTardis implements ITardis {
 	
 	public static class CapabilityTardisProvider implements ICapabilitySerializable<NBTTagCompound> {
 		
-		private ITardis capability;
+		private ITardisTile capability;
 		
-		public CapabilityTardisProvider(ITardis capability) {
+		public CapabilityTardisProvider(ITardisTile capability) {
 			this.capability = capability;
 		}
 		
@@ -114,16 +115,16 @@ public class CapabilityTileTardis implements ITardis {
 		}
 	}
 	
-	public static class Storage implements Capability.IStorage<ITardis> {
+	public static class Storage implements Capability.IStorage<ITardisTile> {
 		
 		@Nullable
 		@Override
-		public NBTBase writeNBT(Capability<ITardis> capability, ITardis instance, EnumFacing side) {
+		public NBTBase writeNBT(Capability<ITardisTile> capability, ITardisTile instance, EnumFacing side) {
 			return instance.writeNBT();
 		}
 		
 		@Override
-		public void readNBT(Capability<ITardis> capability, ITardis instance, EnumFacing side, NBTBase nbt) {
+		public void readNBT(Capability<ITardisTile> capability, ITardisTile instance, EnumFacing side, NBTBase nbt) {
 			instance.readNBT((NBTTagCompound) nbt);
 		}
 	}

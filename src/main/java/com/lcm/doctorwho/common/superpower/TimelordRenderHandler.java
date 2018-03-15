@@ -3,6 +3,7 @@ package com.lcm.doctorwho.common.superpower;
 import java.awt.Color;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
+import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.LimbManipulationUtil;
 
 import lucraft.mods.lucraftcore.superpowers.Superpower;
@@ -37,7 +38,8 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 	private static final ModelPlayer playerModelLargeArms = new ModelPlayer(0.1F, false);
 	private static final ModelPlayer playerModelSmallArms = new ModelPlayer(0.1F, true);
 	private static final ResourceLocation REGEN_TEXTURE = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/entity/regen.png");
-	
+	static int arm_shake = 0;
+
 	static {
 		LimbManipulationUtil.getLimbManipulator(playerModelLargeArms, LimbManipulationUtil.Limb.LEFT_ARM).setAngles(0, 0, -75);
 		LimbManipulationUtil.getLimbManipulator(playerModelLargeArms, LimbManipulationUtil.Limb.RIGHT_ARM).setAngles(0, 0, 75);
@@ -281,9 +283,12 @@ public class TimelordRenderHandler implements SuperpowerRenderer.ISuperpowerRend
 	public static void onRenderPlayerPre(RenderPlayerEvent.Pre e) {
 		TimelordSuperpowerHandler handler = SuperpowerHandler.getSpecificSuperpowerPlayerHandler(e.getEntityPlayer(), TimelordSuperpowerHandler.class);
 		if (handler != null && (handler.regenTicks > 0 && handler.regenTicks < 200)) {
-			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.LEFT_ARM).setAngles(0, 0, -75);
-			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.RIGHT_ARM).setAngles(0, 0, 75);
+            arm_shake = ATGUtils.RANDOM.nextInt(7);
+			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.LEFT_ARM).setAngles(0, 0, -75 + arm_shake);
+			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.RIGHT_ARM).setAngles(0, 0, 75 + arm_shake);
 			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.HEAD).setAngles(-20, 0, 0);
+			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.LEFT_LEG).setAngles(0, 0, -10);
+			LimbManipulationUtil.getLimbManipulator(e.getRenderer(), LimbManipulationUtil.Limb.RIGHT_LEG).setAngles(0, 0, 10);
 		}
 	}
 	

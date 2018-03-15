@@ -1,18 +1,18 @@
 package com.lcm.doctorwho;
 
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.ITardis;
+import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
 import com.lcm.doctorwho.common.dimension.ATGDims;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.events.ATGCommonProxy;
+import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.DebugCommand;
 
-import com.lcm.doctorwho.utils.JsonGenUtil;
 import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -47,25 +47,20 @@ public class AcrossTheGalaxy {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-        setUpTiles();
 	    ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
 		proxy.preInit(event);
 	}
 	
 	@EventHandler
-	public void init(FMLInitializationEvent event) throws IOException {
+	public void init(FMLInitializationEvent event) {
+		ATGObjects.setUpTiles();
 		ATGNetwork.init();
 		MinecraftForge.EVENT_BUS.register(proxy);
 		proxy.init(event);
-		CapabilityManager.INSTANCE.register(ITardis.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
+		ATGObjects.setUpCapabilities();
 		ATGDims.dimSetup();
 	}
 
-	public static void setUpTiles() {
-		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
-        GameRegistry.registerTileEntity(TileEntity1963Rotor.class, AcrossTheGalaxy.MODID + ":1963rotor");
-        GameRegistry.registerTileEntity(TileEntity1963Chair.class, AcrossTheGalaxy.MODID + ":1963chair");
-	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
