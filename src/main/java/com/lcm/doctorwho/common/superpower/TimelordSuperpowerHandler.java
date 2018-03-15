@@ -43,13 +43,13 @@ public class TimelordSuperpowerHandler extends SuperpowerPlayerHandler {
 		EntityPlayer player = cap.getPlayer();
 		
 		if (!player.world.isRemote) {
-			
+
 			// Server Behavior
 			if (regenTicks > 0 && regenTicks < 200) { // regenerating
 				regenTicks++;
 				player.extinguish();
 				player.setArrowCountInEntity(0);
-				
+
 				if (regenTicks > 100) { // explosion phase
 					if (player.world.getBlockState(player.getPosition()).getBlock() instanceof BlockFire) player.world.setBlockToAir(player.getPosition());
 					double x = player.posX + player.getRNG().nextGaussian() * 2;

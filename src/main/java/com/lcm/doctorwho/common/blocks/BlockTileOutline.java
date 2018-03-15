@@ -59,6 +59,7 @@ public class BlockTileOutline extends BlockContainer implements ITileEntityProvi
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
