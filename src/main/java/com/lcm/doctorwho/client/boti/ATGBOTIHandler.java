@@ -1,20 +1,14 @@
-package com.lcm.doctorwho.client.events;
+package com.lcm.doctorwho.client.boti;
 
-import com.lcm.doctorwho.client.boti.EntityCamera;
-import com.lcm.doctorwho.client.boti.FakeWorld;
-import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
-import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
 import com.lcm.doctorwho.utils.ATGConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -23,16 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 /**
  * Created by Nictogen on 2/19/18
  */
-@Mod.EventBusSubscriber(Side.CLIENT) public class ATGClientEventHandler {
-	@SubscribeEvent public static void angelsRender(RenderLivingEvent.Post<EntityWeepingAngel> e) {
-		EntityLivingBase entity = e.getEntity();
-		if (entity instanceof EntityWeepingAngel) {
-			EntityWeepingAngel angel = (EntityWeepingAngel) entity;
-			if (!angel.isSeen()) {
-				ATGNetwork.INSTANCE.sendToServer(new MessageAngelSeen(angel.getEntityId()));
-			}
-		}
-	}
+@Mod.EventBusSubscriber(Side.CLIENT) public class ATGBOTIHandler {
 
 	@SubscribeEvent public static void onRenderTick(TickEvent.RenderTickEvent event) {
 

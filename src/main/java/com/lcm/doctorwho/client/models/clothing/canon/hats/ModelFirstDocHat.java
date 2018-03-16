@@ -8,78 +8,69 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
+
 public class ModelFirstDocHat extends ModelBiped {
-
-	/**
-	 * Model First Doctor hats
-	 *
-	 * @Author - Lucy
-	 * @Date - 02/19/2018
-	 */
-
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/first_doc_hat.png");
-
-	ModelRenderer Base;
-	ModelRenderer Hat2;
-	ModelRenderer Hat3;
-	ModelRenderer Hat4;
-	ModelRenderer Hat5;
-	ModelRenderer Hat6;
-	ModelRenderer Hat7;
-	ModelRenderer Hat8;
 
 	public ModelFirstDocHat() {
 		textureWidth = 64;
 		textureHeight = 64;
 
-		Base = new ModelRenderer(this, 2, 16);
-		Base.addBox(0F, 0F, 0F, 9, 2, 9);
-		Base.setRotationPoint(-4.5F, -14F, -5F);
-		Base.setTextureSize(64, 64);
-		Base.mirror = true;
-		ATGUtils.setRotation(Base, 0F, 0F, 0F);
-		Hat2 = new ModelRenderer(this, 4, 6);
-		Hat2.addBox(0F, 0F, 0F, 8, 1, 8);
-		Hat2.setRotationPoint(-4F, -15F, -4.5F);
-		Hat2.setTextureSize(64, 64);
-		Hat2.mirror = true;
-		ATGUtils.setRotation(Hat2, 0F, 0F, 0F);
-		Hat3 = new ModelRenderer(this, 37, 38);
-		Hat3.addBox(0F, 0F, 0F, 2, 1, 6);
-		Hat3.setRotationPoint(-3F, -17F, -3.5F);
-		Hat3.setTextureSize(64, 64);
-		Hat3.mirror = true;
-		ATGUtils.setRotation(Hat3, 0F, 0F, 0F);
-		Hat4 = new ModelRenderer(this, 37, 30);
-		Hat4.addBox(0F, 0F, 0F, 2, 1, 6);
-		Hat4.setRotationPoint(1F, -17F, -3.5F);
-		Hat4.setTextureSize(64, 64);
-		Hat4.mirror = true;
-		ATGUtils.setRotation(Hat4, 0F, 0F, 0F);
-		Hat5 = new ModelRenderer(this, 22, 39);
-		Hat5.addBox(0F, 0F, 0F, 1, 1, 5);
-		Hat5.setRotationPoint(-2.5F, -17.5F, -3F);
-		Hat5.setTextureSize(64, 64);
-		Hat5.mirror = true;
-		ATGUtils.setRotation(Hat5, 0F, 0F, 0F);
-		Hat6 = new ModelRenderer(this, 8, 39);
-		Hat6.addBox(0F, 0F, 0F, 1, 1, 5);
-		Hat6.setRotationPoint(1.5F, -17.5F, -3F);
-		Hat6.setTextureSize(64, 64);
-		Hat6.mirror = true;
-		ATGUtils.setRotation(Hat6, 0F, 0F, 0F);
-		Hat7 = new ModelRenderer(this, 7, 29);
-		Hat7.addBox(0F, 0F, 0F, 7, 1, 7);
-		Hat7.setRotationPoint(-3.5F, -16F, -4F);
-		Hat7.setTextureSize(64, 64);
-		Hat7.mirror = true;
-		ATGUtils.setRotation(Hat7, 0F, 0F, 0F);
-		Hat8 = new ModelRenderer(this, 40, 7);
-		Hat8.addBox(0F, 0F, 0F, 2, 1, 6);
-		Hat8.setRotationPoint(-1F, -16.5F, -3.5F);
-		Hat8.setTextureSize(64, 64);
-		Hat8.mirror = true;
-		ATGUtils.setRotation(Hat8, 0F, 0F, 0F);
+		ArrayList<ModelRenderer> boxes = new ArrayList<>();
+
+		ModelRenderer base = new ModelRenderer(this, 2, 16);
+		base.addBox(0F, 0F, 0F, 9, 2, 9);
+		base.setRotationPoint(-4.5F, -14F, -5F);
+		ATGUtils.setRotation(base, 0F, 0F, 0F);
+		boxes.add(base);
+
+		ModelRenderer hat2 = new ModelRenderer(this, 4, 6);
+		hat2.addBox(0F, 0F, 0F, 8, 1, 8);
+		hat2.setRotationPoint(-4F, -15F, -4.5F);
+		ATGUtils.setRotation(hat2, 0F, 0F, 0F);
+		boxes.add(hat2);
+
+		ModelRenderer hat3 = new ModelRenderer(this, 37, 38);
+		hat3.addBox(0F, 0F, 0F, 2, 1, 6);
+		hat3.setRotationPoint(-3F, -17F, -3.5F);
+		ATGUtils.setRotation(hat3, 0F, 0F, 0F);
+		boxes.add(hat3);
+
+		ModelRenderer hat4 = new ModelRenderer(this, 37, 30);
+		hat4.addBox(0F, 0F, 0F, 2, 1, 6);
+		hat4.setRotationPoint(1F, -17F, -3.5F);
+		ATGUtils.setRotation(hat4, 0F, 0F, 0F);
+		boxes.add(hat4);
+
+		ModelRenderer hat5 = new ModelRenderer(this, 22, 39);
+		hat5.addBox(0F, 0F, 0F, 1, 1, 5);
+		hat5.setRotationPoint(-2.5F, -17.5F, -3F);
+		ATGUtils.setRotation(hat5, 0F, 0F, 0F);
+		boxes.add(hat5);
+
+		ModelRenderer hat6 = new ModelRenderer(this, 8, 39);
+		hat6.addBox(0F, 0F, 0F, 1, 1, 5);
+		hat6.setRotationPoint(1.5F, -17.5F, -3F);
+		ATGUtils.setRotation(hat6, 0F, 0F, 0F);
+		boxes.add(hat6);
+
+		ModelRenderer hat7 = new ModelRenderer(this, 7, 29);
+		hat7.addBox(0F, 0F, 0F, 7, 1, 7);
+		hat7.setRotationPoint(-3.5F, -16F, -4F);
+		ATGUtils.setRotation(hat7, 0F, 0F, 0F);
+		boxes.add(hat7);
+
+		ModelRenderer hat8 = new ModelRenderer(this, 40, 7);
+		hat8.addBox(0F, 0F, 0F, 2, 1, 6);
+		hat8.setRotationPoint(-1F, -16.5F, -3.5F);
+		ATGUtils.setRotation(hat8, 0F, 0F, 0F);
+		boxes.add(hat8);
+
+		for (ModelRenderer box : boxes) {
+			box.mirror = true;
+			box.setTextureSize(64,64);
+		}
 
 		this.bipedHeadwear.isHidden = true;
 
@@ -87,21 +78,13 @@ public class ModelFirstDocHat extends ModelBiped {
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0);
 		this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
 
-		((BodyPartHook) this.bipedHead).setRender(new BodyPartHook.IPartRenderer() {
-			@Override public void render(float scale) {
-				GlStateManager.pushMatrix();
-				GlStateManager.translate(0, 0.35, 0);
-				ATGUtils.bindTexture(TEX);
-				Base.render(scale);
-				Hat2.render(scale);
-				Hat3.render(scale);
-				Hat4.render(scale);
-				Hat5.render(scale);
-				Hat6.render(scale);
-				Hat7.render(scale);
-				Hat8.render(scale);
-				GlStateManager.popMatrix();
-			}
+		((BodyPartHook) this.bipedHead).setRender(scale -> {
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0, 0.35, 0);
+			ATGUtils.bindTexture(TEX);
+			for (ModelRenderer box : boxes)
+				box.render(scale);
+			GlStateManager.popMatrix();
 		});
 
 	}

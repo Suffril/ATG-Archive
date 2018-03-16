@@ -25,6 +25,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.image.BufferedImage;
 import java.nio.IntBuffer;
+import java.util.Objects;
 
 /**
  * Created by Nictogen on 3/5/18.
@@ -35,11 +36,11 @@ public class EntityCamera extends EntityPlayerSP {
 	private Vec3d origin;
 
 	public EntityCamera(World world) {
-		super(Minecraft.getMinecraft(), world, Minecraft.getMinecraft().getConnection(), null, null);
+		super(Minecraft.getMinecraft(), world, Objects.requireNonNull(Minecraft.getMinecraft().getConnection()), null, null);
 	}
 
 	public EntityCamera(World world, double x, double y, double z) {
-		super(Minecraft.getMinecraft(), world, Minecraft.getMinecraft().getConnection(), null, null);
+		super(Minecraft.getMinecraft(), world, Objects.requireNonNull(Minecraft.getMinecraft().getConnection()), null, null);
 		this.setPositionAndUpdate(x, y, z);
 		this.origin = new Vec3d(x, y, z);
 	}
@@ -77,8 +78,8 @@ public class EntityCamera extends EntityPlayerSP {
 		//Render world
 		try {
 			//Set all of the render setting to work on the proxy world
-			mc.displayHeight = framebuffer.framebufferWidth;
-			mc.displayWidth = framebuffer.framebufferHeight;
+			mc.displayHeight = framebuffer.framebufferHeight;
+			mc.displayWidth = framebuffer.framebufferWidth;
 
 			mc.gameSettings.thirdPersonView = 0;
 			mc.gameSettings.hideGUI = true;
@@ -143,7 +144,7 @@ public class EntityCamera extends EntityPlayerSP {
 		Minecraft.getMinecraft().setRenderViewEntity(Minecraft.getMinecraft().player);
 	}
 
-	public void setupOffset(Vec3d tile) {
+	private void setupOffset(Vec3d tile) {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 
 		Vec3d pVec = new Vec3d(player.posX, player.posY, player.posZ);
@@ -180,19 +181,18 @@ public class EntityCamera extends EntityPlayerSP {
 		rotationYaw = (float) angleDeg;
 
 		//pitch TODO
-
-		x1 = tVec.y;
-		z1 = tVec.z;
-
-		x2 = tVec.y;
-		z2 = projVec.z;
-
-		angleDeg = Math.atan2(z2 - z1, x2 - x1) * 180 / Math.PI;
-
-		if (angleDeg <= 0)
-			angleDeg = 360 + angleDeg;
-
-		rotationPitch = 0f;
+//
+//		x1 = tVec.y;
+//		z1 = tVec.z;
+//
+//		x2 = tVec.y;
+//		z2 = projVec.z;
+//
+//		angleDeg = Math.atan2(z2 - z1, x2 - x1) * 180 / Math.PI;
+//
+//		if (angleDeg <= 0)
+//			angleDeg = 360 + angleDeg;
+//		rotationPitch = 0f;
 	}
 
 	@Override public void onEntityUpdate() {

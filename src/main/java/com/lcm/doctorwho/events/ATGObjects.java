@@ -14,9 +14,9 @@ import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.outlines.ItemClothingOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemSonic;
-import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
-import com.lcm.doctorwho.common.mobs.hostile.EntityWeepingAngel;
-import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
+import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
+import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
+import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
@@ -56,6 +56,7 @@ import java.util.Arrays;
 /**
  * Created by Nictogen on 2/18/18
  */
+@SuppressWarnings("unused")
 @Mod.EventBusSubscriber public class ATGObjects {
 
 	public static class Blocks {

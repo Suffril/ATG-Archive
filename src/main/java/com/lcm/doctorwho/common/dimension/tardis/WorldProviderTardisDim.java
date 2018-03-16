@@ -2,7 +2,6 @@ package com.lcm.doctorwho.common.dimension.tardis;
 
 import com.lcm.doctorwho.common.dimension.ATGDims;
 import lucraft.mods.lucraftcore.space.dimension.ChunkGeneratorSpace;
-import lucraft.mods.lucraftcore.space.dimension.SpaceSkyRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -69,7 +68,7 @@ public class WorldProviderTardisDim extends WorldProvider {
 	}
 
 	@Override public boolean shouldMapSpin(String entity, double x, double z, double rotation) {
-		return true;
+		return false;
 	}
 
 	@Override public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
@@ -77,7 +76,7 @@ public class WorldProviderTardisDim extends WorldProvider {
 	}
 
 	@Override public float getStarBrightness(float par1) {
-		return 0.8F;
+		return 0.0F;
 	}
 
 	/**
@@ -88,8 +87,6 @@ public class WorldProviderTardisDim extends WorldProvider {
 	}
 
 	@SideOnly(Side.CLIENT) @Nullable @Override public IRenderHandler getSkyRenderer() {
-		if (super.getSkyRenderer() == null)
-			this.setSkyRenderer(new SpaceSkyRenderer(world));
-		return super.getSkyRenderer();
+		return null;
 	}
 }

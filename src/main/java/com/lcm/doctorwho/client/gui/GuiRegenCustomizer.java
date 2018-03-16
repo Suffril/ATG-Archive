@@ -12,14 +12,14 @@ import net.minecraftforge.fml.client.config.GuiSlider;
 
 public class GuiRegenCustomizer extends GuiCustomizer implements GuiSlider.ISlider {
 
-	public float primaryRed;
-	public float primaryGreen;
-	public float primaryBlue;
-	public float secondaryRed;
-	public float secondaryGreen;
-	public float secondaryBlue;
-	public boolean textured;
-	public GuiButton texturedButton;
+	private float primaryRed;
+	private float primaryGreen;
+	private float primaryBlue;
+	private float secondaryRed;
+	private float secondaryGreen;
+	private float secondaryBlue;
+	private boolean textured;
+	private GuiButton texturedButton;
 
 	@Override public void initGui() {
 		super.initGui();

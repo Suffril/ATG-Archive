@@ -15,9 +15,7 @@ public class JsonUtils {
 	//Generates basic item jsons
 	public static void item(String itemName, String textureName) {
 		File fileDir = new File(mod_path + "\\models\\item\\");
-		if (!fileDir.exists()) {
-			fileDir.mkdirs();
-		}
+		fileDir.mkdirs();
 
 		try {
 
@@ -35,22 +33,16 @@ public class JsonUtils {
 			jw.close();
 			writer.close();
 
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	//This only generates basic block blockstates with ONE variant (I'll add support for multiple later)
-	public static void Block(String blockName, String textureName) {
+	public static void block(String blockName, String textureName) {
 
 		File fileDir = new File(mod_path + "\\blockstates\\");
-		if (!fileDir.exists()) {
-			fileDir.mkdirs();
-		}
+		fileDir.mkdirs();
 
 		try {
 
@@ -70,10 +62,6 @@ public class JsonUtils {
 			jw.close();
 			writer.close();
 
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,9 +75,7 @@ public class JsonUtils {
 	private static void blockModel(String blockName, String textureName, String path) {
 
 		File fileDir = new File(path + "\\models\\block\\");
-		if (!fileDir.exists()) {
-			fileDir.mkdirs();
-		}
+		fileDir.mkdirs();
 
 		try {
 
@@ -107,10 +93,6 @@ public class JsonUtils {
 			jw.close();
 			writer.close();
 
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -121,9 +103,7 @@ public class JsonUtils {
 	private static void blockItemModel(String blockName) {
 
 		File fileDir = new File(mod_path + "\\models\\item\\");
-		if (!fileDir.exists()) {
-			fileDir.mkdirs();
-		}
+		fileDir.mkdirs();
 
 		try {
 
@@ -138,10 +118,6 @@ public class JsonUtils {
 			jw.close();
 			writer.close();
 
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

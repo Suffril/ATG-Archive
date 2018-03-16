@@ -2,8 +2,7 @@ package com.lcm.doctorwho.client.render.item;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
-import com.lcm.doctorwho.client.models.items.ModelFobwatchClosed;
-import com.lcm.doctorwho.client.models.items.ModelFobwatchOpen;
+import com.lcm.doctorwho.client.models.items.ModelFobwatch;
 import com.lcm.doctorwho.utils.ATGUtils;
 import lucraft.mods.lucraftcore.util.render.IItemRenderer;
 import net.minecraft.block.state.IBlockState;
@@ -24,22 +23,15 @@ import java.util.List;
 public class RenderItemFobwatch implements IItemRenderer {
 
 	// Textures
-	private ResourceLocation modelTextureOpen = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/fob_watch/fob_open.png");
-	private ResourceLocation modelTextureClosed = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/fob_watch/fob_closed.png");
-	private ResourceLocation modelTexture = modelTextureClosed;
+	private ResourceLocation modelTexture = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/items/fob.png");
 
 	private static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
 	// Models
-	private ItemModelBase modelFobWatchClosed = new ModelFobwatchClosed();
-	private ItemModelBase modelfobWatchOpen = new ModelFobwatchOpen();
-	private ItemModelBase modelInUse = modelFobWatchClosed;
+	private ItemModelBase modelFobWatchClosed = new ModelFobwatch(false);
+	private ItemModelBase modelfobWatchOpen = new ModelFobwatch(true);
 
-	private float scale = 0.0625F;
-
-	public RenderItemFobwatch() {
-
-	}
+	public RenderItemFobwatch() { }
 
 	@Override public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
 		return IItemRenderer.super.getQuads(state, side, rand);
@@ -62,20 +54,15 @@ public class RenderItemFobwatch implements IItemRenderer {
 	}
 
 	@Override public IModelState getTransforms() {
-		return modelInUse.getTransforms();
+		return modelFobWatchClosed.getTransforms();
 	}
 
 	@Override public void renderItem(ItemStack stack, TransformType transformType) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(modelTexture);
 
-		if (stack.getTagCompound() != null && stack.getTagCompound().getBoolean("open")) {
-			modelInUse = modelfobWatchOpen;
-			modelTexture = modelTextureOpen;
-		} else {
-			modelInUse = modelFobWatchClosed;
-			modelTexture = modelTextureClosed;
-		}
+		ItemModelBase modelInUse = (stack.getTagCompound() != null && stack.getTagCompound().getBoolean("open")) ? modelfobWatchOpen : modelFobWatchClosed;
 
+		float scale = 0.0625F;
 		modelInUse.renderModel(scale);
 
 		if (stack.isItemEnchanted())

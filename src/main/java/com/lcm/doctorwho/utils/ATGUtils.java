@@ -21,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,13 +36,6 @@ public class ATGUtils {
 	 */
 	public static void playSound(Entity entity, SoundEvent sound) {
 		entity.world.playSound(null, entity.posX, entity.posY, entity.posZ, sound, SoundCategory.PLAYERS, 1.0F, 1.0F);
-	}
-
-	/**
-	 * Checks whether we are on a client or not
-	 */
-	public static boolean isPhysicalClient() {
-		return FMLCommonHandler.instance().getSide().isClient();
 	}
 
 	/**
@@ -90,7 +82,7 @@ public class ATGUtils {
 		explodeKnockback(player, player.world, player.getPosition(), ATGConfig.regenerativeKnockback, ATGConfig.regenerativeKnockbackRange);
 	}
 
-	public static void explodeKnockback(Entity exploder, World world, BlockPos pos, float knockback, int range) {
+	private static void explodeKnockback(Entity exploder, World world, BlockPos pos, float knockback, int range) {
 		world.getEntitiesWithinAABBExcludingEntity(exploder, getReach(pos, range)).forEach(entity -> {
 			if (!(entity instanceof EntityLiving || entity instanceof EntityPlayer) || exploder.isDead)
 				return;
@@ -105,7 +97,7 @@ public class ATGUtils {
 		});
 	}
 
-	public static void explodeKill(Entity exploder, World world, BlockPos pos, int range) {
+	private static void explodeKill(Entity exploder, World world, BlockPos pos, int range) {
 		world.getEntitiesWithinAABBExcludingEntity(exploder, getReach(pos, range)).forEach(entity -> {
 			if (!(entity instanceof EntityLiving || entity instanceof EntityPlayer) || !entity.isNonBoss())
 				return;
@@ -113,7 +105,7 @@ public class ATGUtils {
 		});
 	}
 
-	public static AxisAlignedBB getReach(BlockPos pos, int range) {
+	private static AxisAlignedBB getReach(BlockPos pos, int range) {
 		return new AxisAlignedBB(pos.up(range).north(range).west(range), pos.down(range).south(range).east(range));
 	}
 

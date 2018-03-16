@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.mobs;
+package com.lcm.doctorwho.common.entity.hostile;
 
 import com.lcm.doctorwho.utils.ATGConfig;
 import net.minecraft.entity.Entity;
@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -18,7 +17,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
 
-public class EntityWeepingAngel extends EntityMob implements IMob {
+public class EntityWeepingAngel extends EntityMob {
 
 	private static DataParameter<Boolean> VIEWED = EntityDataManager.<Boolean>createKey(EntityWeepingAngel.class, DataSerializers.BOOLEAN);
 
@@ -76,6 +75,11 @@ public class EntityWeepingAngel extends EntityMob implements IMob {
 		if (!world.isRemote)
 			if (isSeen()) {
 				setSeenTime(getSeenTime() + 1);
+				motionX = 0;
+				motionZ = 0;
+				if (onGround) {
+					motionZ = 0;
+				}
 
 				if (getSeenTime() > 15)
 					setSeen(false);
@@ -99,28 +103,6 @@ public class EntityWeepingAngel extends EntityMob implements IMob {
 			int y = world.getSpawnPoint().getY();
 			entity.setPositionAndUpdate(x, y, z);
 		}
-	}
-
-	@Override public void setMoveForward(float amount) {
-		if (!isSeen())
-			moveForward = amount;
-		else
-			moveForward = 0;
-	}
-
-	@Override public void setMoveVertical(float amount) {
-		if (!isSeen())
-			moveVertical = amount;
-
-		if (isSeen() && !isAirBorne)
-			moveVertical = 0;
-	}
-
-	@Override public void setMoveStrafing(float amount) {
-		if (!isSeen())
-			moveStrafing = amount;
-		else
-			moveStrafing = 0;
 	}
 
 	/**

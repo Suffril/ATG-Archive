@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.client.render.entity;
 
 import com.lcm.doctorwho.client.render.RenderMobsInit;
-import com.lcm.doctorwho.common.mobs.hostile.EntityCybermen;
+import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
@@ -12,15 +12,13 @@ import javax.annotation.Nullable;
 
 public class RenderCybermen extends RenderLiving<EntityCybermen> {
 
-	ModelBiped model = null;
-
 	public RenderCybermen(ModelBase modelbaseIn) {
 		super(Minecraft.getMinecraft().getRenderManager(), modelbaseIn, 1.0F);
 	}
 
 	@Override protected void renderModel(EntityCybermen entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
 		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
-		model = RenderMobsInit.CYBERS.get(entity.getType());
+		ModelBiped model = RenderMobsInit.CYBERS.get(entity.getType());
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 	}
 

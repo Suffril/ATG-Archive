@@ -1,6 +1,6 @@
 package com.lcm.doctorwho.networking.packets;
 
-import com.lcm.doctorwho.common.mobs.EntityWeepingAngel;
+import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;

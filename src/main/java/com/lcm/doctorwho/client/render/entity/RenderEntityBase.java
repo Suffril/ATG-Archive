@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderEntityBase<T extends EntityLiving> extends RenderLiving<T> {
-	String textureName;
+	private String textureName;
 
 	public RenderEntityBase(ModelBase model, String texName, float shadowSize) {
 		super(Minecraft.getMinecraft().getRenderManager(), model, shadowSize);

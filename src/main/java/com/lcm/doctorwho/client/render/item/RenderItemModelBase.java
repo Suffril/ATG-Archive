@@ -20,7 +20,7 @@ import java.util.List;
 
 public class RenderItemModelBase implements IItemRenderer {
 
-	private ResourceLocation modelTexture = null;
+	private ResourceLocation modelTexture;
 	private static final ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
 	private IBakedModel jsonModel;

@@ -21,8 +21,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = AcrossTheGalaxy.MODID, name = AcrossTheGalaxy.NAME, version = AcrossTheGalaxy.VERSION, dependencies = "required:forge@[14.23.1.2574,); required-after:lucraftcore@[1.12-2.0.4,)", acceptedMinecraftVersions = "1.12, 1.12.1, 1.12.2") @EventBusSubscriber public class AcrossTheGalaxy {
-	@SidedProxy(serverSide = "com.lcm.doctorwho.events.ATGCommonProxy", clientSide = "com.lcm.doctorwho.events.ATGClientProxy")
 
+	@SidedProxy(serverSide = "com.lcm.doctorwho.events.ATGCommonProxy", clientSide = "com.lcm.doctorwho.events.ATGClientProxy")
 	public static ATGCommonProxy proxy;
 
 	public static final String MODID = "lcm-atg";
@@ -34,7 +34,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 	@EventHandler public void preInit(FMLPreInitializationEvent event) {
 		ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
-		proxy.preInit(event);
 	}
 
 	@EventHandler public void init(FMLInitializationEvent event) {

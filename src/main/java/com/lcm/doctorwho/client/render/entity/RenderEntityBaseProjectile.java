@@ -1,14 +1,14 @@
 package com.lcm.doctorwho.client.render.entity;
 
 import com.lcm.doctorwho.client.models.entity.projectile.ModelProjectile;
-import com.lcm.doctorwho.common.mobs.projectile.EntityProjectile;
+import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
 
 public class RenderEntityBaseProjectile extends RenderSnowball<EntityProjectile> {
 
-	ModelProjectile laser = new ModelProjectile();
+	private ModelProjectile laser = new ModelProjectile();
 
 	public RenderEntityBaseProjectile() {
 		super(Minecraft.getMinecraft().getRenderManager(), Items.AIR, null);
