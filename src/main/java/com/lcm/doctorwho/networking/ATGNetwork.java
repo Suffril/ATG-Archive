@@ -15,6 +15,7 @@ public class ATGNetwork {
 		INSTANCE.registerMessage(MessageAngelSeen.AngelSeenHandler.class, MessageAngelSeen.class, 0, Side.SERVER);
 		INSTANCE.registerMessage(MessageSyncTardis.TardisSyncHandler.class, MessageSyncTardis.class, 1, Side.CLIENT);
 		INSTANCE.registerMessage(MessageChunkData.Handler.class, MessageChunkData.class, 2, Side.CLIENT);
+		INSTANCE.registerMessage(MessageRequestChunks.Handler.class, MessageRequestChunks.class, 3, Side.SERVER);
 	}
 
 }

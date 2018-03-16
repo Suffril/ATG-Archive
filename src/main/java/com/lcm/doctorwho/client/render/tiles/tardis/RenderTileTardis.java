@@ -1,9 +1,8 @@
 package com.lcm.doctorwho.client.render.tiles.tardis;
 
-import com.lcm.doctorwho.client.events.ATGClientEventHandler;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
-import com.lcm.doctorwho.client.windows.EntityCamera;
-import com.lcm.doctorwho.client.windows.FakeWorld;
+import com.lcm.doctorwho.client.boti.EntityCamera;
+import com.lcm.doctorwho.client.boti.FakeWorld;
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.ITardis;
 import com.lcm.doctorwho.common.tiles.TileEntityTardis;
@@ -16,21 +15,13 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
 public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis>
 {
-	//TODO animated portal
-	//TODO fix memory leaks
-	//TODO variable door sizes
-	//TODO smoother teleporting
-	//TODO teleport all entities/when colliding
-	//TODO bigger hitbox
-	//TODO more than one area
-	//TODO interior spawning
 	private ITardisModel MODEL = null;
 
 	public RenderTileTardis() { }
@@ -51,7 +42,6 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 		}
 
 		GlStateManager.pushMatrix();
-		GlStateManager.pushMatrix();
 
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(180, 0.0F, 0.0F, 1.0F);
@@ -61,13 +51,15 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 		MODEL.renderAll(0.0625f);
 
 		GlStateManager.popMatrix();
+
 		FakeWorld fakeWorld = FakeWorld.getFakeWorld(ATGConfig.tardisDIM);
 
-		EntityCamera camera = fakeWorld.getCamera(ATGClientEventHandler.cameraID, new BlockPos(0.5, 0.5, 0.5));
-		ATGClientEventHandler.cameraID = camera.getEntityId();
+		EntityCamera camera = fakeWorld.getCamera(tile, new Vec3d(0.5, 1, 0.5)); //TODO get origin
+
 		if (camera.image != null)
 		{
-			GlStateManager.bindTexture(new DynamicTexture(camera.image).getGlTextureId());
+			DynamicTexture texture = new DynamicTexture(camera.image);
+			GlStateManager.bindTexture(texture.getGlTextureId());
 			GlStateManager.pushMatrix();
 
 			GlStateManager.translate(x, y, z);
@@ -85,9 +77,10 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 			tessellator.draw();
 			GlStateManager.popMatrix();
 			GlStateManager.enableLighting();
-		}
 
-		GlStateManager.popMatrix();
+			camera.image = null;
+			GlStateManager.deleteTexture(texture.getGlTextureId());
+		}
 	}
 
 }

@@ -1,13 +1,11 @@
 package com.lcm.doctorwho.events;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.clothing.canon.ModelFirstDocHat;
 import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
-import com.lcm.doctorwho.client.models.clothing.canon.ModelFez;
 import com.lcm.doctorwho.client.models.items.ModelFirstDoctorCane;
 import com.lcm.doctorwho.client.models.items.sonics.Model11thDocScrewdriver;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
-import com.lcm.doctorwho.client.windows.EntityCamera;
+import com.lcm.doctorwho.client.boti.EntityCamera;
 import com.lcm.doctorwho.common.blocks.BlockOutline;
 import com.lcm.doctorwho.common.blocks.BlockTardis;
 import com.lcm.doctorwho.common.blocks.LeavesOutline;

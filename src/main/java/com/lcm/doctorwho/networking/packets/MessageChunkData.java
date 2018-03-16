@@ -1,13 +1,17 @@
 package com.lcm.doctorwho.networking.packets;
 
-import com.lcm.doctorwho.client.windows.FakeWorld;
+import com.google.common.collect.Lists;
+import com.lcm.doctorwho.client.boti.FakeWorld;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -15,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Nictogen on 3/5/18.
@@ -40,20 +45,20 @@ public class MessageChunkData implements IMessage
 		this.buffer = new byte[this.calculateChunkSize(chunkIn, flag, changedSectionFilter)];
 		this.availableSections = this.extractChunkData(new PacketBuffer(getWriteBuffer()), chunkIn, flag, changedSectionFilter);
 		this.dimensionID = dimensionID;
-//		this.tileEntityTags = Lists.<NBTTagCompound>newArrayList();
-//
-//		for (Map.Entry<BlockPos, TileEntity> entry : chunkIn.getTileEntityMap().entrySet())
-//		{
-//			BlockPos blockpos = entry.getKey();
-//			TileEntity tileentity = entry.getValue();
-//			int i = blockpos.getY() >> 4;
-//
-//			if (this.fullChunk || (changedSectionFilter & 1 << i) != 0)
-//			{
-//				NBTTagCompound nbttagcompound = tileentity.getUpdateTag();
-//				this.tileEntityTags.add(nbttagcompound);
-//			}
-//		}
+		this.tileEntityTags = Lists.newArrayList();
+
+		for (Map.Entry<BlockPos, TileEntity> entry : chunkIn.getTileEntityMap().entrySet())
+		{
+			BlockPos blockpos = entry.getKey();
+			TileEntity tileentity = entry.getValue();
+			int i = blockpos.getY() >> 4;
+
+			if (this.fullChunk || (changedSectionFilter & 1 << i) != 0)
+			{
+				NBTTagCompound nbttagcompound = tileentity.getUpdateTag();
+				this.tileEntityTags.add(nbttagcompound);
+			}
+		}
 	}
 
 	@Override public void fromBytes(ByteBuf buf)
@@ -74,13 +79,13 @@ public class MessageChunkData implements IMessage
 		{
 			this.buffer = new byte[i];
 			packetBuffer.readBytes(this.buffer);
-//			int j = ByteBufUtils.readVarInt(buf, 5);
-//			this.tileEntityTags = Lists.<NBTTagCompound>newArrayList();
+			int j = ByteBufUtils.readVarInt(buf, 5);
+			this.tileEntityTags = Lists.newArrayList();
 
-//			for (int k = 0; k < j; ++k)
-//			{
-//				this.tileEntityTags.add(ByteBufUtils.readTag(buf));
-//			}
+			for (int k = 0; k < j; ++k)
+			{
+				this.tileEntityTags.add(ByteBufUtils.readTag(buf));
+			}
 		}
 	}
 
@@ -94,12 +99,12 @@ public class MessageChunkData implements IMessage
 		packetBuffer.writeInt(this.dimensionID);
 		packetBuffer.writeVarInt(this.buffer.length);
 		packetBuffer.writeBytes(this.buffer);
-//		packetBuffer.writeVarInt(this.tileEntityTags.size());
+		packetBuffer.writeVarInt(this.tileEntityTags.size());
 
-//		for (NBTTagCompound nbttagcompound : this.tileEntityTags)
-//		{
-//			packetBuffer.writeCompoundTag(nbttagcompound);
-//		}
+		for (NBTTagCompound nbttagcompound : this.tileEntityTags)
+		{
+			packetBuffer.writeCompoundTag(nbttagcompound);
+		}
 	}
 
 	private ByteBuf getWriteBuffer()
@@ -136,16 +141,16 @@ public class MessageChunkData implements IMessage
 					chunk.resetRelightChecks();
 				}
 
-//				for (NBTTagCompound nbttagcompound : message.tileEntityTags)
-//				{
-//					BlockPos blockpos = new BlockPos(nbttagcompound.getInteger("x"), nbttagcompound.getInteger("y"), nbttagcompound.getInteger("z"));
-//					TileEntity tileentity = FakeWorldHandler.fakeWorld.getTileEntity(blockpos);
-//
-//					if (tileentity != null)
-//					{
-//						tileentity.handleUpdateTag(nbttagcompound);
-//					}
-//				}
+				for (NBTTagCompound nbttagcompound : message.tileEntityTags)
+				{
+					BlockPos blockpos = new BlockPos(nbttagcompound.getInteger("x"), nbttagcompound.getInteger("y"), nbttagcompound.getInteger("z"));
+					TileEntity tileentity = world.getTileEntity(blockpos);
+
+					if (tileentity != null)
+					{
+						tileentity.handleUpdateTag(nbttagcompound);
+					}
+				}
 
 			});
 			return null;

@@ -1,5 +1,6 @@
-package com.lcm.doctorwho.client.windows;
+package com.lcm.doctorwho.client.boti;
 
+import com.lcm.doctorwho.common.tiles.TileEntityTardis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -7,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.WorldType;
@@ -29,12 +30,14 @@ public class FakeWorld extends WorldClient
 		} else return fakeWorlds.stream().filter(world -> world.dimensionID == dimensionID).findAny().get();
 	}
 
-	public EntityCamera getCamera(int entityID, BlockPos pos)
+	public EntityCamera getCamera(TileEntityTardis tileEntityTardis, Vec3d pos)
 	{
+		int entityID = tileEntityTardis.cameraID;
 		Entity[] entities = loadedEntityList.stream().filter(entity -> entity instanceof EntityCamera && entity.getEntityId() == entityID).toArray(Entity[]::new);
 		if(entities.length == 0){
-			EntityCamera camera = new EntityCamera(this, 0.5, 1, 0.5);
+			EntityCamera camera = new EntityCamera(this, pos.x, pos.y, pos.z);
 			this.spawnEntity(camera);
+			tileEntityTardis.cameraID = camera.getEntityId();
 			return camera;
 		} else return (EntityCamera) entities[0];
 	}
