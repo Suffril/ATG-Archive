@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 
 public interface ITileModel {
 
-    void render(float scale);
+	void render(float scale);
 
-    ResourceLocation getTexture();
+	ResourceLocation getTexture();
 }

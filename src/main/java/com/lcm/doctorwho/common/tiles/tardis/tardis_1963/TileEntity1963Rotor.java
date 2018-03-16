@@ -7,11 +7,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntity1963Rotor extends TileEntity {
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox() {
-        return super.getRenderBoundingBox().grow(8, 8, 8);
-    }
-
+	@Override @SideOnly(Side.CLIENT) public AxisAlignedBB getRenderBoundingBox() {
+		return super.getRenderBoundingBox().grow(8, 8, 8);
+	}
 
 }

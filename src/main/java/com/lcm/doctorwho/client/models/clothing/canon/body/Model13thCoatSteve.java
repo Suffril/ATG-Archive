@@ -3,23 +3,22 @@ package com.lcm.doctorwho.client.models.clothing.canon.body;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
 import com.lcm.doctorwho.utils.ATGUtils;
-
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class Model13thCoatSteve extends ModelBiped {
-	
+
 	/**
 	 * Model Thirtenth Doctor Jacket
 	 *
 	 * @Author - Lucy
 	 * @Date - - 02/26/2018
 	 */
-	
+
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/13_steve_coat.png");
-	
+
 	ModelRenderer CoatBaseLeft;
 	ModelRenderer CoatBaseLeft2;
 	ModelRenderer CoatBaseRight;
@@ -47,7 +46,7 @@ public class Model13thCoatSteve extends ModelBiped {
 	ModelRenderer LapelLeft2;
 	ModelRenderer ButtonBack1;
 	ModelRenderer ButtonBack2;
-	
+
 	public Model13thCoatSteve() {
 		textureWidth = 64;
 		textureHeight = 64;
@@ -132,7 +131,7 @@ public class Model13thCoatSteve extends ModelBiped {
 		LACoatArmBack = new ModelRenderer(this, 47, 12);
 		LACoatArmBack.setRotationPoint(-1.0F, -2.1F, 1.5F);
 		LACoatArmBack.addBox(0.0F, 0.0F, 0.0F, 4, 10, 1, 0.0F);
-		
+
 		bipedRightArm.addChild(RACoatArmTop);
 		bipedRightArm.addChild(RACoatArmLeft);
 		bipedLeftArm.addChild(LACoatArmFront);
@@ -143,14 +142,13 @@ public class Model13thCoatSteve extends ModelBiped {
 		bipedRightArm.addChild(RACoatArmRight);
 		bipedLeftArm.addChild(LACoatArmTop);
 		bipedLeftArm.addChild(LACoatArmBack);
-		
+
 		bipedBody = new BodyPartHook(this, 16, 16);
 		bipedBody.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0);
 		bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-		
+
 		((BodyPartHook) bipedBody).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				ATGUtils.bindTexture(TEX);
 				CoatBaseLeft.render(scale);
@@ -173,7 +171,7 @@ public class Model13thCoatSteve extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 	}
-	
+
 }

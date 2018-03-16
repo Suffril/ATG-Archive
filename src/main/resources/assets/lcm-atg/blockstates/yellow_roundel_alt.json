@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "lcm-atg:yellow_roundel_alt" }
+  "variants": {
+    "normal": {
+      "model": "lcm-atg:yellow_roundel_alt"
     }
+  }
 }

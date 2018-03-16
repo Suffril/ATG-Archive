@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "half=top": { "model":"lcm-atg:slabs/tro_flatroundel_slab_2_top" },
-        "half=bottom": { "model":"lcm-atg:slabs/tro_flatroundel_slab_2_bottom" }
+  "variants": {
+    "half=top": {
+      "model": "lcm-atg:slabs/tro_flatroundel_slab_2_top"
+    },
+    "half=bottom": {
+      "model": "lcm-atg:slabs/tro_flatroundel_slab_2_bottom"
     }
+  }
 }

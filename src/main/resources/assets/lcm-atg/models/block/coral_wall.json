@@ -1,7 +1,6 @@
-
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "lcm-atg:blocks/coral"
-    }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "lcm-atg:blocks/coral"
+  }
 }

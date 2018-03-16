@@ -28,7 +28,7 @@ minecraft {
 	version = "1.12.2-14.23.2.2625"
 	runDir = "run"
 	mappings = "snapshot_20171003"
-	makeObfSourceJar = false 
+	makeObfSourceJar = false
 }
 
 repositories {

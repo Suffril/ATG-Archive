@@ -3,23 +3,22 @@ package com.lcm.doctorwho.client.models.clothing.canon.hats;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
 import com.lcm.doctorwho.utils.ATGUtils;
-
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelFirstDocHat extends ModelBiped {
-	
+
 	/**
 	 * Model First Doctor hats
 	 *
 	 * @Author - Lucy
 	 * @Date - 02/19/2018
 	 */
-	
+
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/first_doc_hat.png");
-	
+
 	ModelRenderer Base;
 	ModelRenderer Hat2;
 	ModelRenderer Hat3;
@@ -28,11 +27,11 @@ public class ModelFirstDocHat extends ModelBiped {
 	ModelRenderer Hat6;
 	ModelRenderer Hat7;
 	ModelRenderer Hat8;
-	
+
 	public ModelFirstDocHat() {
 		textureWidth = 64;
 		textureHeight = 64;
-		
+
 		Base = new ModelRenderer(this, 2, 16);
 		Base.addBox(0F, 0F, 0F, 9, 2, 9);
 		Base.setRotationPoint(-4.5F, -14F, -5F);
@@ -81,16 +80,15 @@ public class ModelFirstDocHat extends ModelBiped {
 		Hat8.setTextureSize(64, 64);
 		Hat8.mirror = true;
 		ATGUtils.setRotation(Hat8, 0F, 0F, 0F);
-		
+
 		this.bipedHeadwear.isHidden = true;
-		
+
 		this.bipedHead = new BodyPartHook(this, 0, 0);
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0);
 		this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-		
+
 		((BodyPartHook) this.bipedHead).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(0, 0.35, 0);
 				ATGUtils.bindTexture(TEX);
@@ -105,6 +103,6 @@ public class ModelFirstDocHat extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 	}
 }

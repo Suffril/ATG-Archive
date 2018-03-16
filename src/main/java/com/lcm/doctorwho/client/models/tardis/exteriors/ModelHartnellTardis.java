@@ -2,7 +2,6 @@ package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
-
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -17,7 +16,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_hartnell.png");
 	private boolean doorOpen = false;
 	private boolean lampOn;
-	
+
 	ModelRenderer B1;
 	ModelRenderer P1;
 	ModelRenderer P2;
@@ -195,11 +194,11 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 	ModelRenderer PBS18;
 	ModelRenderer PBS19;
 	ModelRenderer PBS20;
-	
+
 	public ModelHartnellTardis() {
 		textureWidth = 256;
 		textureHeight = 256;
-		
+
 		B1 = new ModelRenderer(this, 0, 0);
 		B1.addBox(-14F, 23F, -14F, 28, 1, 28);
 		B1.setRotationPoint(0F, 0F, 0F);
@@ -1265,19 +1264,18 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		PBS20.mirror = true;
 		ATGUtils.setRotation(PBS20, 0F, 0F, 0F);
 	}
-	
-	@Override
-	public void renderRightDoor(float scale) {
-		
+
+	@Override public void renderRightDoor(float scale) {
+
 		GlStateManager.pushMatrix();
-		
+
 		if (isDoorOpen()) {
 			GlStateManager.translate(0.8F, 0.0F, 0.2F);
 			GlStateManager.rotate(50, 0.0F, 1.0F, 0.0F);
 		}
-		
+
 		// Window Parts
-		
+
 		W11.render(scale);
 		W15.render(scale);
 		W16.render(scale);
@@ -1285,7 +1283,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		W25.render(scale);
 		W29.render(scale);
 		W30.render(scale);
-		
+
 		RD1.render(scale);
 		RD2.render(scale);
 		RD3.render(scale);
@@ -1304,16 +1302,15 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		RD16.render(scale);
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public void renderLeftDoor(float scale) {
-		
+
+	@Override public void renderLeftDoor(float scale) {
+
 		GlStateManager.pushMatrix();
 		if (isDoorOpen()) {
 			GlStateManager.translate(-0.8F, 0.0F, 0.2F);
 			GlStateManager.rotate(-50, 0.0F, 1.0F, 0.0F);
 		}
-		
+
 		LD1.render(scale);
 		LD2.render(scale);
 		LD3.render(scale);
@@ -1332,7 +1329,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		LD17.render(scale);
 		LD18.render(scale);
 		LD19.render(scale);
-		
+
 		// Windows
 		W8.render(scale);
 		W9F.render(scale);
@@ -1342,15 +1339,14 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		W31.render(scale);
 		W43.render(scale);
 		LD5.render(scale);
-		
+
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public void renderShell(float scale) {
+
+	@Override public void renderShell(float scale) {
 		// base
 		B1.render(scale);
-		
+
 		// pillars
 		P1.render(scale);
 		P2.render(scale);
@@ -1368,7 +1364,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		P14.render(scale);
 		P15.render(scale);
 		P16.render(scale);
-		
+
 		// Outline
 		O1.render(scale);
 		O2.render(scale);
@@ -1382,7 +1378,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		O10.render(scale);
 		O11.render(scale);
 		O12.render(scale);
-		
+
 		// Sides
 		S11.render(scale);
 		S12.render(scale);
@@ -1417,7 +1413,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		S39.render(scale);
 		S310.render(scale);
 		S311.render(scale);
-		
+
 		// roof
 		R1.render(scale);
 		R2.render(scale);
@@ -1428,7 +1424,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		R7.render(scale);
 		R8.render(scale);
 		R9.render(scale);
-		
+
 		// PB signs
 		PBS1.render(scale);
 		PBS2.render(scale);
@@ -1450,7 +1446,7 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		PBS18.render(scale);
 		PBS19.render(scale);
 		PBS20.render(scale);
-		
+
 		// windows
 		W1.render(scale);
 		W2.render(scale);
@@ -1483,18 +1479,17 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		W41.render(scale);
 		W42.render(scale);
 	}
-	
-	@Override
-	public void renderLamp(float scale) {
+
+	@Override public void renderLamp(float scale) {
 		GlStateManager.pushMatrix();
-		
+
 		L1.render(scale);
 		L2.render(scale);
 		L3.render(scale);
 		L4.render(scale);
 		L7.render(scale);
 		L5.render(scale);
-		
+
 		if (isLampOn()) {
 			GlStateManager.enableAlpha();
 			GlStateManager.enableBlend();
@@ -1505,27 +1500,24 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
 		}
-		
+
 		L6.render(scale);
-		
+
 		GlStateManager.disableAlpha();
 		GlStateManager.disableBlend();
-		
+
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public void renderText(float scale) {
-		
+
+	@Override public void renderText(float scale) {
+
 	}
-	
-	@Override
-	public void other(float scale) {
-		
+
+	@Override public void other(float scale) {
+
 	}
-	
-	@Override
-	public void renderAll(float scale) {
+
+	@Override public void renderAll(float scale) {
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(0.95F, 0.95F, 0.95F);
 		GlStateManager.translate(0, 0.1, 0);
@@ -1536,38 +1528,32 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		renderText(scale);
 		other(scale);
 		renderLeftDoor(scale);
-		
+
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public boolean isDoorOpen() {
+
+	@Override public boolean isDoorOpen() {
 		return doorOpen;
 	}
-	
-	@Override
-	public boolean isLampOn() {
+
+	@Override public boolean isLampOn() {
 		return lampOn;
 	}
-	
-	@Override
-	public void setLampOn(boolean on) {
+
+	@Override public void setLampOn(boolean on) {
 		lampOn = on;
 	}
-	
-	@Override
-	public void setDoorOpen(boolean open) {
+
+	@Override public void setDoorOpen(boolean open) {
 		doorOpen = open;
 	}
-	
-	@Override
-	public ResourceLocation getTexture() {
+
+	@Override public ResourceLocation getTexture() {
 		return TEX;
 	}
-	
-	@Override
-	public String getExteriorName() {
+
+	@Override public String getExteriorName() {
 		return "Hartnell";
 	}
-	
+
 }

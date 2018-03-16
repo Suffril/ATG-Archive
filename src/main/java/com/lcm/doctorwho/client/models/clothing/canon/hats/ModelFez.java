@@ -2,7 +2,6 @@ package com.lcm.doctorwho.client.models.clothing.canon.hats;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
-
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -17,18 +16,18 @@ public class ModelFez extends ModelBiped {
 	 * @Author - Lucy
 	 * @Date - 02/25/2018
 	 */
-	
+
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/clothing/fez.png");
-	
+
 	ModelRenderer FezSubBase;
 	ModelRenderer FezSubTassleBase;
 	ModelRenderer FezSubTassle1;
 	ModelRenderer FezSubTassle2;
-	
+
 	public ModelFez() {
 		textureWidth = 64;
 		textureHeight = 32;
-		
+
 		FezSubBase = new ModelRenderer(this, 0, 4);
 		FezSubBase.addBox(0F, 0F, 0F, 4, 3, 4);
 		FezSubBase.setRotationPoint(-1F, 21F, -2F);
@@ -53,16 +52,15 @@ public class ModelFez extends ModelBiped {
 		FezSubTassle2.setTextureSize(64, 32);
 		FezSubTassle2.mirror = true;
 		ATGUtils.setRotation(FezSubTassle2, 0F, -1.570796F, 0F);
-		
+
 		bipedHeadwear.isHidden = true;
-		
+
 		bipedHead = new BodyPartHook(this, 0, 0);
 		bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0);
 		bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-		
+
 		((BodyPartHook) bipedHead).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				Minecraft.getMinecraft().getRenderManager().renderEngine.bindTexture(TEX);
 				GlStateManager.translate(0F, -2F, 0F);
@@ -73,7 +71,7 @@ public class ModelFez extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 	}
-	
+
 }

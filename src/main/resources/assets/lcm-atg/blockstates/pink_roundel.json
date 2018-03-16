@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "lcm-atg:pink_roundel" }
+  "variants": {
+    "normal": {
+      "model": "lcm-atg:pink_roundel"
     }
+  }
 }

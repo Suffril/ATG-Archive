@@ -8,18 +8,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityDoorBase extends TileEntity implements ITickable {
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox() {
-        return super.getRenderBoundingBox().grow(8, 8, 8);
-    }
+	@Override @SideOnly(Side.CLIENT) public AxisAlignedBB getRenderBoundingBox() {
+		return super.getRenderBoundingBox().grow(8, 8, 8);
+	}
 
+	/**
+	 * Like the old updateEntity(), except more generic.
+	 */
+	@Override public void update() {
 
-    /**
-     * Like the old updateEntity(), except more generic.
-     */
-    @Override
-    public void update() {
-
-    }
+	}
 }

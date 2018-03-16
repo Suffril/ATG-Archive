@@ -1,13 +1,7 @@
 package com.lcm.doctorwho.client.models.items;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.lcm.doctorwho.utils.ATGUtils;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
-
+import com.lcm.doctorwho.utils.ATGUtils;
 import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -15,6 +9,10 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
+import org.lwjgl.util.vector.Vector3f;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModelFobwatchClosed extends ModelBase implements ItemModelBase {
 	ModelRenderer WatchFace;
@@ -37,11 +35,11 @@ public class ModelFobwatchClosed extends ModelBase implements ItemModelBase {
 	ModelRenderer WatchBackIndent1;
 	ModelRenderer WatchBackIndent2;
 	ModelRenderer WatchBackIndent3;
-	
+
 	public ModelFobwatchClosed() {
 		textureWidth = 64;
 		textureHeight = 64;
-		
+
 		WatchFace = new ModelRenderer(this, 0, 12);
 		WatchFace.addBox(0F, 0F, 0F, 6, 6, 1);
 		WatchFace.setRotationPoint(-3F, 17F, 0F);
@@ -163,9 +161,8 @@ public class ModelFobwatchClosed extends ModelBase implements ItemModelBase {
 		WatchBackIndent3.mirror = true;
 		ATGUtils.setRotation(WatchBackIndent3, 0F, 0F, 0F);
 	}
-	
-	@Override
-	public void renderModel(float scale) {
+
+	@Override public void renderModel(float scale) {
 		WatchFace.render(scale);
 		WatchFaceGold1.render(scale);
 		WatchFaceGold2.render(scale);
@@ -187,9 +184,8 @@ public class ModelFobwatchClosed extends ModelBase implements ItemModelBase {
 		WatchBackIndent2.render(scale);
 		WatchBackIndent3.render(scale);
 	}
-	
-	@Override
-	public IModelState getTransforms() {
+
+	@Override public IModelState getTransforms() {
 		Map<ItemCameraTransforms.TransformType, TRSRTransformation> map = new HashMap<>();
 		map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, 1F, 0F), new Vector3f(0.5F, 1.7F, 0), new Vector3f(1F, 1F, 1F))));
 		map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(180F, 1F, 0F), new Vector3f(0.5F, 1.2F, 0.5F), new Vector3f(0.5F, 0.5F, 0.5F))));

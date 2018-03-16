@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "half=top": { "model":"lcm-atg:slabs/tro_slab_1_top" },
-        "half=bottom": { "model":"lcm-atg:slabs/tro_slab_1_bottom" }
+  "variants": {
+    "half=top": {
+      "model": "lcm-atg:slabs/tro_slab_1_top"
+    },
+    "half=bottom": {
+      "model": "lcm-atg:slabs/tro_slab_1_bottom"
     }
+  }
 }

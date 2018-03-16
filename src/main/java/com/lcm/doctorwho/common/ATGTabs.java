@@ -1,7 +1,6 @@
 package com.lcm.doctorwho.common;
 
 import com.lcm.doctorwho.events.ATGObjects;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -13,18 +12,17 @@ public class ATGTabs {
 	public static CreativeTabs TABS_BLOCKS_TARDIS_2 = new TabBase("1963", Item.getItemFromBlock(ATGObjects.Blocks.tro_fault_1));
 
 	private static class TabBase extends CreativeTabs {
-		
+
 		private ItemStack stack = null;
-		
+
 		public TabBase(String label, Item item) {
 			super(label);
 			stack = new ItemStack(item);
 		}
-		
-		@Override
-		public ItemStack getTabIconItem() {
+
+		@Override public ItemStack getTabIconItem() {
 			return stack;
 		}
-		
+
 	}
 }

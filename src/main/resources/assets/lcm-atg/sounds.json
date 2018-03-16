@@ -1,37 +1,42 @@
 {
-	"regeneration": {
-		"category": "ambient",
-		"subtitle": "lcm-atg.subtitles.regeneration",
-		"sounds": [{
-			"name": "lcm-atg:regeneration",
-			"stream": false
-		}]
-	},
-	
-	"timey_wimey": {
-		"category": "players",
-		"subtitle": "lcm-atg.subtitles.timey_wimey",
-		"sounds": [{
-			"name": "lcm-atg:timey_wimey",
-			"stream": false
-		}]
-	},
-	
-	"tardis_pb_open": {
-		"category": "master",
-		"subtitle": "lcm-atg.subtitles.tardis_pb_open",
-		"sounds": [{
-			"name": "lcm-atg:tardis/tardis_pb_open",
-			"stream": false
-		}]
-	},
-	
-		"tardis_pb_close": {
-		"category": "master",
-		"subtitle": "lcm-atg.subtitles.tardis_pb_close",
-		"sounds": [{
-			"name": "lcm-atg:tardis/tardis_pb_close",
-			"stream": false
-		}]
-	}
+  "regeneration": {
+    "category": "ambient",
+    "subtitle": "lcm-atg.subtitles.regeneration",
+    "sounds": [
+      {
+        "name": "lcm-atg:regeneration",
+        "stream": false
+      }
+    ]
+  },
+  "timey_wimey": {
+    "category": "players",
+    "subtitle": "lcm-atg.subtitles.timey_wimey",
+    "sounds": [
+      {
+        "name": "lcm-atg:timey_wimey",
+        "stream": false
+      }
+    ]
+  },
+  "tardis_pb_open": {
+    "category": "master",
+    "subtitle": "lcm-atg.subtitles.tardis_pb_open",
+    "sounds": [
+      {
+        "name": "lcm-atg:tardis/tardis_pb_open",
+        "stream": false
+      }
+    ]
+  },
+  "tardis_pb_close": {
+    "category": "master",
+    "subtitle": "lcm-atg.subtitles.tardis_pb_close",
+    "sounds": [
+      {
+        "name": "lcm-atg:tardis/tardis_pb_close",
+        "stream": false
+      }
+    ]
+  }
 }

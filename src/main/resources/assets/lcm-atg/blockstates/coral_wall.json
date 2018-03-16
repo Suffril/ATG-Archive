@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "lcm-atg:coral_wall" }
+  "variants": {
+    "normal": {
+      "model": "lcm-atg:coral_wall"
     }
+  }
 }

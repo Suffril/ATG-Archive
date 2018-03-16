@@ -1,13 +1,7 @@
 package com.lcm.doctorwho.client.models.items;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.lcm.doctorwho.utils.ATGUtils;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.lcm.doctorwho.client.models.interfaces.ItemModelBase;
-
+import com.lcm.doctorwho.utils.ATGUtils;
 import lucraft.mods.lucraftcore.util.render.LCModelState;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -15,6 +9,10 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
+import org.lwjgl.util.vector.Vector3f;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase {
 	ModelRenderer Handle1;
@@ -31,11 +29,11 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase {
 	ModelRenderer CaneCurve7;
 	ModelRenderer CaneCurve8;
 	ModelRenderer CaneBase;
-	
+
 	public ModelFirstDoctorCane() {
 		textureWidth = 64;
 		textureHeight = 64;
-		
+
 		Handle1 = new ModelRenderer(this, 13, 1);
 		Handle1.addBox(0F, 0F, 0F, 6, 2, 2);
 		Handle1.setRotationPoint(0F, 0F, 0F);
@@ -121,9 +119,8 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase {
 		CaneBase.mirror = true;
 		ATGUtils.setRotation(CaneBase, 0F, 0F, 0F);
 	}
-	
-	@Override
-	public void renderModel(float scale) {
+
+	@Override public void renderModel(float scale) {
 		Handle1.render(scale);
 		Handle2.render(scale);
 		Silver1.render(scale);
@@ -139,9 +136,8 @@ public class ModelFirstDoctorCane extends ModelBase implements ItemModelBase {
 		CaneCurve8.render(scale);
 		CaneBase.render(scale);
 	}
-	
-	@Override
-	public IModelState getTransforms() {
+
+	@Override public IModelState getTransforms() {
 		Map<ItemCameraTransforms.TransformType, TRSRTransformation> map = new HashMap<>();
 		map.put(ItemCameraTransforms.TransformType.GUI, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(0F, 1.0F, 0F), new Vector3f(0.5F, 0.5F, 0), new Vector3f(1F, 1F, 1F))));
 		map.put(ItemCameraTransforms.TransformType.GROUND, new TRSRTransformation(new ItemTransformVec3f(new Vector3f(-90F, 0F, 0F), new Vector3f(0.5F, 0.3F, 0.5F), new Vector3f(0.5F, 0.5F, 0.5F))));

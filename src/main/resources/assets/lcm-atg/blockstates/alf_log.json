@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "lcm-atg:alf_log" }
+  "variants": {
+    "normal": {
+      "model": "lcm-atg:alf_log"
     }
+  }
 }

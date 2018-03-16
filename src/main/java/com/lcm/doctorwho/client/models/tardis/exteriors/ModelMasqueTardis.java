@@ -2,7 +2,6 @@ package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
-
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -12,11 +11,11 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelMasqueTardis extends ModelBase implements ITardisModel {
-	
+
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_masque.png");
 	private boolean doorOpen = false;
 	private boolean lampOn;
-	
+
 	ModelRenderer P1;
 	ModelRenderer P2;
 	ModelRenderer P3;
@@ -193,11 +192,11 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 	ModelRenderer O2;
 	ModelRenderer O3;
 	ModelRenderer O4;
-	
+
 	public ModelMasqueTardis() {
 		textureWidth = 256;
 		textureHeight = 256;
-		
+
 		P1 = new ModelRenderer(this, 23, 0);
 		P1.addBox(-12.5F, -14.5F, -12.5F, 3, 37, 3);
 		P1.setRotationPoint(0F, 0F, 0F);
@@ -1255,17 +1254,16 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		O4.mirror = true;
 		ATGUtils.setRotation(O4, 0F, 0F, 0F);
 	}
-	
-	@Override
-	public void renderRightDoor(float scale) {
-		
+
+	@Override public void renderRightDoor(float scale) {
+
 		GlStateManager.pushMatrix();
-		
+
 		if (isDoorOpen()) {
 			GlStateManager.translate(0.8F, 0.0F, 0.2F);
 			GlStateManager.rotate(50, 0.0F, 1.0F, 0.0F);
 		}
-		
+
 		RDW1.render(scale);
 		RDW2.render(scale);
 		RDW3.render(scale);
@@ -1273,7 +1271,7 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		RDW5.render(scale);
 		RDW6.render(scale);
 		RDW7.render(scale);
-		
+
 		RD1.render(scale);
 		RD2.render(scale);
 		RD3.render(scale);
@@ -1282,19 +1280,18 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		RD6.render(scale);
 		RD7.render(scale);
 		RD8.render(scale);
-		
+
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public void renderLeftDoor(float scale) {
-		
+
+	@Override public void renderLeftDoor(float scale) {
+
 		GlStateManager.pushMatrix();
 		if (isDoorOpen()) {
 			GlStateManager.translate(-0.8F, 0.0F, 0.2F);
 			GlStateManager.rotate(-50, 0.0F, 1.0F, 0.0F);
 		}
-		
+
 		LDW1.render(scale);
 		LDW2.render(scale);
 		LDW3.render(scale);
@@ -1323,9 +1320,8 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		LD19.render(scale);
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public void renderShell(float scale) {
+
+	@Override public void renderShell(float scale) {
 		R1.render(scale);
 		R2.render(scale);
 		R3.render(scale);
@@ -1341,7 +1337,7 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		R13.render(scale);
 		R14.render(scale);
 		R15.render(scale);
-		
+
 		PS1.render(scale);
 		PS2.render(scale);
 		PS3.render(scale);
@@ -1396,7 +1392,7 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		O2.render(scale);
 		O3.render(scale);
 		O4.render(scale);
-		
+
 		P1.render(scale);
 		P2.render(scale);
 		P3.render(scale);
@@ -1444,14 +1440,13 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		S310.render(scale);
 		S311.render(scale);
 	}
-	
-	@Override
-	public void renderLamp(float scale) {
-		
+
+	@Override public void renderLamp(float scale) {
+
 		GlStateManager.pushMatrix();
-		
+
 		LampBase.render(scale);
-		
+
 		if (isLampOn()) {
 			GlStateManager.enableAlpha();
 			GlStateManager.enableBlend();
@@ -1462,7 +1457,7 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
 		}
-		
+
 		LampGlow1.render(scale);
 		LampGlow2.render(scale);
 		LampGlow3.render(scale);
@@ -1482,25 +1477,22 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		LampGlow17.render(scale);
 		LampGlow18.render(scale);
 		LampGlow19.render(scale);
-		
+
 		GlStateManager.disableAlpha();
 		GlStateManager.disableBlend();
-		
+
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public void renderText(float scale) {
-		
+
+	@Override public void renderText(float scale) {
+
 	}
-	
-	@Override
-	public void other(float scale) {
-		
+
+	@Override public void other(float scale) {
+
 	}
-	
-	@Override
-	public void renderAll(float scale) {
+
+	@Override public void renderAll(float scale) {
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(0.95, 0.95, 0.95);
 		GlStateManager.translate(0, 0.1, 0);
@@ -1513,35 +1505,29 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		other(scale);
 		GlStateManager.popMatrix();
 	}
-	
-	@Override
-	public boolean isDoorOpen() {
+
+	@Override public boolean isDoorOpen() {
 		return doorOpen;
 	}
-	
-	@Override
-	public boolean isLampOn() {
+
+	@Override public boolean isLampOn() {
 		return lampOn;
 	}
-	
-	@Override
-	public void setLampOn(boolean on) {
+
+	@Override public void setLampOn(boolean on) {
 		lampOn = on;
 	}
-	
-	@Override
-	public void setDoorOpen(boolean open) {
+
+	@Override public void setDoorOpen(boolean open) {
 		doorOpen = open;
 	}
-	
-	@Override
-	public ResourceLocation getTexture() {
+
+	@Override public ResourceLocation getTexture() {
 		return TEX;
 	}
-	
-	@Override
-	public String getExteriorName() {
+
+	@Override public String getExteriorName() {
 		return "Masque";
 	}
-	
+
 }

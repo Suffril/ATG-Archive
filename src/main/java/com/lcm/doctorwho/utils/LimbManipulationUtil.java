@@ -1,9 +1,5 @@
 package com.lcm.doctorwho.utils;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -19,19 +15,22 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
-public class LimbManipulationUtil {
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+@Mod.EventBusSubscriber(Side.CLIENT) public class LimbManipulationUtil {
 	private static Field textureOffsetXField = ModelRenderer.class.getDeclaredFields()[2];
 	private static Field textureOffsetYField = ModelRenderer.class.getDeclaredFields()[3];
-	
+
 	public static LimbManipulator getLimbManipulator(RenderPlayer renderPlayer, Limb limb) {
 		LimbManipulator manipulator = new LimbManipulator();
 		try {
 			textureOffsetXField.setAccessible(true);
 			textureOffsetYField.setAccessible(true);
-			
+
 			List<LayerRenderer<AbstractClientPlayer>> layerList = ReflectionHelper.getPrivateValue(RenderLivingBase.class, renderPlayer, 4);
-			
+
 			for (LayerRenderer<AbstractClientPlayer> layer : layerList)
 				for (Field field : layer.getClass().getDeclaredFields()) {
 					field.setAccessible(true);
@@ -51,39 +50,39 @@ public class LimbManipulationUtil {
 						manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.secondaryRendererField));
 					}
 				}
-			
+
 			ModelPlayer model = renderPlayer.getMainModel();
-			
+
 			ModelRenderer modelRenderer = (ModelRenderer) limb.rendererField.get(model);
-			
+
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.rendererField));
 			modelRenderer = (ModelRenderer) limb.secondaryRendererField.get(model);
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.secondaryRendererField));
-			
+
 			textureOffsetXField.setAccessible(false);
 			textureOffsetYField.setAccessible(false);
 		} catch (IllegalAccessException ignored) {}
 		return manipulator;
 	}
-	
+
 	public static LimbManipulator getLimbManipulator(ModelPlayer model, Limb limb) {
 		LimbManipulator manipulator = new LimbManipulator();
 		try {
 			textureOffsetXField.setAccessible(true);
 			textureOffsetYField.setAccessible(true);
-			
+
 			ModelRenderer modelRenderer = (ModelRenderer) limb.rendererField.get(model);
-			
+
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.rendererField));
 			modelRenderer = (ModelRenderer) limb.secondaryRendererField.get(model);
 			manipulator.limbs.add(new CustomModelRenderer(model, textureOffsetXField.getInt(modelRenderer), textureOffsetYField.getInt(modelRenderer), modelRenderer, limb.secondaryRendererField));
-			
+
 			textureOffsetXField.setAccessible(false);
 			textureOffsetYField.setAccessible(false);
 		} catch (IllegalAccessException ignored) {}
 		return manipulator;
 	}
-	
+
 	//@formatter:off
 	public enum Limb {
 		HEAD(ModelBiped.class.getDeclaredFields()[0], ModelBiped.class.getDeclaredFields()[1]),
@@ -92,33 +91,33 @@ public class LimbManipulationUtil {
 		RIGHT_ARM(ModelBiped.class.getDeclaredFields()[3], ModelPlayer.class.getDeclaredFields()[1]),
 		LEFT_LEG(ModelBiped.class.getDeclaredFields()[6], ModelPlayer.class.getDeclaredFields()[2]),
 		RIGHT_LEG(ModelBiped.class.getDeclaredFields()[5], ModelPlayer.class.getDeclaredFields()[3]);
-
+		
 		private Field rendererField, secondaryRendererField;
-
+		
 		Limb(Field rendererField, Field secondaryRendererField) {
 			this.rendererField = rendererField;
 			this.secondaryRendererField = secondaryRendererField;
 		}
 	}
 	//@formatter:on
-	
+
 	public static class LimbManipulator {
-		
+
 		private ArrayList<CustomModelRenderer> limbs = new ArrayList<>();
-		
+
 		public LimbManipulator setAngles(float x, float y, float z) {
 			for (CustomModelRenderer limb : limbs)
 				limb.setAngles(x, y, z);
 			return this;
 		}
-		
+
 		public LimbManipulator setOffsets(float x, float y, float z) {
 			for (CustomModelRenderer limb : limbs)
 				limb.setOffsets(x, y, z);
 			return this;
 		}
 	}
-	
+
 	private static class CustomModelRenderer extends ModelRenderer {
 		private float actualX, actualY, actualZ;
 		private float offX, offY, offZ;
@@ -126,7 +125,7 @@ public class LimbManipulationUtil {
 		private ModelBiped modelBiped;
 		private ModelRenderer old;
 		private Field f;
-		
+
 		private CustomModelRenderer(ModelBiped model, int texOffX, int texOffY, ModelRenderer old, Field field) throws IllegalAccessException {
 			super(model, "");
 			this.modelBiped = model;
@@ -137,9 +136,8 @@ public class LimbManipulationUtil {
 			this.setRotationPoint(old.rotationPointX, old.rotationPointY, old.rotationPointZ);
 			field.set(model, this);
 		}
-		
-		@Override
-		public void render(float scale) {
+
+		@Override public void render(float scale) {
 			if (this.changeAngles) {
 				this.rotateAngleX = this.actualX;
 				this.rotateAngleY = this.actualY;
@@ -158,37 +156,36 @@ public class LimbManipulationUtil {
 			super.render(scale);
 			GlStateManager.popMatrix();
 		}
-		
+
 		private void reset() {
-			if (f != null) try {
-				this.f.set(modelBiped, this.old);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
+			if (f != null)
+				try {
+					this.f.set(modelBiped, this.old);
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
 		}
-		
+
 		private void setAnglesRadians(float x, float y, float z) {
 			this.actualX = x;
 			this.actualY = y;
 			this.actualZ = z;
 			this.changeAngles = true;
 		}
-		
+
 		private void setAngles(float x, float y, float z) {
 			this.setAnglesRadians((float) Math.toRadians(x), (float) Math.toRadians(y), (float) Math.toRadians(z));
 		}
-		
+
 		private void setOffsets(float x, float y, float z) {
 			this.offX = x;
 			this.offY = y;
 			this.offZ = z;
 		}
 	}
-	
-	@SubscribeEvent
-	public static void onRenderPlayerPost(RenderPlayerEvent.Post event) {
-		@SuppressWarnings("rawtypes")
-		RenderLivingBase renderer = (RenderLivingBase) Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(event.getEntityPlayer());
+
+	@SubscribeEvent public static void onRenderPlayerPost(RenderPlayerEvent.Post event) {
+		@SuppressWarnings("rawtypes") RenderLivingBase renderer = (RenderLivingBase) Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(event.getEntityPlayer());
 		List<LayerRenderer<AbstractClientPlayer>> layerList = ReflectionHelper.getPrivateValue(RenderLivingBase.class, renderer, 4);
 		try {
 			for (LayerRenderer<AbstractClientPlayer> layer : layerList)
@@ -196,13 +193,17 @@ public class LimbManipulationUtil {
 					field.setAccessible(true);
 					if (field.getType() == ModelBiped.class) {
 						for (ModelRenderer modelRenderer : ((ModelBiped) field.get(layer)).boxList)
-							if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
-					} else if (field.getType() == ModelPlayer.class) for (ModelRenderer modelRenderer : ((ModelBiped) field.get(layer)).boxList)
-						if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
+							if (modelRenderer instanceof CustomModelRenderer)
+								((CustomModelRenderer) modelRenderer).reset();
+					} else if (field.getType() == ModelPlayer.class)
+						for (ModelRenderer modelRenderer : ((ModelBiped) field.get(layer)).boxList)
+							if (modelRenderer instanceof CustomModelRenderer)
+								((CustomModelRenderer) modelRenderer).reset();
 				}
 			for (ModelRenderer modelRenderer : event.getRenderer().getMainModel().boxList)
-				if (modelRenderer instanceof CustomModelRenderer) ((CustomModelRenderer) modelRenderer).reset();
+				if (modelRenderer instanceof CustomModelRenderer)
+					((CustomModelRenderer) modelRenderer).reset();
 		} catch (IllegalAccessException ignored) {}
 	}
-	
+
 }

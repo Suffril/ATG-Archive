@@ -3,7 +3,6 @@ package com.lcm.doctorwho.client.models.entity.hostile.cybermen;
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.BodyPartHook;
 import com.lcm.doctorwho.utils.ATGUtils;
-
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -12,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModelCyberTenthPlanet extends ModelBiped {
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/entity/cybermen/tenth_planet.png");
-	
+
 	ModelRenderer Head1;
 	ModelRenderer Head2;
 	ModelRenderer Head3;
@@ -122,11 +121,11 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 	ModelRenderer LeftLeg5;
 	ModelRenderer LeftLeg6;
 	ModelRenderer LeftLeg7;
-	
+
 	public ModelCyberTenthPlanet() {
 		textureWidth = 128;
 		textureHeight = 128;
-		
+
 		Head1 = new ModelRenderer(this, 32, 0);
 		Head1.addBox(4.8F, -10F, -0.5F, 1, 7, 1);
 		Head1.setRotationPoint(0F, 0F, 0F);
@@ -783,14 +782,13 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 		LeftLeg7.setTextureSize(128, 128);
 		LeftLeg7.mirror = true;
 		ATGUtils.setRotation(LeftLeg7, 0F, 0F, 0F);
-		
+
 		this.bipedHead = new BodyPartHook(this, 0, 0);
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0);
 		this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-		
+
 		((BodyPartHook) this.bipedHead).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				ATGUtils.bindTexture(TEX);
 				GlStateManager.translate(0F, -0.00F, 0F);
@@ -843,14 +841,13 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 		bipedBody = new BodyPartHook(this, 16, 16);
 		bipedBody.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0);
 		bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-		
+
 		((BodyPartHook) bipedBody).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(0F, -0.05F, 0F);
 				ATGUtils.bindTexture(TEX);
@@ -890,14 +887,13 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 		this.bipedLeftArm = new BodyPartHook(this, 40, 16);
 		this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, 0);
 		this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
-		
+
 		((BodyPartHook) bipedLeftArm).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(-0.32, -0.05F, 0);
 				ATGUtils.bindTexture(TEX);
@@ -912,14 +908,13 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 		this.bipedRightArm = new BodyPartHook(this, 40, 16);
 		this.bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, 0);
 		this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-		
+
 		((BodyPartHook) bipedRightArm).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(0.32, -0.05F, 0);
 				ATGUtils.bindTexture(TEX);
@@ -934,14 +929,13 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 		this.bipedRightLeg = new BodyPartHook(this, 0, 16);
 		this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0);
 		this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
-		
+
 		((BodyPartHook) bipedRightLeg).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				// Old 0.90
 				GlStateManager.translate(0.11, -0.80F, 0F);
@@ -956,14 +950,13 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 		this.bipedLeftLeg = new BodyPartHook(this, 0, 16);
 		this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0);
 		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
-		
+
 		((BodyPartHook) bipedLeftLeg).setRender(new BodyPartHook.IPartRenderer() {
-			@Override
-			public void render(float scale) {
+			@Override public void render(float scale) {
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(-0.11, -0.80F, 0F);
 				ATGUtils.bindTexture(TEX);
@@ -977,19 +970,17 @@ public class ModelCyberTenthPlanet extends ModelBiped {
 				GlStateManager.popMatrix();
 			}
 		});
-		
+
 	}
-	
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale) {
+
+	@Override public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale) {
 		super.render(entity, f, f1, f2, f3, f4, scale);
 		setRotationAngles(f, f1, f2, f3, f4, scale, entity);
-		
+
 	}
-	
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+
+	@Override public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
 	}
-	
+
 }
