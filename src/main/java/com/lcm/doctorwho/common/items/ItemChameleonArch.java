@@ -1,12 +1,10 @@
 package com.lcm.doctorwho.common.items;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
-import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
+import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.utils.ATGConfig;
-import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
-import lucraft.mods.lucraftcore.superpowers.SuperpowerPlayerHandler;
 import lucraft.mods.lucraftcore.util.helper.StringHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,47 +33,29 @@ public class ItemChameleonArch extends Item {
 
 	@Override public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack arch = player.getHeldItem(hand);
-		SuperpowerPlayerHandler handler = SuperpowerHandler.getSuperpowerPlayerHandler(player);
+		ITimelordCapability handler = player.getCapability(CapabilityTimelord.TIMELORD_CAP, null);
+		if(handler == null) return new ActionResult<>(EnumActionResult.PASS, arch);
+		player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.timeyWimey, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
 		if (arch.getTagCompound() == null) {
 			arch.setTagCompound(new NBTTagCompound());
 			arch.getTagCompound().setBoolean("open", true);
 		}
+		if (arch.getItemDamage() == ATGConfig.regenCapacity) {
+			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch")), true);
+			return new ActionResult<>(EnumActionResult.FAIL, arch);
+		}
 
-		// Handle inifite regeneration case
-		if (ATGConfig.regenCapacity == 0)
-			if (handler == null) {
-				arch.getTagCompound().setBoolean("open", true);
-				SuperpowerHandler.giveSuperpower(player, TimelordSuperpower.INSTANCE);
-				SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = -1;
-				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
-				arch.getTagCompound().setBoolean("open", false);
-				return new ActionResult<>(EnumActionResult.PASS, arch);
-			} else {
-				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.alreadyTimelord")), true);
-				return new ActionResult<>(EnumActionResult.FAIL, arch);
-			}
-
-		if (handler == null) {
-			if (arch.getItemDamage() == ATGConfig.regenCapacity) {
-				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyArch")), true);
-				return new ActionResult<>(EnumActionResult.FAIL, arch);
-			}
-
-			SuperpowerHandler.setSuperpower(player, TimelordSuperpower.INSTANCE);
-
-			int used = doUsageDamage(arch, SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class));
-			if (arch.getItemDamage() < ATGConfig.regenCapacity && !player.isCreative())
-				throw new RuntimeException("Did not fully use arch when receiving superpower (" + used + "," + arch.getCount() + ")");
-
+		if (!handler.isTimelord()) {
+			handler.setTimelord(true);
+			doUsageDamage(arch, handler);
 			player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.becomeTimelord")), true);
-		} else if (handler instanceof TimelordSuperpowerHandler) {
-			TimelordSuperpowerHandler tmh = ((TimelordSuperpowerHandler) handler);
+		} else {
 
 			if (!player.isSneaking()) {
-				int used = doUsageDamage(arch, tmh);
+				int used = doUsageDamage(arch, handler);
 				if (used == 0) {
-					if (tmh.regenerationsLeft == ATGConfig.regenCapacity) {
+					if (handler.getRegensLeft() == ATGConfig.regenCapacity) {
 						arch.getTagCompound().setBoolean("open", false);
 						player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullCycle", used)), true);
 					} else if (arch.getItemDamage() == ATGConfig.regenCapacity)
@@ -87,31 +67,29 @@ public class ItemChameleonArch extends Item {
 				if (arch.getItemDamage() == 0 && !player.isCreative()) {
 					player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.fullArch")), true);
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
-				} else if (tmh.regenerationsLeft < 1) {
+				} else if (handler.getRegensLeft() < 1) {
 					player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer.emptyCycle")), true);
 					return new ActionResult<>(EnumActionResult.FAIL, arch);
 				}
 
 				// TODO sound effect?
 				arch.setItemDamage(arch.getItemDamage() - 1);
-				tmh.regenerationsLeft--;
+				handler.setRegensLeft(handler.getRegensLeft() - 1);
 				player.sendStatusMessage(new TextComponentString(StringHelper.translateToLocal("lcm-atg.messages.transfer")), true);
 				arch.getTagCompound().setBoolean("open", false);
+				return new ActionResult<>(EnumActionResult.PASS, arch);
 			}
-		} else
-			return new ActionResult<>(EnumActionResult.FAIL, arch);
-
-		player.world.playSound(null, player.posX, player.posY, player.posZ, ATGObjects.SoundEvents.timeyWimey, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		}
 		return new ActionResult<>(EnumActionResult.PASS, arch);
 	}
 
-	private int doUsageDamage(ItemStack stack, TimelordSuperpowerHandler handler) {
-		int supply = ATGConfig.regenCapacity - stack.getItemDamage(), needed = ATGConfig.regenCapacity - handler.regenerationsLeft, used = Math.min(supply, needed);
+	private int doUsageDamage(ItemStack stack, ITimelordCapability handler) {
+		int supply = ATGConfig.regenCapacity - stack.getItemDamage(), needed = ATGConfig.regenCapacity - handler.getRegensLeft(), used = Math.min(supply, needed);
 		if (used == 0)
 			return 0;
 
-		handler.regenerationsLeft += used;
-		SuperpowerHandler.syncToAll(handler.getPlayer());
+		handler.setRegensLeft(handler.getRegensLeft() + used);
+		handler.syncToAll();
 
 		if (!handler.getPlayer().isCreative())
 			stack.setItemDamage(stack.getItemDamage() + used);

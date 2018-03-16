@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.events;
 
+import com.lcm.doctorwho.client.gui.GuiRegenCustomizer;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFez;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFirstDocHat;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
@@ -11,6 +12,7 @@ import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
+import com.lcm.doctorwho.common.timelord.TimelordClientEventHandler;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
@@ -18,8 +20,10 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -39,13 +43,16 @@ public class ATGClientProxy extends ATGCommonProxy {
 	private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
 
 	@Override public void init(FMLInitializationEvent event) {
+		super.init(event);
 		RenderMobsInit.init();
+		MinecraftForge.EVENT_BUS.register(new TimelordClientEventHandler());
 	}
 
 	@Override public void postInit(FMLPostInitializationEvent ev) {
 		setupTardisModels();
 		setupClothingModels();
 		setupTileRendering();
+		ClientCommandHandler.instance.registerCommand(new GuiRegenCustomizer.CustomizeCommand());
 	}
 
 	@SubscribeEvent public void renderAngels(RenderLivingEvent.Post<EntityWeepingAngel> e) {

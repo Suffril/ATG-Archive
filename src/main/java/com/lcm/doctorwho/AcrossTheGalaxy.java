@@ -1,15 +1,16 @@
 package com.lcm.doctorwho;
 
+import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.common.dimension.ATGDims;
-import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.events.ATGCommonProxy;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.DebugCommand;
-import lucraft.mods.lucraftcore.utilities.items.ItemInjection;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -40,13 +41,14 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 		ATGObjects.setUpTiles();
 		ATGNetwork.init();
 		MinecraftForge.EVENT_BUS.register(proxy);
+		CapabilityManager.INSTANCE.register(ITimelordCapability.class, new CapabilityTimelord.Storage(), CapabilityTimelord.class);
+
 		proxy.init(event);
 		ATGObjects.setUpCapabilities();
 		ATGDims.dimSetup();
 	}
 
 	@EventHandler public void postInit(FMLPostInitializationEvent event) {
-		ItemInjection.registerInjection(new TimelordSuperpower.Injection(), TimelordSuperpower.INSTANCE.getRegistryName());
 		proxy.postInit(event);
 	}
 

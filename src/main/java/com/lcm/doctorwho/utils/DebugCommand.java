@@ -1,7 +1,5 @@
 package com.lcm.doctorwho.utils;
 
-import com.lcm.doctorwho.common.superpower.TimelordSuperpowerHandler;
-import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -35,7 +33,7 @@ public class DebugCommand extends CommandBase {
 				break;
 			case "set":
 				try {
-					SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = Integer.valueOf(args[1]);
+//					SuperpowerHandler.getSpecificSuperpowerPlayerHandler(player, TimelordSuperpowerHandler.class).regenerationsLeft = Integer.valueOf(args[1]);
 				} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 					throw new CommandException("Invalid use of set", (Object[]) args);
 				} catch (NullPointerException e) {

@@ -39,10 +39,12 @@ public class MessageRequestChunks implements IMessage {
 	public static class Handler implements IMessageHandler<MessageRequestChunks, IMessage> {
 
 		@Override public IMessage onMessage(MessageRequestChunks message, MessageContext ctx) {
-			for (int x = message.chunkX - message.radius; x < message.chunkX + message.radius; x++)
-				for (int z = message.chunkZ - message.radius; z < message.chunkZ + message.radius; z++)
-					ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(ctx.getServerHandler().player.world.getMinecraftServer().getWorld(message.dimensionID).getChunkProvider().provideChunk(x, z), 65535, message.dimensionID));
+			ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
+				for (int x = message.chunkX - message.radius; x < message.chunkX + message.radius; x++)
+					for (int z = message.chunkZ - message.radius; z < message.chunkZ + message.radius; z++)
+						ATGNetwork.INSTANCE.sendToAll(new MessageChunkData(ctx.getServerHandler().player.world.getMinecraftServer().getWorld(message.dimensionID).getChunkProvider().provideChunk(x, z), 65535, message.dimensionID));
 
+			});
 			return null;
 		}
 	}

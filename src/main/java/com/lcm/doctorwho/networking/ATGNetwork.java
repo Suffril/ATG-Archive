@@ -1,10 +1,7 @@
 package com.lcm.doctorwho.networking;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
-import com.lcm.doctorwho.networking.packets.MessageChunkData;
-import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
-import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
+import com.lcm.doctorwho.networking.packets.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,6 +15,9 @@ public class ATGNetwork {
 		INSTANCE.registerMessage(MessageSyncTardis.TardisSyncHandler.class, MessageSyncTardis.class, 1, Side.CLIENT);
 		INSTANCE.registerMessage(MessageChunkData.Handler.class, MessageChunkData.class, 2, Side.CLIENT);
 		INSTANCE.registerMessage(MessageRequestChunks.Handler.class, MessageRequestChunks.class, 3, Side.SERVER);
+		INSTANCE.registerMessage(MessageChangeRegenState.Handler.class, MessageChangeRegenState.class, 4, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSyncTimelordData.Handler.class, MessageSyncTimelordData.class, 5, Side.CLIENT);
+		INSTANCE.registerMessage(MessageRegenerationStyle.Handler.class, MessageRegenerationStyle.class, 6, Side.SERVER);
 	}
 
 }

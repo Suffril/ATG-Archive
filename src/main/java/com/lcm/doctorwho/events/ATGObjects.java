@@ -10,14 +10,13 @@ import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.*;
 import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
 import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
+import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
+import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
+import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
 import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.outlines.ItemClothingOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemSonic;
-import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
-import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
-import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
-import com.lcm.doctorwho.common.superpower.TimelordSuperpower;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
@@ -172,10 +171,6 @@ import java.util.Arrays;
 		public static final SoundEvent timeyWimey = new ATGUtils.ATGSoundEvent("timey_wimey");
 		public static final SoundEvent tardis_pb_open = new ATGUtils.ATGSoundEvent("tardis_pb_open");
 		public static final SoundEvent tardis_pb_close = new ATGUtils.ATGSoundEvent("tardis_pb_close");
-	}
-
-	public static class Superpowers { // NO_UCD (unused code)
-		public static final TimelordSuperpower timelord = TimelordSuperpower.INSTANCE;
 	}
 
 	public static class AbilityEntries { // NO_UCD (unused code)
