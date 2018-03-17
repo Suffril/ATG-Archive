@@ -35,6 +35,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 	@EventHandler public void preInit(FMLPreInitializationEvent event) {
 		ATGConfig.init(new Configuration(event.getSuggestedConfigurationFile()));
+		proxy.preInit(event);
 	}
 
 	@EventHandler public void init(FMLInitializationEvent event) {

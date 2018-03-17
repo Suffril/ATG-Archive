@@ -43,9 +43,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class TimelordEventHandler {
 
 	@SubscribeEvent public void onWorldTick(TickEvent.PlayerTickEvent event) {
-		if (event.phase.equals(TickEvent.Phase.END))
-			return;
-		if (!event.player.hasCapability(CapabilityTimelord.TIMELORD_CAP, null))
+		if (event.phase.equals(TickEvent.Phase.END) || !event.player.hasCapability(CapabilityTimelord.TIMELORD_CAP, null))
 			return;
 		ITimelordCapability handler = event.player.getCapability(CapabilityTimelord.TIMELORD_CAP, null);
 		handler.update();

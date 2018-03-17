@@ -19,9 +19,9 @@ public class RenderMobsInit {
 	public static final Map<EntityCybermen.CyberType, ModelBiped> CYBERS = new HashMap<>();
 
 	public static void init() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, manager -> new RenderEntityBase<>(new ModelWeepingAngel(), "weeping_angel", 1.0F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityProjectile.class, manager -> new RenderEntityBaseProjectile());
-		RenderingRegistry.registerEntityRenderingHandler(EntityCybermen.class, manager -> new RenderCybermen(new ModelCyberTenthPlanet()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWeepingAngel.class, manager -> new RenderEntityBase<>(manager, new ModelWeepingAngel(), "weeping_angel", 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityProjectile.class, RenderEntityBaseProjectile::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCybermen.class, manager -> new RenderCybermen(manager, new ModelCyberTenthPlanet()));
 		cyberModels();
 	}
 

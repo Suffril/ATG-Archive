@@ -12,8 +12,8 @@ import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
-import com.lcm.doctorwho.common.timelord.TimelordClientEventHandler;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
+import com.lcm.doctorwho.common.timelord.TimelordClientEventHandler;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 import net.minecraft.client.model.ModelBiped;
@@ -27,6 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -42,9 +43,12 @@ public class ATGClientProxy extends ATGCommonProxy {
 
 	private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
 
+	@Override public void preInit(FMLPreInitializationEvent ev) {
+		RenderMobsInit.init();
+	}
+
 	@Override public void init(FMLInitializationEvent event) {
 		super.init(event);
-		RenderMobsInit.init();
 		MinecraftForge.EVENT_BUS.register(new TimelordClientEventHandler());
 	}
 
