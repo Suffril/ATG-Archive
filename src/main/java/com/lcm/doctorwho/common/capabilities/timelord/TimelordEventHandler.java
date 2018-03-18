@@ -1,11 +1,11 @@
 package com.lcm.doctorwho.common.timelord;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
-import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.timelord.events.RegenerationEvent;
-import com.lcm.doctorwho.common.timelord.events.RegenerationFinishEvent;
-import com.lcm.doctorwho.common.timelord.events.RegenerationStartEvent;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationEvent;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationFinishEvent;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationStartEvent;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;

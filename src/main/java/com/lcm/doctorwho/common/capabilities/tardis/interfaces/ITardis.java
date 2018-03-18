@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.capabilities.interfaces;
+package com.lcm.doctorwho.common.capabilities.tardis.interfaces;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;

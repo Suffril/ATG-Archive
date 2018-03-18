@@ -1,9 +1,9 @@
-package com.lcm.doctorwho.common.timelord;
+package com.lcm.doctorwho.common.capabilities.timelord;
 
-import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
-import com.lcm.doctorwho.common.timelord.events.RegenerationEvent;
-import com.lcm.doctorwho.common.timelord.events.RegenerationFinishEvent;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationEvent;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationFinishEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovementInput;

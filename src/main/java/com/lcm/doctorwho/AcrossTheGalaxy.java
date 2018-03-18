@@ -1,7 +1,7 @@
 package com.lcm.doctorwho;
 
-import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
 import com.lcm.doctorwho.common.dimension.ATGDims;
 import com.lcm.doctorwho.events.ATGCommonProxy;
 import com.lcm.doctorwho.events.ATGObjects;
