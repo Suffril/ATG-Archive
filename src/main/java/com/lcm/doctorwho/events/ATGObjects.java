@@ -15,6 +15,7 @@ import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.outlines.ItemClothingOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemSonic;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
@@ -99,6 +100,7 @@ import java.util.Arrays;
 
 		// Tardis
 		public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block interiorDoor = new BlockInteriorDoor(Material.CORAL, "interior_door");
 
 		// Troughton - Fault Locator
 		public static final Block tro_fault_1 = new BlockOutline(Material.CORAL, "tro_fault_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
@@ -252,6 +254,7 @@ import java.util.Arrays;
 
 	public static void setUpTiles() {
 		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
+		GameRegistry.registerTileEntity(TileEntityInteriorDoor.class, AcrossTheGalaxy.MODID + ":interior_door");
 		GameRegistry.registerTileEntity(TileEntity1963Rotor.class, AcrossTheGalaxy.MODID + ":1963rotor");
 		GameRegistry.registerTileEntity(TileEntity1963Chair.class, AcrossTheGalaxy.MODID + ":1963chair");
 	}

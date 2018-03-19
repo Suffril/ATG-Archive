@@ -10,9 +10,11 @@ import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
 import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
+import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileInteriorDoor;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.capabilities.timelord.TimelordClientEventHandler;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
@@ -91,6 +93,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 
 	@SideOnly(Side.CLIENT) private static void setupTileRendering() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInteriorDoor.class, new RenderTileInteriorDoor());
 	}
 
 }

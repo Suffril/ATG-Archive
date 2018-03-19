@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.common.blocks;
 
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.utils.ATGConfig;
@@ -28,7 +29,7 @@ import javax.annotation.Nullable;
 
 public class BlockTardis extends BlockOutline {
 
-	protected static final AxisAlignedBB AABB = new AxisAlignedBB(-0.25, 0, 0.1, 1.25, 3,1.25);
+	protected static final AxisAlignedBB AABB = new AxisAlignedBB(-0.25, 0, 0.1, 1.25, 3, 1.25);
 
 	public BlockTardis(Material material, String name) {
 		super(material, name);
@@ -52,6 +53,15 @@ public class BlockTardis extends BlockOutline {
 			worldIn.notifyBlockUpdate(pos, state, state, 3);
 			BlockPos iPos = tardis.getInteriorDoorPos();
 			WorldJsonUtils.INSTANCE.fromJson(tardis_dim, iPos.getX() >> 4, iPos.getY() >> 4, iPos.getZ() >> 4, "default_interior", true);
+
+			tardis_dim.setBlockState(iPos, ATGObjects.Blocks.interiorDoor.getDefaultState());
+			TileEntityInteriorDoor interiorDoor = (TileEntityInteriorDoor) tardis_dim.getTileEntity(iPos);
+
+			interiorDoor.exteriorDim = worldIn.provider.getDimension();
+			interiorDoor.exteriorPos = pos;
+			interiorDoor.markDirty();
+			tardis_dim.notifyBlockUpdate(iPos, state, state, 3);
+
 		}
 	}
 
@@ -89,7 +99,8 @@ public class BlockTardis extends BlockOutline {
 				tardis.markDirty();
 				worldIn.notifyBlockUpdate(pos, state, state, 3);
 			}
-		} else ATGUtils.sendPlayerMessage(playerIn, "This is not your TARDIS!");
+		} else
+			ATGUtils.sendPlayerMessage(playerIn, "This is not your TARDIS!");
 		return true;
 	}
 

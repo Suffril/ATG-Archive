@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.client.boti;
 
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -45,13 +47,13 @@ public class EntityCamera extends EntityPlayerSP {
 		this.origin = new Vec3d(x, y, z);
 	}
 
-	public void renderWorldToTexture(Vec3d tilePos, float partialRenderTicks) {
+	public void renderWorldToTexture(TileEntity tileEntity, Vec3d tilePos, float partialRenderTicks) {
 		if (!world.isRemote)
 			return;
 
 		Framebuffer mcBuffer = Minecraft.getMinecraft().getFramebuffer();
 
-		setupOffset(tilePos);
+		setupOffset(tileEntity, tilePos);
 
 		Minecraft.getMinecraft().setRenderViewEntity(this);
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
@@ -144,7 +146,7 @@ public class EntityCamera extends EntityPlayerSP {
 		Minecraft.getMinecraft().setRenderViewEntity(Minecraft.getMinecraft().player);
 	}
 
-	private void setupOffset(Vec3d tile) {
+	private void setupOffset(TileEntity tileEntity, Vec3d tile) {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 
 		Vec3d pVec = new Vec3d(player.posX, player.posY, player.posZ);
@@ -179,6 +181,10 @@ public class EntityCamera extends EntityPlayerSP {
 		angleDeg = 90 - (angleDeg);
 
 		rotationYaw = (float) angleDeg;
+
+		if(tileEntity instanceof TileEntityInteriorDoor){
+			rotationYaw -= 180;
+		}
 
 		//pitch TODO
 //

@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.client.boti;
 
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -36,6 +37,18 @@ public class FakeWorld extends WorldClient {
 			EntityCamera camera = new EntityCamera(this, pos.x, pos.y, pos.z);
 			this.spawnEntity(camera);
 			tileEntityTardis.cameraID = camera.getEntityId();
+			return camera;
+		} else
+			return (EntityCamera) entities[0];
+	}
+
+	public EntityCamera getCamera(TileEntityInteriorDoor tileEntityInteriorDoor, Vec3d pos) {
+		int entityID = tileEntityInteriorDoor.cameraID;
+		Entity[] entities = loadedEntityList.stream().filter(entity -> entity instanceof EntityCamera && entity.getEntityId() == entityID).toArray(Entity[]::new);
+		if (entities.length == 0) {
+			EntityCamera camera = new EntityCamera(this, pos.x, pos.y, pos.z -	 1);
+			this.spawnEntity(camera);
+			tileEntityInteriorDoor.cameraID = camera.getEntityId();
 			return camera;
 		} else
 			return (EntityCamera) entities[0];

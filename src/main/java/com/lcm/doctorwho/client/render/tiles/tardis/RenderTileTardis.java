@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
@@ -51,7 +52,8 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 
 		FakeWorld fakeWorld = FakeWorld.getFakeWorld(ATGConfig.tardisDIM);
 
-		EntityCamera camera = fakeWorld.getCamera(tile, new Vec3d(x, y, z).add(new Vec3d(0.0, 1, 0.5)));
+		BlockPos pos = tile.getInteriorDoorPos();
+		EntityCamera camera = fakeWorld.getCamera(tile, new Vec3d(pos.getX(), pos.getY(), pos.getZ()));
 
 		if (camera.image != null) {
 			DynamicTexture texture = new DynamicTexture(camera.image);
@@ -66,10 +68,10 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder bufferBuilder = tessellator.getBuffer();
 			bufferBuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-			bufferBuilder.pos(0, -2.5, -0.25).tex(0.25, 0).endVertex();
-			bufferBuilder.pos(1, -2.5, -0.25).tex(0.75, 0).endVertex();
-			bufferBuilder.pos(1, 0, -0.25).tex(0.75, 1).endVertex();
-			bufferBuilder.pos(0, 0, -0.25).tex(0.25, 1).endVertex();
+			bufferBuilder.pos(0, -2.5, -0.25).tex(0.9, 0.1).endVertex();
+			bufferBuilder.pos(1, -2.5, -0.25).tex(0.1, 0.1).endVertex();
+			bufferBuilder.pos(1, 0, -0.25).tex(0.1, 0.9).endVertex();
+			bufferBuilder.pos(0, 0, -0.25).tex(0.9, 0.9).endVertex();
 			tessellator.draw();
 			GlStateManager.popMatrix();
 			GlStateManager.enableLighting();

@@ -23,7 +23,7 @@ import static com.lcm.doctorwho.AcrossTheGalaxy.MODID;
 
 public class TileEntityTardis extends TileEntity implements ITickable {
 
-	private AxisAlignedBB tardis_enter_AABB = new AxisAlignedBB(0, 0, 0, 0.6, 2, 0.1);
+	private AxisAlignedBB tardis_enter_AABB = new AxisAlignedBB(0.2, 0, 0, 0.8, 2, 0.1);
 
 	public int cameraID = -1;
 
@@ -79,8 +79,8 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 
 	@Override public void update() {
 		if (!world.isRemote && doorOpen)
-			for (Entity e : world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos()).offset(0.2, 0, 0)))
-				ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, getInteriorDoorPos());
+			for (Entity e : world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos())))
+				ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, getInteriorDoorPos().south());
 	}
 
 	public static class TardisWorldData extends WorldSavedData {
