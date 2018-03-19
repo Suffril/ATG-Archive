@@ -1,6 +1,6 @@
 package com.lcm.doctorwho;
 
-import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
 import com.lcm.doctorwho.common.dimension.ATGDims;
 import com.lcm.doctorwho.events.ATGCommonProxy;
@@ -45,7 +45,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 		CapabilityManager.INSTANCE.register(ITimelordCapability.class, new CapabilityTimelord.Storage(), CapabilityTimelord.class);
 
 		proxy.init(event);
-		ATGObjects.setUpCapabilities();
 		ATGDims.dimSetup();
 	}
 

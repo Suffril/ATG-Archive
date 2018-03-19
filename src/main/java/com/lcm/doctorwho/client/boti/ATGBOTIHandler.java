@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -34,7 +35,8 @@ import net.minecraftforge.fml.relauncher.Side;
 					Minecraft.getMinecraft().getRenderManager().setWorld(fakeWorld);
 					Minecraft.getMinecraft().renderGlobal = fakeWorld.renderGlobal;
 
-					EntityCamera camera = fakeWorld.getCamera((TileEntityTardis) tileEntity, new Vec3d(0.5, 1, 0.5)); //TODO get origin
+					BlockPos pos = ((TileEntityTardis) tileEntity).getInteriorDoorPos();
+					EntityCamera camera = fakeWorld.getCamera((TileEntityTardis) tileEntity, new Vec3d(pos.getX(), pos.getY(), pos.getZ()).add(new Vec3d(0.5, 1, 0.5)));
 
 					GlStateManager.pushMatrix();
 					GlStateManager.pushAttrib();
@@ -53,7 +55,7 @@ import net.minecraftforge.fml.relauncher.Side;
 					Minecraft.getMinecraft().getRenderManager().setWorld(worldClient);
 
 					if (Minecraft.getMinecraft().world.getTotalWorldTime() % 200 == 0) { //TODO optimize
-						ATGNetwork.INSTANCE.sendToServer(new MessageRequestChunks(0, 0, 1, ATGConfig.tardisDIM)); //TODO origin
+						ATGNetwork.INSTANCE.sendToServer(new MessageRequestChunks(((TileEntityTardis) tileEntity).interiorPos.getX(), ((TileEntityTardis) tileEntity).interiorPos.getZ(), 2, ATGConfig.tardisDIM));
 					}
 				}
 			});

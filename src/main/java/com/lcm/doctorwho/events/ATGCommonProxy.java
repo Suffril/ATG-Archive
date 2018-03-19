@@ -1,6 +1,6 @@
 package com.lcm.doctorwho.events;
 
-import com.lcm.doctorwho.common.timelord.TimelordEventHandler;
+import com.lcm.doctorwho.common.capabilities.timelord.TimelordEventHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

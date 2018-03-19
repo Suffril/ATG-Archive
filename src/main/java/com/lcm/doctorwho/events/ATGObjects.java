@@ -8,8 +8,6 @@ import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.*;
-import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
 import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
@@ -36,7 +34,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -257,10 +254,6 @@ import java.util.Arrays;
 		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
 		GameRegistry.registerTileEntity(TileEntity1963Rotor.class, AcrossTheGalaxy.MODID + ":1963rotor");
 		GameRegistry.registerTileEntity(TileEntity1963Chair.class, AcrossTheGalaxy.MODID + ":1963chair");
-	}
-
-	public static void setUpCapabilities() {
-		CapabilityManager.INSTANCE.register(ITardisTile.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
 	}
 
 	@SideOnly(Side.CLIENT) // note: this means *physical* side
