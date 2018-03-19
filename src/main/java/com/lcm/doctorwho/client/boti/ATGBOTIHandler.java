@@ -1,9 +1,6 @@
 package com.lcm.doctorwho.client.boti;
 
-import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.networking.ATGNetwork;
-import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
-import com.lcm.doctorwho.utils.ATGConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,26 +16,33 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 @Mod.EventBusSubscriber(Side.CLIENT) public class ATGBOTIHandler {
 
+	private static boolean rendering;
+	//TODO interior doesn't render until you visit the dimension once?
+	//TODO clouds are rendering?
 	@SubscribeEvent public static void onRenderTick(TickEvent.RenderTickEvent event) {
 
 		if (event.phase != TickEvent.Phase.END)
 			return;
 		WorldClient worldClient = Minecraft.getMinecraft().world;
-		if (worldClient != null) {
+		if (worldClient != null && !rendering) {
 			RenderGlobal renderGlobal = Minecraft.getMinecraft().renderGlobal;
-
 			worldClient.loadedTileEntityList.forEach(tileEntity -> {
-				if (tileEntity instanceof TileEntityTardis) {
-					FakeWorld fakeWorld = FakeWorld.getFakeWorld(ATGConfig.tardisDIM);
+				if (tileEntity instanceof ICameraInterface) {
+					FakeWorld fakeWorld = FakeWorld.getFakeWorld(((ICameraInterface) tileEntity).getRenderDimension());
+
+					EntityCamera camera = fakeWorld.getCamera((ICameraInterface) tileEntity);
+					if (camera.image != null)
+						return; //Rendering over an image that hasn't been shown yet is a waste
+
 					Minecraft.getMinecraft().world = fakeWorld;
 					Minecraft.getMinecraft().getRenderManager().setWorld(fakeWorld);
 					Minecraft.getMinecraft().renderGlobal = fakeWorld.renderGlobal;
 
-					EntityCamera camera = fakeWorld.getCamera((TileEntityTardis) tileEntity, new Vec3d(0.5, 1, 0.5)); //TODO get origin
-
 					GlStateManager.pushMatrix();
 					GlStateManager.pushAttrib();
-					camera.renderWorldToTexture(new Vec3d(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()), event.renderTickTime);
+					rendering = true;
+					camera.renderWorldToTexture(tileEntity, new Vec3d(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()), event.renderTickTime);
+					rendering = false;
 					GlStateManager.popAttrib();
 					GlStateManager.popMatrix();
 
@@ -52,17 +56,21 @@ import net.minecraftforge.fml.relauncher.Side;
 					Minecraft.getMinecraft().renderGlobal = renderGlobal;
 					Minecraft.getMinecraft().getRenderManager().setWorld(worldClient);
 
-					if (Minecraft.getMinecraft().world.getTotalWorldTime() % 200 == 0) { //TODO optimize
-						ATGNetwork.INSTANCE.sendToServer(new MessageRequestChunks(0, 0, 1, ATGConfig.tardisDIM)); //TODO origin
+					if (Minecraft.getMinecraft().world.getTotalWorldTime() % 200 == 0 || ((ICameraInterface) tileEntity).isChunkEmpty(fakeWorld)) { //TODO optimize
+						ATGNetwork.INSTANCE.sendToServer(((ICameraInterface) tileEntity).requestChunks());
 					}
 				}
 			});
+		} else if(!FakeWorld.fakeWorlds.isEmpty()){
+			FakeWorld.fakeWorlds.clear();
 		}
 	}
 
 	@SubscribeEvent public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if (event.phase == TickEvent.Phase.END && Minecraft.getMinecraft().world != null)
-			FakeWorld.getFakeWorld(ATGConfig.tardisDIM).updateEntities();
+			for (FakeWorld fakeWorld : FakeWorld.fakeWorlds) {
+				fakeWorld.updateEntities();
+			}
 	}
 
 }

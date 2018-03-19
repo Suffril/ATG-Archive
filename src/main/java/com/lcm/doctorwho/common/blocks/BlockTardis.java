@@ -1,22 +1,18 @@
 package com.lcm.doctorwho.common.blocks;
 
-import com.lcm.doctorwho.common.capabilities.tardis.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITardisTile;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGObjects;
-import com.lcm.doctorwho.networking.ATGNetwork;
-import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
-import com.lcm.doctorwho.networking.packets.MessageSyncTardis;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
-import com.lcm.doctorwho.utils.TardisUtils;
+import com.lcm.doctorwho.utils.WorldJsonUtils;
+import com.sun.javafx.geom.Vec2d;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -28,14 +24,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 
 public class BlockTardis extends BlockOutline {
 
-	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.6000000238418579D, 0.699999988079071D);
+	protected static final AxisAlignedBB AABB = new AxisAlignedBB(-0.25, 0, 0.1, 1.25, 3, 1.25);
 
 	public BlockTardis(Material material, String name) {
 		super(material, name);
@@ -47,34 +41,28 @@ public class BlockTardis extends BlockOutline {
 	 */
 	@Override public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
-		ITardisTile capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
 
 		if (!worldIn.isRemote) {
-			try {
-				capa.setTardisID(TardisUtils.getTardisAmount());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			tardis.ownerUUID = placer.getUniqueID().toString();
 
-			capa.setOwner(placer.getUniqueID().toString());
-			capa.setDoorOpen(false);
-			capa.setModelID(0);
-
-			try {
-				TardisUtils.saveTardis(capa, TardisUtils.newInteriorPos(), pos, worldIn.provider.getDimension());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			// TODO Generating Interior here
-			TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
 			MinecraftServer server = placer.world.getMinecraftServer();
 			WorldServer tardis_dim = server.getWorld(ATGConfig.tardisDIM);
-			// This is a test, hush
-			tardis_dim.setBlockState(new BlockPos(info.getInteriorX(), info.getInteriorY(), info.getInteriorZ()), ATGObjects.Blocks.creamRoundel.getDefaultState());
-		} else
-			ATGNetwork.INSTANCE.sendToServer(new MessageRequestChunks(0, 0, 1, ATGConfig.tardisDIM)); //TODO send origin
+			Vec2d chunk = TileEntityTardis.TardisWorldData.get(tardis_dim).getNewChunkCoordinates();
+			tardis.interiorPos = new BlockPos(chunk.x, 0, chunk.y);
+			tardis.markDirty();
+			worldIn.notifyBlockUpdate(pos, state, state, 3);
+			BlockPos iPos = tardis.getInteriorDoorPos();
+			WorldJsonUtils.INSTANCE.fromJson(tardis_dim, iPos.getX() >> 4, iPos.getY() >> 4, iPos.getZ() >> 4, "default_interior", true);
 
+			tardis_dim.setBlockState(iPos, ATGObjects.Blocks.interiorDoor.getDefaultState());
+			TileEntityInteriorDoor interiorDoor = (TileEntityInteriorDoor) tardis_dim.getTileEntity(iPos);
+
+			interiorDoor.exteriorDim = worldIn.provider.getDimension();
+			interiorDoor.exteriorPos = pos;
+			interiorDoor.markDirty();
+			tardis_dim.notifyBlockUpdate(iPos, state, state, 3);
+
+		}
 	}
 
 	@Override public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
@@ -86,7 +74,7 @@ public class BlockTardis extends BlockOutline {
 	}
 
 	@Nullable public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return NULL_AABB;
+		return AABB;
 	}
 
 	/**
@@ -101,31 +89,18 @@ public class BlockTardis extends BlockOutline {
 	 */
 	@Override public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityTardis tardis = (TileEntityTardis) worldIn.getTileEntity(pos);
-		ITardisTile capa = tardis.getCapability(CapabilityTileTardis.TARDIS, null);
 
-		if (playerIn.getUniqueID().toString().equalsIgnoreCase(capa.getOwner())) {
-			capa.setDoorOpen(!capa.isDoorOpen());
-			SoundEvent sound = capa.isDoorOpen() ? ATGObjects.SoundEvents.tardis_pb_open : ATGObjects.SoundEvents.tardis_pb_close;
+		if (playerIn.getUniqueID().toString().equalsIgnoreCase(tardis.ownerUUID)) {
+			tardis.doorOpen = !tardis.doorOpen;
+			SoundEvent sound = tardis.doorOpen ? ATGObjects.SoundEvents.tardis_pb_open : ATGObjects.SoundEvents.tardis_pb_close;
 			ATGUtils.playSound(playerIn, sound);
 
 			if (!worldIn.isRemote) {
-				NBTTagCompound tardisNBT = tardis.writeToNBT(TardisUtils.tardisWriteToNBT(capa));
-				tardis.readFromNBT(tardisNBT);
 				tardis.markDirty();
-
-				try {
-					TardisUtils.TardisInfo info = TardisUtils.loadInfoFromFile(capa.getTardisID());
-					TardisUtils.saveTardis(capa, new BlockPos(info.getInteriorX(), info.getInteriorY(), info.getInteriorZ()), pos, worldIn.provider.getDimension());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-				ATGNetwork.INSTANCE.sendToAllAround(new MessageSyncTardis(pos, TardisUtils.tardisWriteToNBT(capa)), new NetworkRegistry.TargetPoint(playerIn.dimension, playerIn.posX, playerIn.posY, playerIn.posY, 50));
+				worldIn.notifyBlockUpdate(pos, state, state, 3);
 			}
-		} else {
+		} else
 			ATGUtils.sendPlayerMessage(playerIn, "This is not your TARDIS!");
-		}
-
 		return true;
 	}
 

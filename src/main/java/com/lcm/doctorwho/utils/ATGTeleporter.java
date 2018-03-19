@@ -23,6 +23,10 @@ public class ATGTeleporter extends Teleporter {
 		this.z = z;
 	}
 
+	public static void changeDim(Entity entity, int dimension, BlockPos pos){
+		changeDim(entity, dimension, pos.getX(), pos.getY(), pos.getZ());
+	}
+
 	public static void changeDim(Entity entity, int dimension, double x, double y, double z) {
 		int oldDimension = entity.world.provider.getDimension();
 		MinecraftServer server = entity.world.getMinecraftServer();

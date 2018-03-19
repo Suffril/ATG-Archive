@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.networking.packets;
 
+import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;

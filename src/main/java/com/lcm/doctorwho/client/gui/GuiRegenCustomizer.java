@@ -1,7 +1,7 @@
 package com.lcm.doctorwho.client.gui;
 
+import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageRegenerationStyle;
 import lucraft.mods.lucraftcore.superpowers.SuperpowerHandler;

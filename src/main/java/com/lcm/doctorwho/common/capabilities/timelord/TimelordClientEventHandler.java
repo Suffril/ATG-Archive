@@ -1,15 +1,13 @@
 package com.lcm.doctorwho.common.capabilities.timelord;
 
-import com.lcm.doctorwho.client.render.entity.layers.RenderLayerRegeneration;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationEvent;
 import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationFinishEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovementInput;
 import net.minecraftforge.client.event.InputUpdateEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -19,7 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  */
 
 public class TimelordClientEventHandler {
-
 
 	@SubscribeEvent
 	public void onRegeneration(RegenerationEvent event){

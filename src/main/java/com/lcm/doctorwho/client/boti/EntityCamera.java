@@ -1,11 +1,13 @@
 package com.lcm.doctorwho.client.boti;
 
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
@@ -17,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -32,7 +35,7 @@ import java.util.Objects;
  */
 public class EntityCamera extends EntityPlayerSP {
 	public BufferedImage image;
-
+	private DynamicTexture texture;
 	private Vec3d origin;
 
 	public EntityCamera(World world) {
@@ -45,13 +48,13 @@ public class EntityCamera extends EntityPlayerSP {
 		this.origin = new Vec3d(x, y, z);
 	}
 
-	public void renderWorldToTexture(Vec3d tilePos, float partialRenderTicks) {
+	public void renderWorldToTexture(TileEntity tileEntity, Vec3d tilePos, float partialRenderTicks) {
 		if (!world.isRemote)
 			return;
 
 		Framebuffer mcBuffer = Minecraft.getMinecraft().getFramebuffer();
 
-		setupOffset(tilePos);
+		setupOffset(tileEntity, tilePos);
 
 		Minecraft.getMinecraft().setRenderViewEntity(this);
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
@@ -144,7 +147,7 @@ public class EntityCamera extends EntityPlayerSP {
 		Minecraft.getMinecraft().setRenderViewEntity(Minecraft.getMinecraft().player);
 	}
 
-	private void setupOffset(Vec3d tile) {
+	private void setupOffset(TileEntity tileEntity, Vec3d tile) {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 
 		Vec3d pVec = new Vec3d(player.posX, player.posY, player.posZ);
@@ -157,11 +160,10 @@ public class EntityCamera extends EntityPlayerSP {
 
 		diff = pVec.subtract(tVec);
 		tVec = origin.add(diff.scale(0.2));
-		diff = diff.scale(0.2);
 
 		posX = origin.x + diff.x * 0.2;
 		posY = origin.y;
-		posZ = origin.z - diff.z * 0.2 - 0.1;
+		posZ = origin.z - diff.z * 0.2;
 
 		//yaw TODO fix
 
@@ -176,9 +178,13 @@ public class EntityCamera extends EntityPlayerSP {
 		if (angleDeg <= 0)
 			angleDeg = 360 + angleDeg;
 
-		angleDeg = 90 - (angleDeg - 90);
+		angleDeg = 90 - (angleDeg);
 
 		rotationYaw = (float) angleDeg;
+
+		if(tileEntity instanceof TileEntityInteriorDoor){
+			rotationYaw -= 180;
+		}
 
 		//pitch TODO
 //
@@ -193,6 +199,20 @@ public class EntityCamera extends EntityPlayerSP {
 //		if (angleDeg <= 0)
 //			angleDeg = 360 + angleDeg;
 //		rotationPitch = 0f;
+	}
+
+	public void bindTexture() {
+		texture = new DynamicTexture(image);
+		GlStateManager.bindTexture(texture.getGlTextureId());
+	}
+
+	public void deleteTexture(Vec3d renderPos) {
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		if (renderPos.distanceTo(new Vec3d(player.posX, player.posY, player.posZ)) < 20) { //TODO configure range
+			image = null;
+			GlStateManager.deleteTexture(texture.getGlTextureId());
+			texture = null;
+		}
 	}
 
 	@Override public void onEntityUpdate() {

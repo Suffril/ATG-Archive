@@ -8,9 +8,6 @@ import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.*;
-import com.lcm.doctorwho.common.capabilities.tardis.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITardisTile;
-import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
@@ -18,10 +15,10 @@ import com.lcm.doctorwho.common.items.ItemChameleonArch;
 import com.lcm.doctorwho.common.items.outlines.ItemClothingOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemSonic;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
-import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
 import com.lcm.doctorwho.common.traits.negative.*;
 import com.lcm.doctorwho.common.traits.positive.*;
 import com.lcm.doctorwho.utils.ATGUtils;
@@ -38,7 +35,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -104,6 +100,7 @@ import java.util.Arrays;
 
 		// Tardis
 		public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block interiorDoor = new BlockInteriorDoor(Material.CORAL, "interior_door");
 
 		// Troughton - Fault Locator
 		public static final Block tro_fault_1 = new BlockOutline(Material.CORAL, "tro_fault_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
@@ -257,17 +254,12 @@ import java.util.Arrays;
 
 	public static void setUpTiles() {
 		GameRegistry.registerTileEntity(TileEntityTardis.class, AcrossTheGalaxy.MODID + ":tardis");
+		GameRegistry.registerTileEntity(TileEntityInteriorDoor.class, AcrossTheGalaxy.MODID + ":interior_door");
 		GameRegistry.registerTileEntity(TileEntity1963Rotor.class, AcrossTheGalaxy.MODID + ":1963rotor");
 		GameRegistry.registerTileEntity(TileEntity1963Chair.class, AcrossTheGalaxy.MODID + ":1963chair");
 	}
 
-	public static void setUpCapabilities() {
-		CapabilityManager.INSTANCE.register(ITardisTile.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
-        CapabilityManager.INSTANCE.register(ITimelordCapability.class, new CapabilityTimelord.Storage(), CapabilityTimelord.class);
-
-    }
-
-	@SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT) // note: this means *physical* side
 	@SubscribeEvent public static void onModelBake(ModelBakeEvent e) {
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
 
@@ -279,7 +271,6 @@ import java.util.Arrays;
 				if (loc.getResourcePath().equalsIgnoreCase("chameleonarch"))
 					e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
 			}
-
 		}
 	}
 }
