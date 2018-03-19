@@ -7,6 +7,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
@@ -34,7 +35,7 @@ import java.util.Objects;
  */
 public class EntityCamera extends EntityPlayerSP {
 	public BufferedImage image;
-
+	private DynamicTexture texture;
 	private Vec3d origin;
 
 	public EntityCamera(World world) {
@@ -199,6 +200,20 @@ public class EntityCamera extends EntityPlayerSP {
 //		if (angleDeg <= 0)
 //			angleDeg = 360 + angleDeg;
 //		rotationPitch = 0f;
+	}
+
+	public void bindTexture() {
+		texture = new DynamicTexture(image);
+		GlStateManager.bindTexture(texture.getGlTextureId());
+	}
+
+	public void deleteTexture(Vec3d renderPos) {
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		if (renderPos.distanceTo(new Vec3d(player.posX, player.posY, player.posZ)) < 20) { //TODO configure range
+			image = null;
+			GlStateManager.deleteTexture(texture.getGlTextureId());
+			texture = null;
+		}
 	}
 
 	@Override public void onEntityUpdate() {

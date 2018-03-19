@@ -1,5 +1,7 @@
 package com.lcm.doctorwho.common.tiles.tardis;
 
+import com.lcm.doctorwho.client.boti.FakeWorld;
+import com.lcm.doctorwho.client.boti.ICameraInterface;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
 import com.lcm.doctorwho.utils.ATGConfig;
@@ -13,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
@@ -21,11 +24,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static com.lcm.doctorwho.AcrossTheGalaxy.MODID;
 
-public class TileEntityTardis extends TileEntity implements ITickable {
+public class TileEntityTardis extends TileEntity implements ITickable, ICameraInterface {
 
 	private AxisAlignedBB tardis_enter_AABB = new AxisAlignedBB(0.2, 0, 0, 0.8, 2, 0.1);
 
-	public int cameraID = -1;
+	private int cameraID = -1;
 
 	public int modelID;
 	public String ownerUUID = "No-one";
@@ -81,6 +84,31 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 		if (!world.isRemote && doorOpen)
 			for (Entity e : world.getEntitiesWithinAABB(Entity.class, tardis_enter_AABB.offset(getPos())))
 				ATGTeleporter.changeDim(e, ATGConfig.tardisDIM, getInteriorDoorPos().south());
+	}
+
+	@Override public int getCameraID() {
+		return this.cameraID;
+	}
+
+	@Override public void setCameraID(int id) {
+		this.cameraID = id;
+	}
+
+	@Override public int getRenderDimension() {
+		return ATGConfig.tardisDIM;
+	}
+
+	@Override public MessageRequestChunks requestChunks() {
+		return new MessageRequestChunks(interiorPos.getX(), interiorPos.getZ(), 2, ATGConfig.tardisDIM);
+	}
+
+	@Override public boolean isChunkEmpty(FakeWorld world) {
+		return world.getChunkFromChunkCoords(interiorPos.getX(), interiorPos.getZ()).isEmpty();
+	}
+
+	@Override public Vec3d getCameraSpawnPos() {
+		BlockPos cameraPos = getInteriorDoorPos();
+		return new Vec3d(cameraPos.getX(), cameraPos.getY(), cameraPos.getZ() + 0.5);
 	}
 
 	public static class TardisWorldData extends WorldSavedData {

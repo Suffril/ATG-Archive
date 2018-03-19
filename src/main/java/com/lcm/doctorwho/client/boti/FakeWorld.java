@@ -1,7 +1,5 @@
 package com.lcm.doctorwho.client.boti;
 
-import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
-import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -30,25 +28,14 @@ public class FakeWorld extends WorldClient {
 			return fakeWorlds.stream().filter(world -> world.dimensionID == dimensionID).findAny().get();
 	}
 
-	public EntityCamera getCamera(TileEntityTardis tileEntityTardis, Vec3d pos) {
-		int entityID = tileEntityTardis.cameraID;
+	public EntityCamera getCamera(ICameraInterface viewer) {
+		Vec3d pos = viewer.getCameraSpawnPos();
+		int entityID = viewer.getCameraID();
 		Entity[] entities = loadedEntityList.stream().filter(entity -> entity instanceof EntityCamera && entity.getEntityId() == entityID).toArray(Entity[]::new);
 		if (entities.length == 0) {
 			EntityCamera camera = new EntityCamera(this, pos.x, pos.y, pos.z);
 			this.spawnEntity(camera);
-			tileEntityTardis.cameraID = camera.getEntityId();
-			return camera;
-		} else
-			return (EntityCamera) entities[0];
-	}
-
-	public EntityCamera getCamera(TileEntityInteriorDoor tileEntityInteriorDoor, Vec3d pos) {
-		int entityID = tileEntityInteriorDoor.cameraID;
-		Entity[] entities = loadedEntityList.stream().filter(entity -> entity instanceof EntityCamera && entity.getEntityId() == entityID).toArray(Entity[]::new);
-		if (entities.length == 0) {
-			EntityCamera camera = new EntityCamera(this, pos.x, pos.y, pos.z -	 1);
-			this.spawnEntity(camera);
-			tileEntityInteriorDoor.cameraID = camera.getEntityId();
+			viewer.setCameraID(camera.getEntityId());
 			return camera;
 		} else
 			return (EntityCamera) entities[0];
