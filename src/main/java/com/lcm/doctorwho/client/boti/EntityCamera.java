@@ -160,7 +160,6 @@ public class EntityCamera extends EntityPlayerSP {
 
 		diff = pVec.subtract(tVec);
 		tVec = origin.add(diff.scale(0.2));
-		diff = diff.scale(0.2);
 
 		posX = origin.x + diff.x * 0.2;
 		posY = origin.y;
