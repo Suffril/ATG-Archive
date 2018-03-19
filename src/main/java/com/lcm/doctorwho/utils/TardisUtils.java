@@ -3,7 +3,7 @@ package com.lcm.doctorwho.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITardisTile;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;

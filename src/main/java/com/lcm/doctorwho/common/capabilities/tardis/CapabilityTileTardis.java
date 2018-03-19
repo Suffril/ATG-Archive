@@ -1,6 +1,6 @@
-package com.lcm.doctorwho.common.capabilities;
+package com.lcm.doctorwho.common.capabilities.tardis;
 
-import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITardisTile;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

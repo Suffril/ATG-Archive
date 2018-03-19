@@ -1,9 +1,9 @@
-package com.lcm.doctorwho.common.timelord.capability;
+package com.lcm.doctorwho.common.capabilities.timelord.capability;
 
-import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
-import com.lcm.doctorwho.common.timelord.events.RegenerationEvent;
-import com.lcm.doctorwho.common.timelord.events.RegenerationFinishEvent;
-import com.lcm.doctorwho.common.timelord.events.RegenerationStartEvent;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationEvent;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationFinishEvent;
+import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationStartEvent;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageChangeRegenState;
 import com.lcm.doctorwho.networking.packets.MessageSyncTimelordData;

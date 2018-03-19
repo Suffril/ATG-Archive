@@ -1,8 +1,8 @@
 package com.lcm.doctorwho.common.items;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.utils.ATGConfig;
 import lucraft.mods.lucraftcore.util.helper.StringHelper;

@@ -4,16 +4,21 @@ import com.lcm.doctorwho.client.gui.GuiRegenCustomizer;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFez;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFirstDocHat;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.models.tardis.decoration.Model1963ChairSmall;
+import com.lcm.doctorwho.client.models.tardis.decoration.Model1963Rotor;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelHartnellTardis;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelMasqueTardis;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
 import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
 import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
+import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileBase;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
-import com.lcm.doctorwho.common.timelord.TimelordClientEventHandler;
+import com.lcm.doctorwho.common.capabilities.timelord.TimelordClientEventHandler;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 import net.minecraft.client.model.ModelBiped;
@@ -91,6 +96,8 @@ public class ATGClientProxy extends ATGCommonProxy {
 
 	@SideOnly(Side.CLIENT) private static void setupTileRendering() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Chair.class, new RenderTileBase(new Model1963ChairSmall()));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Rotor.class, new RenderTileBase(new Model1963Rotor()));
 	}
 
 }

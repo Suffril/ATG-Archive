@@ -8,8 +8,9 @@ import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.*;
-import com.lcm.doctorwho.common.capabilities.CapabilityTileTardis;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITardisTile;
+import com.lcm.doctorwho.common.capabilities.tardis.CapabilityTileTardis;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITardisTile;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
@@ -20,6 +21,7 @@ import com.lcm.doctorwho.common.items.outlines.ItemSonic;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
 import com.lcm.doctorwho.common.traits.negative.*;
 import com.lcm.doctorwho.common.traits.positive.*;
 import com.lcm.doctorwho.utils.ATGUtils;
@@ -261,9 +263,11 @@ import java.util.Arrays;
 
 	public static void setUpCapabilities() {
 		CapabilityManager.INSTANCE.register(ITardisTile.class, new CapabilityTileTardis.Storage(), CapabilityTileTardis.class);
-	}
+        CapabilityManager.INSTANCE.register(ITimelordCapability.class, new CapabilityTimelord.Storage(), CapabilityTimelord.class);
 
-	@SideOnly(Side.CLIENT) // note: this means *physical* side
+    }
+
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent public static void onModelBake(ModelBakeEvent e) {
 		for (ModelResourceLocation loc : e.getModelRegistry().getKeys()) {
 
@@ -275,6 +279,7 @@ import java.util.Arrays;
 				if (loc.getResourcePath().equalsIgnoreCase("chameleonarch"))
 					e.getModelRegistry().putObject(loc, new RenderItemFobwatch());
 			}
+
 		}
 	}
 }

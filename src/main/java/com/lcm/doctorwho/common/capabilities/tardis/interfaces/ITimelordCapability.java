@@ -1,6 +1,6 @@
-package com.lcm.doctorwho.common.capabilities.interfaces;
+package com.lcm.doctorwho.common.capabilities.tardis.interfaces;
 
-import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 

@@ -1,8 +1,8 @@
 package com.lcm.doctorwho.client.render.entity.layers;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.timelord.capability.CapabilityTimelord;
-import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import com.lcm.doctorwho.utils.ATGUtils;
 import com.lcm.doctorwho.utils.LimbManipulationUtil;
 import lucraft.mods.lucraftcore.util.helper.LCRenderHelper;
@@ -12,6 +12,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -21,7 +22,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -40,7 +43,7 @@ import java.util.ArrayList;
 	private static ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
 
 	private RenderPlayer playerRenderer;
-	static int arm_shake = 0;
+	private static int arm_shake = 0;
 
 	public RenderLayerRegeneration(RenderPlayer playerRenderer) {
 		this.playerRenderer = playerRenderer;
@@ -257,7 +260,7 @@ import java.util.ArrayList;
 		GlStateManager.popAttrib();
 	}
 
-	private void renderCone(EntityPlayer entityPlayer, float scale, float scale2, Color color) {
+	public static void renderCone(EntityPlayer entityPlayer, float scale, float scale2, Color color) {
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder vertexBuffer = tessellator.getBuffer();
 		for (int i = 0; i < 8; i++) {
@@ -293,6 +296,7 @@ import java.util.ArrayList;
 			e.getRenderer().addLayer(new RenderLayerRegeneration(e.getRenderer()));
 		}
 	}
+
 
 	public boolean shouldCombineTextures() {
 		return false;

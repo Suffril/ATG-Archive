@@ -1,6 +1,6 @@
-package com.lcm.doctorwho.common.timelord.events;
+package com.lcm.doctorwho.common.capabilities.timelord.events;
 
-import com.lcm.doctorwho.common.capabilities.interfaces.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.tardis.interfaces.ITimelordCapability;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
