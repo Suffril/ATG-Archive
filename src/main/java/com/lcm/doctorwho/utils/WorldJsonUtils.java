@@ -1,6 +1,7 @@
 package com.lcm.doctorwho.utils;
 
 import com.google.gson.*;
+import com.lcm.doctorwho.AcrossTheGalaxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
@@ -20,7 +21,9 @@ import java.util.ArrayList;
  */
 public class WorldJsonUtils {
 
-	public static void generateJson(World world, int chunkX, int chunkY, int chunkZ, String name) {
+	public static WorldJsonUtils INSTANCE = new WorldJsonUtils();
+
+	public void generateJson(World world, int chunkX, int chunkY, int chunkZ, String name) {
 		int[][][] blockArray = new int[16][16][16];
 		BlockPos origin = new BlockPos(chunkX << 4, chunkY << 4, chunkZ << 4);
 		ArrayList<JsonBlock> states = new ArrayList<>();
@@ -77,15 +80,22 @@ public class WorldJsonUtils {
 		}
 	}
 
-	public static void fromJson(World world, int chunkX, int chunkY, int chunkZ, String name) {
+	public void fromJson(World world, int chunkX, int chunkY, int chunkZ, String name, boolean loadFromResources) {
 		try {
 			BlockPos origin = new BlockPos(chunkX << 4, chunkY << 4, chunkZ << 4);
-			File dir = new File(FMLCommonHandler.instance().getSavesDirectory().getParentFile(), "json-structures");
-			dir.mkdirs();
-			File jsonFile = new File(dir, name + ".json");
-			JsonParser parser = new JsonParser();
 			ArrayList<JsonBlock> states = new ArrayList<>();
-			JsonObject object = parser.parse(new FileReader(jsonFile)).getAsJsonObject();
+
+			JsonParser parser = new JsonParser();
+			JsonObject object;
+			if(!loadFromResources){
+				File dir = new File(FMLCommonHandler.instance().getSavesDirectory().getParentFile(), "json-structures");
+				dir.mkdirs();
+				File jsonFile = new File(dir, name + ".json");
+				object = parser.parse(new FileReader(jsonFile)).getAsJsonObject();
+			} else {
+				InputStream stream = getClass().getClassLoader().getResourceAsStream("assets/" + AcrossTheGalaxy.MODID + "/chunks/" + name + ".json");
+				object = parser.parse(new BufferedReader(new InputStreamReader(stream, "UTF-8"))).getAsJsonObject();
+			}
 
 			for (JsonElement blocks : object.get("blocks").getAsJsonArray()) {
 				JsonObject resourceElement = blocks.getAsJsonObject();
@@ -93,24 +103,23 @@ public class WorldJsonUtils {
 				if (!states.contains(block))
 					states.add(block);
 			}
-			if (jsonFile.exists()) {
-				JsonArray array = object.getAsJsonArray("blockArray");
-				for (int x = 0; x < 16; x++) {
-					JsonArray array2 = array.get(x).getAsJsonArray();
-					for (int y = 0; y < 16; y++) {
-						JsonArray array3 = array2.get(y).getAsJsonArray();
-						for (int z = 0; z < 16; z++) {
-							JsonBlock b = states.get(array3.get(z).getAsInt());
-							String s = (b.domain + ":" + b.path).replace("\"", "");
-							BlockPos pos = origin.add(new BlockPos(x, y, z));
-							Block block = Block.getBlockFromName(s);
-							IBlockState state = block.getStateFromMeta(b.meta);
-							world.setBlockState(pos, state,3);
-						}
+
+			JsonArray array = object.getAsJsonArray("blockArray");
+			for (int x = 0; x < 16; x++) {
+				JsonArray array2 = array.get(x).getAsJsonArray();
+				for (int y = 0; y < 16; y++) {
+					JsonArray array3 = array2.get(y).getAsJsonArray();
+					for (int z = 0; z < 16; z++) {
+						JsonBlock b = states.get(array3.get(z).getAsInt());
+						String s = (b.domain + ":" + b.path).replace("\"", "");
+						BlockPos pos = origin.add(new BlockPos(x, y, z));
+						Block block = Block.getBlockFromName(s);
+						IBlockState state = block.getStateFromMeta(b.meta);
+						world.setBlockState(pos, state, 3);
 					}
 				}
 			}
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -132,7 +141,7 @@ public class WorldJsonUtils {
 				throw new CommandException("No arguments given", (Object[]) args);
 			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 
-			generateJson(player.world, (int) player.posX >> 4, (int) player.posY >> 4, (int) player.posZ >> 4, args[0]);
+			INSTANCE.generateJson(player.world, (int) player.posX >> 4, (int) player.posY >> 4, (int) player.posZ >> 4, args[0]);
 		}
 
 	}
@@ -154,7 +163,7 @@ public class WorldJsonUtils {
 				throw new CommandException("No arguments given", (Object[]) args);
 			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 
-			fromJson(player.world, (int) player.posX >> 4, (int) player.posY >> 4, (int) player.posZ >> 4, args[0]);
+			INSTANCE.fromJson(player.world, (int) player.posX >> 4, (int) player.posY >> 4, (int) player.posZ >> 4, args[0], false);
 		}
 
 	}

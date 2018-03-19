@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 
 public class BlockTardis extends BlockOutline {
 
-	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.6000000238418579D, 0.699999988079071D);
+	protected static final AxisAlignedBB AABB = new AxisAlignedBB(-0.25, 0, 0.1, 1.25, 3,1.25);
 
 	public BlockTardis(Material material, String name) {
 		super(material, name);
@@ -51,7 +51,7 @@ public class BlockTardis extends BlockOutline {
 			tardis.markDirty();
 			worldIn.notifyBlockUpdate(pos, state, state, 3);
 			BlockPos iPos = tardis.getInteriorDoorPos();
-			WorldJsonUtils.fromJson(tardis_dim, iPos.getX() >> 4, iPos.getY() >> 4, iPos.getZ() >> 4, "default_interior");
+			WorldJsonUtils.INSTANCE.fromJson(tardis_dim, iPos.getX() >> 4, iPos.getY() >> 4, iPos.getZ() >> 4, "default_interior", true);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class BlockTardis extends BlockOutline {
 	}
 
 	@Nullable public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return NULL_AABB;
+		return AABB;
 	}
 
 	/**
