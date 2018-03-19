@@ -32,8 +32,7 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 	public boolean doorOpen = false;
 	public BlockPos interiorPos = new BlockPos(0, 0, 0);
 
-	public TileEntityTardis() {
-	}
+	public TileEntityTardis() { }
 
 	@Override public NBTTagCompound getUpdateTag() {
 		return writeToNBT();
@@ -71,7 +70,7 @@ public class TileEntityTardis extends TileEntity implements ITickable {
 	}
 
 	public BlockPos getInteriorDoorPos() {
-		return new BlockPos((interiorPos.getX() << 4) + 8, 70, (interiorPos.getZ() << 4) + 8);
+		return new BlockPos((interiorPos.getX() << 4) + 8, 70, interiorPos.getZ() << 4);
 	}
 
 	@Override @SideOnly(Side.CLIENT) public AxisAlignedBB getRenderBoundingBox() {

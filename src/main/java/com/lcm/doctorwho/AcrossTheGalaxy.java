@@ -8,6 +8,7 @@ import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.DebugCommand;
+import com.lcm.doctorwho.utils.WorldJsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -54,6 +55,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 	@EventHandler public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new DebugCommand());
+		event.registerServerCommand(new WorldJsonUtils.GenerateJsonCommand());
+		event.registerServerCommand(new WorldJsonUtils.BuildJsonCommand());
 	}
 
 }

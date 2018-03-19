@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class FakeWorld extends WorldClient {
 
-	private static ArrayList<FakeWorld> fakeWorlds = new ArrayList<>();
+	public static ArrayList<FakeWorld> fakeWorlds = new ArrayList<>();
 
 	public static FakeWorld getFakeWorld(int dimensionID) {
 		if (fakeWorlds.stream().noneMatch(world -> world.dimensionID == dimensionID)) {

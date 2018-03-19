@@ -51,7 +51,7 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 
 		FakeWorld fakeWorld = FakeWorld.getFakeWorld(ATGConfig.tardisDIM);
 
-		EntityCamera camera = fakeWorld.getCamera(tile, new Vec3d(0.5, 1, 0.5)); //TODO get origin
+		EntityCamera camera = fakeWorld.getCamera(tile, new Vec3d(x, y, z).add(new Vec3d(0.0, 1, 0.5)));
 
 		if (camera.image != null) {
 			DynamicTexture texture = new DynamicTexture(camera.image);

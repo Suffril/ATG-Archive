@@ -20,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 @Mod.EventBusSubscriber(Side.CLIENT) public class ATGBOTIHandler {
 
+	//TODO interior doesn't render until you visit the dimension once?
 	@SubscribeEvent public static void onRenderTick(TickEvent.RenderTickEvent event) {
 
 		if (event.phase != TickEvent.Phase.END)
@@ -36,7 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 					Minecraft.getMinecraft().renderGlobal = fakeWorld.renderGlobal;
 
 					BlockPos pos = ((TileEntityTardis) tileEntity).getInteriorDoorPos();
-					EntityCamera camera = fakeWorld.getCamera((TileEntityTardis) tileEntity, new Vec3d(pos.getX(), pos.getY(), pos.getZ()).add(new Vec3d(0.5, 1, 0.5)));
+					EntityCamera camera = fakeWorld.getCamera((TileEntityTardis) tileEntity, new Vec3d(pos.getX(), pos.getY(), pos.getZ()).add(new Vec3d(0.0, 0, 0.5)));
 
 					GlStateManager.pushMatrix();
 					GlStateManager.pushAttrib();
@@ -54,11 +55,13 @@ import net.minecraftforge.fml.relauncher.Side;
 					Minecraft.getMinecraft().renderGlobal = renderGlobal;
 					Minecraft.getMinecraft().getRenderManager().setWorld(worldClient);
 
-					if (Minecraft.getMinecraft().world.getTotalWorldTime() % 200 == 0) { //TODO optimize
+					if (Minecraft.getMinecraft().world.getTotalWorldTime() % 200 == 0 || fakeWorld.getChunkFromChunkCoords(((TileEntityTardis) tileEntity).interiorPos.getX(), ((TileEntityTardis) tileEntity).interiorPos.getZ()).isEmpty()) { //TODO optimize
 						ATGNetwork.INSTANCE.sendToServer(new MessageRequestChunks(((TileEntityTardis) tileEntity).interiorPos.getX(), ((TileEntityTardis) tileEntity).interiorPos.getZ(), 2, ATGConfig.tardisDIM));
 					}
 				}
 			});
+		} else if(!FakeWorld.fakeWorlds.isEmpty()){
+			FakeWorld.fakeWorlds.clear();
 		}
 	}
 

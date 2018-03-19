@@ -4,6 +4,7 @@ import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
+import com.lcm.doctorwho.utils.WorldJsonUtils;
 import com.sun.javafx.geom.Vec2d;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -43,14 +44,14 @@ public class BlockTardis extends BlockOutline {
 		if (!worldIn.isRemote) {
 			tardis.ownerUUID = placer.getUniqueID().toString();
 
-			// TODO Generating Interior here
 			MinecraftServer server = placer.world.getMinecraftServer();
 			WorldServer tardis_dim = server.getWorld(ATGConfig.tardisDIM);
 			Vec2d chunk = TileEntityTardis.TardisWorldData.get(tardis_dim).getNewChunkCoordinates();
 			tardis.interiorPos = new BlockPos(chunk.x, 0, chunk.y);
 			tardis.markDirty();
 			worldIn.notifyBlockUpdate(pos, state, state, 3);
-			tardis_dim.setBlockState(tardis.getInteriorDoorPos().down(), ATGObjects.Blocks.creamRoundel.getDefaultState());
+			BlockPos iPos = tardis.getInteriorDoorPos();
+			WorldJsonUtils.fromJson(tardis_dim, iPos.getX() >> 4, iPos.getY() >> 4, iPos.getZ() >> 4, "default_interior");
 		}
 	}
 

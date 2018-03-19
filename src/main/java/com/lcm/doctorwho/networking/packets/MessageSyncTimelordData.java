@@ -34,19 +34,19 @@ public class MessageSyncTimelordData implements IMessage {
 	}
 
 	@Override public void fromBytes(ByteBuf buf) {
-		player = Minecraft.getMinecraft().player.world.getPlayerEntityByUUID(UUID.fromString(ByteBufUtils.readUTF8String(buf)));
-		data = ByteBufUtils.readTag(buf);
+		if(Minecraft.getMinecraft().player != null)
+			player = Minecraft.getMinecraft().player.world.getPlayerEntityByUUID(UUID.fromString(ByteBufUtils.readUTF8String(buf)));
+		if(player != null)
+			data = ByteBufUtils.readTag(buf);
 	}
 
 	public static class Handler implements IMessageHandler<MessageSyncTimelordData, IMessage> {
 
 		@Override public IMessage onMessage(MessageSyncTimelordData message, MessageContext ctx) {
 			EntityPlayer player = message.player;
-			if(!player.hasCapability(CapabilityTimelord.TIMELORD_CAP, null)) return null;
+			if(player == null || !player.hasCapability(CapabilityTimelord.TIMELORD_CAP, null)) return null;
 			ITimelordCapability handler = player.getCapability(CapabilityTimelord.TIMELORD_CAP, null);
-			Minecraft.getMinecraft().addScheduledTask(() -> {
-				handler.readNBT(message.data);
-			});
+			Minecraft.getMinecraft().addScheduledTask(() -> handler.readNBT(message.data));
 
 			return null;
 		}

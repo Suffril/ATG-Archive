@@ -161,7 +161,7 @@ public class EntityCamera extends EntityPlayerSP {
 
 		posX = origin.x + diff.x * 0.2;
 		posY = origin.y;
-		posZ = origin.z - diff.z * 0.2 - 0.1;
+		posZ = origin.z - diff.z * 0.2;
 
 		//yaw TODO fix
 
@@ -176,7 +176,7 @@ public class EntityCamera extends EntityPlayerSP {
 		if (angleDeg <= 0)
 			angleDeg = 360 + angleDeg;
 
-		angleDeg = 90 - (angleDeg - 90);
+		angleDeg = 90 - (angleDeg);
 
 		rotationYaw = (float) angleDeg;
 
