@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntity1963Chair extends TileEntity {
 
 	@Override @SideOnly(Side.CLIENT) public AxisAlignedBB getRenderBoundingBox() {
-		return super.getRenderBoundingBox().grow(8, 8, 8);
+		return super.getRenderBoundingBox().grow(4, 4, 4);
 	}
 
 }
