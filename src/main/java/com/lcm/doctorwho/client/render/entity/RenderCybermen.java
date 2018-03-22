@@ -13,9 +13,6 @@ import javax.annotation.Nullable;
 
 public class RenderCybermen extends RenderLiving<EntityCybermen> {
 
-
-	TileEntityHopper
-
 	public RenderCybermen(RenderManager manager, ModelBase modelbaseIn) {
 		super(manager, modelbaseIn, 1.0F);
 	}

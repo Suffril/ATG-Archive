@@ -26,6 +26,7 @@ import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -160,9 +161,12 @@ import java.util.Arrays;
 		public static Item eleventhDocSonic = new ItemSonic("sonic_eleventh_doc", SoundEvents.regeneration).setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static Item firstDocCane = new ItemOutline("cane_first_doc").setCreativeTab(ATGTabs.TABS_ITEMS_SONICS);
 		public static Item chameleonArch = new ItemChameleonArch();
-		public static Item fez = new ItemClothingOutline("fez", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);// .setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
-		public static Item firstDocHat = new ItemClothingOutline("firstDocHat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD);// .setCreativeTab(ATGTabs.TABS_ITEMS_CLOTHING);
+
+		//To-Do Make a working tab for clothing, using misc in the meantime
+		public static Item fez = new ItemClothingOutline("fez", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD).setCreativeTab(CreativeTabs.MISC);
+		public static Item firstDocHat = new ItemClothingOutline("firstDocHat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD).setCreativeTab(CreativeTabs.MISC);
 		public static Item thirtenthDocCoat = new ItemClothingOutline("thirtenthDocCoat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.CHEST);
+		public static Item fourthDocHat = new ItemClothingOutline("fourthDocHat", ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.HEAD).setCreativeTab(CreativeTabs.MISC);
 	}
 
 	public static class SoundEvents {

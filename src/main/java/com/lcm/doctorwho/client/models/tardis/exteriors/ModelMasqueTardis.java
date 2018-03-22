@@ -2,6 +2,7 @@ package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -1444,20 +1445,7 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 	@Override public void renderLamp(float scale) {
 
 		GlStateManager.pushMatrix();
-
-		LampBase.render(scale);
-
-		if (isLampOn()) {
-			GlStateManager.enableAlpha();
-			GlStateManager.enableBlend();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
-			int bright = 0xF0;
-			int brightX = bright % 65536;
-			int brightY = bright / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
-		}
-
+		RenderTileTardis.calculateLight();
 		LampGlow1.render(scale);
 		LampGlow2.render(scale);
 		LampGlow3.render(scale);
@@ -1477,10 +1465,6 @@ public class ModelMasqueTardis extends ModelBase implements ITardisModel {
 		LampGlow17.render(scale);
 		LampGlow18.render(scale);
 		LampGlow19.render(scale);
-
-		GlStateManager.disableAlpha();
-		GlStateManager.disableBlend();
-
 		GlStateManager.popMatrix();
 	}
 

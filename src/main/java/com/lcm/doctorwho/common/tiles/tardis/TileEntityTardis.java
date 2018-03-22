@@ -77,7 +77,7 @@ public class TileEntityTardis extends TileEntity implements ITickable, ICameraIn
 	}
 
 	@Override @SideOnly(Side.CLIENT) public AxisAlignedBB getRenderBoundingBox() {
-		return super.getRenderBoundingBox().grow(8, 8, 8);
+		return super.getRenderBoundingBox().grow(4, 4, 4);
 	}
 
 	@Override public void update() {

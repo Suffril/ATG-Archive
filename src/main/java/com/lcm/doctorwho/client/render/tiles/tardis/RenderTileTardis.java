@@ -9,6 +9,7 @@ import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -39,8 +40,6 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GlStateManager.rotate(180, 0.0F, 0.0F, 1.0F);
 		MODEL.setDoorOpen(tile.doorOpen);
-		MODEL.setLampOn(new Random().nextBoolean());
-
 		if (MODEL.getTexture() != null) {
 			ATGUtils.bindTexture(MODEL.getTexture());
 		}
@@ -48,6 +47,7 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 		MODEL.renderAll(0.0625f);
 		GlStateManager.popMatrix();
 
+		if(tile.doorOpen) {
 		FakeWorld fakeWorld = FakeWorld.getFakeWorld(ATGConfig.tardisDIM);
 
 		EntityCamera camera = fakeWorld.getCamera(tile);
@@ -77,6 +77,28 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 			GlStateManager.popMatrix();
 
 			camera.deleteTexture(new Vec3d(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ()));
+			}
+		}
+	}
+
+	public static void calculateLight()
+	{
+		float timer = System.nanoTime() / 1000000000l;
+
+		if (timer % 2 == 0) {
+			GlStateManager.pushMatrix();
+			GlStateManager.enableAlpha();
+			GlStateManager.enableBlend();
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
+			int bright = 0xF0;
+			int brightX = bright % 65536;
+			int brightY = bright / 65536;
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 0x0, 0xf0);
+			GlStateManager.disableAlpha();
+			GlStateManager.disableBlend();
+			GlStateManager.popMatrix();
 		}
 	}
 

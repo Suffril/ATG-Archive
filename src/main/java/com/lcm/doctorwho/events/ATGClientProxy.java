@@ -1,21 +1,25 @@
 package com.lcm.doctorwho.events;
 
 import com.lcm.doctorwho.client.gui.GuiRegenCustomizer;
+import com.lcm.doctorwho.client.models.clothing.canon.body.Model13thCoatSteve;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFez;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFirstDocHat;
+import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFourthDoctorHat;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelHartnellTardis;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelMasqueTardis;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelPertweeTARDIS;
-import com.lcm.doctorwho.client.models.tardis.exteriors.ModelTTCapsuleHellbent;
+import com.lcm.doctorwho.client.models.tardis.decoration.Model1963ChairSmall;
+import com.lcm.doctorwho.client.models.tardis.decoration.Model1963Rotor;
+import com.lcm.doctorwho.client.models.tardis.exteriors.*;
 import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
+import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileBase;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileInteriorDoor;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.capabilities.timelord.TimelordClientEventHandler;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
+import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 import net.minecraft.client.model.ModelBiped;
@@ -43,7 +47,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
 	public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
 
-	private ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
+	private ArrayList<EntityPlayer> LAYERED_PLAYERS = new ArrayList<>();
 
 	@Override public void preInit(FMLPreInitializationEvent ev) {
 		RenderMobsInit.init();
@@ -71,8 +75,8 @@ public class ATGClientProxy extends ATGCommonProxy {
 	}
 
 	@SubscribeEvent public void onRenderPlayerPost(RenderPlayerEvent.Post e) {
-		if (!layersAddedTo.contains(e.getEntityPlayer())) {
-			layersAddedTo.add(e.getEntityPlayer());
+		if (!LAYERED_PLAYERS.contains(e.getEntityPlayer())) {
+			LAYERED_PLAYERS.add(e.getEntityPlayer());
 			e.getRenderer().addLayer(new RenderLayerHat());
 		}
 	}
@@ -83,17 +87,23 @@ public class ATGClientProxy extends ATGCommonProxy {
 		TARDIS_MODELS.put(1, new ModelHartnellTardis());
 		TARDIS_MODELS.put(2, new ModelPertweeTARDIS());
 		TARDIS_MODELS.put(3, new ModelMasqueTardis());
+        TARDIS_MODELS.put(4, new ModelDavisonTardis());
+        TARDIS_MODELS.put(5, new ModelMovie1998Tardis());
 	}
 
 	@SideOnly(Side.CLIENT) private static void setupClothingModels() {
 		CLOTHING.clear();
 		CLOTHING.put(ATGObjects.Items.fez, new ModelFez());
 		CLOTHING.put(ATGObjects.Items.firstDocHat, new ModelFirstDocHat());
+		CLOTHING.put(ATGObjects.Items.fourthDocHat, new ModelFourthDoctorHat());
+		CLOTHING.put(ATGObjects.Items.thirtenthDocCoat, new Model13thCoatSteve());
 	}
 
 	@SideOnly(Side.CLIENT) private static void setupTileRendering() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInteriorDoor.class, new RenderTileInteriorDoor());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Rotor.class, new RenderTileBase(new Model1963Rotor()));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Chair.class, new RenderTileBase(new Model1963ChairSmall()));
 	}
 
 }

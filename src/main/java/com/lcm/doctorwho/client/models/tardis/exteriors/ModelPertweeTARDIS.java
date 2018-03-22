@@ -2,6 +2,7 @@ package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -1400,10 +1401,6 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		PS18.render(scale);
 		PS19.render(scale);
 		PS20.render(scale);
-	}
-
-	@Override public void renderLamp(float scale) {
-		GlStateManager.pushMatrix();
 
 		GlStateManager.translate(0, 0.1, 0);
 		GlStateManager.scale(0.95F, 0.95F, 0.95F);
@@ -1414,17 +1411,11 @@ public class ModelPertweeTARDIS extends ModelBase implements ITardisModel {
 		LT3.render(scale);
 		LT4.render(scale);
 
-		if (isLampOn()) {
-			GlStateManager.enableAlpha();
-			GlStateManager.enableBlend();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
-			int bright = 0xF0;
-			int brightX = bright % 65536;
-			int brightY = bright / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
-		}
+	}
 
+	@Override public void renderLamp(float scale) {
+		GlStateManager.pushMatrix();
+		RenderTileTardis.calculateLight();
 		LAMPGLOW.render(scale);
 		GlStateManager.popMatrix();
 

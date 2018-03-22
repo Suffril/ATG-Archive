@@ -2,6 +2,7 @@ package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class ModelHartnellTardis extends ModelBase implements ITardisModel
 
@@ -1478,35 +1480,19 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		W40.render(scale);
 		W41.render(scale);
 		W42.render(scale);
+
+		//Lamp outline
+        L1.render(scale);
+        L2.render(scale);
+        L3.render(scale);
+        L4.render(scale);
+        L7.render(scale);
+        L5.render(scale);
 	}
 
 	@Override public void renderLamp(float scale) {
-		GlStateManager.pushMatrix();
-
-		L1.render(scale);
-		L2.render(scale);
-		L3.render(scale);
-		L4.render(scale);
-		L7.render(scale);
-		L5.render(scale);
-
-		if (isLampOn()) {
-			GlStateManager.enableAlpha();
-			GlStateManager.enableBlend();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
-			int bright = 0xF0;
-			int brightX = bright % 65536;
-			int brightY = bright / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, brightX, brightY);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1F);
-		}
-
+		RenderTileTardis.calculateLight();
 		L6.render(scale);
-
-		GlStateManager.disableAlpha();
-		GlStateManager.disableBlend();
-
-		GlStateManager.popMatrix();
 	}
 
 	@Override public void renderText(float scale) {
@@ -1521,15 +1507,15 @@ public class ModelHartnellTardis extends ModelBase implements ITardisModel
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(0.95F, 0.95F, 0.95F);
 		GlStateManager.translate(0, 0.1, 0);
-		renderLamp(scale);
 		RenderHelper.enableStandardItemLighting();
 		renderRightDoor(scale);
 		renderShell(scale);
 		renderText(scale);
 		other(scale);
 		renderLeftDoor(scale);
-
-		GlStateManager.popMatrix();
+		RenderHelper.disableStandardItemLighting();
+        renderLamp(scale);
+        GlStateManager.popMatrix();
 	}
 
 	@Override public boolean isDoorOpen() {
