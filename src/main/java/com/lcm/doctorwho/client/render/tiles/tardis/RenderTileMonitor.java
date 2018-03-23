@@ -2,8 +2,10 @@ package com.lcm.doctorwho.client.render.tiles.tardis;
 
 import com.lcm.doctorwho.client.boti.EntityCamera;
 import com.lcm.doctorwho.client.boti.FakeWorld;
+import com.lcm.doctorwho.client.models.interfaces.ITileModel;
 import com.lcm.doctorwho.client.models.tardis.decoration.ModelMonitor;
-import com.lcm.doctorwho.common.tiles.tardis.TileEntityMonitor;
+import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityMonitor;
+import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityToyotaMonitor;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,7 +20,12 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileMonitor extends TileEntitySpecialRenderer<TileEntityMonitor> {
 
-	public static ModelMonitor model = new ModelMonitor();
+	public ITileModel model = new ModelMonitor();
+
+	public RenderTileMonitor (ITileModel model)
+	{
+		this.model = model;
+	}
 
 	@Override public void render(TileEntityMonitor tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		GlStateManager.pushMatrix();
@@ -31,6 +38,13 @@ public class RenderTileMonitor extends TileEntitySpecialRenderer<TileEntityMonit
 
 		EntityCamera camera = fakeWorld.getCamera(tile);
 		GlStateManager.rotate(180f, 0, 1f, 0f);
+
+		if(tile instanceof TileEntityToyotaMonitor)
+		{
+		    //TODO Further position this properly
+		    GlStateManager.translate(0,-0.02, 0.1);
+        }
+
 		if (camera != null && camera.image != null) {
 			camera.bindTexture();
 

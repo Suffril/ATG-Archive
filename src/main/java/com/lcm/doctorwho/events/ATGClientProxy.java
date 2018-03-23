@@ -8,6 +8,8 @@ import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFourthDoctorHat;
 import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
 import com.lcm.doctorwho.client.models.tardis.decoration.Model1963ChairSmall;
 import com.lcm.doctorwho.client.models.tardis.decoration.Model1963Rotor;
+import com.lcm.doctorwho.client.models.tardis.decoration.ModelMonitor;
+import com.lcm.doctorwho.client.models.tardis.decoration.ModelMonitorToyota;
 import com.lcm.doctorwho.client.models.tardis.exteriors.*;
 import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
@@ -18,20 +20,24 @@ import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.capabilities.timelord.TimelordClientEventHandler;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
-import com.lcm.doctorwho.common.tiles.tardis.TileEntityMonitor;
+import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityMonitor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityToyotaMonitor;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -49,13 +55,14 @@ public class ATGClientProxy extends ATGCommonProxy {
 	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
 	public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
 
-	private ArrayList<EntityPlayer> LAYERED_PLAYERS = new ArrayList<>();
+    private ArrayList<EntityPlayer> LAYERED_PLAYERS = new ArrayList<>();
 
 	@Override public void preInit(FMLPreInitializationEvent ev) {
 		RenderMobsInit.init();
 	}
 
 	@Override public void init(FMLInitializationEvent event) {
+	    setupATGMusicTypes();
 		super.init(event);
 		MinecraftForge.EVENT_BUS.register(new TimelordClientEventHandler());
 	}
@@ -67,7 +74,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 		ClientCommandHandler.instance.registerCommand(new GuiRegenCustomizer.CustomizeCommand());
 	}
 
-	@SubscribeEvent public void renderAngels(RenderLivingEvent.Post<EntityWeepingAngel> e) {
+	@SubscribeEvent public static void renderAngels(RenderLivingEvent.Post<EntityWeepingAngel> e) {
 		EntityLivingBase entity = e.getEntity();
 		if (entity instanceof EntityWeepingAngel) {
 			EntityWeepingAngel angel = (EntityWeepingAngel) entity;
@@ -104,9 +111,13 @@ public class ATGClientProxy extends ATGCommonProxy {
 	@SideOnly(Side.CLIENT) private static void setupTileRendering() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInteriorDoor.class, new RenderTileInteriorDoor());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMonitor.class, new RenderTileMonitor());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMonitor.class, new RenderTileMonitor(new ModelMonitor()));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityToyotaMonitor.class, new RenderTileMonitor(new ModelMonitorToyota()));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Rotor.class, new RenderTileBase(new Model1963Rotor()));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Chair.class, new RenderTileBase(new Model1963ChairSmall()));
 	}
 
+    @SideOnly(Side.CLIENT) private static void setupATGMusicTypes() {
+       EnumHelperClient.addMusicType("TARDIS_HUM", ATGObjects.SoundEvents.interiorHum, 0, 49);
+    }
 }

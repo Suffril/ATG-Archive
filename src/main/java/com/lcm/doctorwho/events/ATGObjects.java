@@ -16,8 +16,9 @@ import com.lcm.doctorwho.common.items.outlines.ItemClothingOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemOutline;
 import com.lcm.doctorwho.common.items.outlines.ItemSonic;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
-import com.lcm.doctorwho.common.tiles.tardis.TileEntityMonitor;
+import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityMonitor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
+import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityToyotaMonitor;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.common.traits.negative.*;
@@ -26,6 +27,7 @@ import com.lcm.doctorwho.utils.ATGUtils;
 import lucraft.mods.lucraftcore.superpowers.abilities.Ability;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -64,6 +66,7 @@ import java.util.Arrays;
 		GameRegistry.registerTileEntity(TileEntity1963Rotor.class, AcrossTheGalaxy.MODID + ":1963rotor");
 		GameRegistry.registerTileEntity(TileEntity1963Chair.class, AcrossTheGalaxy.MODID + ":1963chair");
 		GameRegistry.registerTileEntity(TileEntityMonitor.class, AcrossTheGalaxy.MODID + ":monitor");
+		GameRegistry.registerTileEntity(TileEntityToyotaMonitor.class, AcrossTheGalaxy.MODID + ":toyota_monitor");
 	}
 
 	public static class EntityEntries { // NO_UCD (unused code)
@@ -90,6 +93,7 @@ import java.util.Arrays;
 		public static final SoundEvent timeyWimey = new ATGUtils.ATGSoundEvent("timey_wimey");
 		public static final SoundEvent tardis_pb_open = new ATGUtils.ATGSoundEvent("tardis_pb_open");
 		public static final SoundEvent tardis_pb_close = new ATGUtils.ATGSoundEvent("tardis_pb_close");
+	    public static final SoundEvent interiorHum = new ATGUtils.ATGSoundEvent("interior_hum");
 	}
 
 	public static class AbilityEntries { // NO_UCD (unused code)
@@ -218,7 +222,7 @@ import java.util.Arrays;
 		public static final Block tardis = new BlockTardis(Material.CORAL, "tardis").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		public static final Block interiorDoor = new BlockInteriorDoor(Material.CORAL, "interior_door");
 
-		public static final Block monitor = new BlockMonitor().setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
+		public static final Block monitor = new BlockMonitor("monitor", TileEntityMonitor.class).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 		// Troughton - Fault Locator
 		public static final Block tro_fault_1 = new BlockOutline(Material.CORAL, "tro_fault_1").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 		public static final Block tro_fault_2 = new BlockOutline(Material.CORAL, "tro_fault_2").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
@@ -261,6 +265,8 @@ import java.util.Arrays;
 		public static final Block ha_tro_cons = new BlockOutline(Material.CORAL, "ha_tro_cons").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 		public static final Block ha_tro_floor = new BlockOutline(Material.CORAL, "ha_tro_floor").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 		public static final Block ha_tro_roof = new BlockOutline(Material.CORAL, "ha_tro_roof").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+
+		public static final Block toyotaMonitor = new BlockMonitor("toyota_monitor", TileEntityToyotaMonitor.class).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS);
 
 	}
 

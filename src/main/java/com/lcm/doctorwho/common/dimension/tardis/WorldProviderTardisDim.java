@@ -1,12 +1,16 @@
 package com.lcm.doctorwho.common.dimension.tardis;
 
 import com.lcm.doctorwho.common.dimension.ATGDims;
+import com.lcm.doctorwho.events.ATGClientProxy;
+import com.lcm.doctorwho.events.ATGObjects;
 import lucraft.mods.lucraftcore.space.dimension.ChunkGeneratorSpace;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -89,4 +93,17 @@ public class WorldProviderTardisDim extends WorldProvider {
 	@SideOnly(Side.CLIENT) @Nullable @Override public IRenderHandler getSkyRenderer() {
 		return null;
 	}
+
+    /**
+     * Called on the client to get the music type to play when in this world type.
+     * At the time of calling, the client player and world are guaranteed to be non-null
+     * @return null to use vanilla logic, otherwise a MusicType to play in this world
+     */
+    @Nullable
+    @SideOnly(Side.CLIENT)
+    public net.minecraft.client.audio.MusicTicker.MusicType getMusicType()
+    {
+        return MusicTicker.MusicType.valueOf("TARDIS_HUM");
+    }
+
 }

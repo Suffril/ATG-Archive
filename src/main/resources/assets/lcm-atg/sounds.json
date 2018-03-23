@@ -19,6 +19,16 @@
       }
     ]
   },
+    "interior_hum": {
+    "category": "master",
+    "subtitle": "lcm-atg.subtitles.interior_hum",
+    "sounds": [
+      {
+        "name": "lcm-atg:tardis/hum/interior_hum",
+        "stream": true
+      }
+    ]
+  },
   "tardis_pb_open": {
     "category": "master",
     "subtitle": "lcm-atg.subtitles.tardis_pb_open",

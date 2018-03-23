@@ -1,4 +1,4 @@
-package com.lcm.doctorwho.common.tiles.tardis;
+package com.lcm.doctorwho.common.tiles.tardis.monitors;
 
 import com.lcm.doctorwho.client.boti.EntityCamera;
 import com.lcm.doctorwho.client.boti.FakeWorld;
