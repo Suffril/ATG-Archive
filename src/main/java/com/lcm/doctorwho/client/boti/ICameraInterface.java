@@ -1,6 +1,7 @@
 package com.lcm.doctorwho.client.boti;
 
 import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
+import com.sun.javafx.geom.Vec2d;
 import net.minecraft.util.math.Vec3d;
 
 /**
@@ -19,5 +20,9 @@ public interface ICameraInterface {
 	boolean isChunkEmpty(FakeWorld world);
 
 	Vec3d getCameraSpawnPos();
+
+	void setupOffset(EntityCamera camera, Vec3d tilePos);
+
+	Vec2d getResolution();
 
 }

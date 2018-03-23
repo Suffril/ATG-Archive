@@ -1,7 +1,9 @@
 package com.lcm.doctorwho;
 
-import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
+import com.lcm.doctorwho.common.capabilities.tardis.capability.CapabilityTardisChunk;
+import com.lcm.doctorwho.common.capabilities.tardis.capability.ITardisChunkCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
 import com.lcm.doctorwho.common.dimension.ATGDims;
 import com.lcm.doctorwho.events.ATGCommonProxy;
 import com.lcm.doctorwho.events.ATGObjects;
@@ -44,7 +46,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 		ATGNetwork.init();
 		MinecraftForge.EVENT_BUS.register(proxy);
 		CapabilityManager.INSTANCE.register(ITimelordCapability.class, new CapabilityTimelord.Storage(), CapabilityTimelord.class);
-
+		CapabilityManager.INSTANCE.register(ITardisChunkCapability.class, new CapabilityTardisChunk.Storage(), CapabilityTardisChunk.class);
 		proxy.init(event);
 		ATGDims.dimSetup();
 	}

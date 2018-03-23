@@ -1,8 +1,8 @@
 package com.lcm.doctorwho.common.capabilities.timelord;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.capability.CapabilityTimelord;
+import com.lcm.doctorwho.common.capabilities.timelord.capability.ITimelordCapability;
 import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationEvent;
 import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationFinishEvent;
 import com.lcm.doctorwho.common.capabilities.timelord.events.RegenerationStartEvent;

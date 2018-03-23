@@ -1,6 +1,7 @@
 package com.lcm.doctorwho.common.blocks;
 
-import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
+import com.lcm.doctorwho.common.capabilities.tardis.capability.CapabilityTardisChunk;
+import com.lcm.doctorwho.common.capabilities.tardis.capability.ITardisChunkCapability;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGObjects;
 import com.lcm.doctorwho.utils.ATGConfig;
@@ -55,13 +56,11 @@ public class BlockTardis extends BlockOutline {
 			WorldJsonUtils.INSTANCE.fromJson(tardis_dim, iPos.getX() >> 4, iPos.getY() >> 4, iPos.getZ() >> 4, "default_interior", true);
 
 			tardis_dim.setBlockState(iPos, ATGObjects.Blocks.interiorDoor.getDefaultState());
-			TileEntityInteriorDoor interiorDoor = (TileEntityInteriorDoor) tardis_dim.getTileEntity(iPos);
 
-			interiorDoor.exteriorDim = worldIn.provider.getDimension();
-			interiorDoor.exteriorPos = pos;
-			interiorDoor.markDirty();
-			tardis_dim.notifyBlockUpdate(iPos, state, state, 3);
-
+			ITardisChunkCapability c = CapabilityTardisChunk.getTardisChunkCapability(tardis_dim, iPos);
+			c.setExteriorDim(worldIn.provider.getDimension());
+			c.setExteriorPos(pos);
+			c.syncToAll();
 		}
 	}
 

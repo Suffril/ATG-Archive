@@ -16,8 +16,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
-
 public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis> {
 
 	private ITardisModel MODEL = null;
@@ -52,7 +50,7 @@ public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis
 
 		EntityCamera camera = fakeWorld.getCamera(tile);
 
-		if (camera.image != null) {
+			if (camera != null && camera.image != null) {
 			camera.bindTexture();
 
 			GlStateManager.pushMatrix();

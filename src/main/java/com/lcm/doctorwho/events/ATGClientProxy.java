@@ -13,10 +13,12 @@ import com.lcm.doctorwho.client.render.RenderMobsInit;
 import com.lcm.doctorwho.client.render.entity.layers.RenderLayerHat;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileBase;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileInteriorDoor;
+import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileMonitor;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.common.capabilities.timelord.TimelordClientEventHandler;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityInteriorDoor;
+import com.lcm.doctorwho.common.tiles.tardis.TileEntityMonitor;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
@@ -102,6 +104,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 	@SideOnly(Side.CLIENT) private static void setupTileRendering() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInteriorDoor.class, new RenderTileInteriorDoor());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMonitor.class, new RenderTileMonitor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Rotor.class, new RenderTileBase(new Model1963Rotor()));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Chair.class, new RenderTileBase(new Model1963ChairSmall()));
 	}

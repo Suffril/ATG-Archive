@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.Side;
 					FakeWorld fakeWorld = FakeWorld.getFakeWorld(((ICameraInterface) tileEntity).getRenderDimension());
 
 					EntityCamera camera = fakeWorld.getCamera((ICameraInterface) tileEntity);
-					if (camera.image != null)
+					if (camera == null || camera.image != null)
 						return; //Rendering over an image that hasn't been shown yet is a waste
 
 					Minecraft.getMinecraft().world = fakeWorld;
@@ -41,7 +41,7 @@ import net.minecraftforge.fml.relauncher.Side;
 					GlStateManager.pushMatrix();
 					GlStateManager.pushAttrib();
 					rendering = true;
-					camera.renderWorldToTexture(tileEntity, new Vec3d(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()), event.renderTickTime);
+					camera.renderWorldToTexture((ICameraInterface) tileEntity, ((ICameraInterface) tileEntity).getResolution(), new Vec3d(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ()), event.renderTickTime);
 					rendering = false;
 					GlStateManager.popAttrib();
 					GlStateManager.popMatrix();

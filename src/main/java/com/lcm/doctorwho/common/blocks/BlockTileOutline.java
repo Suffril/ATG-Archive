@@ -45,9 +45,7 @@ public class BlockTileOutline extends BlockContainer implements ITileEntityProvi
 	@Nullable @Override public TileEntity createNewTileEntity(World worldIn, int meta) {
 		try {
 			return tileEntity.newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 

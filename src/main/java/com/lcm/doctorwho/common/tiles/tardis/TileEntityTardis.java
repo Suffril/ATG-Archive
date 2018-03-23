@@ -1,5 +1,6 @@
 package com.lcm.doctorwho.common.tiles.tardis;
 
+import com.lcm.doctorwho.client.boti.EntityCamera;
 import com.lcm.doctorwho.client.boti.FakeWorld;
 import com.lcm.doctorwho.client.boti.ICameraInterface;
 import com.lcm.doctorwho.networking.ATGNetwork;
@@ -7,7 +8,9 @@ import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
 import com.lcm.doctorwho.utils.ATGConfig;
 import com.lcm.doctorwho.utils.ATGTeleporter;
 import com.sun.javafx.geom.Vec2d;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -109,6 +112,60 @@ public class TileEntityTardis extends TileEntity implements ITickable, ICameraIn
 	@Override public Vec3d getCameraSpawnPos() {
 		BlockPos cameraPos = getInteriorDoorPos();
 		return new Vec3d(cameraPos.getX(), cameraPos.getY(), cameraPos.getZ() + 0.5);
+	}
+
+	@Override public void setupOffset(EntityCamera camera, Vec3d tilePos) {
+		EntityPlayer player = Minecraft.getMinecraft().player;
+
+		Vec3d pVec = new Vec3d(player.posX, player.posY, player.posZ);
+		Vec3d tVec = new Vec3d(tilePos.x + 0.5, tilePos.y + 0.5, tilePos.z + 0.5);
+
+		Vec3d ref = pVec.add(new Vec3d(0, 0, 100));
+		Vec3d diff = ref.subtract(tVec);
+
+		Vec3d projVec = camera.origin.add(diff);
+
+		diff = pVec.subtract(tVec);
+		tVec = camera.origin.add(diff.scale(0.2));
+
+		camera.posX = camera.origin.x + diff.x * 0.2;
+		camera.posY = camera.origin.y;
+		camera.posZ = camera.origin.z - diff.z * 0.2;
+
+		//yaw TODO fix
+
+		double x1 = tVec.x;
+		double z1 = tVec.z;
+
+		double x2 = projVec.x;
+		double z2 = projVec.z;
+
+		double angleDeg = Math.atan2(z2 - z1, x2 - x1) * 180 / Math.PI;
+
+		if (angleDeg <= 0)
+			angleDeg = 360 + angleDeg;
+
+		angleDeg = 90 - (angleDeg);
+
+		camera.rotationYaw = (float) angleDeg;
+
+		//pitch TODO
+		//
+		//		x1 = tVec.y;
+		//		z1 = tVec.z;
+		//
+		//		x2 = tVec.y;
+		//		z2 = projVec.z;
+		//
+		//		angleDeg = Math.atan2(z2 - z1, x2 - x1) * 180 / Math.PI;
+		//
+		//		if (angleDeg <= 0)
+		//			angleDeg = 360 + angleDeg;
+		//		rotationPitch = 0f;
+	}
+
+	@Override public Vec2d getResolution() {
+		return new Vec2d(500, 500);
 	}
 
 	public static class TardisWorldData extends WorldSavedData {

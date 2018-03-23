@@ -30,6 +30,8 @@ public class FakeWorld extends WorldClient {
 
 	public EntityCamera getCamera(ICameraInterface viewer) {
 		Vec3d pos = viewer.getCameraSpawnPos();
+		if (pos == null)
+			return null;
 		int entityID = viewer.getCameraID();
 		Entity[] entities = loadedEntityList.stream().filter(entity -> entity instanceof EntityCamera && entity.getEntityId() == entityID).toArray(Entity[]::new);
 		if (entities.length == 0) {

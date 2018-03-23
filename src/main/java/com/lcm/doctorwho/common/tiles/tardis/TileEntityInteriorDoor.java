@@ -1,18 +1,23 @@
 package com.lcm.doctorwho.common.tiles.tardis;
 
+import com.lcm.doctorwho.client.boti.EntityCamera;
 import com.lcm.doctorwho.client.boti.FakeWorld;
 import com.lcm.doctorwho.client.boti.ICameraInterface;
+import com.lcm.doctorwho.common.capabilities.tardis.capability.CapabilityTardisChunk;
+import com.lcm.doctorwho.common.capabilities.tardis.capability.ITardisChunkCapability;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageRequestChunks;
 import com.lcm.doctorwho.utils.ATGTeleporter;
+import com.sun.javafx.geom.Vec2d;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class TileEntityInteriorDoor extends TileEntity implements ITickable, ICameraInterface {
@@ -23,8 +28,6 @@ public class TileEntityInteriorDoor extends TileEntity implements ITickable, ICa
 
 	public int modelID;
 	public boolean doorOpen = false;
-	public int exteriorDim;
-	public BlockPos exteriorPos = new BlockPos(0, 0, 0);
 
 	public TileEntityInteriorDoor() { }
 
@@ -38,24 +41,20 @@ public class TileEntityInteriorDoor extends TileEntity implements ITickable, ICa
 
 	@Override public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
 		readFromNBT(pkt.getNbtCompound());
-		ATGNetwork.INSTANCE.sendToServer(new MessageRequestChunks(exteriorPos.getX() >> 4, exteriorPos.getZ() >> 4, 5, exteriorDim));
+		ITardisChunkCapability c = CapabilityTardisChunk.getTardisChunkCapability(world, pos);
+		if (c != null && c.getExteriorPos() != null)
+			ATGNetwork.INSTANCE.sendToServer(new MessageRequestChunks(c.getExteriorPos().getX() >> 4, c.getExteriorPos().getZ() >> 4, 5, c.getExteriorDim()));
 	}
 
 	@Override public void readFromNBT(NBTTagCompound nbt) {
 		modelID = nbt.getInteger("modelID");
 		doorOpen = nbt.getBoolean("doorOpen");
-		exteriorPos = new BlockPos(nbt.getInteger("exteriorX"), nbt.getInteger("exteriorY"), nbt.getInteger("exteriorZ"));
-		exteriorDim = nbt.getInteger("exteriorDim");
 		super.readFromNBT(nbt);
 	}
 
 	@Override public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		tag.setInteger("modelID", modelID);
 		tag.setBoolean("doorOpen", doorOpen);
-		tag.setInteger("exteriorX", exteriorPos.getX());
-		tag.setInteger("exteriorY", exteriorPos.getY());
-		tag.setInteger("exteriorZ", exteriorPos.getZ());
-		tag.setInteger("exteriorDim", exteriorDim);
 		super.writeToNBT(tag);
 		return tag;
 	}
@@ -65,9 +64,10 @@ public class TileEntityInteriorDoor extends TileEntity implements ITickable, ICa
 	}
 
 	@Override public void update() {
-		if (!world.isRemote)
+		ITardisChunkCapability c = CapabilityTardisChunk.getTardisChunkCapability(world, pos);
+		if (!world.isRemote && c != null && c.getExteriorPos() != null)
 			for (Entity e : world.getEntitiesWithinAABB(Entity.class, tardis_exit_AABB.offset(getPos())))
-				ATGTeleporter.changeDim(e, exteriorDim, exteriorPos.north());
+				ATGTeleporter.changeDim(e, c.getExteriorDim(), c.getExteriorPos().north());
 	}
 
 	@Override public int getCameraID() {
@@ -79,18 +79,78 @@ public class TileEntityInteriorDoor extends TileEntity implements ITickable, ICa
 	}
 
 	@Override public int getRenderDimension() {
-		return this.exteriorDim;
+		ITardisChunkCapability c = CapabilityTardisChunk.getTardisChunkCapability(world, pos);
+		return c != null ? c.getExteriorDim() : 0;
 	}
 
 	@Override public MessageRequestChunks requestChunks() {
-		return new MessageRequestChunks(exteriorPos.getX() >> 4, exteriorPos.getZ() >> 4, 2, exteriorDim);
+		ITardisChunkCapability c = CapabilityTardisChunk.getTardisChunkCapability(world, pos);
+		return new MessageRequestChunks(c.getExteriorPos().getX() >> 4, c.getExteriorPos().getZ() >> 4, 2, c.getExteriorDim());
 	}
 
 	@Override public boolean isChunkEmpty(FakeWorld fakeWorld) {
-		return fakeWorld.getChunkFromChunkCoords(exteriorPos.getX() >> 4, exteriorPos.getZ() >> 4).isEmpty();
+		ITardisChunkCapability c = CapabilityTardisChunk.getTardisChunkCapability(world, pos);
+
+		return fakeWorld.getChunkFromChunkCoords(c.getExteriorPos().getX() >> 4, c.getExteriorPos().getZ() >> 4).isEmpty();
 	}
 
 	@Override public Vec3d getCameraSpawnPos() {
-		return new Vec3d(exteriorPos.getX(), exteriorPos.getY(), exteriorPos.getZ() - 1);
+		ITardisChunkCapability c = CapabilityTardisChunk.getTardisChunkCapability(world, pos);
+
+		return (c.getExteriorPos() == null) ? null : new Vec3d(c.getExteriorPos().getX(), c.getExteriorPos().getY(), c.getExteriorPos().getZ() - 1);
+	}
+
+	@Override public void setupOffset(EntityCamera camera, Vec3d tilePos) {
+		EntityPlayer player = Minecraft.getMinecraft().player;
+
+		Vec3d pVec = new Vec3d(player.posX, player.posY, player.posZ);
+		Vec3d tVec = new Vec3d(tilePos.x + 0.5, tilePos.y + 0.5, tilePos.z + 0.5);
+
+		Vec3d ref = pVec.add(new Vec3d(0, 0, 100));
+		Vec3d diff = ref.subtract(tVec);
+
+		Vec3d projVec = camera.origin.add(diff);
+
+		diff = pVec.subtract(tVec);
+		tVec = camera.origin.add(diff.scale(0.2));
+
+		camera.posX = camera.origin.x + diff.x * 0.2;
+		camera.posY = camera.origin.y;
+		camera.posZ = camera.origin.z - diff.z * 0.2;
+
+		//yaw TODO fix
+
+		double x1 = tVec.x;
+		double z1 = tVec.z;
+
+		double x2 = projVec.x;
+		double z2 = projVec.z;
+
+		double angleDeg = Math.atan2(z2 - z1, x2 - x1) * 180 / Math.PI;
+
+		if (angleDeg <= 0)
+			angleDeg = 360 + angleDeg;
+
+		angleDeg = 90 - (angleDeg);
+
+		camera.rotationYaw = (float) angleDeg - 180;
+
+		//pitch TODO
+		//
+		//		x1 = tVec.y;
+		//		z1 = tVec.z;
+		//
+		//		x2 = tVec.y;
+		//		z2 = projVec.z;
+		//
+		//		angleDeg = Math.atan2(z2 - z1, x2 - x1) * 180 / Math.PI;
+		//
+		//		if (angleDeg <= 0)
+		//			angleDeg = 360 + angleDeg;
+		//		rotationPitch = 0f;
+	}
+
+	@Override public Vec2d getResolution() {
+		return new Vec2d(500, 500);
 	}
 }
