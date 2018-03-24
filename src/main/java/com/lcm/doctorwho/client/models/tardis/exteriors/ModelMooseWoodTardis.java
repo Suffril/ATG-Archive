@@ -1,19 +1,17 @@
 package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.models.interfaces.TardisModelOutline;
 import com.lcm.doctorwho.utils.ATGUtils;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class ModelMooseWoodTardis extends ModelBase implements ITardisModel {
+public class ModelMooseWoodTardis extends TardisModelOutline {
 
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/moose/shell.png");
 	private boolean doorOpen = false;
-	private boolean lampOn;
 
 	//IModel model = OBJLoader.INSTANCE.loadModel(new ResourceLocation(AcrossTheGalaxy.MODID, "models/obj/moose/tardis_shell.obj"));
 
@@ -1875,13 +1873,6 @@ public class ModelMooseWoodTardis extends ModelBase implements ITardisModel {
 		return false;
 	}
 
-	@Override public boolean isLampOn() {
-		return false;
-	}
-
-	@Override public void setLampOn(boolean on) {
-
-	}
 
 	@Override public void setDoorOpen(boolean open) {
 

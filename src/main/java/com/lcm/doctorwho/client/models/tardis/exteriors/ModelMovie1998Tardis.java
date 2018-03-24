@@ -1,20 +1,17 @@
 package com.lcm.doctorwho.client.models.tardis.exteriors;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.models.interfaces.TardisModelOutline;
 import com.lcm.doctorwho.client.render.tiles.tardis.RenderTileTardis;
 import com.lcm.doctorwho.utils.ATGUtils;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.ResourceLocation;
 
-public class ModelMovie1998Tardis extends ModelBase implements ITardisModel {
+public class ModelMovie1998Tardis extends TardisModelOutline {
 
-    private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_1998.png");
     private boolean doorOpen = false;
-    private boolean lampOn;
 
     ModelRenderer B1;
     ModelRenderer B2;
@@ -201,6 +198,8 @@ public class ModelMovie1998Tardis extends ModelBase implements ITardisModel {
     {
         textureWidth = 256;
         textureHeight = 256;
+
+        TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/tardis_1998.png");
 
         B1 = new ModelRenderer(this, 0, 29);
         B1.addBox(-13.5F, 22.5F, -13.5F, 27, 1, 27);
@@ -1534,14 +1533,6 @@ public class ModelMovie1998Tardis extends ModelBase implements ITardisModel {
 
     @Override public boolean isDoorOpen() {
         return doorOpen;
-    }
-
-    @Override public boolean isLampOn() {
-        return lampOn;
-    }
-
-    @Override public void setLampOn(boolean on) {
-        lampOn = on;
     }
 
     @Override public void setDoorOpen(boolean open) {

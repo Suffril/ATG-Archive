@@ -1,14 +1,13 @@
 package com.lcm.doctorwho.client.models.tardis.decoration;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.interfaces.ITileModel;
+import com.lcm.doctorwho.client.models.interfaces.TileModelOutline;
 import com.lcm.doctorwho.utils.ATGUtils;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class Model1963ChairSmall extends ModelBase implements ITileModel {
+public class Model1963ChairSmall extends TileModelOutline {
 
 	private ResourceLocation TEX = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/models/tardis/1963/1963_chair_small.png");
 	ModelRenderer MS1;
@@ -480,7 +479,8 @@ public class Model1963ChairSmall extends ModelBase implements ITileModel {
 		ATGUtils.setRotation(Sup31, 0F, 0F, 0.7853982F);
 	}
 
-	@Override public void render(float scale) {
+	@Override
+	public void render(float scale) {
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(0.90, 0.90, 0.90);
 		GlStateManager.translate(0, 0.2, 0);

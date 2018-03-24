@@ -1,16 +1,15 @@
 package com.lcm.doctorwho.client.models.tardis.decoration;
 
 import com.lcm.doctorwho.AcrossTheGalaxy;
-import com.lcm.doctorwho.client.models.interfaces.ITileModel;
+import com.lcm.doctorwho.client.models.interfaces.TileModelOutline;
 import com.lcm.doctorwho.utils.ATGUtils;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 
 /**
  * Created by Nictogen on 3/19/18.
  */
-public class ModelMonitor extends ModelBase implements ITileModel {
+public class ModelMonitor extends TileModelOutline {
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(AcrossTheGalaxy.MODID, "textures/blocks/monitor.png");
 	private ModelRenderer body;

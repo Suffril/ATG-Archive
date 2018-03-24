@@ -1,6 +1,6 @@
 package com.lcm.doctorwho.client.render.tiles.tardis;
 
-import com.lcm.doctorwho.client.models.interfaces.ITileModel;
+import com.lcm.doctorwho.client.models.interfaces.TileModelOutline;
 import com.lcm.doctorwho.utils.ATGUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -8,9 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 
 public class RenderTileBase extends TileEntitySpecialRenderer {
 
-	private ITileModel MODEL;
+	private TileModelOutline MODEL;
 
-	public RenderTileBase(ITileModel model) {
+	public RenderTileBase(TileModelOutline model) {
 		MODEL = model;
 	}
 

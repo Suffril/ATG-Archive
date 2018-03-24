@@ -2,7 +2,7 @@ package com.lcm.doctorwho.client.render.tiles.tardis;
 
 import com.lcm.doctorwho.client.boti.EntityCamera;
 import com.lcm.doctorwho.client.boti.FakeWorld;
-import com.lcm.doctorwho.client.models.interfaces.ITileModel;
+import com.lcm.doctorwho.client.models.interfaces.TileModelOutline;
 import com.lcm.doctorwho.client.models.tardis.decoration.ModelMonitor;
 import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityMonitor;
 import com.lcm.doctorwho.common.tiles.tardis.monitors.TileEntityToyotaMonitor;
@@ -20,9 +20,9 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileMonitor extends TileEntitySpecialRenderer<TileEntityMonitor> {
 
-	public ITileModel model = new ModelMonitor();
+	public TileModelOutline model = new ModelMonitor();
 
-	public RenderTileMonitor (ITileModel model)
+	public RenderTileMonitor (TileModelOutline model)
 	{
 		this.model = model;
 	}

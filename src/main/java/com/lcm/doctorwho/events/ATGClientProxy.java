@@ -5,7 +5,7 @@ import com.lcm.doctorwho.client.models.clothing.canon.body.Model13thCoatSteve;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFez;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFirstDocHat;
 import com.lcm.doctorwho.client.models.clothing.canon.hats.ModelFourthDoctorHat;
-import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.models.interfaces.TardisModelOutline;
 import com.lcm.doctorwho.client.models.tardis.decoration.Model1963ChairSmall;
 import com.lcm.doctorwho.client.models.tardis.decoration.Model1963Rotor;
 import com.lcm.doctorwho.client.models.tardis.decoration.ModelMonitor;
@@ -27,7 +27,6 @@ import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Chair;
 import com.lcm.doctorwho.common.tiles.tardis.tardis_1963.TileEntity1963Rotor;
 import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
-import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
@@ -39,7 +38,6 @@ import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -54,7 +52,7 @@ import java.util.Map;
 
 public class ATGClientProxy extends ATGCommonProxy {
 
-	public static final Map<Integer, ITardisModel> TARDIS_MODELS = new HashMap<>();
+	public static final Map<Integer, TardisModelOutline> TARDIS_MODELS = new HashMap<>();
 	public static final Map<Item, ModelBiped> CLOTHING = new HashMap<>();
 
     private ArrayList<EntityPlayer> LAYERED_PLAYERS = new ArrayList<>();
@@ -86,6 +84,7 @@ public class ATGClientProxy extends ATGCommonProxy {
 	}
 
 	@SubscribeEvent public void onRenderPlayerPost(RenderPlayerEvent.Post e) {
+
 		if (!LAYERED_PLAYERS.contains(e.getEntityPlayer())) {
 			LAYERED_PLAYERS.add(e.getEntityPlayer());
 			e.getRenderer().addLayer(new RenderLayerHat());

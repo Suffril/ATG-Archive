@@ -2,7 +2,7 @@ package com.lcm.doctorwho.client.render.tiles.tardis;
 
 import com.lcm.doctorwho.client.boti.EntityCamera;
 import com.lcm.doctorwho.client.boti.FakeWorld;
-import com.lcm.doctorwho.client.models.interfaces.ITardisModel;
+import com.lcm.doctorwho.client.models.interfaces.TardisModelOutline;
 import com.lcm.doctorwho.common.tiles.tardis.TileEntityTardis;
 import com.lcm.doctorwho.events.ATGClientProxy;
 import com.lcm.doctorwho.utils.ATGConfig;
@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderTileTardis extends TileEntitySpecialRenderer<TileEntityTardis> {
 
-	private ITardisModel MODEL = null;
+	private TardisModelOutline MODEL = null;
 
 	public RenderTileTardis() {
 
