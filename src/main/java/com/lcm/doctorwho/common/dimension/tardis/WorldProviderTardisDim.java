@@ -6,6 +6,7 @@ import com.lcm.doctorwho.events.ATGObjects;
 import lucraft.mods.lucraftcore.space.dimension.ChunkGeneratorSpace;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -22,6 +23,17 @@ public class WorldProviderTardisDim extends WorldProvider {
 	public WorldProviderTardisDim() {
 
 	}
+
+	@Override
+	public boolean isBlockHighHumidity(BlockPos pos) {
+		return false;
+	}
+
+	@Override
+	public void calculateInitialWeather() { }
+
+	@Override
+	public void updateWeather() { }
 
 	@Override public IChunkGenerator createChunkGenerator() {
 		return new ChunkGeneratorSpace(this.world);

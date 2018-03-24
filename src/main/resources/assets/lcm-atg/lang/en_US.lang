@@ -6,6 +6,9 @@ itemGroup.sonics=Sonics
 item.sonic_eleventh_doc.name=Sonic Screwdriver | §aEleventh Doctor’s
 item.cane_first_doc.name=First Doctor’s Cane
 item.fez.name=Fez
+item.fourthDocHat.name=Fourth Doctor Hat
+item.firstDocHat.name=First Doctor hat
+item.thirtenthDocCoat.name=Thirtenth Doctor coat
 
 
 //Blocks

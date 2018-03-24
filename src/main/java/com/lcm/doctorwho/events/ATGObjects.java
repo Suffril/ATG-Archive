@@ -8,6 +8,7 @@ import com.lcm.doctorwho.client.render.item.RenderItemFobwatch;
 import com.lcm.doctorwho.client.render.item.RenderItemModelBase;
 import com.lcm.doctorwho.common.ATGTabs;
 import com.lcm.doctorwho.common.blocks.*;
+import com.lcm.doctorwho.common.entity.EntityMountable;
 import com.lcm.doctorwho.common.entity.hostile.EntityCybermen;
 import com.lcm.doctorwho.common.entity.hostile.EntityWeepingAngel;
 import com.lcm.doctorwho.common.entity.projectile.EntityProjectile;
@@ -74,6 +75,7 @@ import java.util.Arrays;
 		public static final EntityEntry laser = EntityEntryBuilder.create().entity(EntityProjectile.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "laser"), 1).name("laser").tracker(80, 3, true).build();
 		public static final EntityEntry cyberMan = EntityEntryBuilder.create().entity(EntityCybermen.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "cybermen"), 2).egg(1, 0).name("cybermen").tracker(80, 3, false).build();
 		public static final EntityEntry camera = EntityEntryBuilder.create().entity(EntityCamera.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "camera"), 3).name("camera").build();
+		public static final EntityEntry mountable = EntityEntryBuilder.create().entity(EntityMountable.class).id(new ResourceLocation(AcrossTheGalaxy.MODID, "mountable"), 4).name("mountable").tracker(80, 3, false).build();
 	}
 
 	public static class Items {
@@ -260,7 +262,7 @@ import java.util.Arrays;
 
 		public static final Block rotor1963 = new BlockTileOutline(Material.CORAL, "rotor1963", TileEntity1963Rotor.class).setLightLevel(1.0F).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 		public static final Block light = new BlockLight().setRegistryName("light").setUnlocalizedName("light").setLightLevel(1.0F);
-		public static final Block chair1963 = new BlockTileOutline(Material.CORAL, "chair1963", TileEntity1963Chair.class).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
+		public static final Block chair1963 = new BlockSittableOutline(Material.WOOD, "chair1963", TileEntity1963Chair.class, 0.5D).setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 
 		public static final Block ha_tro_cons = new BlockOutline(Material.CORAL, "ha_tro_cons").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);
 		public static final Block ha_tro_floor = new BlockOutline(Material.CORAL, "ha_tro_floor").setCreativeTab(ATGTabs.TABS_BLOCKS_TARDIS_2);

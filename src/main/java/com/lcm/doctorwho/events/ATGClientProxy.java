@@ -29,9 +29,11 @@ import com.lcm.doctorwho.networking.ATGNetwork;
 import com.lcm.doctorwho.networking.packets.MessageAngelSeen;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -109,15 +111,22 @@ public class ATGClientProxy extends ATGCommonProxy {
 	}
 
 	@SideOnly(Side.CLIENT) private static void setupTileRendering() {
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTardis.class, new RenderTileTardis());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInteriorDoor.class, new RenderTileInteriorDoor());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMonitor.class, new RenderTileMonitor(new ModelMonitor()));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityToyotaMonitor.class, new RenderTileMonitor(new ModelMonitorToyota()));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Rotor.class, new RenderTileBase(new Model1963Rotor()));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntity1963Chair.class, new RenderTileBase(new Model1963ChairSmall()));
+		addTileRender(TileEntityTardis.class, new RenderTileTardis());
+		addTileRender(TileEntityInteriorDoor.class, new RenderTileInteriorDoor());
+		addTileRender(TileEntityMonitor.class, new RenderTileMonitor(new ModelMonitor()));
+		addTileRender(TileEntityToyotaMonitor.class, new RenderTileMonitor(new ModelMonitorToyota()));
+		addTileRender(TileEntity1963Rotor.class, new RenderTileBase(new Model1963Rotor()));
+		addTileRender(TileEntity1963Chair.class, new RenderTileBase(new Model1963ChairSmall()));
 	}
 
     @SideOnly(Side.CLIENT) private static void setupATGMusicTypes() {
        EnumHelperClient.addMusicType("TARDIS_HUM", ATGObjects.SoundEvents.interiorHum, 0, 49);
     }
+
+	private static <T extends TileEntity> void addTileRender(Class<T> tileEntity, TileEntitySpecialRenderer<? super T> specialRenderer)
+	{
+		ClientRegistry.bindTileEntitySpecialRenderer(tileEntity,specialRenderer);
+	}
+
+
 }
