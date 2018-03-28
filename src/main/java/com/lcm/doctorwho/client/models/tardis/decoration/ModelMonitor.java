@@ -27,7 +27,7 @@ public class ModelMonitor extends TileModelOutline {
 		leftHandle = new ModelRenderer(this, 0, 0);
 		leftHandle.setRotationPoint(13.5F, 2.0F, 0.0F);
 		leftHandle.addBox(0.0F, 0.0F, 0.0F, 1, 4, 1);
-		ATGUtils.setRotation(leftHandle, 0.0F, 0.39269908169872414F, 0.0F);
+		setRotation(leftHandle, 0.0F, 0.39269908169872414F, 0.0F);
 		ModelRenderer leftHandleTop = new ModelRenderer(this, 0, 6);
 		leftHandleTop.setRotationPoint(-1.0F, 0.0F, 0.0F);
 		leftHandleTop.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1);
@@ -39,7 +39,7 @@ public class ModelMonitor extends TileModelOutline {
 		rightHandle = new ModelRenderer(this, 36, 0);
 		rightHandle.setRotationPoint(-1.5F, 2.0F, 0.0F);
 		rightHandle.addBox(0.0F, 0.0F, 0.0F, 1, 4, 1);
-		ATGUtils.setRotation(rightHandle, 0.0F, -0.39269908169872414F, 0.0F);
+		setRotation(rightHandle, 0.0F, -0.39269908169872414F, 0.0F);
 		ModelRenderer rightHandleTop = new ModelRenderer(this, 36, 6);
 		rightHandleTop.setRotationPoint(1.0F, 0.0F, 0.0F);
 		rightHandleTop.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1);
@@ -51,11 +51,11 @@ public class ModelMonitor extends TileModelOutline {
 		neck = new ModelRenderer(this, 18, 11);
 		neck.setRotationPoint(6.0F, 2.4F, 1.5F);
 		neck.addBox(0.0F, 0.0F, 0.0F, 1, 5, 1);
-		ATGUtils.setRotation(neck, 0.7853981633974483F, 0.0F, 0.0F);
+		setRotation(neck, 0.7853981633974483F, 0.0F, 0.0F);
 		ModelRenderer neckBase = new ModelRenderer(this, 18, 18);
 		neckBase.setRotationPoint(0.0F, 4.3F, 0.3F);
 		neckBase.addBox(0.0F, 0.0F, 0.0F, 1, 7, 1);
-		ATGUtils.setRotation(neckBase, -0.7853981633974483F, 0.0F, 0.0F);
+		setRotation(neckBase, -0.7853981633974483F, 0.0F, 0.0F);
 		neck.addChild(neckBase);
 	}
 

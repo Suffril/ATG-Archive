@@ -59,15 +59,6 @@ public class ATGUtils {
 	}
 
 	/**
-	 * Didn't see the need to have the same method used over and over in a load of model classes
-	 */
-	@SideOnly(Side.CLIENT) public static void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	/**
 	 * Stops a mob in it's tracks, FULLY.
 	 */
 	@Deprecated public static void freezeMob(Entity entity, boolean considerYlevel) {
@@ -75,6 +66,15 @@ public class ATGUtils {
 		if (considerYlevel && entity.onGround)
 			entity.motionY = 0;
 		entity.motionZ = 0;
+	}
+
+	/**
+	 * Didn't see the need to have the same method used over and over in a load of model classes
+	 */
+	@SideOnly(Side.CLIENT) public static void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
 	}
 
 	public static void regenerationExplosion(EntityPlayer player) {
